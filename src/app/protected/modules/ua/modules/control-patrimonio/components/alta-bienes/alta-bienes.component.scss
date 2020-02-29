@@ -1,0 +1,35 @@
+// @import "assets/styles/scss/views/table";
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.page-vehiculo {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 500px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomFormaAdquisicion: (
+      width: 12rem
+    ),
+    nroDocSustentatorio: (
+      width: 12rem
+    ),
+    fecha: (
+      width: 9rem
+    ),
+    totalBienes: (
+      width: 6rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);

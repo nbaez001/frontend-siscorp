@@ -1,0 +1,152 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+@import "../src/@shared/scss/style_util";
+
+:host {
+    
+  
+    .filtros {
+      mat-expansion-panel {
+        margin: 10px 0;
+        border-radius: 0;
+  
+        mat-expansion-panel-header mat-panel-title {
+          display: flex;
+          align-content: center;
+        }
+  
+        .inputs {
+           mat-form-field {
+            margin-right: 10px;
+            width: 100%;
+  
+            /deep/ .mat-form-field-wrapper {
+              padding-bottom: 0;
+            }
+          }
+  
+          .acciones {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 10px;
+  
+            button:first-of-type {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  
+  
+  }
+ 
+
+  .paginacion-right{
+    display: inline !important;
+  }
+  
+  .mat-toolbar-fondo{
+    background: #fff;
+  }
+  
+  .excel-icon-top{
+    margin-top: 15px !important;
+    width: 30px;
+     height: 30px;
+  }
+  
+  // .fondo-filtro{
+  //   background: #039be5;
+  //   color: white;
+  // }
+  
+  .mat-expansion-panel-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px;
+    border-radius: inherit;
+    background: #039be5 !important;
+    //height: 48px !important;
+  }
+  
+  .mat-expansion-panel-header.mat-expanded:focus .mat-expansion-panel-header .mat-expanded:hover {
+  background:  #039be5 !important;
+  }
+  
+  
+  
+  .mat-icon-button {
+    padding: 0;
+    min-width: 0;
+    width: 25px;
+    height: 30px;
+    flex-shrink: 0;
+    line-height: 10px;
+    border-radius: 50%;
+  }
+  
+  .mat-row:hover {
+  background-color:  #DFE5EF;
+  .mat-cell, .mat-footer-cell {
+    font-weight: bold;
+    }
+  }
+//TOOLTIP MODIFICACION
+// ::ng-deep .formato-tooltip {
+//   background-color: black !important;
+//   color: white;
+//   font-size: 18px;
+//   width: auto !important;
+// }
+
+//  button:hover mat-icon {
+//    font-size:36px !important;
+//  }
+//FIN TOOLTIP
+  
+  @include mat-table-columns(
+  (
+    colNro: (
+      width: 2rem
+    ),
+    colConvenio: (
+      width: 8rem
+    )
+    ,
+    colDescripcion: (
+      width: 12rem
+    ),
+    colTiempo: (
+      width: 5rem
+    ),
+    colFechaInicio: (
+      width: 5rem
+    ),
+    colFechaFin: (
+      width: 5rem
+    ),
+    colFechaActualizacion: (
+      width: 5rem
+    ),
+    colSupervisor: (
+      width: 5rem
+    ),
+    colEstado: (
+      width: 5rem
+    ),
+    colDiasTrans: (
+      width: 5rem
+    ),
+    acciones: (
+      width: 8rem
+    )
+  )
+);
+  
+ 
+  
+
+  

@@ -1,0 +1,1000 @@
+<div class="page">
+  <mat-toolbar class="mat-primary  mat-dialog-header">
+    <span style="font-size: 18px !important; font-weight: bold;">{{titulo_requerimiento}}</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div mat-dialog-content>
+
+   
+    <div style="height: 85%;">
+
+    <mat-tab-group>
+
+      <mat-tab label="COSTO DIRECTO">
+        <mat-grid-list cols="8" rowHeight="70px">
+            <mat-grid-tile [responsiveRows]="{xs: 8, sm: 8, md: 8, lg: 3, xl: 3}">
+              <mat-form-field appearance="outline">
+                <mat-label>Recurso</mat-label>
+                <input style="height: 33px !important;" matInput>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 8, sm: 8, md: 8, lg: 5, xl: 5}" class="dialog-form-actions">
+              <button mat-mini-fab>
+                <mat-icon matTooltip="Buscar Recurso" matTooltipClass="formato-tooltip">search</mat-icon>
+              </button>
+              <button (click)="crearRecurso()" mat-raised-button color="primary">
+                <mat-icon>add</mat-icon> Nuevo Recurso
+              </button>
+              <button (click)="modificarRecurso()" mat-raised-button color="primary">
+                <mat-icon>edit</mat-icon> Modificar Recurso
+              </button>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <div class="bandeja scroll-container-table">
+          <p-table [value]="dataCostoDirecto" [scrollable]="true" scrollHeight="370px" [resizableColumns]="true"
+            [columns]="scrollableColsCostoDirecto" [frozenColumns]="frozenColsCostoDirecto" frozenWidth="300px"
+            (onEditInit)="onEditInitCostoDirecto($event)" (onEditComplete)="onEditCompleteCostoDirecto($event)"
+            selectionMode="single" [(selection)]="selectedCostoDirectoNode">
+
+            <ng-template pTemplate="frozencolgroup" let-columns>
+              <colgroup>
+                <col style="text-align:  center !important; width:300px !important;">
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <ng-container *ngFor="let col of columns; let i = index">
+                  <col *ngIf="i==0" style="width: 30px !important;text-align:  center;">
+                  <col *ngIf="i==1 || i==2 || i==3" style="width: 50px  !important;text-align:  center;">
+                  <col *ngIf="i>=4 && i<(4+cantidadDataCostoDirecto)" style="width: 50px;text-align:  center;">
+                  <col *ngIf="i==(4+cantidadDataCostoDirecto)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(5+cantidadDataCostoDirecto)" style="width: 50px  !important;text-align:  center;">
+                  <col *ngIf="i==(6+cantidadDataCostoDirecto)" style="width: 50px  !important;text-align:  center;">
+                  <col *ngIf="i==(7+cantidadDataCostoDirecto)" style="width: 50px  !important;text-align:  center;">
+                  <col *ngIf="i==(8+cantidadDataCostoDirecto)" style="width: 50px  !important;text-align:  center;">
+                  <col *ngIf="i==(9+cantidadDataCostoDirecto)" style="width: 50px  !important;text-align:  center;">
+                  <col *ngIf="i==(10+cantidadDataCostoDirecto)" style="width: 50px  !important;text-align:  center;">
+                </ng-container>
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="frozenheader" let-columns>
+              <tr>
+                <th style="text-align: center !important;height: 109px;font-size: 12px;">
+                  RECURSO
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0" style="text-align:  center !important;" [attr.colspan]="cantidadDataCostoDirecto+4">
+                    PRESUPUESTO DEL EXPEDIENTE TÉCNICO
+                  </th>
+                  <th *ngIf="i==(cantidadDataCostoDirecto+4)" [attr.colspan]="7">
+
+                  </th>
+                </ng-container>
+              </tr>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0" style="text-align: center;background-color: #DDF0C9;" [attr.colspan]="4">
+                    TOTAL
+                  </th>
+                  <th *ngIf="i==4" style="text-align: center; background-color: #FFEBB0;"
+                    [attr.colspan]="cantidadDataCostoDirecto">
+                    MENSUAL
+                  </th>
+                  <th *ngIf="i==(4+cantidadDataCostoDirecto)" style="background-color: #E8F1F9;" [attr.colspan]="3">
+                    ACUMULADO
+                  </th>
+                  <th *ngIf="i==(7+cantidadDataCostoDirecto)" style="background-color: #E8F1F9;" [attr.colspan]="2">
+                    SOLICITADO
+                  </th>
+                  <th *ngIf="i==(9+cantidadDataCostoDirecto)" style=" background-color: #BEE9FC;" [attr.colspan]="2">
+                    SALDO DISPONIBLE
+                  </th>
+                </ng-container>
+              </tr>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0 || i==1 || i==2 || i==3" style="text-align: center;background-color: #DDF0C9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i>=4 && i<(4+cantidadDataCostoDirecto)"
+                    style="text-align: center; background-color: #FFEBB0;">
+                    {{col.header}}
+                  </th>
+                  <th
+                    *ngIf="i==(4+cantidadDataCostoDirecto) || i==(5+cantidadDataCostoDirecto) || i==(6+cantidadDataCostoDirecto)"
+                    style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(7+cantidadDataCostoDirecto) || i==(8+cantidadDataCostoDirecto)"
+                    style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(9+cantidadDataCostoDirecto) || i==(10+cantidadDataCostoDirecto)"
+                    style="background-color: #BEE9FC;">
+                    {{col.header}}
+                  </th>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenbody" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr [pSelectableRow]="rowData" style="font-size: 12px;" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns">
+                  <td *ngIf="rowData.edicion==0" style="height: 38px !important;font-weight: bold;font-size: 12px;">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length >= cantidadPalabraRecurso"
+                    matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-recurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field] | slice:0:cantidadPalabraRecurso}} ...
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length < cantidadPalabraRecurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field]}}
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-rowData let-columns="columns">
+              <tr [pSelectableRow]="rowData" style="font-size: 12px;" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns;let i = index">
+                  <td *ngIf="i!=(cantidadDataCostoDirecto+7) " style="height: 38px !important;">
+                    {{rowData[col.field]}}
+                  </td>
+
+                  <td style="height: 32px !important;" *ngIf="i==(cantidadDataCostoDirecto+7) && rowData.edicion==1 "
+                    [pEditableColumn]="rowData" [pEditableColumnField]="rowData[col.field]">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text"
+                          style="height: 37px !important;width: 90% !important;font-weight: bold;"
+                          [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        <input type="text" style="width: 90%;" [(ngModel)]="rowData[col.field]">
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="height: 38px !important;" *ngIf="i==(cantidadDataCostoDirecto+7) && rowData.edicion==0">
+                    <span>{{rowData[col.field]}}</span>
+                  </td>
+
+
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenfooter" let-rowNode let-rowData="rowData">
+              <tr>
+                <td style="font-size: 12px;">TOTAL COSTO DIRECTO</td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" *ngFor="let dataCostoDirecto of totalDataCostoDirecto">
+                <td [attr.colspan]="6+cantidadDataCostoDirecto">
+                </td>
+                <td>
+                  {{dataCostoDirecto.totalAcumulado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataCostoDirecto.totalSolicitado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataCostoDirecto.totalSaldoDisponible | number : '1.2-2' :'en-US'}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="GASTOS GENERALES">
+        <br>
+        <div class="bandeja scroll-container-table">
+          <p-table [value]="dataGastosGenerales" [scrollable]="true" scrollHeight="370px" [resizableColumns]="true"
+            [columns]="scrollableColsGastosGenerales" [frozenColumns]="frozenColsGastosGenerales" frozenWidth="380px"
+            (onEditInit)="onEditInitGastosGenerales($event)" (onEditComplete)="onEditCompleteGastosGenerales($event)">
+
+            <ng-template pTemplate="frozencolgroup" let-columns>
+              <colgroup>
+                <col style="text-align:  center !important; width:380px !important">
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <ng-container *ngFor="let col of columns; let i = index">
+                  <col *ngIf="i==0" style="width:30px !important;text-align:  center;">
+                  <col *ngIf="i==1 || i==2 || i==3" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(4)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(5)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(6)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(7)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(8)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(9)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(10)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(11)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(12)" style="width: 50px !important;text-align:  center;">
+                </ng-container>
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="frozenheader" let-columns>
+              <tr>
+                <th style="text-align: center !important;height: 68px;font-size: 12px;">
+                  RECURSO
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0" style="text-align: center;background-color: #DDF0C9;" [attr.colspan]="4">
+                    PRESUPUESTO DEL EXPEDIENTE TÉCNICO
+                  </th>
+                  <th *ngIf="i==(4)" style="background-color: #E8F1F9;" [attr.colspan]="3">
+                    ACUMULADO
+                  </th>
+                  <th *ngIf="i==(7)" style="background-color: #E8F1F9;" [attr.colspan]="3">
+                    SOLICITADO
+                  </th>
+                  <th *ngIf="i==(10)" style=" background-color: #BEE9FC;" [attr.colspan]="3">
+                    SALDO DISPONIBLE
+                  </th>
+                </ng-container>
+              </tr>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0 || i==1 || i==2 || i==3" style="text-align: center;background-color: #DDF0C9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(4) || i==(5) || i==(6)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(7) || i==(8) || i==(9)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(10) || i==(11) || i==(12)" style="background-color: #BEE9FC;">
+                    {{col.header}}
+                  </th>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenbody" let-rowData let-rowData="rowData" let-columns="columns" >
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns">
+                  <td *ngIf="rowData.edicion==0" style="height: 38px !important;font-weight: bold;font-size: 12px;">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td *ngIf="rowData.edicion==1 && (rowData[col.field]).length >= cantidadPalabraRecursoGastosGenerales"
+                    matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-recurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field] | slice:0:cantidadPalabraRecursoGastosGenerales}} ...
+                  </td>
+                  <td *ngIf="rowData.edicion==1 && (rowData[col.field]).length < cantidadPalabraRecursoGastosGenerales"
+                    style="height: 38px !important;">
+                    {{rowData[col.field]}}
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns;let i = index">
+
+                  <td style="height: 32px !important;" *ngIf="(i==7 && rowData.tipo==2 && rowData.edicion==1) || (i==8 && rowData.tipo==1 && rowData.edicion==1)"
+                    [pEditableColumn]="rowData" [pEditableColumnField]="rowData[col.field]">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" style="height: 37px !important;font-weight: bold;"
+                          [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        <input type="text" style="width: 90%;" [(ngModel)]="rowData[col.field]">
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+
+                  <td style="height: 38px !important;" *ngIf="(i!=7 || rowData.tipo!=2 || rowData.edicion!=1) && (i!=8 || rowData.tipo!=1 || rowData.edicion!=1)">
+                    <span>{{rowData[col.field]}}</span>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenfooter" let-rowNode let-rowData="rowData">
+              <tr>
+                <td style="font-size: 12px;">TOTAL GASTOS GENERALES</td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" *ngFor="let dataGastosGenerales of totalDataGastosGenerales">
+                <td [attr.colspan]="6">
+                </td>
+                <td>
+                  {{dataGastosGenerales.totalAcumulado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosGenerales.totalSolicitado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosGenerales.totalSaldoDisponible | number : '1.2-2' :'en-US'}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="GASTOS DE RESIDENTES">
+        <br>
+        <div class="bandeja scroll-container-table">
+          <p-table [value]="dataGastosResidente" [scrollable]="true" scrollHeight="370px" [resizableColumns]="true"
+            [columns]="scrollableColsGastosResidente" [frozenColumns]="frozenColsGastosResidente" frozenWidth="300px"
+            (onEditInit)="onEditInitGastosResidente($event)" (onEditComplete)="onEditCompleteGastosResidente($event)">
+
+            <ng-template pTemplate="frozencolgroup" let-columns>
+              <colgroup>
+                <col style="text-align:  center !important; width:300px !important">
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <ng-container *ngFor="let col of columns; let i = index">
+                  <col *ngIf="i==0" style="width: 30px !important;text-align:  center;">
+                  <col *ngIf="i==1 || i==2 || i==3" style="width: 50px !important; text-align:  center;">
+                  <col *ngIf="i==(4)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(5)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(6)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(7)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(8)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(9)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(10)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(11)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(12)" style="width: 50px !important;text-align:  center;">
+                </ng-container>
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="frozenheader" let-columns>
+              <tr>
+                <th style="text-align: center !important;height: 68px; font-size: 12px;">
+                  RECURSO
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0" style="text-align: center;background-color: #DDF0C9;" [attr.colspan]="4">
+                    PRESUPUESTO DEL EXPEDIENTE TÉCNICO
+                  </th>
+                  <th *ngIf="i==(4)" style="background-color: #E8F1F9;" [attr.colspan]="3">
+                    ACUMULADO
+                  </th>
+                  <th *ngIf="i==(7)" style="background-color: #E8F1F9;" [attr.colspan]="3">
+                    SOLICITADO
+                  </th>
+                  <th *ngIf="i==(10)" style=" background-color: #BEE9FC;" [attr.colspan]="3">
+                    SALDO DISPONIBLE
+                  </th>
+                </ng-container>
+              </tr>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0 || i==1 || i==2 || i==3" style="text-align: center;background-color: #DDF0C9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(4) || i==(5) || i==(6)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(7) || i==(8) || i==(9)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(10) || i==(11) || i==(12)" style="background-color: #BEE9FC;">
+                    {{col.header}}
+                  </th>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenbody" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns">
+                  <td *ngIf="rowData.edicion==0" style="height: 38px !important;font-weight: bold;font-size: 12px;">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length >= cantidadPalabraRecurso"
+                    matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-recurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field] | slice:0:cantidadPalabraRecurso}} ...
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length < cantidadPalabraRecurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field]}}
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns;let i = index">
+
+                  <td style="height: 32px !important;" *ngIf="(i==7 && rowData.tipo==2 && rowData.edicion==1) || (i==8 && rowData.tipo==1 && rowData.edicion==1)"
+                    [pEditableColumn]="rowData" [pEditableColumnField]="rowData[col.field]">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" style="height: 37px !important;font-weight: bold;"
+                          [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        <input type="text" style="width: 90%;" [(ngModel)]="rowData[col.field]">
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+
+                  <td style="height: 38px !important;" *ngIf="(i!=7 || rowData.tipo!=2 || rowData.edicion!=1) && (i!=8 || rowData.tipo!=1 || rowData.edicion!=1)">
+                    <span>{{rowData[col.field]}}</span>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenfooter" let-rowNode let-rowData="rowData">
+              <tr>
+                <td style="font-size: 12px;">TOTAL GASTOS RESIDENTE</td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" *ngFor="let dataGastosResidente of totalDataGastosResidente">
+                <td [attr.colspan]="6">
+                </td>
+                <td>
+                  {{dataGastosResidente.totalAcumulado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosResidente.totalSolicitado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosResidente.totalSaldoDisponible | number : '1.2-2' :'en-US'}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="GASTOS FINANCIEROS Y OTROS">
+        <br>
+        <div class="bandeja scroll-container-table">
+          <p-table [value]="dataGastosFinanciero" [scrollable]="true" scrollHeight="370px" [resizableColumns]="true"
+            [columns]="scrollableColsGastosFinanciero" [frozenColumns]="frozenColsGastosFinanciero" frozenWidth="350px"
+            (onEditInit)="onEditInitGastosFinanciero($event)"
+            (onEditComplete)="onEditCompleteGastosSupervision($event)">
+
+            <ng-template pTemplate="frozencolgroup" let-columns>
+              <colgroup>
+                <col style="text-align:  center !important; width:350px !important">
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <ng-container *ngFor="let col of columns; let i = index">
+                  <col *ngIf="i==0" style="width: 30px !important;text-align:  center;">
+                  <col *ngIf="i==1 || i==2 || i==3" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(4)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(5)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(6)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(7)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(8)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(9)" style="width: 50px !important;text-align:  center;">
+                </ng-container>
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="frozenheader" let-columns>
+              <tr>
+                <th style="text-align: center !important;height: 54px; font-size: 12px;">
+                  RECURSO
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0" style="text-align: center;background-color: #DDF0C9;" [attr.colspan]="4">
+                    PRESUPUESTO DEL EXPEDIENTE TÉCNICO
+                  </th>
+                  <th *ngIf="i==(4)" style="background-color: #E8F1F9;" [attr.colspan]="2">
+                    ACUMULADO
+                  </th>
+                  <th *ngIf="i==(6)" style="background-color: #E8F1F9;" [attr.colspan]="2">
+                    SOLICITADO
+                  </th>
+                  <th *ngIf="i==(8)" style=" background-color: #BEE9FC;" [attr.colspan]="2">
+                    SALDO DISPONIBLE
+                  </th>
+                </ng-container>
+              </tr>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0 || i==1 || i==2 || i==3" style="text-align: center;background-color: #DDF0C9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(4) || i==(5)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(6) || i==(7)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(8) || i==(9)" style="background-color: #BEE9FC;">
+                    {{col.header}}
+                  </th>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenbody" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns">
+                  <td *ngIf="rowData.edicion==0" style="height: 38px !important;font-weight: bold;font-size: 12px;">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length >= cantidadPalabraRecurso"
+                    matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-recurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field] | slice:0:cantidadPalabraRecurso}} ...
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length < cantidadPalabraRecurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field]}}
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns;let i = index">
+
+                  <td style="height: 32px !important;" *ngIf="(i==6 && rowData.edicion==1)" [pEditableColumn]="rowData"
+                    [pEditableColumnField]="rowData[col.field]">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" style="height: 37px !important;font-weight: bold;"
+                          [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        <input type="text" style="width: 90%;" [(ngModel)]="rowData[col.field]">
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+
+                  <td style="height: 38px !important;" *ngIf="(i!=6 || rowData.edicion!=1)">
+                    <span>{{rowData[col.field]}}</span>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenfooter" let-rowNode let-rowData="rowData">
+              <tr>
+                <td style="font-size: 12px;">TOTAL GASTOS FINANCIEROS</td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" *ngFor="let dataGastosFinanciero of totalDataGastosFinanciero">
+                <td [attr.colspan]="5">
+                </td>
+                <td>
+                  {{dataGastosFinanciero.totalAcumulado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosFinanciero.totalSolicitado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosFinanciero.totalSaldoDisponible | number : '1.2-2' :'en-US'}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="GASTOS N.E.">
+        <br>
+        <div class="bandeja scroll-container-table">
+          <p-table [value]="dataGastosNucleo" [scrollable]="true" scrollHeight="370px" [resizableColumns]="true"
+            [columns]="scrollableColsGastosNucleo" [frozenColumns]="frozenColsGastosNucleo" frozenWidth="400px"
+            (onEditInit)="onEditInitGastosNucleo($event)" (onEditComplete)="onEditCompleteGastosNucleo($event)">
+
+            <ng-template pTemplate="frozencolgroup" let-columns>
+              <colgroup>
+                <col style="text-align:  center !important; width:400px !important">
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <ng-container *ngFor="let col of columns; let i = index">
+                  <col *ngIf="i==0" style="width: 30px !important; text-align:  center;">
+                  <col *ngIf="i==1 || i==2 || i==3" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(4)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(5)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(6)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(7)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(8)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(9)" style="width: 50px !important;text-align:  center;">
+                </ng-container>
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="frozenheader" let-columns>
+              <tr>
+                <th style="text-align: center !important;height: 54px;font-size: 12px;">
+                  RECURSO
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0" style="text-align: center;background-color: #DDF0C9;" [attr.colspan]="4">
+                    PRESUPUESTO DEL EXPEDIENTE TÉCNICO
+                  </th>
+                  <th *ngIf="i==(4)" style="background-color: #E8F1F9;" [attr.colspan]="2">
+                    ACUMULADO
+                  </th>
+                  <th *ngIf="i==(6)" style="background-color: #E8F1F9;" [attr.colspan]="2">
+                    SOLICITADO
+                  </th>
+                  <th *ngIf="i==(8)" style=" background-color: #BEE9FC;" [attr.colspan]="2">
+                    SALDO DISPONIBLE
+                  </th>
+                </ng-container>
+              </tr>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0 || i==1 || i==2 || i==3" style="text-align: center;background-color: #DDF0C9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(4) || i==(5)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(6) || i==(7)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(8) || i==(9)" style="background-color: #BEE9FC;">
+                    {{col.header}}
+                  </th>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenbody" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns">
+                  <td *ngIf="rowData.edicion==0" style="height: 38px !important;font-weight: bold;font-size: 12px;">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length >= cantidadPalabraRecursoNE"
+                    matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-recurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field] | slice:0:cantidadPalabraRecursoNE}} ...
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length < cantidadPalabraRecursoNE"
+                    style="height: 38px !important;">
+                    {{rowData[col.field]}}
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns;let i = index">
+
+                  <td style="height: 32px !important;" *ngIf="(i==6 && rowData.edicion==1)" [pEditableColumn]="rowData"
+                    [pEditableColumnField]="rowData[col.field]">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" style="height: 37px !important;font-weight: bold;"
+                          [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        <input type="text" style="width: 90%;" [(ngModel)]="rowData[col.field]">
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+
+                  <td style="height: 38px !important;" *ngIf="(i!=6 || rowData.edicion!=1)">
+                    <span>{{rowData[col.field]}}</span>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenfooter" let-rowNode let-rowData="rowData">
+              <tr>
+                <td style="font-size: 12px;">TOTAL GASTOS N.E.</td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" *ngFor="let dataGastosNucleo of totalDataGastosNucleo">
+                <td [attr.colspan]="5">
+                </td>
+                <td>
+                  {{dataGastosNucleo.totalAcumulado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosNucleo.totalSolicitado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosNucleo.totalSaldoDisponible | number : '1.2-2' :'en-US'}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="GASTOS DE SUPERVISIÓN">
+        <br>
+        <div class="bandeja scroll-container-table">
+          <p-table [value]="dataGastosSupervision" [scrollable]="true" scrollHeight="370px" [resizableColumns]="true"
+            [columns]="scrollableColsGastosSupervision" [frozenColumns]="frozenColsGastosSupervision"
+            frozenWidth="400px" (onEditInit)="onEditInitGastosSupervision($event)"
+            (onEditComplete)="onEditCompleteGastosSupervision($event)">
+
+            <ng-template pTemplate="frozencolgroup" let-columns>
+              <colgroup>
+                <col style="text-align:  center !important; width:400px !important">
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="colgroup" let-columns>
+              <colgroup>
+                <ng-container *ngFor="let col of columns; let i = index">
+                  <col *ngIf="i==0" style="width: 30px !important;text-align:  center;">
+                  <col *ngIf="i==1 || i==2 || i==3" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(4)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(5)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(6)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(7)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(8)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(9)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(10)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(11)" style="width: 50px !important;text-align:  center;">
+                  <col *ngIf="i==(12)" style="width: 50px !important;text-align:  center;">
+                </ng-container>
+              </colgroup>
+            </ng-template>
+
+            <ng-template pTemplate="frozenheader" let-columns>
+              <tr>
+                <th style="text-align: center !important;height: 68px; font-size: 12px;">
+                  RECURSO
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0" style="text-align: center;background-color: #DDF0C9;" [attr.colspan]="4">
+                    PRESUPUESTO DEL EXPEDIENTE TÉCNICO
+                  </th>
+                  <th *ngIf="i==(4)" style="background-color: #E8F1F9;" [attr.colspan]="3">
+                    ACUMULADO
+                  </th>
+                  <th *ngIf="i==(7)" style="background-color: #E8F1F9;" [attr.colspan]="3">
+                    SOLICITADO
+                  </th>
+                  <th *ngIf="i==(10)" style=" background-color: #BEE9FC;" [attr.colspan]="3">
+                    SALDO DISPONIBLE
+                  </th>
+                </ng-container>
+              </tr>
+              <tr style="font-size: 12px;">
+                <ng-container *ngFor="let col of columns; let i = index">
+
+                  <th *ngIf="i==0 || i==1 || i==2 || i==3" style="text-align: center;background-color: #DDF0C9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(4) || i==(5) || i==(6)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(7) || i==(8) || i==(9)" style="background-color: #E8F1F9;">
+                    {{col.header}}
+                  </th>
+                  <th *ngIf="i==(10) || i==(11) || i==(12)" style="background-color: #BEE9FC;">
+                    {{col.header}}
+                  </th>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenbody" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns">
+                  <td *ngIf="rowData.edicion==0" style="height: 38px !important;font-weight: bold;font-size: 12px;">
+                    {{rowData[col.field]}}
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length >= cantidadPalabraRecursoGastoSupervision"
+                    matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-recurso"
+                    style="height: 38px !important;">
+                    {{rowData[col.field] | slice:0:cantidadPalabraRecursoGastoSupervision}} ...
+                  </td>
+                  <td *ngIf="rowData.edicion!=0 && (rowData[col.field]).length < cantidadPalabraRecursoGastoSupervision"
+                    style="height: 38px !important;">
+                    {{rowData[col.field]}}
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-rowData let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" (mouseenter)="onMouseEnterTabla(rowData)"
+                (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+                <ng-container *ngFor="let col of columns;let i = index">
+
+                  <td style="height: 32px !important;" *ngIf="(i==7 && rowData.tipo==2 && rowData.edicion==1) || (i==8 && rowData.tipo==1 && rowData.edicion==1)"
+                    [pEditableColumn]="rowData" [pEditableColumnField]="rowData[col.field]">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" style="height: 37px !important;font-weight: bold;"
+                          [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        <input type="text" style="width: 90%;" [(ngModel)]="rowData[col.field]">
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+
+                  <td style="height: 38px !important;" *ngIf="(i!=7 || rowData.tipo!=2 || rowData.edicion!=1) && (i!=8 || rowData.tipo!=1 || rowData.edicion!=1)">
+                    <span>{{rowData[col.field]}}</span>
+                  </td>
+                </ng-container>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="frozenfooter" let-rowNode let-rowData="rowData">
+              <tr>
+                <td style="font-size: 12px;">TOTAL GASTOS SUPERVISIÓN</td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+              <tr style="font-size: 12px;" *ngFor="let dataGastosSupervision of totalDataGastosSupervision">
+                <td [attr.colspan]="6">
+                </td>
+                <td>
+                  {{dataGastosSupervision.totalAcumulado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosSupervision.totalSolicitado | number : '1.2-2' :'en-US'}}
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                  {{dataGastosSupervision.totalSaldoDisponible | number : '1.2-2' :'en-US'}}
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+
+    </div>
+
+    <div style="height: 15%;">
+
+    <div align="right">
+      <p class="formato-leyenda-saldo">
+        <span style="font-weight: 500;">TOTAL AUTORIZACIÓN DE GASTO: </span>
+        <span class="label-saldo-disponible">S/.100000.00 </span>
+      </p>
+      <p class="formato-leyenda-saldo">
+        <span style="font-weight: 300;">SALDO DISPONIBLE PROYECTO: </span>
+        <span class="label-saldo-disponible">S/.8000.00 </span>
+      </p>
+    </div>
+
+    <div align="center">
+      <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="generarRequerimiento()">
+        <mat-icon>description</mat-icon> Finalizar
+      </button>
+      <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="eliminarAutorizacion()">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+    </div>
+
+    </div>
+  
+
+
+    <br>
+  </div>
+</div>

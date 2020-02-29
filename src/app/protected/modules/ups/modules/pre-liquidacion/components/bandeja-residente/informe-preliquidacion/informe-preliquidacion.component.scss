@@ -1,0 +1,29 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+:host {
+
+    /deep/  .mat-grid-tile .mat-figure{
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    @include mat-table-columns(
+        (
+            colNro: (
+            width: 2rem
+          ),
+          colDescripcion: (
+            width: 70%
+          )
+          ,
+          colArchivo: (
+            width: 30%
+          ),
+          acciones: (
+            width: 5rem
+          )
+        )
+      );
+
+}

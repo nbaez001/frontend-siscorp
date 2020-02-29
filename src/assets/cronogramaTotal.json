@@ -1,0 +1,279 @@
+{
+    "data":
+    [
+        {
+            "data":{
+				"ID_CODIGO":1,
+                "DEC_METRADO": "",
+				"DEC_PARCIAL": "89,844.67",
+				"DEC_PRECIO":  "",
+				"DESCRIP_UND": "OBRAS PROVISIONALES TRABAJOS PRELIMINARES SEGURIDAD Y SALUD",
+				"FID_CRN_MENSUAL": 62701,
+				"ID_PADRE": 0,
+				"ITEM": "01",
+				"METRADO_1": "",
+				"METRADO_2": "",
+				"METRADO_3": "",
+				"METRADO_4": "",
+				"MONEDA_1": "",
+				"MONEDA_2": "",
+				"MONEDA_3": "",
+				"MONEDA_4": "",
+				"PORCENTAJE_1": "",
+				"PORCENTAJE_2": "",
+				"PORCENTAJE_3": "",
+				"PORCENTAJE_4": "",
+				"TXT_UNIDAD": ""
+            },
+            "children":[
+                {
+                    "data":{
+                        "ID_CODIGO":10,
+						"DEC_METRADO": "",
+						"DEC_PARCIAL": 76145.3,
+						"DEC_PRECIO": "",
+						"DESCRIP_UND": "OBRAS PROVISIONALES Y TRABAJOS PRELIMINARES",
+						"FID_CRN_MENSUAL": 62710,
+						"ID_PADRE": 0,
+						"ITEM": "01.01",
+						"METRADO_1": "",
+						"METRADO_2": "",
+						"METRADO_3": "",
+						"METRADO_4": "",
+						"MONEDA_1": "",
+						"MONEDA_2": "",
+						"MONEDA_3": "",
+						"MONEDA_4": "",
+						"PORCENTAJE_1": "",
+						"PORCENTAJE_2": "",
+						"PORCENTAJE_3": "",
+						"PORCENTAJE_4": "",
+						"TXT_UNIDAD": ""
+                    },
+                    "children":[
+                        {
+                            "data":{
+                                "ID_CODIGO":100,
+								"DEC_METRADO": "",
+								"DEC_PARCIAL": 9868.6,
+								"DEC_PRECIO": "",
+								"DESCRIP_UND": "CONSTRUCCIONES PROVISIONALES",
+								"FID_CRN_MENSUAL": 627101,
+								"ID_PADRE": 0,
+								"ITEM": "01.01.01",
+								"METRADO_1": "",
+								"METRADO_2": "",
+								"METRADO_3": "",
+								"METRADO_4": "",
+								"MONEDA_1": "",
+								"MONEDA_2": "",
+								"MONEDA_3": "",
+								"MONEDA_4": "",
+								"PORCENTAJE_1": "",
+								"PORCENTAJE_2": "",
+								"PORCENTAJE_3": "",
+								"PORCENTAJE_4": "",
+								"TXT_UNIDAD": ""
+                            },
+                            "children":[
+                                {
+                                    "data":{
+                                        "ID_CODIGO":100,
+                                        "DEC_METRADO": "4.00",
+                                        "DEC_PARCIAL": "7,605.12",
+                                        "DEC_PRECIO": "1,901.28",
+                                        "DESCRIP_UND": "ALQUILER CAMPAMENTO PROVISIONAL (ALMACEN, OFICINA, DORMITORIO Y COMEDOR DE OBRA)",
+                                        "FID_CRN_MENSUAL": 6271010,
+                                        "ID_PADRE": 0,
+                                        "ITEM": "01.01.01.01",
+                                        "METRADO_1": "",
+                                        "METRADO_2": "",
+                                        "METRADO_3": "",
+                                        "METRADO_4": "",
+                                        "MONEDA_1": "",
+                                        "MONEDA_2": "",
+                                        "MONEDA_3": "",
+                                        "MONEDA_4": "",
+                                        "PORCENTAJE_1": "",
+                                        "PORCENTAJE_2": "",
+                                        "PORCENTAJE_3": "",
+                                        "PORCENTAJE_4": "",
+                                        "TXT_UNIDAD": "MES"
+                                    }
+                                  
+                                },
+                                {
+                                    "data":{
+                                        "ID_CODIGO":100,
+                                        "DEC_METRADO": "1.00",
+                                        "DEC_PARCIAL": "705.45",
+                                        "DEC_PRECIO": "705.45",
+                                        "DESCRIP_UND": "SERVICIOS HIGIENICOS P/TRABAJADORES (1 LETRINAS)",
+                                        "FID_CRN_MENSUAL": 6271010,
+                                        "ID_PADRE": 0,
+                                        "ITEM": "01.01.01.02",
+                                        "METRADO_1": "",
+                                        "METRADO_2": "",
+                                        "METRADO_3": "",
+                                        "METRADO_4": "",
+                                        "MONEDA_1": "",
+                                        "MONEDA_2": "",
+                                        "MONEDA_3": "",
+                                        "MONEDA_4": "",
+                                        "PORCENTAJE_1": "",
+                                        "PORCENTAJE_2": "",
+                                        "PORCENTAJE_3": "",
+                                        "PORCENTAJE_4": "",
+                                        "TXT_UNIDAD": "UND"
+                                    }
+                                  
+                                }
+                            ],
+           
+                            "expanded": {"expanded": true}
+                        },
+                        {
+                            "data":{
+                                "ID_CODIGO":200,
+								"DEC_METRADO": "",
+								"DEC_PARCIAL": "1,506.37",
+								"DEC_PRECIO": "",
+								"DESCRIP_UND": "INSTALACIONES PROVISIONALES",
+								"FID_CRN_MENSUAL": 62702,
+								"ID_PADRE": 0,
+								"ITEM": "01.01.02",
+								"METRADO_1": "",
+								"METRADO_2": "",
+								"METRADO_3": "",
+								"METRADO_4": "",
+								"MONEDA_1": "",
+								"MONEDA_2": "",
+								"MONEDA_3": "",
+								"MONEDA_4": "",
+								"PORCENTAJE_1": "",
+								"PORCENTAJE_2": "",
+								"PORCENTAJE_3": "",
+								"PORCENTAJE_4": "",
+								"TXT_UNIDAD": ""
+                            }
+                        }
+                    ],
+           
+                    "expanded": {"expanded": true}
+                },
+                {
+                    "data":{
+                        "ID_CODIGO":5,
+						"DEC_METRADO": "",
+						"DEC_PARCIAL": "13,699.37",
+						"DEC_PRECIO": "",
+						"DESCRIP_UND": "SEGURIDAD  Y SALUD - MITIGACION AMBIENTAL",
+						"FID_CRN_MENSUAL": 62711,
+						"ID_PADRE": 0,
+						"ITEM": "01.02",
+						"METRADO_1": "",
+						"METRADO_2": "",
+						"METRADO_3": "",
+						"METRADO_4": "",
+						"MONEDA_1": "",
+						"MONEDA_2": "",
+						"MONEDA_3": "",
+						"MONEDA_4": "",
+						"PORCENTAJE_1": "",
+						"PORCENTAJE_2": "",
+						"PORCENTAJE_3": "",
+						"PORCENTAJE_4": "",
+						"TXT_UNIDAD": ""
+                    },
+                    "children":[
+                        {
+                            "data":{
+                                "ID_CODIGO":6,
+								"DEC_METRADO": "",
+								"DEC_PARCIAL": "8,714.08",
+								"DEC_PRECIO": "",
+								"DESCRIP_UND": "ELABORACION, IMPLEMENTACION Y ADMINISTRACION DEL PLAN DE SEGURIDAD Y SALUD EN EL TRABAJO",
+								"FID_CRN_MENSUAL": 627111,
+								"ID_PADRE": 0,
+								"ITEM": "01.02.01",
+								"METRADO_1": "",
+								"METRADO_2": "",
+								"METRADO_3": "",
+								"METRADO_4": "",
+								"MONEDA_1": "",
+								"MONEDA_2": "",
+								"MONEDA_3": "",
+								"MONEDA_4": "",
+								"PORCENTAJE_1": "",
+								"PORCENTAJE_2": "",
+								"PORCENTAJE_3": "",
+								"PORCENTAJE_4": "",
+								"TXT_UNIDAD": ""
+                            }
+                        }
+                    ],
+           
+                    "expanded": {"expanded": true}
+                }
+            ],
+           
+            "expanded": {"expanded": true}
+            
+        },
+        {
+            "data":{
+                "ID_CODIGO":2,
+                "DEC_METRADO": "",
+				"DEC_PARCIAL": "",
+				"DEC_PRECIO":  "",
+				"DESCRIP_UND": "ESTRUCTURAS",
+				"FID_CRN_MENSUAL": 62702,
+				"ID_PADRE": 0,
+				"ITEM": "02",
+				"METRADO_1": "",
+				"METRADO_2": "",
+				"METRADO_3": "",
+				"METRADO_4": "",
+				"MONEDA_1": "",
+				"MONEDA_2": "",
+				"MONEDA_3": "",
+				"MONEDA_4": "",
+				"PORCENTAJE_1": "",
+				"PORCENTAJE_2": "",
+				"PORCENTAJE_3": "",
+				"PORCENTAJE_4": "",
+				"TXT_UNIDAD": ""
+            },
+            "children":[
+                {
+                    "data":{
+                        "ID_CODIGO":8,
+						"DEC_METRADO": "",
+						"DEC_PARCIAL": "260,855.43",
+						"DEC_PRECIO": "",
+						"DESCRIP_UND": "EDIFICACION",
+						"FID_CRN_MENSUAL": 62701,
+						"ID_PADRE": 0,
+						"ITEM": "02.01",
+						"METRADO_1": "",
+						"METRADO_2": "",
+						"METRADO_3": "",
+						"METRADO_4": "",
+						"MONEDA_1": "",
+						"MONEDA_2": "",
+						"MONEDA_3": "",
+						"MONEDA_4": "",
+						"PORCENTAJE_1": "",
+						"PORCENTAJE_2": "",
+						"PORCENTAJE_3": "",
+						"PORCENTAJE_4": "",
+						"TXT_UNIDAD": ""
+                    }
+                }
+        
+            ],
+            "expanded": {"expanded": true}
+        }
+       
+    ]
+}

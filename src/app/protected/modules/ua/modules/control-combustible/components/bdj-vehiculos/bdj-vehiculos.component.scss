@@ -1,0 +1,58 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.page {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 560px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    unidad: (
+      width: 12rem
+    ),
+    tambo: (
+      width: 12rem
+    ),
+    codPatrimonio: (
+      width: 8rem
+    ),
+    denominacion: (
+      width: 9rem
+    ),
+    marca: (
+      width: 6rem
+    ),
+    modelo: (
+      width: 6rem
+    ),
+    serie: (
+      width: 10rem
+    ),
+    placa: (
+      width: 6rem
+    ),
+    color: (
+      width: 4rem
+    ),
+    estado: (
+      width: 4rem
+    ),
+    opt: (
+      width: 12.5rem,
+      text-align: center
+    )
+  )
+);
+
+// .mat-tooltip {
+//   font-size: 20px !important;
+//   font-weight: bold !important;
+// }

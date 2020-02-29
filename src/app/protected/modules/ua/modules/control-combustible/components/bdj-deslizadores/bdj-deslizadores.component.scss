@@ -1,0 +1,55 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.page-vehiculo {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomUnidad: (
+      width: 12rem
+    ),
+    nomTambo: (
+      width: 12rem
+    ),
+    codPatrimonio: (
+      width: 7rem
+    ),
+    denominacion: (
+      width: 9rem
+    ),
+    marca: (
+      width: 7rem
+    ),
+    modelo: (
+      width: 5rem
+    ),
+    tipo: (
+      width: 6rem
+    ),
+    serie: (
+      width: 11rem
+    ),
+    color: (
+      width: 6rem
+    ),
+    estado: (
+      width: 6rem
+    ),
+    potencia: (
+      width: 4rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);

@@ -1,0 +1,1160 @@
+<div class="page">
+  <!-- CABECERA -->
+  <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+    <span>SUSTENTAR AUTORIZACIÓN DE GASTO</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <!--------------------------------------------------------------SUSTENTAR REQUERIMIENTO -------------------------------------------------------->
+
+  <div class="center">
+    <mat-label class="select-label">SUSTENTAR AUTORIZACIÒN DE GASTO 001-2019</mat-label>
+  </div>
+  <!-- BANDEJA -->
+  <div mat-dialog-content>
+
+  <mat-tab-group>
+    <!---------------------------------------------------------------- TAB COSTO DIRECTO --------------------------------------------------------->
+    <mat-tab label="COSTO DIRECTO">
+
+      <div class="bandeja scroll-container-table">
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Cabeceras Priner nivel - INICIO-->
+
+          <ng-container matColumnDef="checked">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}" class="estilo-cabecera-tabla"> Nº MÍNIMO <br>COTIZ.</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+
+              <!-- <span *ngIf="insumo.unidad != '' && insumo.saldoDisponible != '0.00'"> -->
+              <span >
+                <mat-checkbox [(ngModel)]="insumo.checked" (click)="$event.stopPropagation()"
+                  (change)="$event ? seleccionarCotizacion(insumo) : null"
+                  [checked]="selectionCotizacion.isSelected(insumo)">
+                </mat-checkbox>
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="recurso">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> RECURSO </th>
+            <td mat-cell *matCellDef="let insumo">
+              <span *ngIf="insumo.unidad == ''" class="td-span-center">
+                {{insumo.recurso}}
+              </span>
+              <span *ngIf="insumo.unidad != ''" style="padding-left: 10px;">
+                {{insumo.recurso}}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="subrubro">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> SUB RUBRO </th>
+            <td mat-cell *matCellDef="let insumo"> {{insumo.subrubro}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="unidad">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> UNID </th>
+            <td mat-cell *matCellDef="let insumo">{{insumo.unidad}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> CANTIDAD </th>
+            <td mat-cell *matCellDef="let insumo"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cuExp">
+            <th mat-header-cell *matHeaderCellDef> C.U. </th>
+            <td mat-cell *matCellDef="let insumo"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="parcialExp">
+            <th mat-header-cell *matHeaderCellDef>PARCIAL </th>
+            <!-- <td mat-cell *matCellDef="let insumo"> {{tabla.metAnt}} </td> -->
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="cuCotiz">
+            <th mat-header-cell *matHeaderCellDef> C.U. </th>
+            <!-- <td mat-cell *matCellDef="let insumo"> {{tabla.valAnt}} </td> -->
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="parcialCotiz">
+            <th mat-header-cell *matHeaderCellDef>PARCIAL </th>
+            <!-- <td mat-cell *matCellDef="let insumo"> {{tabla.metAnt}} </td> -->
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="diferenciaCu">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> DIFERENCIA C.U. S/.<br> (EXP. TEC. -
+              COTIZ.) </th>
+
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="diferenciaParcial">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> DIFERENCIA C.U. S/.<br> (EXP. TEC. -
+              COTIZ.) </th>
+
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="variacionParcial">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> VARIACIÓN<br>PARCIAL </th>
+
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="solicitud">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> DOCUMENTO GENERADO </th>
+
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('solicitud', i)"
+              [style.display]="getRowSpan('solicitud', i) ? '' : 'none'" class="td-align-center"> {{insumo.solicitud}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> ACCIONES </th>
+
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('accion', i)"
+              [style.display]="getRowSpan('accion', i) ? '' : 'none'" style="text-align: left;">
+              <div *ngIf="insumo.cidEstado == '001' && insumo.tipoRecurso == '02'">
+
+                <button mat-icon-button color="primary" (click)="verSolicitud(insumo.idCodigo)"
+                  matTooltip="Generar Solicitud de Cotización">
+                  <mat-icon>picture_as_pdf</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" (click)="editarCotizacion(insumo.idCodigo)"
+                  matTooltip="Editar Insumos a la Cotización">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" (click)="eliminarAutorizacion(insumo)"
+                  matTooltip="Eliminar Solicitud de Cotización">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '002' && insumo.tipoRecurso == '01'">
+                <button mat-icon-button color="primary" (click)="generaHojaTareo(insumo.idCodigo)"
+                  matTooltip="Generar Hoja de Tareo">
+                  <mat-icon>picture_as_pdf</mat-icon>
+                </button>
+
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '003'">
+                <button mat-icon-button color="primary" (click)="verSolicitud(insumo.idCodigo)"
+                  matTooltip="Ver Solicitud de Cotización">
+                  <mat-icon>picture_as_pdf</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" (click)="verCuadroComparativo(insumo.idCodigo)"
+                  matTooltip="Cuadro Comparativo">
+                  <mat-icon>list_alt</mat-icon>
+                </button>
+
+                <!-- CUADRO COMPARATIVO DINAMICO -->
+                <!--             
+            <button mat-icon-button color="primary" (click)="verCuadroComparativoDinamico(insumo.idCodigo)"
+              matTooltip="Cuadro Comparativo Dinamico">
+              <mat-icon>chrome_reader_mode</mat-icon> 
+            </button> 
+          -->
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '004'">
+                <button mat-icon-button color="primary" (click)="verSolicitud(insumo.idCodigo)"
+                  matTooltip="Ver Solicitud de Cotización">
+                  <mat-icon>picture_as_pdf</mat-icon>
+                </button>
+
+              </div>
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="observaciones">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> OBSERVACIONES </th>
+
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+
+            </td>
+          </ng-container>
+
+          <!-- Cabeceras Primer nivel- FIN-->
+
+          <!-- Cabeceras Segundo nivel - INICIO-->
+          <ng-container matColumnDef="colnrocotizaciones">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Nº MÍN.<br>COTIZ.</th>
+          </ng-container>
+          <ng-container matColumnDef="colRecurso">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">RECURSO</th>
+          </ng-container>
+          <ng-container matColumnDef="colSubrubro">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">SUB RUBRO</th>
+          </ng-container>
+          <ng-container matColumnDef="colUnidad">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">UNID</th>
+          </ng-container>
+          <ng-container matColumnDef="colCantidad">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">CANTIDAD</th>
+          </ng-container>
+          <ng-container matColumnDef="colExptco">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">EXP. TCO. </th>
+          </ng-container>
+          <ng-container matColumnDef="colCotizado">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">COTIZADO </th>
+          </ng-container>
+
+          <ng-container matColumnDef="colDiferenciacu">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> DIFERENCIA C.U. S/.<br> (EXP. TEC. - COTIZ.) </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colDiferenciaparcial">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> DIFERENCIA PARCIAL S/.<br> (EXP. TEC. - COTIZ.)
+            </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colVariacion">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> VARIACIÓN<br>PARCIAL % </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colDocumento">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> DOCUMENTO GENERADO </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colAcciones">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> ACCIONES </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colObservaciones">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> OBSERVACIONES </th>
+
+            
+          </ng-container>
+          <!-- Cabeceras Segundo nivel - FIN-->
+
+
+
+
+          <!-- columnas segundo nivel -->
+          <tr mat-header-row
+            *matHeaderRowDef="['colnrocotizaciones', 'colRecurso','colSubrubro','colUnidad','colCantidad','colExptco','colCotizado','colDiferenciacu','colDiferenciaparcial','colVariacion','colDocumento','colAcciones','colObservaciones']" class = "mat-header-row-formato">
+          </tr>
+
+          <!-- columnas primer nivel -->
+          <tr mat-header-row *matHeaderRowDef="columnas;"  class = "mat-header-row-formato"></tr>
+
+          <tr mat-row *matRowDef="let row; columns: columnas" ></tr>
+
+        </table>
+
+
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+        
+      </div>
+      <div class="formato-leyenda-saldo">
+        <p><span style="font-weight: 500;">TOTAL REQUERIMIENTO: </span> <span class="label-saldo-disponible">S/.
+            10000.00</span></p>
+      </div>
+      <!-- BANDEJA -->
+      <div class="columna">
+        <mat-toolbar>
+          <mat-toolbar-row class=" mat-toolbar-fondo">
+  
+            <div class="center">
+            <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="generarSolicitudCotizacion()">
+              <mat-icon>description</mat-icon> Generar Solicitud Cotización
+            </button>
+  
+            <button mat-raised-button color="primary" style="margin-right: 10px;"
+              (click)="finalizarSolicitudCotizacion()">
+              <mat-icon>description</mat-icon> Finalizar AG
+            </button>
+
+            <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="generarSolicitudCotizacion()">
+              <mat-icon>cloud_download</mat-icon> Descargar Formatos
+            </button>
+
+            <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="generarSolicitudCotizacion()">
+              <mat-icon>call_made</mat-icon> Enviar
+            </button> 
+          </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+  
+      </div>
+
+      
+
+
+<div>
+<mat-card lass="example-card" class="mat-elevation-z8">
+  <mat-card-content>
+    <div >
+
+  <table mat-table [dataSource]="dataSourceDocumentos">
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
+      <td mat-cell *matCellDef="let row"  ></td>
+    </ng-container>
+
+    <ng-container matColumnDef="documento">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table" > DOCUMENTO </th>
+      <td mat-cell *matCellDef="let row" >  </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="archivo"> 
+      <th mat-header-cell *matHeaderCellDef  class="formato_header_table">ARCHIVO </th>
+      <td mat-cell *matCellDef="let row" >  </td>
+    </ng-container>             
+    
+    
+
+   
+
+    <tr mat-header-row *matHeaderRowDef="columnas2" class = "mat-header-row-formato"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas2"></tr>
+  </table>
+  </div>
+  </mat-card-content>
+</mat-card>
+
+</div>
+
+    </mat-tab>
+
+    <!---------------------------------------------------------------- TAB GASTO GENERAL ---------------------------------------------------------->
+    <mat-tab label="GASTOS GENERALES">
+
+      <div class="bandeja scroll-container-table">
+
+        <table mat-table [dataSource]="dataSourceGastoGeneral">
+
+          <!-- <ng-container matColumnDef="checked2">
+
+            <th mat-header-cell *matHeaderCellDef> ITEM</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+
+              <span *ngIf="insumo.unidad != '' && insumo.saldoDisponible != '0.00'">
+                <mat-checkbox [(ngModel)]="insumo.checked" (click)="$event.stopPropagation()"
+                  (change)="$event ? seleccionarCotizacion(insumo) : null"
+                  [checked]="selectionCotizacion.isSelected(insumo)">
+                </mat-checkbox>
+              </span>
+            </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="recurso2">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> RECURSO </th>
+            <td mat-cell *matCellDef="let insumo">
+
+              <span *ngIf="insumo.unidad == ''" class="td-span-center">
+                {{insumo.recurso}}
+              </span>
+
+              <span *ngIf="insumo.unidad != ''" style="padding-left: 10px;">
+                {{insumo.recurso}}
+              </span>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="unidad2">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> UNID. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.unidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad2">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}" > CANTIDAD </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cuExp2">
+            <th mat-header-cell *matHeaderCellDef> C.U. </th>
+            <td mat-cell *matCellDef="let insumo"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="parcialExp2">
+            <th mat-header-cell *matHeaderCellDef>PARCIAL </th>
+            <!-- <td mat-cell *matCellDef="let insumo"> {{tabla.metAnt}} </td> -->
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="cuCotiz2">
+            <th mat-header-cell *matHeaderCellDef> C.U. </th>
+            <!-- <td mat-cell *matCellDef="let insumo"> {{tabla.valAnt}} </td> -->
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="parcialCotiz2">
+            <th mat-header-cell *matHeaderCellDef>PARCIAL </th>
+            <!-- <td mat-cell *matCellDef="let insumo"> {{tabla.metAnt}} </td> -->
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="diferenciaCu2">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> DIFERENCIA C.U. S/.<br> (EXP. TEC. -
+              COTIZ.) </th>
+
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="diferenciaParcial2">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> DIFERENCIA C.U. S/.<br> (EXP. TEC. -
+              COTIZ.) </th>
+
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="variacionParcial2">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> VARIACIÓN PARCIAL </th>
+
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.cantidad}}
+
+            </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="solicitud2">
+            <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> DOCUMENTO GENERADO </th>
+
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('solicitud', i)"
+              [style.display]="getRowSpan('solicitud', i) ? '' : 'none'" class="td-align-center"> {{insumo.solicitud}}
+            </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="acciones2">
+            <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('accion', i)"
+              [style.display]="getRowSpan('accion', i) ? '' : 'none'" style="text-align: left;">
+              <div *ngIf="insumo.cidEstado == '001' && insumo.tipoRecurso == '01'">
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="verCalculoPagoMensual(insumo.idCodigo)" matTooltip="Ver Pago Mensual">
+                  <mat-icon>library_books</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="editarCotizacion(insumo.idCodigo)" matTooltip="Editar solicitud contización">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px" (click)="eliminarAutorizacion(insumo)"
+                  matTooltip="Eliminar solicitud de cotización">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '002' && insumo.tipoRecurso == '01'">
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="calculoPagoMensual(insumo.idCodigo)" matTooltip="Cálculo Pago Mensual">
+                  <mat-icon>payment</mat-icon>
+                </button>
+
+
+              </div>
+
+            </td>
+          </ng-container> -->
+            <!-- Cabeceras Primer nivel- FIN-->
+
+          <!-- Cabeceras Segundo nivel - INICIO-->
+          
+          <ng-container matColumnDef="colRecurso2">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">RECURSO</th>
+          </ng-container>
+          <ng-container matColumnDef="colUnidad2">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">UNIDAD</th>
+          </ng-container>
+          <ng-container matColumnDef="colCantidad2">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">CANTIDAD</th>
+          </ng-container>
+          <ng-container matColumnDef="colExptco2">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">EXP. TCO. </th>
+          </ng-container>
+          <ng-container matColumnDef="colCotizado2">
+            <th mat-header-cell *matHeaderCellDef [attr.colspan]="2">COTIZADO </th>
+          </ng-container>
+
+          <ng-container matColumnDef="colDiferenciacu2">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> DIFERENCIA C.U. S/.<br> (EXP. TEC. - COTIZ.) </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colDiferenciaparcial2">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> DIFERENCIA PARCIAL S/.<br> (EXP. TEC. - COTIZ.)
+            </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colVariacion2">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> VARIACIÓN PARCIAL % </th>
+
+          </ng-container>
+
+          <ng-container matColumnDef="colDocumento2">
+            <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> DOCUMENTO GENERADO </th>
+
+          </ng-container>
+
+          <!-- Cabeceras Segundo nivel - FIN-->
+
+
+
+
+          <!-- columnas segundo nivel -->
+          <tr mat-header-row
+            *matHeaderRowDef="['colRecurso2','colUnidad2','colCantidad2','colExptco2','colCotizado2','colDiferenciacu2','colDiferenciaparcial2','colVariacion2','colDocumento2']" class = "mat-header-row-formato">
+          </tr>
+
+
+          <tr mat-header-row *matHeaderRowDef="columnasGastoGeneral" class = "mat-header-row-formato"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnasGastoGeneral" style="line-height: 30px;"></tr>
+        </table>
+
+
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+        <!-- 
+          <mat-toolbar>
+            <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+        
+              <div>
+                <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+                  [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+                </mat-paginator>
+        
+              </div>
+            </mat-toolbar-row>
+          </mat-toolbar> 
+      -->
+      </div>
+      <div class="formato-leyenda-saldo">
+        <p><span style="font-weight: 500;">TOTAL REQUERIMIENTO: </span> <span class="label-saldo-disponible">S/.
+            10000.00</span></p>
+      </div>
+      <!-- BANDEJA -->
+      <div class="columna">
+        <mat-toolbar>
+          <mat-toolbar-row class=" mat-toolbar-fondo">
+  
+            <div class="center">
+            
+  
+            <button mat-raised-button color="primary" style="margin-right: 10px;"
+              (click)="finalizarSolicitudCotizacion()">
+              <mat-icon>description</mat-icon> Finalizar AG
+            </button>
+
+            <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="generarSolicitudCotizacion()">
+              <mat-icon>cloud_download</mat-icon> Descargar Formatos
+            </button>
+
+            <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="generarSolicitudCotizacion()">
+              <mat-icon>call_made</mat-icon> Enviar
+            </button> 
+          </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+  
+      </div>
+      
+    </mat-tab>
+
+    <!---------------------------------------------------------------- TAB GASTO DE RESIDENTE --------------------------------------------------------->
+    <mat-tab label="GASTOS DE RESIDENTE">
+
+      <div class="bandeja scroll-container-table">
+
+        <table mat-table [dataSource]="dataSourceGastoResidente">
+
+          <ng-container matColumnDef="checked3">
+
+            <th mat-header-cell *matHeaderCellDef> ITEM</th>
+            <td mat-cell *matCellDef="let insumo">
+
+              <span *ngIf="insumo.unidad != '' && insumo.saldoDisponible != '0.00'">
+                <mat-checkbox [(ngModel)]="insumo.checked" (click)="$event.stopPropagation()"
+                  (change)="$event ? seleccionarCotizacion(insumo) : null"
+                  [checked]="selectionCotizacion.isSelected(insumo)">
+                </mat-checkbox>
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="recurso3">
+            <th mat-header-cell *matHeaderCellDef> RECURSO </th>
+            <td mat-cell *matCellDef="let insumo">
+
+              <span *ngIf="insumo.unidad == ''" class="td-span-center">
+                {{insumo.recurso}}
+              </span>
+
+              <span *ngIf="insumo.unidad != ''" style="padding-left: 10px;">
+                {{insumo.recurso}}
+              </span>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="unidad3">
+            <th mat-header-cell *matHeaderCellDef> UNID. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.unidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad3">
+            <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="precio3">
+            <th mat-header-cell *matHeaderCellDef>PRECIO S/. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.precio}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_solicitada3">
+            <th mat-header-cell *matHeaderCellDef>CANTIDAD <br>A COTIZAR</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+              <mat-form-field *ngIf="insumo.unidad != ''" appearance="outline" floatLabel="never">
+                <input matInput [value]="insumo.cantidadSolicitada" [(ngModel)]="insumo.cantidadSolicitada">
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="saldo_disponible3">
+            <th mat-header-cell *matHeaderCellDef>SALDO <br> DISPONIBLE <br> (S/.)</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.saldoDisponible}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_cotizacion3">
+            <th mat-header-cell *matHeaderCellDef style="width: 6%;">MIN. N°<br> COTIZ.</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.cantidadCotizacion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="solicitud3">
+            <th mat-header-cell *matHeaderCellDef>DOCUMENTO GENERADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('solicitud', i)"
+              [style.display]="getRowSpan('solicitud', i) ? '' : 'none'" class="td-align-center"> {{insumo.solicitud}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado3">
+            <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('estado', i)"
+              [style.display]="getRowSpan('estado', i) ? '' : 'none'" style="text-align: left;"> {{insumo.estado}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones3">
+            <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('accion', i)"
+              [style.display]="getRowSpan('accion', i) ? '' : 'none'" style="text-align: left;">
+              <div *ngIf="insumo.cidEstado == '001' && insumo.tipoRecurso == '01'">
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="verCalculoPagoMensual(insumo.idCodigo)" matTooltip="Ver Pago Mensual">
+                  <mat-icon>library_books</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="editarCotizacion(insumo.idCodigo)" matTooltip="Editar solicitud contización">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px" (click)="eliminarAutorizacion(insumo)"
+                  matTooltip="Eliminar solicitud de cotización">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '002' && insumo.tipoRecurso == '01'">
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="calculoPagoMensual(insumo.idCodigo)" matTooltip="Cálculo Pago Mensual">
+                  <mat-icon>payment</mat-icon>
+                </button>
+
+
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnasGastoResidente"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnasGastoResidente" style="line-height: 30px;"></tr>
+        </table>
+
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+
+      </div>
+    </mat-tab>
+
+    <!----------------------------------------------------------- TAB GASTO DE FINANCIEROS U OTROS ---------------------------------------------------->
+    <mat-tab label="GASTOS FINANCIEROS U OTROS">
+
+      <div class="bandeja scroll-container-table">
+
+        <table mat-table [dataSource]="dataSourceGastoFinanciero">
+
+          <ng-container matColumnDef="checked4">
+
+            <th mat-header-cell *matHeaderCellDef> ITEM</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+
+              <span *ngIf="insumo.unidad != '' && insumo.saldoDisponible != '0.00'">
+                <mat-checkbox [(ngModel)]="insumo.checked" (click)="$event.stopPropagation()"
+                  (change)="$event ? seleccionarCotizacion(insumo) : null"
+                  [checked]="selectionCotizacion.isSelected(insumo)">
+                </mat-checkbox>
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="recurso4">
+            <th mat-header-cell *matHeaderCellDef> RECURSO </th>
+            <td mat-cell *matCellDef="let insumo">
+
+              <span *ngIf="insumo.unidad == ''" class="td-span-center">
+                {{insumo.recurso}}
+              </span>
+
+              <span *ngIf="insumo.unidad != ''" style="padding-left: 10px;">
+                {{insumo.recurso}}
+              </span>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="unidad4">
+            <th mat-header-cell *matHeaderCellDef> UNID. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.unidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad4">
+            <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="precio4">
+            <th mat-header-cell *matHeaderCellDef>PRECIO S/. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.precio}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_solicitada4">
+            <th mat-header-cell *matHeaderCellDef>CANTIDAD <br>A COTIZAR</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+              <mat-form-field *ngIf="insumo.unidad != ''" appearance="outline" floatLabel="never">
+                <input matInput [value]="insumo.cantidadSolicitada" [(ngModel)]="insumo.cantidadSolicitada">
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="saldo_disponible4">
+            <th mat-header-cell *matHeaderCellDef>SALDO <br> DISPONIBLE <br> (S/.)</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.saldoDisponible}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_cotizacion4">
+            <th mat-header-cell *matHeaderCellDef style="width: 6%;">MIN. N°<br> COTIZ.</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.cantidadCotizacion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="solicitud4">
+            <th mat-header-cell *matHeaderCellDef>DOCUMENTO GENERADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('solicitud', i)"
+              [style.display]="getRowSpan('solicitud', i) ? '' : 'none'" class="td-align-center"> {{insumo.solicitud}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado4">
+            <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('estado', i)"
+              [style.display]="getRowSpan('estado', i) ? '' : 'none'" style="text-align: left;"> {{insumo.estado}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones4">
+            <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('accion', i)"
+              [style.display]="getRowSpan('accion', i) ? '' : 'none'" style="text-align: left;">
+              <div *ngIf="insumo.cidEstado == '001' && insumo.tipoRecurso == '01'">
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="verCalculoPagoMensual(insumo.idCodigo)" matTooltip="Ver Pago Mensual">
+                  <mat-icon>library_books</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="editarCotizacion(insumo.idCodigo)" matTooltip="Editar solicitud contización">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px" (click)="eliminarAutorizacion(insumo)"
+                  matTooltip="Eliminar solicitud de cotización">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '002' && insumo.tipoRecurso == '01'">
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="calculoPagoMensual(insumo.idCodigo)" matTooltip="Cálculo Pago Mensual">
+                  <mat-icon>payment</mat-icon>
+                </button>
+
+
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnasGastoFinanciero"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnasGastoFinanciero" style="line-height: 30px;"></tr>
+        </table>
+
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+
+      </div>
+    </mat-tab>
+
+    <!--------------------------------------------------------- TAB GASTO NUCLEO EJECUTOR ------------------------------------------------------>
+    <mat-tab label="GASTOS N.E.">
+      <div class="bandeja scroll-container-table">
+
+        <table mat-table [dataSource]="dataSourceGastoNucleoEjecutor">
+
+          <ng-container matColumnDef="checked5">
+
+            <th mat-header-cell *matHeaderCellDef> ITEM</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+
+              <span *ngIf="insumo.unidad != '' && insumo.saldoDisponible != '0.00'">
+                <mat-checkbox [(ngModel)]="insumo.checked" (click)="$event.stopPropagation()"
+                  (change)="$event ? seleccionarCotizacion(insumo) : null"
+                  [checked]="selectionCotizacion.isSelected(insumo)">
+                </mat-checkbox>
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="recurso5">
+            <th mat-header-cell *matHeaderCellDef> RECURSO </th>
+            <td mat-cell *matCellDef="let insumo">
+
+              <span *ngIf="insumo.unidad == ''" class="td-span-center">
+                {{insumo.recurso}}
+              </span>
+
+              <span *ngIf="insumo.unidad != ''" style="padding-left: 10px;">
+                {{insumo.recurso}}
+              </span>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="unidad5">
+            <th mat-header-cell *matHeaderCellDef> UNID. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.unidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad5">
+            <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="precio5">
+            <th mat-header-cell *matHeaderCellDef>PRECIO S/. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.precio}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_solicitada5">
+            <th mat-header-cell *matHeaderCellDef>CANTIDAD <br>A COTIZAR</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+              <mat-form-field *ngIf="insumo.unidad != ''" appearance="outline" floatLabel="never">
+                <input matInput [value]="insumo.cantidadSolicitada" [(ngModel)]="insumo.cantidadSolicitada">
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="saldo_disponible5">
+            <th mat-header-cell *matHeaderCellDef>SALDO <br> DISPONIBLE <br> (S/.)</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.saldoDisponible}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_cotizacion5">
+            <th mat-header-cell *matHeaderCellDef style="width: 6%;">MIN. N°<br> COTIZ.</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.cantidadCotizacion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="solicitud5">
+            <th mat-header-cell *matHeaderCellDef>DOCUMENTO GENERADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('solicitud', i)"
+              [style.display]="getRowSpan('solicitud', i) ? '' : 'none'" class="td-align-center"> {{insumo.solicitud}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado5">
+            <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('estado', i)"
+              [style.display]="getRowSpan('estado', i) ? '' : 'none'" style="text-align: left;"> {{insumo.estado}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones5">
+            <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('accion', i)"
+              [style.display]="getRowSpan('accion', i) ? '' : 'none'" style="text-align: left;">
+              <div *ngIf="insumo.cidEstado == '001' && insumo.tipoRecurso == '01'">
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="verCalculoPagoMensual(insumo.idCodigo)" matTooltip="Ver Pago Mensual">
+                  <mat-icon>library_books</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="editarCotizacion(insumo.idCodigo)" matTooltip="Editar solicitud contización">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px" (click)="eliminarAutorizacion(insumo)"
+                  matTooltip="Eliminar solicitud de cotización">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '002' && insumo.tipoRecurso == '01'">
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="calculoPagoMensual(insumo.idCodigo)" matTooltip="Cálculo Pago Mensual">
+                  <mat-icon>payment</mat-icon>
+                </button>
+
+
+              </div>
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnasGastoNucleoEjecutor"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnasGastoNucleoEjecutor" style="line-height: 30px;"></tr>
+        </table>
+
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+
+      </div>
+
+    </mat-tab>
+
+    <!--------------------------------------------------------- TAB GASTO DE SUPERVISIÓN----------------------------------------------------->
+    <mat-tab label="GASTOS DE SUPERVISIÓN">
+      <div class="bandeja scroll-container-table">
+
+        <table mat-table [dataSource]="dataSourceGastoSupervisor">
+
+          <ng-container matColumnDef="checked6">
+
+            <th mat-header-cell *matHeaderCellDef> ITEM</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+
+              <span *ngIf="insumo.unidad != '' && insumo.saldoDisponible != '0.00'">
+                <mat-checkbox [(ngModel)]="insumo.checked" (click)="$event.stopPropagation()"
+                  (change)="$event ? seleccionarCotizacion(insumo) : null"
+                  [checked]="selectionCotizacion.isSelected(insumo)">
+                </mat-checkbox>
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="recurso6">
+            <th mat-header-cell *matHeaderCellDef> RECURSO </th>
+            <td mat-cell *matCellDef="let insumo">
+
+              <span *ngIf="insumo.unidad == ''" class="td-span-center">
+                {{insumo.recurso}}
+              </span>
+
+              <span *ngIf="insumo.unidad != ''" style="padding-left: 10px;">
+                {{insumo.recurso}}
+              </span>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="unidad6">
+            <th mat-header-cell *matHeaderCellDef> UNID. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.unidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad6">
+            <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center"> {{insumo.cantidad}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="precio6">
+            <th mat-header-cell *matHeaderCellDef>PRECIO S/. </th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">{{insumo.precio}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_solicitada6">
+            <th mat-header-cell *matHeaderCellDef>CANTIDAD <br>A COTIZAR</th>
+            <td mat-cell *matCellDef="let insumo" class="td-align-center">
+              <mat-form-field *ngIf="insumo.unidad != ''" appearance="outline" floatLabel="never">
+                <input matInput [value]="insumo.cantidadSolicitada" [(ngModel)]="insumo.cantidadSolicitada">
+              </mat-form-field>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="saldo_disponible6">
+            <th mat-header-cell *matHeaderCellDef>SALDO <br> DISPONIBLE <br> (S/.)</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.saldoDisponible}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cantidad_cotizacion6">
+            <th mat-header-cell *matHeaderCellDef style="width: 6%;">MIN. N°<br> COTIZ.</th>
+            <td mat-cell *matCellDef="let insumo" style="text-align: center;"> {{insumo.cantidadCotizacion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="solicitud6">
+            <th mat-header-cell *matHeaderCellDef>DOCUMENTO GENERADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('solicitud', i)"
+              [style.display]="getRowSpan('solicitud', i) ? '' : 'none'" class="td-align-center"> {{insumo.solicitud}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado6">
+            <th mat-header-cell *matHeaderCellDef>ESTADO</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('estado', i)"
+              [style.display]="getRowSpan('estado', i) ? '' : 'none'" style="text-align: left;"> {{insumo.estado}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones6">
+            <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+            <td mat-cell *matCellDef="let insumo; let i = index" [attr.rowspan]="getRowSpan('accion', i)"
+              [style.display]="getRowSpan('accion', i) ? '' : 'none'" style="text-align: left;">
+              <div *ngIf="insumo.cidEstado == '001' && insumo.tipoRecurso == '01'">
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="verCalculoPagoMensual(insumo.idCodigo)" matTooltip="Ver Pago Mensual">
+                  <mat-icon>library_books</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="editarCotizacion(insumo.idCodigo)" matTooltip="Editar solicitud contización">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary" style="margin: 0 10px" (click)="eliminarAutorizacion(insumo)"
+                  matTooltip="Eliminar solicitud de cotización">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+              </div>
+
+              <div *ngIf="insumo.cidEstado == '002' && insumo.tipoRecurso == '01'">
+                <button mat-icon-button color="primary" style="margin: 0 10px"
+                  (click)="calculoPagoMensual(insumo.idCodigo)" matTooltip="Cálculo Pago Mensual">
+                  <mat-icon>payment</mat-icon>
+                </button>
+
+
+              </div>
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnasGastoSupervisor"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnasGastoSupervisor" style="line-height: 30px;"></tr>
+        </table>
+
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+
+      </div>
+
+    </mat-tab>
+    
+  </mat-tab-group>
+  <!-- <div class="formato-leyenda-saldo">
+    <p><span style="font-weight: 500;">TOTAL REQUERIMIENTO: </span> <span class="label-saldo-disponible">S/.
+        10000.00</span></p>
+  </div> -->
+  <!-- <div class="contenido-formulario">
+    <div class="columna">
+      <mat-toolbar>
+        <mat-toolbar-row class=" mat-toolbar-fondo">
+
+            <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="guardarSolicitudCotizacion()">
+            <mat-icon>save</mat-icon> Guardar
+          </button>
+
+          <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="generarSolicitudCotizacion()">
+            <mat-icon>description</mat-icon> Generar Cotización
+          </button>
+
+          <button mat-raised-button color="primary" style="margin-right: 10px;"
+            (click)="finalizarSolicitudCotizacion()">
+            <mat-icon>description</mat-icon> Autorización de Gasto
+          </button>
+
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+    </div>
+  </div> -->
+  
+
+  
+
+
+  </div>
+</div>

@@ -1,0 +1,18 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "Costo Directo"
+        }, 
+        {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "Gastos Generales"
+        }
+    ],
+	"idPerfil": null
+}

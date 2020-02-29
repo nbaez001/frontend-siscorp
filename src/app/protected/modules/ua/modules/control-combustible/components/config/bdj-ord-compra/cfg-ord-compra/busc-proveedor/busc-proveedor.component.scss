@@ -1,0 +1,36 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nombre: (
+      width: 14rem
+    ),
+    nomTipoDocumento: (
+      width: 5rem
+    ),
+    nroDocumento: (
+      width: 7rem
+    ),
+    nomDepartamento: (
+      width: 9rem
+    ),
+    nomProvincia: (
+      width: 7rem
+    ),
+    nomDistrito: (
+      width: 7rem
+    )
+  )
+);
+
+.mat-row:hover {
+  cursor: pointer;
+}

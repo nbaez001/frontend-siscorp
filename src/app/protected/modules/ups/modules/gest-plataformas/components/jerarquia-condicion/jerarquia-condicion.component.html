@@ -1,0 +1,66 @@
+<div mat-dialog-title>
+  <span>JERARQUÍA DE CONDICIÓN DE PLATAFORMAS FIJAS</span>
+  <button mat-icon-button (click)="matDialogRef.close()"><mat-icon>clear</mat-icon></button>
+</div>
+
+<div mat-dialog-content>
+  <mat-grid-list cols="4" rowHeight="25px">
+
+    <!--CABECERA-->
+    <mat-grid-tile
+      [style.background]="'lightblue'"
+      *ngFor="let c of ['SITUACIÓN', 'ESTADO', 'SUB ESTADO', 'DET. SUB ESTADO']">
+      {{c}}
+    </mat-grid-tile>
+  
+    <ng-template
+      ngFor
+      let-si
+      [ngForOf]="tDatos">
+  
+      <!--SITUACIONES-->
+      <mat-grid-tile
+        [style.background]="'lightgreen'"
+        [rowspan]="si.cantDetSubEstados">
+        {{si.situacion}}
+      </mat-grid-tile>
+  
+      <ng-template
+        ngFor
+        let-es
+        [ngForOf]="si.estados">
+  
+          <!--ESTADOS-->
+          <mat-grid-tile
+            [style.background]="'lightgreen'"
+            [rowspan]="es.cantDetSubEstados">
+            {{es.estado}}
+          </mat-grid-tile>
+  
+          <ng-template
+            ngFor
+            let-se
+            [ngForOf]="es.subEstados">
+  
+              <!--SUB ESTADOS-->
+              <mat-grid-tile
+                [style.background]="'lightgreen'"
+                [rowspan]="se.cantDetSubEstados">
+                {{se.subEstado}}
+              </mat-grid-tile>
+  
+              <!--DET. SUB ESTADOS-->
+              <mat-grid-tile
+                [style.background]="'lightgreen'"
+                *ngFor="let dse of se.detSubEstados">
+                {{dse.detSubEstado}}
+              </mat-grid-tile>
+  
+          </ng-template>
+  
+      </ng-template>
+      
+    </ng-template>
+  
+  </mat-grid-list>
+</div>

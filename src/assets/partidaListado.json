@@ -1,0 +1,33 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {          
+            "item": 1,
+            "cantidadInsumo": "10.00",
+            "cidCodigo" : "01.01.01.01",      
+            "descripcion": "ALQUILER CAMPAMENTO PROVISIONAL (ALMACEN OFICINA DORMITORIO Y COMEDOR DE OBRA)",
+            "fidPartida": 101
+        }, {
+            "item": 2,
+            "cantidadInsumo": "20.00",
+            "cidCodigo" : "01.01.02.01",
+            "descripcion": "LIMPIEZA Y DESBROCE MANUAL DEL TERRENO",
+            "fidPartida": 102
+        }, {
+            "item": 3,
+            "cantidadInsumo": "10.00",
+            "cidCodigo" : "01.01.04.01",
+            "descripcion": "ELABORACIÓN IMPLEMENTACIÓN Y ADMINISTRACIÓN DEL PLAN DE SEGURIDAD Y SALUD",
+            "fidPartida": 103
+        }, {
+            "item": 4,
+            "cantidadInsumo": "30.00",
+            "cidCodigo" : "01.02.01.05",
+            "descripcion": "CAPACITACION EN SEGURIDAD Y SALUD",
+            "fidPartida": 104
+        }
+    ],
+	"idPerfil": 1
+}

@@ -1,0 +1,17 @@
+<mat-card class="navbar">
+    <div class="navbar-content" style="font-size: 30px;">
+        <mat-icon *ngIf="cabecera.icono" inline>{{cabecera.icono}}</mat-icon> {{cabecera.titulo}}
+    </div>
+    <div class="navbar-actions">
+        <button mat-button [matMenuTriggerFor]="menu" class="user-button" [matTooltip]="user.puesto">
+            <img src="assets/images/profile.jpg">
+            <span>{{ user.nombres | titlecase }}</span>
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item><mat-icon>account_circle</mat-icon> Mi Perfil</button>
+            <button mat-menu-item><mat-icon>account_circle</mat-icon> Cambiar Contraseña</button>
+            <button mat-menu-item (click)="logout()"><mat-icon>exit_to_app</mat-icon> Cerrar Sesión</button>
+        </mat-menu>
+    </div>
+</mat-card>

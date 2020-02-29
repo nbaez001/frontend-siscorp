@@ -1,0 +1,68 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "titulo":"Costo Directo",
+			"total": "10000",
+            "MONEDA_1": "20000",
+			"PORCENTAJE_1": "20%",
+			"MONEDA_2": "20000",
+			"PORCENTAJE_2": "20%",
+			"MONEDA_3": "20000",
+			"PORCENTAJE_3": "20%",
+			"MONEDA_4": "20000",
+			"PORCENTAJE_4": "20%"
+        },
+		{
+			"titulo":"Gastos Generales",
+            "total": "20000",
+            "MONEDA_1": "20000",
+			"PORCENTAJE_1": "40%",
+			"MONEDA_2": "20000",
+			"PORCENTAJE_2": "40%",
+			"MONEDA_3": "20000",
+			"PORCENTAJE_3": "40%",
+			"MONEDA_4": "20000",
+			"PORCENTAJE_4": "40%"
+        },
+		{
+			"titulo":"Costo Total de Obra",
+            "total": "30000",
+            "MONEDA_1": "20000",
+			"PORCENTAJE_1": "20%",
+			"MONEDA_2": "20000",
+			"PORCENTAJE_2": "20%",
+			"MONEDA_3": "20000",
+			"PORCENTAJE_3": "20%",
+			"MONEDA_4": "20000",
+			"PORCENTAJE_4": "20%"
+        },
+		{
+			"titulo":"Gastos de supervisión",
+            "total": "40000",
+            "MONEDA_1": "20000",
+			"PORCENTAJE_1": "40%",
+			"MONEDA_2": "20000",
+			"PORCENTAJE_2": "40%",
+			"MONEDA_3": "20000",
+			"PORCENTAJE_3": "40%",
+			"MONEDA_4": "20000",
+			"PORCENTAJE_4": "40%"
+        },
+		{
+			"titulo":"Presupuesto Total",
+            "total": "50000",
+            "MONEDA_1": "20000",
+			"PORCENTAJE_1": "20%",
+			"MONEDA_2": "20000",
+			"PORCENTAJE_2": "20%",
+			"MONEDA_3": "20000",
+			"PORCENTAJE_3": "20%",
+			"MONEDA_4": "20000",
+			"PORCENTAJE_4": "20%"
+        }
+    ],
+	"idPerfil": 1
+}

@@ -1,0 +1,195 @@
+<div class="page">
+  <div [formGroup]="formularioInformeGrp" id="formularioInformeGrp">
+      <p-fieldset legend="Cabecera informe">
+        <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 2, lg: 2, xl: 2}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>N° Hoja de trámite</mat-label>
+                    <input matInput formControlName="frmNroHoja" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 2, lg: 2, xl: 2}">
+                  <mat-form-field appearance="outline">
+                      <mat-label>N° Informe</mat-label>
+                      <input matInput formControlName="frmNroInforme" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Destinatario</mat-label>
+                      <input matInput formControlName="frmDestinatario" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                  <mat-form-field appearance="outline" >
+                      <mat-label>Fecha Informe</mat-label>
+                      <input matInput formControlName="frmFechaInforme" [matDatepicker]="picker"   placeholder="Fecha">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 10, lg: 10, xl: 10}">
+                    <mat-form-field appearance="outline"  >
+                      <mat-label>Asunto</mat-label>
+                      <input matInput formControlName="frmAsunto" >
+                    </mat-form-field>
+                  </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 10, lg: 10, xl: 10}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Proyecto</mat-label>
+                    <input matInput formControlName="frmProyecto" >
+                  </mat-form-field>
+                </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 10, lg: 10, xl: 10}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Nro. Convenio</mat-label>
+                    <input matInput formControlName="frmNumConvenio" >
+                  </mat-form-field>
+                </mat-grid-tile>
+        </mat-grid-list>
+      </p-fieldset>
+      
+      <p-fieldset legend="Cuerpo informe" >
+        <mat-tab-group>
+          <mat-tab label="Aspectos generales">
+            <mat-grid-list cols="12" rowHeight="100px">
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                      <mat-form-field appearance="outline"  >
+                        <mat-label>Aspectos Generales</mat-label>
+                        <textarea matInput formControlName="frmAspectosGen" ></textarea>
+                      </mat-form-field>
+                    </mat-grid-tile>
+            </mat-grid-list>
+          </mat-tab>
+          <mat-tab label="Análisis">
+            <mat-grid-list cols="12" rowHeight="100px">
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                      <mat-form-field appearance="outline"  >
+                        <mat-label>Análisis</mat-label>
+                        <textarea matInput formControlName="frmAnalisis" ></textarea>
+                      </mat-form-field>
+                    </mat-grid-tile>
+            </mat-grid-list>
+          </mat-tab>
+          <mat-tab label="Situación">
+            <mat-grid-list cols="12" rowHeight="100px">
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                      <mat-form-field appearance="outline"  >
+                        <mat-label>Situación</mat-label>
+                        <textarea matInput formControlName="frmSituacion" ></textarea>
+                      </mat-form-field>
+                    </mat-grid-tile>
+            </mat-grid-list>
+          </mat-tab>
+          <mat-tab label="Conclusiones">
+            <mat-grid-list cols="12" rowHeight="100px">
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                      <mat-form-field appearance="outline"  >
+                        <mat-label>Conclusiones</mat-label>
+                        <textarea matInput formControlName="frmConclusion" ></textarea>
+                      </mat-form-field>
+                    </mat-grid-tile>
+            </mat-grid-list>
+          </mat-tab>
+          <mat-tab label="Recomendaciones">
+            <mat-grid-list cols="12" rowHeight="100px">
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                      <mat-form-field appearance="outline"  >
+                        <mat-label>Recomendaciones</mat-label>
+                        <textarea matInput formControlName="frmRecomendacion" ></textarea>
+                      </mat-form-field>
+                    </mat-grid-tile>
+            </mat-grid-list>
+          </mat-tab>
+        </mat-tab-group>    
+        
+      </p-fieldset>
+      
+      <p-fieldset legend="Documentos sustentatorios">
+          <mat-grid-list cols="12" rowHeight="50px" >
+              <mat-grid-tile [responsiveRows]="{xs: 0, sm: 8, md: 9, lg: 10, xl: 11}" ></mat-grid-tile>
+
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 3, lg: 2, xl: 1}" >
+                <button color="primary" mat-raised-button (click)="agregarDocumento()" style="margin-right: 5px;">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <!-- <button color="primary" mat-raised-button (click)="buscarDocumento()">
+                  <mat-icon>search</mat-icon>
+                </button> -->
+              </mat-grid-tile>
+          </mat-grid-list>
+
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource" > 
+
+             <ng-container matColumnDef="colNro">
+               <th mat-header-cell *matHeaderCellDef > N° </th>
+               <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+             </ng-container>
+             
+             <ng-container matColumnDef="colDescripcion">
+               <th mat-header-cell *matHeaderCellDef>Descripción</th>
+               <td mat-cell *matCellDef="let tabla">{{tabla.descripcion}} </td>
+             </ng-container>
+       
+             <ng-container matColumnDef="colArchivo">
+               <th mat-header-cell *matHeaderCellDef> Archivo </th>
+               <td mat-cell *matCellDef="let tabla"> {{tabla.archivo}} </td>
+             </ng-container>
+            
+             <ng-container matColumnDef="acciones"> 
+               <th mat-header-cell *matHeaderCellDef>Acciones</th>
+               <td mat-cell *matCellDef="let tabla">
+       
+                 <button mat-icon-button color="primary"
+                   (click)="verDocumento(tabla.id)"
+                   matTooltip="Ver documento">
+                   <mat-icon>remove_red_eye</mat-icon>
+                 </button>
+       
+                 <button mat-icon-button color="primary"
+                   (click)="eliminarDocumento(tabla.id)"
+                   matTooltip="Eliminar documento">
+                   <mat-icon>delete_forever</mat-icon>
+                 </button>
+       
+               </td>
+             </ng-container>
+       
+             <tr mat-header-row *matHeaderRowDef="columnas; sticky: true" class="encabezadoTabla"></tr>
+             <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+           </table>
+
+           <div class="empty" *ngIf=" dataSource === null">
+             No existe datos para mostrar en la tabla
+           </div>
+     
+           <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+           </mat-paginator>
+         </div>
+
+      </p-fieldset>  
+
+      <mat-grid-list cols="12"  >
+        <mat-grid-tile [responsiveRows]="{xs: 0, sm: 4, md: 4, lg: 8, xl: 9}" ></mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 4, xl: 3}" >
+          <div mat-dialog-actions class="alinear-boton">
+            <button mat-raised-button color="primary" (click)="guardar()" style="margin-left: 5px;margin-top: 5px;">Guardar sin enviar</button>
+            <button mat-raised-button color="primary" (click)="enviar()" style="margin-left: 5px;margin-top: 5px;">Enviar</button>
+            <button mat-raised-button color="primary" (click)="vistaPrevia()" style="margin-left: 5px;margin-top: 5px;">Vista previa</button>
+            <!-- <button mat-raised-button  color="warn" [mat-dialog-close]="null" cdkFocusInitial style="margin-left: 5px;margin-top: 5px;">Cancelar</button> -->
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+      
+
+  </div>
+</div>
+

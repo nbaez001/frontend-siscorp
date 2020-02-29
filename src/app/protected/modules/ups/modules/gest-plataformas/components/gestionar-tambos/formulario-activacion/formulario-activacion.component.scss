@@ -1,0 +1,26 @@
+:host {
+
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .contenido-formulario {
+    padding-top: 20px;
+    display: flex;
+
+    mat-form-field {
+      flex: 1;
+    }
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    margin-bottom: 0;
+    padding: 20px;
+
+    button {
+      flex: 1;
+    }
+  }
+}

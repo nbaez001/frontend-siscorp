@@ -1,0 +1,138 @@
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong style="color: white;">Filtros</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <br>
+      <!-- INPUTS -->
+      <div class="inputs" [formGroup]="filtrosForm" fxLayout.xl="row" fxLayout.lg="row">
+        <mat-form-field appearance="outline">
+            <mat-label>Formato Código:</mat-label>
+              <mat-select  formControlName="formatoCodigoFrmCtrl">
+                <mat-option  *ngFor="let formato of dataItem?.codigo" [value]="formato.cidCodigo">{{formato.cidCodigo}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+   
+        <mat-form-field appearance="outline">
+            <mat-label>Unidad Orgánica:</mat-label>
+              <mat-select  formControlName="unidadOrganicaFrmCtrl">
+                <mat-option  *ngFor="let unid of dataItemUnidad?.unidadOrganica" [value]="unid.idCodigo">{{unid.cidNombre}}
+                </mat-option>
+            </mat-select>               
+        </mat-form-field>
+     
+        <mat-form-field appearance="outline">
+          <mat-label>FECHA RECEPCION INICIO</mat-label>
+          <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fechaRegDesdeFrmCtrl">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>FECHA RECEPCION FIN</mat-label>
+          <input matInput [matDatepicker]="picker2" readonly (click)="picker2.open()" formControlName="fechaRegHastaFrmCtrl">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+  
+    
+        <div class="acciones">
+          <button mat-mini-fab (click)="buscarTdr($event)" [disabled]="disableBuscar" matTooltip="búsqueda"><mat-icon >search</mat-icon></button>
+          <button mat-mini-fab class="mat-grey-300-bg"  matTooltip="Limpiar filtros de búsqueda" (click)="reiniciar()"><mat-icon >clear_all</mat-icon></button>
+          <button mat-mini-fab class="nuevo-intrv mat-blue"  matTooltip="Registrar Tdr"  (click)="nuevoTdr()"><mat-icon class="white-fg">add</mat-icon></button>
+        </div>
+      </div>
+      <!-- INPUTS -->
+  
+    </mat-expansion-panel>
+  </mat-accordion>
+  <!-- FILTROS -->
+
+<!--   <embed
+  type="application/pdf"
+  src="http://localhost:8078/prefactibilidadTdr/reporteTdr/61"
+  id="pdfDocument"
+  width="100%" 
+  height="100%" /> -->
+  
+  <!-- BANDEJA -->
+  <div class="bandeja">
+  
+    <table mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="Nro">
+          <th mat-header-cell *matHeaderCellDef> Nro</th>
+          <td mat-cell *matCellDef="let tdr">{{tdr.item}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="codigoFormato">
+        <th mat-header-cell *matHeaderCellDef> Codigo Formato </th>
+        <td mat-cell *matCellDef="let tdr"> {{tdr.codDocumento}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="unidadOrigen">
+        <th mat-header-cell *matHeaderCellDef> Unidad Origen </th>
+        <td mat-cell *matCellDef="let tdr"> {{tdr.fidUnidadOrigen}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="fechaRegistro">
+        <th mat-header-cell *matHeaderCellDef> Fecha Registro </th>
+        <td mat-cell *matCellDef="let tdr"> {{tdr.fecReg}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef >Acciones</th>
+        <td mat-cell *matCellDef="let tdr">
+  
+          <button mat-icon-button color="primary" (click)="verTdr(tdr.idCodigo)" matTooltip="Visualizar TDR">
+              <mat-icon>search</mat-icon>
+          </button>
+
+          <button mat-icon-button color="primary"
+            (click)="editarTdr(tdr.idCodigo, tdr.fidProyecto)" matTooltip="Modificar Tdr">
+            <mat-icon> border_color</mat-icon>
+          </button>
+      
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+  
+      <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+      </div>
+  
+      <mat-card *ngIf="isLoading" class="spinerTable">
+          <mat-progress-spinner color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+      </mat-card>
+        
+       <mat-toolbar>
+        <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+          <div>
+              <mat-paginator 
+              [length]="total" 
+              [pageIndex]="pagina - 1" 
+              [pageSize]="cantidad" 
+              [showFirstLastButtons]="true"
+              [pageSizeOptions]="[15, 30, 50]" 
+              (page)="cambiarPagina($event)">
+              </mat-paginator>
+  
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>  
+   
+  </div>
+  <!-- BANDEJA -->
+  
+  
+  
+  

@@ -1,0 +1,15 @@
+:host {
+  width: 600px;
+
+  .mat-dialog-title {
+    display: flex;
+    place-content: center space-between;
+    align-items: center;
+  }
+
+  .mat-dialog-content {
+    table {
+      width: 100%;
+    }
+  }
+}

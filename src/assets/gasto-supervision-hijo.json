@@ -1,0 +1,68 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "101",
+                "descripcion": " HONORARIOS PROFESIONALES - SUPERVISOR DE OBRA (EJECUCIÓN)",
+                "unidad": "kg",
+                "saldo": "520",
+                "cantidad": "11",
+                "precioUnitario": "520.00",
+                "importe": "1200.00",
+                "razonSocial": "CESAR VALLEJO",
+                "formaPago": "contado",
+                "sustento": "xxxxxxxxxxxxxx",
+                "observacion": "observacion data de prueba numero 01"  
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "201",
+                "descripcion": "MOVILIDAD Y VIATICOS -SUPERVISOR DE OBRA- ZONA COMERCIAL",
+                "unidad": "piz",
+                "saldo": "530",
+                "cantidad": "20",
+                "precioUnitario": "650.00",
+                "importe": "750.00",
+                "razonSocial": "TRAVEL PERU",
+                "formaPago": "CREDITO",
+                "sustento": "SSSSSSSSSSSSSSSSSSS",
+                "observacion": "observacion data de prueba numero 02"  
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "202",
+                "descripcion": "MOVILIDAD Y VIATICOS -SUPERVISOR DE OBRA - LIMA",
+                "unidad": "piz",
+                "saldo": "540",
+                "cantidad": "20",
+                "precioUnitario": "650.00",
+                "importe": "750.00",
+                "razonSocial": "QUIPU RAPID",
+                "formaPago": "CREDITO",
+                "sustento": "SSSSSSSSSSSSSSSSSSS",
+                "observacion": "observacion data de prueba numero 02"  
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "203",
+                "descripcion": "MOVILIDAD Y OTROS GASTOS",
+                "unidad": "piz",
+                "saldo": "940",
+                "cantidad": "20",
+                "precioUnitario": "650.00",
+                "importe": "950.00",
+                "razonSocial": "CAMIONERO CAT",
+                "formaPago": "CREDITO",
+                "sustento": "xxxxxxxxxxxx",
+                "observacion": "observacion data de prueba numero 03"  
+            },
+            "leaf": true
+        }
+    ]
+}

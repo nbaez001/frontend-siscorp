@@ -1,0 +1,227 @@
+  <!-- CABECERA -->
+  <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+    <span>VISUALIZAR PROYECTO</span>
+     <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    </button> 
+  </mat-toolbar>
+  <!-- CABECERA -->
+  <br>
+    <!-- FORMULARIO -->
+    <div mat-dialog-content class="contenido-formulario" [formGroup]="proyectoForm">
+
+        <div class="columna">
+            <mat-form-field appearance="outline">
+              <mat-label>Código Proyecto</mat-label>
+              <input matInput formControlName="codigo" value = {{datos.proyectos.codigo}} readonly>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline" style="margin-right: 10px;">
+              <mat-label>Fecha Recepción</mat-label>
+              <input matInput formControlName="fechaRecepcionProyecto" value = {{datos.proyectos.fecRecepcion}}  readonly>
+            </mat-form-field>   
+            
+            <mat-form-field appearance="outline">
+              <mat-label>Estado</mat-label>
+              <input matInput formControlName="estadoProyecto" value ="{{datos.proyectos.estado}}" readonly>
+            </mat-form-field>
+        </div>
+
+        <div class="columna">           
+            <mat-form-field appearance="outline"  >
+                <mat-label>Encargado Expediente Técnico</mat-label>
+                <input matInput formControlName="encargadoAsignado"  value = {{datos.proyectos.coordinadorPlataformaFija}}  readonly>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline" >
+              <mat-label>Modalidad Ejecución</mat-label>
+              <input matInput formControlName="modalidad"  value = {{datos.proyectos.modalidad}}  readonly>
+            </mat-form-field>
+        
+        </div>
+
+     
+
+
+      <div class="columna">
+
+        
+          <mat-form-field appearance="outline" style="margin-right: 5px;">
+              <mat-label>Fecha Asignación Encargado</mat-label>
+              <input matInput formControlName="fechaAsignacionCoordinador"  value = {{datos.proyectos.fecAsignacion}}  readonly>
+            </mat-form-field>
+
+            
+        <mat-form-field appearance="outline"  style="margin-right: 5px;">
+            <mat-label>Plazo</mat-label>
+
+          
+            <input matInput formControlName="coordinadorAsignado"  value = {{datos.proyectos.numPlazo}}  readonly 
+            *ngIf = "datos.proyectos.cidEstado == '011'  || datos.proyectos.cidEstado == '014' || datos.proyectos.cidEstado == '013'"
+            class="color-grey"
+            matTooltip="días restantes de atención">
+
+            <input matInput formControlName="coordinadorAsignado"  value = {{datos.proyectos.numPlazo}}  readonly 
+            *ngIf = "datos.proyectos.numPlazo > 5 && datos.proyectos.cidEstado != '011'  &&  datos.proyectos.cidEstado != '014'  &&  datos.proyectos.cidEstado != '013'"
+            class="color-orange"
+            matTooltip="días restantes de atención">
+
+            <input matInput formControlName="coordinadorAsignado"  value = {{datos.proyectos.numPlazo}}  readonly 
+            *ngIf = "datos.proyectos.numPlazo < 6 && datos.proyectos.cidEstado != '011' &&  datos.proyectos.cidEstado != '014'  &&  datos.proyectos.cidEstado != '013'"
+            class="color-red"
+            matTooltip="días restantes de atención!..">
+
+        </mat-form-field>
+
+
+          <mat-form-field appearance="outline"  style="margin-right: 5px;">
+              <mat-label>Profesionales Elaboración</mat-label>
+              <input matInput formControlName="profesionalElaboracion"  value = {{datos.proyectos.profesionalElaboracion}}  readonly>
+          </mat-form-field>
+
+        
+      
+          <mat-form-field appearance="outline" >
+            <mat-label>Profesionales Revisión</mat-label>
+            <input matInput formControlName="profesionalRevision"  value = {{datos.proyectos.profesionalRevision}}  readonly>
+          </mat-form-field>
+
+      </div>
+
+
+
+      <mat-tab-group animationDuration="0ms">
+         
+        <mat-tab label="Profesionales Elaboración">
+            
+          <div class="bandeja">
+  
+                <table mat-table [dataSource]="dataSourceEquipoElaborador">
+              
+                  <ng-container matColumnDef="Nro">
+                      <th mat-header-cell *matHeaderCellDef> NRO</th>
+                      <td mat-cell *matCellDef="let equipo; let i = index">{{i + 1}}</td>
+                      
+                  </ng-container>
+              
+                  <ng-container matColumnDef="Profesional">
+                    <th mat-header-cell *matHeaderCellDef> Profesional </th>
+                    <td mat-cell *matCellDef="let equipo"><span >{{equipo.profesion}} </span></td>
+                  </ng-container>
+              
+              
+                  <ng-container matColumnDef="Puesto">
+                    <th mat-header-cell *matHeaderCellDef>Puesto </th>
+                    <td mat-cell *matCellDef="let equipo"><span>{{equipo.colaborador}} </span></td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="Tipo">
+                      <th mat-header-cell *matHeaderCellDef>Tipo </th>
+                   
+                         
+                          <td mat-cell *matCellDef="let equipo">
+                            <span *ngIf = "equipo.tipo == 'JEFE_ELABORADOR'" style="color: rgb(163, 4, 4); font-weight: 600px;">{{equipo.tipo}} </span>
+                            <span *ngIf = "equipo.tipo != 'JEFE_ELABORADOR'" >{{equipo.tipo}} </span>
+                          </td>
+                     
+                   
+                         
+                      
+                      
+                    </ng-container>
+              
+                   
+                    
+                  
+              
+                <ng-container matColumnDef="Descargar" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef>DESCARGAR</th>
+                    <td mat-cell *matCellDef="let archivo">
+                      <button class="tableIconButton mat-icon-btn-style" mat-icon-button matTooltip="Descargar documento"
+                        (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">
+                        <mat-icon>save_alt</mat-icon>
+                      </button>
+                    </td>
+                </ng-container>
+              
+              
+                  <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+                </table>
+              
+             
+              </div>
+
+          
+        </mat-tab>
+
+        <mat-tab label="Profesionales Revisión">
+
+            <div class="bandeja">
+  
+            <table mat-table [dataSource]="dataSourceEquipoRevisor">
+          
+              <ng-container matColumnDef="Nro">
+                  <th mat-header-cell *matHeaderCellDef> NRO</th>
+                  <td mat-cell *matCellDef="let equipo; let i = index">{{i + 1}}</td>
+                  
+              </ng-container>
+          
+              <ng-container matColumnDef="Profesional">
+                <th mat-header-cell *matHeaderCellDef> Profesional </th>
+                <td mat-cell *matCellDef="let equipo"><span >{{equipo.profesion}} </span></td>
+              </ng-container>
+          
+          
+              <ng-container matColumnDef="Puesto">
+                <th mat-header-cell *matHeaderCellDef>Puesto </th>
+                <td mat-cell *matCellDef="let equipo"><span>{{equipo.colaborador}} </span></td>
+              </ng-container>
+          
+
+              <ng-container matColumnDef="Tipo">
+                  <th mat-header-cell *matHeaderCellDef>Tipo </th>
+                  <td mat-cell *matCellDef="let equipo">
+                  <span *ngIf = "equipo.tipo == 'JEFE_REVISOR'" style="color: rgb(163, 4, 4); font-weight: 500px;">{{equipo.tipo}} </span>
+                  <span *ngIf = "equipo.tipo != 'JEFE_REVISOR'" >{{equipo.tipo}} </span>
+                </td>
+                </ng-container>
+          
+              
+          
+            <ng-container matColumnDef="Descargar" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef>DESCARGAR</th>
+                <td mat-cell *matCellDef="let archivo">
+                  <button class="tableIconButton mat-icon-btn-style" mat-icon-button matTooltip="Descargar documento"
+                    (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">
+                    <mat-icon>save_alt</mat-icon>
+                  </button>
+                </td>
+            </ng-container>
+          
+          
+              <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+              <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+            </table>
+          
+         
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+            
+
+        <div align="right" class="example-button-row acciones-margen-derecho">
+
+            <button color="primary" mat-raised-button (click)="dialogRef.close()">
+              Cerrar
+            </button>
+        </div>
+    </div>
+      <!-- FORMULARIO -->
+  
+ 
+   
+
+
+  

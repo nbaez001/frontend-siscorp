@@ -1,0 +1,76 @@
+:host {
+    @import '~perfect-scrollbar/css/perfect-scrollbar.css';
+  
+    width: 600px;
+  
+    .mat-dialog-title {
+      display: flex;
+      place-content: center space-between;
+      align-items: center;
+    }
+  
+    .mat-dialog-content {
+      display: flex;
+      flex-direction: row;
+  
+      .columna {
+        flex: 1;
+  
+        .bandeja {
+          margin: 10px 0;
+          height: 300px;
+          display: flex;
+          flex-direction: column;
+  
+          .item {
+            padding: 5px;
+            border-bottom: 1px solid #00000038;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+  
+            &:hover {
+              background-color: #03a9f4;
+              color: #FFF;
+            }
+          }
+        }
+  
+        &.centro {
+          margin: 0 10px;
+          flex: none;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  
+    .mat-dialog-actions {
+      padding-top: 25px;
+    }
+
+    .flecha-direccional-top{
+        padding-top: 100px;
+    }
+
+    .acciones-margen-derecho{
+        margin-right: 20px;
+    }
+
+
+    h1 {
+        color: #369;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 250%;
+      }
+       #search{
+        margin: 4px 4px 0;
+        width: 257px;
+        height: 28px;
+        font-size: 20px;
+        padding-left: 6px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        outline: none;
+       }
+  }

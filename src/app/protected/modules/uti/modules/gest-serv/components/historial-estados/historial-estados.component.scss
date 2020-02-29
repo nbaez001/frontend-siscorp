@@ -1,0 +1,44 @@
+:host {
+  .historial {
+    display: flex;
+    flex-direction: row;
+
+    table {
+      width: 100%;
+    }
+
+    table.internet {
+      margin-right: 15px;
+    }
+
+    table {
+      tr td.mat-column-estado {
+        width: 100px;
+      }
+
+      tr td.mat-column-estado div, tr td.mat-column-estado div {
+        padding: 3px;
+        margin: 5px;
+        text-align: center;
+        width: 90px;
+        color: #fff !important;
+        font-weight: 500;
+        border-radius: 3px;
+        font-size: 11px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,.3);
+      }
+
+      tr th.mat-column-cabecera {
+        text-align: center !important;
+      }
+
+      tr td, tr th {
+        padding-right: 10px;
+      }
+
+      tr td {
+        font-size: 12px;
+      }
+    }
+  }
+}

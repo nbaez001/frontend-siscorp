@@ -1,0 +1,138 @@
+:host {
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    
+    .mat-toolbar {
+            background: #cc2929 !important;
+            color: #e1f5fe !important;;
+    }
+    
+    
+    .contenido-formulario {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+  
+      .columna {
+        display: flex;
+        flex-direction: row;
+  
+        mat-form-field {
+          flex: 1;
+  
+          &:first-of-type {
+            margin-right: 10px;
+          }
+        }
+  
+        &.archivos {
+          flex-wrap: wrap;
+  
+          mat-card {
+            cursor: pointer;
+            margin: 0 10px 10px 0;
+  
+            mat-icon {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  
+    .mat-dialog-actions {
+      margin-bottom: 0;
+      padding: 20px;
+    }
+  
+    input[type="file"] {
+      display: none;
+    }
+
+    .bandeja {
+      position: relative;
+      margin-top: 38px;
+      padding: 16px;
+  
+      .nuevo-intrv {
+        position: absolute;
+        top: -28px;
+      }
+  
+      table {
+        width: 100%;
+  
+        td.mat-column-desde mat-icon {
+          font-size: 20px;
+        }
+  
+        td.mat-column-modulos .contenido {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+  
+          .dest-ori {
+            width: 21px;
+            text-align: center;
+          }
+  
+          .contenido-modulos {
+            display: flex;
+            flex-direction: column;
+            padding: 0 10px;
+    
+            .modulo {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+          }
+        }
+  
+        td.mat-column-usuarioAtendido {
+          font-size: 25px;
+        }
+  
+        th.mat-column-estado {
+          text-align: center;
+        }
+  
+        td.mat-column-estado > .estado {
+          padding: 5px;
+          margin: 0 10px;
+          text-align: center;
+          width: 90px;
+          color: #FFFFFF !important;
+          font-weight: 500;
+          border-radius: 3px;
+          font-size: 11px;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+  
+          &.small {
+            width: 40px !important;
+          }
+  
+          &.disabled {
+            pointer-events: none;
+          }
+        }
+  
+        .mat-column-acciones, .mat-column-desde {
+          width: auto;
+  
+          button {
+            margin: 0 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}

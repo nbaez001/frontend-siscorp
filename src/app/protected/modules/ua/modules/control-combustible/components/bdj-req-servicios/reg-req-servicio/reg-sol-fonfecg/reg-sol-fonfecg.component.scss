@@ -1,0 +1,40 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    mNemonico: (
+      width: 5rem
+    ),
+    clasificadorGasto: (
+      width: 6rem
+    ),
+    descripcion: (
+      width: 12rem
+    ),
+    unidadMedida: (
+      width: 8rem
+    ),
+    cantidad: (
+      width: 6rem
+    ),
+    precioUnitario: (
+      width: 6rem
+    ),
+    monto: (
+      width: 6rem
+    )
+  )
+);
+
+mat-card-title {
+  font-size: 16px !important;
+  font-weight: bold;
+}

@@ -1,0 +1,121 @@
+<div class="mat-elevation-z1">
+
+    <mat-toolbar class="mat-primary"><mat-icon>terrain</mat-icon> Proyectos Tambos</mat-toolbar>
+  
+    <div class="content">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label> N° de documento</mat-label>
+          <input matInput (keyup)="searchDoc($event)">
+          <mat-icon matSuffix>search</mat-icon>
+          <mat-hint>Perfil de prefactibilidad</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="subtitle-doc" [class.none]="!doc"><mat-icon>insert_drive_file</mat-icon> Detalle del documento</div>
+      <hr>
+      <ng-template [ngIf]="!!doc">
+        <div class="doc-link">{{ doc.nroCompleto }} <mat-icon (click)="openDoc()">open_in_new</mat-icon></div>
+        <br>
+        <div>ASUNTO: {{ doc.asunto }}</div>
+        <br>
+        <div>FECHA: {{ doc.fecha | date }}</div>
+      </ng-template>
+      
+      <div class="subtitle-history" [class.none]="!doc">
+        <div><mat-icon>trending_down</mat-icon> Seguimiento del Proceso</div>
+        <button mat-icon-button><mat-icon>autorenew</mat-icon></button>
+      </div>
+      <hr>
+      <div class="proceso" *ngIf="!!doc">
+
+        <mat-card class="consultores-os">
+          <mat-card-header>
+            <mat-card-title><mat-icon>group</mat-icon> <span> Consultores O.S.</span></mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="consultor-form" [formGroup]="consultorForm">
+              <mat-form-field appearance="outline">
+                <mat-label>Cargo</mat-label>
+                <mat-select formControlName="cargo">
+                  <mat-option value="Arquitecto">Arquitecto</mat-option>
+                  <mat-option value="Ing. Civil">Ing. Civil</mat-option>
+                  <mat-option value="Ing. Eléctrico">Ing. Eléctrico</mat-option>
+                  <mat-option value="Ing. Sanitario">Ing. Sanitario</mat-option>
+                  <mat-option value="Jefe de Proyecto">Jefe de Proyecto</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nombre">
+              </mat-form-field>
+              <button mat-icon-button *ngIf="consultorForm.valid" (click)="nuevoConsultor()"><mat-icon>add</mat-icon></button>
+            </div>
+            <div *ngFor="let consultor of consultores; let i = index" class="consultor-item">
+              <div class="consultor">
+                <mat-icon>person</mat-icon>
+                <div>
+                  <span>{{consultor.nombre | uppercase}}</span>
+                  <strong>{{consultor.cargo}}</strong>
+                </div>
+              </div>
+              <button mat-icon-button (click)="quitarConsultor(i)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-checkbox labelPosition="before">¡Hecho!</mat-checkbox>
+          </mat-card-actions>
+        </mat-card>
+
+
+
+        <mat-card class="validacion-especialistas">
+          <mat-card-header>
+            <mat-card-title><mat-icon>contacts</mat-icon> <span> Conformidad de Especialistas</span></mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div *ngFor="let especialista of especialistas; let i = index" class="especialista-item">
+              <div class="especialista">
+                <mat-icon>how_to_reg</mat-icon>
+                <span>{{especialista.nombre}}</span>
+              </div>
+              <mat-checkbox></mat-checkbox>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="informe-culminacion">
+          <mat-card-header>
+            <mat-card-title><mat-icon>list_alt</mat-icon> <span> Informe de Culminación</span></mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="archivo" [class.has]="!!archivoCulminacion" (click)="inputFileCul.click()">
+              <mat-icon *ngIf="!archivoCulminacion">cloud_upload</mat-icon>
+              <mat-icon *ngIf="!!archivoCulminacion">cloud_done</mat-icon>
+              <span>{{ archivoCulminacion || 'Adjuntar archivo' }}</span>
+              <mat-icon class="descargar">cloud_download</mat-icon>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-checkbox labelPosition="before">¡Hecho!</mat-checkbox>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="resolucion-directorial">
+          <mat-card-header>
+            <mat-card-title><mat-icon>insert_drive_file</mat-icon> <span> Resolución Directorial</span></mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="archivo" [class.has]="!!archivoResolucion" (click)="inputFileRes.click()">
+              <mat-icon *ngIf="!archivoResolucion">cloud_upload</mat-icon>
+              <mat-icon *ngIf="!!archivoResolucion">cloud_done</mat-icon>
+              <span>{{ archivoResolucion || 'Adjuntar archivo' }}</span>
+              <mat-icon class="descargar">cloud_download</mat-icon>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+</div>
+<input type="file" #inputFileCul style="display: none" (change)="guardarInfoCulminacion($event.target.files)" accept="application/pdf">
+<input type="file" #inputFileRes style="display: none" (change)="guardarResolucion($event.target.files)" accept="application/pdf">

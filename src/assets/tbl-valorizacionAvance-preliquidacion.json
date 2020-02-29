@@ -1,0 +1,47 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 500,
+	"response": [
+        {
+            "id": 1,
+            "partida": "partida 01",
+            "descripcion": "descripcion 01",
+            "undPre": "12.555",
+            "metPre": "100",
+            "precioUnitPre": "1.20",
+            "presupuesto": "452.0222",
+            "metAnt": "50",
+            "valAnt": "52.666",
+            "metAct": "20",
+            "valAct": "253.122",
+            "metAcu": "25.33",
+            "valAcu": "25.33",
+            "porcentajeAcu": "25",
+            "metSaldo": "25.33",
+            "valSaldo": "25.33",
+            "porcentajeSaldo": "45"
+        },{
+           
+            "id": 2,
+            "partida": "partida 02",
+            "descripcion": "descripcion 02",
+            "undPre": "22.555",
+            "metPre": "200",
+            "precioUnitPre": "2.20",
+            "presupuesto": "252.0222",
+            "metAnt": "20",
+            "valAnt": "22.666",
+            "metAct": "330",
+            "valAct": "33.122",
+            "metAcu": "33.33",
+            "valAcu": "233.33",
+            "porcentajeAcu": "35",
+            "metSaldo": "33.33",
+            "valSaldo": "33.33",
+            "porcentajeSaldo": "11"
+        }
+       
+    ],
+	"idPerfil": 1
+}

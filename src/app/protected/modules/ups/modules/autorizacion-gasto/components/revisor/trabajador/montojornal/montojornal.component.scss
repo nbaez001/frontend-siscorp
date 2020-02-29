@@ -1,0 +1,44 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+:host {
+#form5{
+    padding: 10px
+}
+
+.cabecera {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .contenido-formulario {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .columna {
+      display: flex;
+      flex-direction: row;
+
+      mat-form-field {
+        flex: 1;
+
+        &:first-of-type {
+          margin-right: 10px;
+        }
+      }
+
+    }
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+}

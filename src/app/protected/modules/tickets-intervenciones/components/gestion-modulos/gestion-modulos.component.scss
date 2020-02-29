@@ -1,0 +1,20 @@
+:host {
+  .cabecera {
+    .contenido {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .agregar {
+    margin: 15px;
+  }
+
+  .bandeja table {
+    width: 100%;
+
+    td.mat-column-acciones {
+      width: 100px;
+    }
+  }
+}

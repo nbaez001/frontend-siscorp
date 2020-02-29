@@ -1,0 +1,77 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "idCodigo": 1,
+            "checked":false,
+            "nro": "01",
+            "nombre": "Perez Perez Abrahan",
+            "genero": "Masculino",
+            "fechaNacimiento":"1999-11-25",
+            "numeroDocumento": "43350785",
+            "rubro": "Costo Directo",
+            "idCategoria":"001",
+			"categoria": "MOC",
+            "tipo": "Operario",
+            "contrato": "SI",
+            "montoJornal": "S/. 80.00",
+            "diasTrabajado": "10",
+            
+            "fechaInicioTrabajo": "15/01/2020"
+        }, 
+        {
+            "idCodigo": 2,
+            "checked":false,
+            "nro": "02",
+            "nombre": "Perez Perez Lionel",
+            "genero": "Masculino",
+            "fechaNacimiento":"1999-11-25",
+            "numeroDocumento": "12345789",
+            "rubro": "Gastos Generales",
+			"idCategoria":"002",
+            "categoria": "Personal Auxiliar",
+            "tipo": "Maestro de Obra",
+            "contrato": "SI",
+            "montoJornal": "",
+            "diasTrabajado": "",
+            "fechaInicioTrabajo": "15/01/2020"
+        }, 
+        {
+            "idCodigo": 3,
+            "checked":false,
+            "nro": "03",
+            "nombre": "Perez Perez Ronaldo",
+            "genero": "Masculino",
+            "fechaNacimiento":"1999-11-25",
+            "numeroDocumento": "85412647",
+            "rubro": "Costo Directo",
+			"idCategoria":"003",
+            "categoria": "MOC",
+            "tipo": "Peón",
+            "contrato": "SI",
+            "montoJornal": "S/. 60.00",
+            "diasTrabajado": "7",
+            "fechaInicioTrabajo": "02/02/2020"
+        },
+        {
+            "idCodigo": 4,
+            "checked":false,
+            "nro": "04",
+            "nombre": "Rua Perez Brad",
+            "genero": "Masculino",
+            "fechaNacimiento":"1999-11-25",
+            "numeroDocumento": "42571245",
+            "rubro": "Costo Directo",
+			"idCategoria":"003",
+            "categoria": "MOC",
+            "tipo": "Peón",
+            "contrato": "SI",
+            "montoJornal": "S/. 60.00",
+            "diasTrabajado": "7",
+            "fechaInicioTrabajo": "02/01/2020"
+        }
+    ],
+	"idPerfil": 1
+}

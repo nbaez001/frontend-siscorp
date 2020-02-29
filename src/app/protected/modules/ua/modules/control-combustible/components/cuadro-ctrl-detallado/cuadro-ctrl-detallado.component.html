@@ -1,0 +1,207 @@
+<div class="page">
+  <!-- <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner> -->
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+      <mat-panel-title>
+        FILTROS CUADRO DE CONTROL DETALLADO
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="mat-expansion-panel-cuerpo">
+      <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
+        <mat-grid-list cols="12" rowHeight="50px">
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Unidad</mat-label>
+              <mat-select formControlName="unidad">
+                <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+                  {{unidad.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Tambos</mat-label>
+              <mat-select formControlName="tambo">
+                <mat-option *ngFor="let tambo of tambos" [value]="tambo">
+                  {{tambo.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Año</mat-label>
+              <mat-select formControlName="anio">
+                <mat-option *ngFor="let anio of anios" [value]="anio">
+                  {{anio.valor}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <div class="btnRigth">
+        <button mat-raised-button color="primary" (click)="buscar()">
+          <mat-icon>search</mat-icon>
+          <strong> BUSCAR</strong>
+        </button>
+        <button mat-raised-button (click)="exportarExcel()">
+          <mat-icon><img class="icono" src="assets/images/ua/excel.png"></mat-icon>
+          <strong> EXPORTAR A EXCEL</strong>
+        </button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-card class="table-resultados">
+    <mat-card-header>
+      <mat-card-title> CUADRO DE CONTROL DETALLADO - PROYECTADO POR (KILOMETRAJE Y HORAS USO) </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-container">
+      <div class="table-container">
+        <table class="mat-table">
+          <thead>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell" rowspan="3" style="width: 2rem;"> N°</th>
+              <th class="mat-header-cell" rowspan="3" style="width: 12rem;"> REGIONES TERRITORIALES</th>
+              <th class="mat-header-cell" rowspan="3" style="width: 12rem;"> TAMBO</th>
+              <th class="mat-header-cell" colspan="3" style="width: 18rem;"> DIESEL B5 - USO CAMIONETAS</th>
+              <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GASOHOL 90 - MOTOCICLETAS</th>
+              <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GASOHOL 90 - GENERADORES</th>
+              <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GASOHOL 90 - DESLIZADORES</th>
+              <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GRASAS LUBRICANTES - AFINES</th>
+              <th class="mat-header-cell" rowspan="3" style="width: 6rem;"> TOTAL PARTIDA 2.3.13.11</th>
+              <th class="mat-header-cell" rowspan="3" style="width: 6rem;"> TOTAL PARTIDA 2.3.13.13</th>
+            </tr>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell" rowspan="2"> CONSUMO (GALONES)</th>
+              <th class="mat-header-cell" colspan="2"> IMPORTE</th>
+              <th class="mat-header-cell" rowspan="2"> CONSUMO (GALONES)</th>
+              <th class="mat-header-cell" colspan="2"> IMPORTE</th>
+              <th class="mat-header-cell" rowspan="2"> CONSUMO (GALONES)</th>
+              <th class="mat-header-cell" colspan="2"> IMPORTE</th>
+              <th class="mat-header-cell" rowspan="2"> CONSUMO (GALONES)</th>
+              <th class="mat-header-cell" colspan="2"> IMPORTE</th>
+              <th class="mat-header-cell" rowspan="2"> CONSUMO (UNIDADES)</th>
+              <th class="mat-header-cell" colspan="2"> IMPORTE</th>
+            </tr>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell"> GALON (S/.)</th>
+              <th class="mat-header-cell"> TOTAL (S/.)</th>
+              <th class="mat-header-cell"> GALON (S/.)</th>
+              <th class="mat-header-cell"> TOTAL (S/.)</th>
+              <th class="mat-header-cell"> GALON (S/.)</th>
+              <th class="mat-header-cell"> TOTAL (S/.)</th>
+              <th class="mat-header-cell"> GALON (S/.)</th>
+              <th class="mat-header-cell"> TOTAL (S/.)</th>
+              <th class="mat-header-cell"> UNIDAD (S/.)</th>
+              <th class="mat-header-cell"> TOTAL (S/.)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="mat-row" *ngFor="let con of listaControl; let i=index">
+              <td class="mat-cell">
+                <ng-container *ngIf="con.idPartida==1">
+                  {{i+1}}
+                </ng-container>
+              </td>
+              <td class="mat-cell">
+                <ng-container *ngIf="con.idPartida==1">
+                  {{con.nomUnidad}}
+                </ng-container>
+              </td>
+              <td class="mat-cell">
+                <ng-container *ngIf="con.idPartida==1">
+                  {{con.nomTambo}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.dieselConsumo!=0">
+                  {{con.dieselConsumo}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.dieselConsumo!=0">
+                  {{con.dieselPromCosto | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.dieselConsumo!=0">
+                  {{con.dieselTotal | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsMotocicletas!=0">
+                  {{con.gasConsMotocicletas}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsMotocicletas!=0">
+                  {{con.gasPromCosto | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsMotocicletas!=0">
+                  {{con.gasMotocicletasTotal | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsGeneradores!=0">
+                  {{con.gasConsGeneradores}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsGeneradores!=0">
+                  {{con.gasPromCosto | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsGeneradores!=0">
+                  {{con.gasGeneradoresTotal | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsDeslizadores!=0">
+                  {{con.gasConsDeslizadores}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsDeslizadores!=0">
+                  {{con.gasPromCosto | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.gasConsDeslizadores!=0">
+                  {{con.gasDeslizadoresTotal | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.lubricConsumo!=0">
+                  {{con.lubricConsumo}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.lubricConsumo!=0">
+                  {{con.lubricPromCosto | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                <ng-container *ngIf="con.lubricConsumo!=0">
+                  {{con.lubricantesTotal | number:'1.2-2'}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">{{con.total | number:'1.2-2'}}</td>
+              <td class="mat-cell celda-right">{{con.total2 | number:'1.2-2'}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="empty" *ngIf="listaControl.length == 0">
+          No existe datos para mostrar en la tabla
+        </div>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,7 @@
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span></span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<ngx-extended-pdf-viewer [src]="currentPdf" useBrowserLocale="true" height="100vh"></ngx-extended-pdf-viewer>

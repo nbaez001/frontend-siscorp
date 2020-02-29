@@ -1,0 +1,385 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "1",
+                "recurso": "OFICIAL",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "2",
+                "recurso": "OPERARIO",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },{
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },{
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },{
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "3",
+                "recurso": "MATERIALES",
+                "unidad": "hh",
+                "cantidad": "11",
+                "precio": "2164.3008",
+                "parcial": "20305.46",
+                "metrado1": "220.0525",
+                "costo1": "2066.74",
+                "metrado2": "220.0525",
+                "costo2": "2066.74",
+                "metrado3": "220.0525",
+                "costo3": "2066.74",
+                "metrado4": "220.0525",
+                "costo4": "2066.74"
+            },
+            "leaf": true
+        }
+
+
+
+        
+    ]
+}

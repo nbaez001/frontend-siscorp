@@ -1,0 +1,23 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "ALQUILER CAMPAMENTO PROVISIONAL (ALMACEN, OFICINA, DORMITORIO Y COMEDOR DE OBRA)"
+        }, 
+        {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "SERVICIOS HIGIENICOS P/TRABAJADORES (1 LETRINAS)"
+        }, 
+        {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "CARTEL DE OBRA 5.00X3.00M"
+        }
+    ],
+	"idPerfil": null
+}

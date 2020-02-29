@@ -1,0 +1,152 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+:host {
+    
+    .filtros {
+      mat-expansion-panel {
+        margin: 10px 0;
+        border-radius: 0;
+  
+        mat-expansion-panel-header mat-panel-title {
+          display: flex;
+          align-content: center;
+        }
+  
+        .inputs {
+           mat-form-field {
+            margin-right: 10px;
+            width: 100%;
+  
+            /deep/ .mat-form-field-wrapper {
+              padding-bottom: 0;
+            }
+          }
+  
+          .acciones {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 10px;
+  
+            button:first-of-type {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  
+  
+  }
+ 
+  .paginacion-right{
+    display: inline !important;
+  }
+  
+  .mat-toolbar-fondo{
+    background: #fff;
+  }
+  
+  .excel-icon-top{
+    margin-top: 15px !important;
+    width: 30px;
+     height: 30px;
+  }
+  
+  .fondo-filtro{
+    background: #039be5;
+    color: white;
+  }
+  
+  .mat-expansion-panel-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px;
+    border-radius: inherit;
+    background: #039be5 !important;
+    //height: 48px !important;
+  }
+  
+  .mat-expansion-panel-header.mat-expanded:focus .mat-expansion-panel-header .mat-expanded:hover {
+  background:  #039be5 !important;
+  }
+  
+  
+  
+  .mat-icon-button {
+    padding: 0;
+    min-width: 0;
+    width: 25px;
+    height: 30px;
+    flex-shrink: 0;
+    line-height: 10px;
+    border-radius: 50%;
+  }
+  
+  .mat-row:hover {
+  background-color:  #DFE5EF;
+  .mat-cell, .mat-footer-cell {
+    font-weight: bold;
+    }
+  }
+  
+  
+  .btn_agregar{
+    float: right;
+  }
+  
+  .btn_agregar_position{
+    position: relative;
+    margin-top: -5px;
+    padding-bottom: 30px;
+    button {
+      margin: 0 10px;
+    }
+  }
+
+  @include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    rubro: (
+      width: 8rem
+    )
+    ,
+    tipoDocumento: (
+      width: 6rem
+    ),
+    nroDocumento: (
+      width: 5rem
+    ),
+    fechaDocumento: (
+      width: 5rem
+    ),
+    proveedor: (
+      width: 5rem
+    ),
+    rucDni: (
+      width: 5rem
+    ),
+    descripcion: (
+      width: 5rem
+    ),
+    importe: (
+      width: 5rem
+    ),
+    estado: (
+      width: 5rem
+    )
+    ,
+    acciones: (
+      width: 3.5rem
+    )
+  )
+);
+  
+ 
+  
+
+  

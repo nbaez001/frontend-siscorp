@@ -1,0 +1,26 @@
+.celda-frozen{
+    border: 1px solid #bdbbbb;
+    background-color: #FFFFFF;
+    text-align: left;
+    font-size: 14px;
+}
+
+
+.celda{
+    border: 1px solid #bdbbbb;
+    background-color: #FFFFFF;
+    text-align: center;
+}
+
+.celda-painted{
+    border: 1px solid #bdbbbb;
+    background-color: #F4E7E4;
+    text-align: center;
+}
+
+.row-hover{
+    cursor: pointer;
+    background: #DFE5EF !important;
+    color: #000000 !important;
+    font-weight: bold;
+  }

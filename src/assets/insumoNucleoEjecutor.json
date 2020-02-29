@@ -1,0 +1,120 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 9,
+	"response": [
+      
+        {
+            
+            "idCodigo": 6,
+            "checked":false,
+            "nro": "06",
+            "recurso": "MOVILIDAD Y VIATICOS",
+            "unidad": "",
+            "cantidad": "",
+            "precio": "",
+            "parcial": "",
+            "cantidadProgramacion": "",
+            "costo": "",
+            "cantidadCotizacion": "",
+            "cantidadSolicitada": "",
+            "saldoDisponible": "",
+            "precioCalculado":"",
+            "solicitud" : ""
+            
+        },     
+        {
+            "idCodigo": 8,
+            "checked":false,
+            "nro": "08",
+            "recurso": "Movilidad y viáticos nucleo ejecutor - registro de firmas",
+            "unidad": "viaje",
+            "cantidad": "12.00",
+            "precio": "6 000.00",
+            "parcial": "",
+            "cantidadProgramacion": "",
+            "costo": "",
+            "cantidadCotizacion": "100",
+            "cantidadSolicitada": "10",
+            "saldoDisponible": "",
+            "precioCalculado":"600.00",
+            "solicitud" : ""
+        }, 
+        {
+            "idCodigo": 9,
+            "checked":false,
+            "nro": "09",
+            "recurso": "Movilidad y Viáticos Nucleo Ejecutor Presidente N.E",
+            "unidad": "viaje",
+            "cantidad": "12.00",
+            "precio": "6 000.00",
+            "parcial": "",
+            "cantidadProgramacion": "",
+            "costo": "",
+            "cantidadCotizacion": "100",
+            "cantidadSolicitada": "10",
+            "saldoDisponible": "",
+            "precioCalculado":"600.00",
+            "solicitud" : ""
+        }, 
+        {
+            "idCodigo": 10,
+            "checked":false,
+            "nro": "10",
+            "recurso": "Movilidad y Viáticos Nucleo Ejecutor Secretario N.E",
+            "unidad": "viaje",
+            "cantidad": "12.00",
+            "precio": "6 000.00",
+            "parcial": "",
+            "cantidadProgramacion": "",
+            "costo": "",
+            "cantidadCotizacion": "100",
+            "cantidadSolicitada": "10",
+            "saldoDisponible": "",
+            "precioCalculado":"600.00",
+            "solicitud" : ""
+        },
+        {
+            "idCodigo": 9,
+            "checked":false,
+            "nro": "09",
+            "recurso": "Movilidad y Viáticos Nucleo Ejecutor Tesorero N.E",
+            "unidad": "viaje",
+            "cantidad": "12.00",
+            "precio": "6 000.00",
+            "parcial": "",
+            "cantidadProgramacion": "",
+            "costo": "",
+            "cantidadCotizacion": "100",
+            "cantidadSolicitada": "10",
+            "saldoDisponible": "",
+            "precioCalculado":"600.00",
+            "solicitud" : ""
+        }, 
+        {
+            "idCodigo": 10,
+            "checked":false,
+            "nro": "10",
+            "recurso": "Movilidad y Viáticos Nucleo Ejecutor Fiscal N.E",
+            "unidad": "viaje",
+            "cantidad": "12.00",
+            "precio": "6 000.00",
+            "parcial": "",
+            "cantidadProgramacion": "",
+            "costo": "",
+            "cantidadCotizacion": "100",
+            "cantidadSolicitada": "10",
+            "saldoDisponible": "",
+            "precioCalculado":"600.00",
+            "solicitud" : ""
+        }
+       
+    ],
+	"idPerfil": 1
+}
+
+
+
+
+
+

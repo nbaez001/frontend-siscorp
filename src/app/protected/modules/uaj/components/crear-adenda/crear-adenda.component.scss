@@ -1,0 +1,58 @@
+mat-form-field {
+  font-size: 12px;
+  width: 100%;
+}
+
+:host {
+
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .contenido-formulario {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    div.attachment {
+      width: 90px;
+      float: left;
+      border: dashed 0.5px #a9a9a942;
+      padding: 10px;
+      margin: 10px !important;
+      height: 90px;
+      position: relative;
+
+      button.remove {
+        position: absolute;
+        top: -15px;
+        right: -15px;
+
+        mat-icon {
+          color: #ff0000a6;
+          border-radius: 10px;
+        }
+      }
+
+      span {
+        text-align: center;
+        font-size: 10px;
+        white-space: inherit;
+      }
+    }
+
+    div.attachment:last-of-type {
+      cursor: pointer;
+    }
+
+  }
+
+
+
+
+
+
+
+
+}

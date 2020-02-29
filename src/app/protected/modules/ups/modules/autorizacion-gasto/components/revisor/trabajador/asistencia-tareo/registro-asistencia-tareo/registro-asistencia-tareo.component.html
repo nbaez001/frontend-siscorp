@@ -1,0 +1,142 @@
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>REGISTRO ASISTENCIA DE TRABAJADORES: DÍA - {{this.datos.dataTrabajadorSelectedFecha | date: 'dd/MM/yyyy'}}</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- BANDEJA -->
+<div class="bandeja">
+
+  <table mat-table [dataSource]="dataSource">
+
+    
+
+  
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef>N°</th>
+      <td mat-cell *matCellDef="let trabajador">{{trabajador.nro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>APELLIDOS Y NOMBRES </th>
+      <td mat-cell *matCellDef="let trabajador"> {{trabajador.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef> TIPO </th>
+      <td mat-cell *matCellDef="let trabajador"> {{trabajador.tipo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroDocumento">
+      <th mat-header-cell *matHeaderCellDef> DNI </th>
+      <td mat-cell *matCellDef="let trabajador"> {{trabajador.numeroDocumento}} </td>
+    </ng-container>
+
+    
+
+    
+
+    <tr mat-header-row *matHeaderRowDef="columnas" class = "mat-header-row-formato">Asistió</tr>
+    
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    
+<!-- 
+    <ng-container matColumnDef="asistencia1">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selectionAsistenciaTareo.hasValue() && isAllSelected()"
+                      [indeterminate]="selectionAsistenciaTareo.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let trabajador">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? seleccionarTrabajadorAsistenciaTareo(trabajador) : null"
+                      [checked]="seleccionarTrabajadorAsistenciaTareo(trabajador)">
+        </mat-checkbox>
+      </td>
+
+      
+    </ng-container> -->
+
+    <ng-container matColumnDef="asistencia1">
+      <th mat-header-cell *matHeaderCellDef> ASISTIÓ&nbsp;&nbsp;&nbsp;NO ASISTIÓ&nbsp;&nbsp;&nbsp;1/2 JORNAL </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-radio-group [value]="element.asistencia1"
+                style="display: block; flex-direction: column; padding: 4px 0;">
+          <mat-radio-button [value]="1" style="padding: 3px 0;"></mat-radio-button>
+          <mat-radio-button [value]="0" style="padding: 3px 0;"></mat-radio-button>
+          <mat-radio-button [value]="2" style="padding: 3px 0;"></mat-radio-button>
+        </mat-radio-group>
+      </td>
+
+     
+    </ng-container>
+
+    
+    <!-- <ng-container matColumnDef="asistencia1">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let trabajador">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                     
+                      [checked]="true">
+        </mat-checkbox>
+      </td>
+
+      
+    </ng-container>
+
+    <ng-container matColumnDef="asistencia2">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let trabajador">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                     
+                      [checked]="true">
+        </mat-checkbox>
+      </td>
+
+      
+    </ng-container>-->
+
+   
+
+
+
+  </table>
+
+  <div class="empty" *ngIf="!isLoading && dataSource === null">
+    No existe datos para mostrar en la tabla
+  </div>
+
+  <!-- <mat-toolbar>
+    <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+      <div>
+        <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+          [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+        </mat-paginator>
+
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar> -->
+
+  <br>
+  <div align="center" class="example-button-row acciones-margen-derecho">
+    <!-- <button color="warn" mat-raised-button (click)="dialogRef.close()">
+      Cerrar
+    </button>
+    &nbsp;&nbsp;&nbsp; -->
+    <button color="primary" mat-raised-button (click)="guardarAsistenciaTareo()">
+      <mat-icon>save</mat-icon>Guardar
+    </button>
+  </div>
+
+</div>
+<!-- BANDEJA -->

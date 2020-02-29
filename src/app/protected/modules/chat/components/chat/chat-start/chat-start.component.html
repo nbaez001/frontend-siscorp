@@ -1,0 +1,22 @@
+
+
+<div fxFlex fxLayout="column" fxLayoutAlign="center center">
+  <br><br>
+  <div class="big-circle mat-elevation-z1 app-logo" fxLayout="column" fxLayoutAlign="center center"
+      >
+
+      <mat-icon style="color: #bdbdbd" class="s-64 s-mat-128" >chat</mat-icon>
+
+  </div>
+
+  <!-- <span class="app-title my-24"  >Chat PN PAIS</span> -->
+
+   <img src="assets/images/avatars/CHATs.png" alt="" style="height: 130px;"> 
+
+  <!-- <span fxHide fxShow.gt-md class="app-message" *fuseIfOnDom [@animate]="{value:'*',params:{delay:'200ms',y:'50px'}}">Select contact to start the chat!..</span> -->
+
+  <button (click)="mostrarSidenav()" mat-raised-button fxHide.gt-md class="" fuseMatSidenavToggler="chat-left-sidenav">
+    Selecciona un contacto para conversar...
+  </button>
+
+</div>

@@ -1,0 +1,525 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "1",
+                "recurso": "MATERIALES",
+                "unidad": "",
+                "cantidad": "11",
+                "precio": "89844.67",
+                "parcial": "89844.67",
+                "metrado1": "",
+                "costo1": "",
+                "metrado2": "",
+                "costo2": "",
+                "metrado3": "",
+                "costo3": "",
+                "metrado4": "",
+                "costo4": ""
+            },
+            "expanded": {
+                "expanded": true
+            },
+            "children": [
+                {
+                "data": {
+                    "item": "1",
+                    "recurso": "OFICIAL",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+
+            },
+            {
+                "data": {
+                    "item": "2",
+                    "recurso": "OPERARIO",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "item": "3",
+                    "recurso": "MATERIALES",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+              },
+              {
+                "data": {
+                    "item": "3",
+                    "recurso": "MATERIALES",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+
+            },
+            {
+                "data": {
+                    "item": "2",
+                    "recurso": "OPERARIO",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "item": "1",
+                    "recurso": "OFICIAL",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+              }
+            
+            ]           
+        },
+
+        {
+            "data": {
+                "item": "2",
+                "recurso": "MANO DE OBRA",
+                "unidad": "",
+                "cantidad": "11",
+                "precio": "89844.67",
+                "parcial": "89844.67",
+                "metrado1": "",
+                "costo1": "",
+                "metrado2": "",
+                "costo2": "",
+                "metrado3": "",
+                "costo3": "",
+                "metrado4": "",
+                "costo4": ""
+            },
+            "expanded": {
+                "expanded": true
+            },
+            "children": [
+                {
+                "data": {
+                    "item": "3",
+                    "recurso": "MATERIALES",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+
+            },
+            {
+                "data": {
+                    "item": "2",
+                    "recurso": "OPERARIO",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "item": "1",
+                    "recurso": "OFICIAL",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+              },
+              {
+                "data": {
+                    "item": "3",
+                    "recurso": "MATERIALES",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+
+            },
+            {
+                "data": {
+                    "item": "2",
+                    "recurso": "OPERARIO",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "item": "1",
+                    "recurso": "OFICIAL",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+              },
+              {
+                "data": {
+                    "item": "3",
+                    "recurso": "MATERIALES",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+
+            },
+            {
+                "data": {
+                    "item": "2",
+                    "recurso": "OPERARIO",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "item": "1",
+                    "recurso": "OFICIAL",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+              },
+              {
+                "data": {
+                    "item": "3",
+                    "recurso": "MATERIALES",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+
+            },
+            {
+                "data": {
+                    "item": "2",
+                    "recurso": "OPERARIO",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "item": "1",
+                    "recurso": "OFICIAL",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+              },
+              {
+                "data": {
+                    "item": "3",
+                    "recurso": "MATERIALES",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+
+            },
+            {
+                "data": {
+                    "item": "2",
+                    "recurso": "OPERARIO",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "item": "1",
+                    "recurso": "OFICIAL",
+                    "unidad": "hh",
+                    "cantidad": "11",
+                    "precio": "2164.3008",
+                    "parcial": "20305.46",
+                    "metrado1": "220.0525",
+                    "costo1": "2066.74",
+                    "metrado2": "220.0525",
+                    "costo2": "2066.74",
+                    "metrado3": "220.0525",
+                    "costo3": "2066.74",
+                    "metrado4": "220.0525",
+                    "costo4": "2066.74"
+                },
+                "expanded": {
+                    "expanded": true
+                },
+                "children": []
+              }
+            
+            ]           
+        }
+
+
+       
+    ]
+}

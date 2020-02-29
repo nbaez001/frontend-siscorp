@@ -1,0 +1,56 @@
+// @import "assets/styles/scss/views/table";
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.page-vehiculo {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 500px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    cidCodigo: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 6rem
+    ),
+    nomUsuarioEtg: (
+      width: 12rem
+    ),
+    dniUsuarioEtg: (
+      width: 6rem
+    ),
+    dependenciaUsuarioEtg: (
+      width: 12rem
+    ),
+    oficinaUsuarioEtg: (
+      width: 12rem
+    ),
+    nomUsuarioRccion: (
+      width: 12rem
+    ),
+    dniUsuarioRccion: (
+      width: 6rem
+    ),
+    dependenciaUsuarioRccion: (
+      width: 12rem
+    ),
+    oficinaUsuarioRccion: (
+      width: 12rem
+    ),
+    cantBienes: (
+      width: 4rem
+    ),
+    opt: (
+      width: 2.5rem
+    )
+  )
+);

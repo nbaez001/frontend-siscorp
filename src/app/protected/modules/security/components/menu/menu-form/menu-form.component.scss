@@ -1,0 +1,50 @@
+.menu-form-dialog {
+    width: 500px;
+
+    .mat-dialog-container {
+        padding: 0;
+        overflow: hidden;
+
+        .mat-dialog-title {
+            min-height: initial;
+            display: flex;
+            align-content: center;
+            place-content: center space-between;
+        }
+
+        .mat-dialog-content {
+            padding: 24px;
+            margin: 0;
+
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                mat-form-field, .control-state {
+                    width: 205px;
+                }
+
+                .control-state {
+                    display: flex;
+                    flex-direction: column;
+
+                    small {
+                        color: rgba(0, 0, 0, 0.6);
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+
+        .mat-dialog-actions {
+            padding: 24px;
+            margin: 0;
+        }
+    }
+}

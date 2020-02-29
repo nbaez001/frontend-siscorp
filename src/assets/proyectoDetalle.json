@@ -1,0 +1,20 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "codigo": "0104174",
+            "descripcion": "Creaciòn del Centro de Servicios - Tambo en el Centro Poblado Quille - Omacha",
+            "nroConvenio": "Conv. Nº 784-2016-VIVIENDA",        
+            "fecAutorizacion": "25-11-2019",
+            "montoConvenio": "1,404426.36",
+            "montoAcumulado": "1,133993.64",
+            "saldoDisponible": "270432.72",
+            "fidProyecto": 27255
+
+
+        }
+    ],
+	"idPerfil": 1
+}

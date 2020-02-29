@@ -1,0 +1,106 @@
+<!-- <app-header></app-header> -->
+
+
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>DESAGREGADO DE GASTOS GENERALES </span>
+   <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon> 
+  </button> 
+</mat-toolbar>
+<br>
+
+
+<div class="container">
+<div class="left">
+    <b>FECHA :</b>
+</div>  
+<div class="center_div2">
+    <span>{{fecha}}</span> 
+</div>
+<div class="right">
+    <span style="padding-right: 20px;"><b>PLAZO DE EJECUCIÓN :</b></span>  
+    <span>{{plazo_ejecucion}} MESES</span>
+</div>
+</div>
+
+
+
+<div mat-dialog-content class="contenido-formulario" >
+<div class="bandeja scrollPersonal">
+
+  <!-- BANDEJA -->
+    <table mat-table [dataSource]="dataSource" >
+    
+
+      <ng-container matColumnDef="nro">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>N°</b></th>
+          <td mat-cell *matCellDef="let item">{{item.numero}}</td>    
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> <b>DESCRIPCIÓN</b> </th>
+        <td mat-cell *matCellDef="let item">{{item.descripcion}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="und">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b> UNID. </b></th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.unidad}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="cant">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>CANT.</b> </th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.cantidadUnidad}} </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="costoUnitario">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> <b>COSTO</b><br><b>UNITARIO</b><br><b>(S/.)</b> </th>
+        <td mat-cell *matCellDef="let item" style="text-align: right">{{item.costoUnitario}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="coefPartial">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b> COEF.</b><br><b>PART.</b></th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.coefPart}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="parcial">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>PARCIAL</b><b>(S/.)</b> </th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.parcial}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="subtotal">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>SUB TOTAL</b> </th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.subTotal}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>TOTAL</b> </th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.total}} </td>
+      </ng-container>
+
+      
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+
+
+    </table>
+
+      <div class="empty" *ngIf="dataSource === null">
+          No existe archivos adjuntos a mostrar
+      </div>   
+      
+  </div>  
+</div>
+
+<div align="right" class="botones-margen-derecho">
+
+  <button color="primary"  mat-raised-button class="margen-entre-botones"  (click) = "darConformidadExcelGeneral()"  [disabled] = "habilitarBtnConformidad">
+     <mat-icon> done_outline</mat-icon>  Dar Conformidad
+  </button>
+
+  <button color="warn" mat-raised-button (click)="dialogRef.close()">
+      <mat-icon>highlight_off</mat-icon> Cerrar
+  </button>
+
+</div>

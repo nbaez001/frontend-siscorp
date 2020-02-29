@@ -1,0 +1,708 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+    <div class="columna">
+    <button mat-flat-button style="background-color: #039be5;" (click)="regresarBandejaTdr()">
+        <mat-icon style="color: white;">arrow_back</mat-icon>
+    </button>
+     <span>Generar Tdr </span> {{formatoCodigoTdr}}
+    </div>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FORMULARIO -->
+<div class="contenido-formulario" [formGroup]="proyectoForm">
+
+  <mat-tab-group selectedIndex="{{selectedIndexTab}}"  (selectedIndexChange) = "tab_click($event)">
+
+    <mat-tab label="Datos Generales">
+      <div class="bandeja">
+        <br> 
+        <mat-form-field appearance="outline" style="width: 15%; margin-left: 25px;">
+          <mat-label>Formato Código:</mat-label>
+          <!-- <mat-select   formControlName="tipoDocArchivoFrmCtrl" [value] = "selectedDefault"> -->
+          <mat-select [(value)]="seleccionCodigoFormato">
+            <mat-option *ngFor="let formato of dataItem?.codigo" [value]="formato.idCodigo">{{formato.cidCodigo}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-radio-group aria-label="Select an option" #radioButonTipoPersona ="matRadioGroup">
+          <mat-radio-button class = "radio-buton-padding-left" value="1" [checked]="checkPersonaNatural" >Persona Natural</mat-radio-button>
+          <mat-radio-button class = "radio-buton-padding-left" value="2" [checked]="checkPersonaJuridica">Persona Jurídica</mat-radio-button>
+        </mat-radio-group>
+
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>DENOMINACIÓN DE LA CONTRATACIÓN</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor  [config]="{toolbar: [] }" [editor]="EditorDenominacion" [(ngModel)]="ckeditorDenominacion" name="ckeditorDenominacion"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+
+            </ckeditor>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b> FINALIDAD PÚBLICA</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor  [config]="{toolbar: [] }" [editor]="EditorFinalidadPublica" [(ngModel)]="ckeditorFinalidadPublica" name="ckeditorFinalidadPublica"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}"></ckeditor>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <!--   <div [innerHTML]="alcanceTexto"></div> -->
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>ANTECEDENTES</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor  [config]="{toolbar: [] }" [editor]="EditorAntecedente" [(ngModel)]="ckeditorAntecedente" name="ckeditorAntecedente"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}"></ckeditor>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+        <br>
+        <div align="right" class="example-button-row">
+          <button color="primary" mat-raised-button (click)="registrarTab_1($event)">
+            <mat-icon>near_me</mat-icon>Guardar
+          </button>
+        </div>
+        <br>
+
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Objetivos y Alcances" [disabled]="tabObjetivoAlcance">
+
+      <div class="bandeja">
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>OBJETIVO</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorObjetivo" [(ngModel)]="ckeditorObjetivo"
+              name="ckeditorObjetivo" (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>ALCANCES Y DESCRIPCIÓN DEL SERVICIO</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+
+            <div class="columna">
+              <mat-label><b style="padding-left: 20px;">Adicionar Alcances</b></mat-label>
+              <button mat-fab class="nuevo-intrv mat-blue" (click)="abrirFomularioAlcance()">
+                <mat-icon class="white-fg">add</mat-icon>
+              </button>
+            </div>
+
+            <div class="bandeja scrollPersonal">
+
+              <table mat-table [dataSource]="dataSourceAlcance">
+
+
+                <ng-container matColumnDef="Nro">
+                  <th mat-header-cell *matHeaderCellDef style="text-align: left"> NRO</th>
+                  <td mat-cell *matCellDef="let alcance; let i = index">{{i + 1}}</td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Descripcion">
+                  <th mat-header-cell *matHeaderCellDef style="text-align: center"> ALCANCE Y DESCRIPCIÓN DEL SERVICIO
+                  </th>
+                  <td mat-cell *matCellDef="let alcance">{{alcance.nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="accion" stickyEnd>
+                  <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+                  <td mat-cell *matCellDef="let alcance">
+                    <button mat-icon-button color="primary" (click)="editarAlcance(alcance.idCodigo)"
+                      matTooltip="Editar Alcance">
+                      <mat-icon> border_color</mat-icon>
+                    </button>
+                    <button class="tableIconButton mat-icon-btn-style" [disabled]="btnEliminar" mat-icon-button
+                      matTooltip="Eliminar Alcance" (click)="eliminarAlcance(alcance.idCodigo)">
+                      <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close
+                      </mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+              </table>
+
+              <div class="empty" *ngIf="dataSourceAlcance === null">
+                No existe archivos adjuntos a mostrar
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>LUGAR DE LA PRESTACIÓN</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorLugar" [(ngModel)]="ckeditorLugar" name="ckeditorLugar"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>PLAZO DE EJECUCIÓN</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorPlazo" [(ngModel)]="ckeditorPlazo" name="ckeditorPlazo"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
+      <br><br>
+      <br>
+      <br>
+      <div align="right" class="example-button-row">
+        <button color="primary" mat-raised-button (click)="registrarTab_2()">
+          <mat-icon>near_me</mat-icon>Guardar
+        </button>
+      </div>
+      <br>
+    </mat-tab>
+
+    <mat-tab label="Entregables" [disabled]="tabEntregable">
+
+      <br><br>
+      <div class="bandeja">
+        
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>ENTREGABLES</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="columna" >
+              <mat-form-field style="padding-left: 20px;" appearance="outline">
+                <mat-label>Descripción General</mat-label>
+                <input matInput formControlName="frmDescripcionGeneral" maxlength="500">
+              </mat-form-field>
+            </div>
+
+
+            <div class="columna">
+              <mat-label><b style="padding-left: 20px;">Adicionar Entregables</b></mat-label>
+              <button mat-fab class="nuevo-intrv mat-blue" (click)="generarCantidadEntregable()">
+                <mat-icon class="white-fg">add</mat-icon>
+              </button>
+            </div>
+
+            <div class="bandeja scrollPersonal">
+
+              <table mat-table [dataSource]="dataSourceEntregable">
+
+
+                <ng-container matColumnDef="Nro">
+                  <th mat-header-cell *matHeaderCellDef style="text-align: center"> NRO</th>
+                  <td mat-cell *matCellDef="let alcance; let i = index">{{i + 1}}</td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Descripcion">
+                  <th mat-header-cell *matHeaderCellDef style="text-align: center"> ENTREGABLE </th>
+                  <td mat-cell *matCellDef="let entregable">{{entregable.nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Plazo">
+                  <th mat-header-cell *matHeaderCellDef style="text-align: center"> PLAZO ENTREGA </th>
+                  <td mat-cell *matCellDef="let entregable">{{entregable.plazo}} </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="accion" stickyEnd>
+                  <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+                  <td mat-cell *matCellDef="let entregable">
+                    <button mat-icon-button color="primary" (click)="registrarActividades(entregable.idCodigo)"
+                      matTooltip="Registrar Activdades">
+                      <mat-icon> assignment</mat-icon>
+                    </button>
+
+                    <button mat-icon-button color="primary" (click)="editarEntregable(entregable.idCodigo)"
+                      matTooltip="Editar Entregable">
+                      <mat-icon> border_color</mat-icon>
+                    </button>
+
+                    <button class="tableIconButton mat-icon-btn-style" [disabled]="btnEliminar" mat-icon-button
+                      matTooltip="Eliminar Entregable" (click)="eliminarEntregable(entregable.idCodigo)">
+                      <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close
+                      </mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="columnasEntregables"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnasEntregables"></tr>
+              </table>
+
+              <div class="empty" *ngIf="dataSourceEntregable === null">
+                No existe archivos adjuntos a mostrar
+              </div>
+            </div>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
+
+      <br><br>
+      <br>
+      <br>
+      <div align="right" class="example-button-row">
+        <button color="primary" mat-raised-button (click)="registrarTab_3($event)">
+          <mat-icon>near_me</mat-icon>Guardar
+        </button>
+      </div>
+      <br>
+
+    </mat-tab>
+
+
+
+    <mat-tab label="Proveedor" [disabled]="tabProveedorFormaPago">
+
+      <br><br>
+      <div class="bandeja">
+
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+  
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <b>REQUISITOS DEL PROVEEDOR</b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+  
+  
+              <div class="columna"  [formGroup]="proyectoForm">
+                <mat-label><b style="padding-left: 20px;">CONDICIONES GENERALES</b></mat-label>
+               <!--  <button mat-fab class="nuevo-intrv mat-blue" (click)="abrirFormularioGenerales()">
+                  <mat-icon class="white-fg">add</mat-icon>
+                </button> -->
+              </div>
+
+              <div class="columna" >
+                <mat-form-field style="padding-left: 20px;" appearance="outline">
+                  <mat-label>Registrar Condición General</mat-label>
+                  <input matInput formControlName="frmCondicionGeneral" maxlength="500">
+                </mat-form-field>
+
+                <button mat-fab class="nuevo-intrv mat-blue"  matTooltip="Registrar Condición General" (click)="validarRegistroCondicionGeneral($event)">
+                  <mat-icon class="white-fg">add</mat-icon>
+                </button> 
+              </div>
+  
+              <div class="bandeja scrollPersonal">
+  
+                <table mat-table [dataSource]="dataSourceGeneral">
+  
+  
+                  <ng-container matColumnDef="Nro">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: left"> NRO</th>
+                    <td mat-cell *matCellDef="let general; let i = index">{{i + 1}}</td>
+                  </ng-container>
+  
+  
+                  <ng-container matColumnDef="Descripcion">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: left"> CONDICIÓN GENERAL </th>
+                    <td mat-cell *matCellDef="let general">{{general.nombreCondicionGeneral}} </td>
+                  </ng-container>
+  
+  
+                  <ng-container matColumnDef="accion" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+                    <td mat-cell *matCellDef="let general">
+                      <button mat-icon-button color="primary" (click)="editarGeneral(general.idCodigoCondicionGeneral)"
+                        matTooltip="Editar Condición Generales">
+                        <mat-icon> assignment</mat-icon>
+                      </button>
+  
+                      <button class="tableIconButton mat-icon-btn-style" [disabled]="btnEliminar" mat-icon-button
+                        matTooltip="Eliminar Condición General" (click)="eliminarGeneral(general.idCodigoCondicionGeneral)">
+                        <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close
+                        </mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+  
+  
+                  <tr mat-header-row *matHeaderRowDef="columnasGenerales"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnasGenerales"></tr>
+                </table>
+  
+                <div class="empty" *ngIf="dataSourceGeneral === null">
+                  No existe archivos adjuntos a mostrar
+                </div>
+              </div>
+  
+              <br><br>
+  
+              <div class="columna">
+                <mat-label><b style="padding-left: 20px;">CONDICIONES PARTICULARES</b></mat-label>
+               <!--  <button mat-fab class="nuevo-intrv mat-blue" (click)="abrirFormularioParticulares()">
+                  <mat-icon class="white-fg">add</mat-icon>
+                </button> -->
+                <br>
+                <!-- <mat-label><b style="padding-left: 20px;">PERFIL DEL PROVEEDOR:</b></mat-label> -->
+              </div>
+
+              <mat-form-field appearance="outline" style="padding-left: 20px;width: 23%;">
+                  <mat-label>Tipo Perfil Contratación:</mat-label>
+                  <!-- <mat-select   formControlName="tipoDocArchivoFrmCtrl" [value] = "selectedDefault"> -->
+                  <mat-select [(value)]="seleccionPerfilContratacion">
+                    <mat-option *ngFor="let perfilCont of dataItemPerfil?.perfilContratacion" [value]="perfilCont.idCodigo">{{perfilCont.nombrePerfil}}
+                    </mat-option>
+                  </mat-select>
+            </mat-form-field>
+
+              <div class="columna" >
+                <mat-form-field style="padding-left: 20px;" appearance="outline">
+                  <mat-label>Registrar Condición Particular</mat-label>
+                  <input matInput formControlName="frmCondicionParticular" maxlength="500">
+                </mat-form-field>
+
+                <button mat-fab class="nuevo-intrv mat-blue" matTooltip="Registrar Condición Particular" (click)="validarRegistroCondicionParticular($event)">
+                  <mat-icon class="white-fg">add</mat-icon>
+                </button> 
+              </div>
+  
+              <div class="bandeja scrollPersonal">
+  
+                <table mat-table [dataSource]="dataSourceParticular">
+  
+  
+                  <ng-container matColumnDef="Nro">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: left"> NRO</th>
+                    <td mat-cell *matCellDef="let particular; let i = index">{{i + 1}}</td>
+                  </ng-container>
+
+                  
+                  <ng-container matColumnDef="tipoPerfil">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: left"> Perfil Contratación</th>
+                    <td mat-cell *matCellDef="let particular">{{particular.nombrePerfil}}</td>
+                  </ng-container>
+
+  
+  
+                  <ng-container matColumnDef="Descripcion">
+                    <th mat-header-cell *matHeaderCellDef style="text-align: left"> CONDICIÓN PARTICULAR </th>
+                    <td mat-cell *matCellDef="let particular">{{particular.descripcionCondicionParticular}} </td>
+                  </ng-container>
+  
+  
+                  <ng-container matColumnDef="accion" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+                    <td mat-cell *matCellDef="let particular">
+                      <button mat-icon-button color="primary" (click)="editarParticular(particular.idCodigoCondicionParticular)"
+                        matTooltip="Editar Condición Particular">
+                        <mat-icon> assignment</mat-icon>
+                      </button>
+  
+                      <button class="tableIconButton mat-icon-btn-style" [disabled]="btnEliminar" mat-icon-button
+                        matTooltip="Eliminar Condición Particular" (click)="eliminarParticular(particular.idCodigoCondicionParticular)">
+                        <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close
+                        </mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+  
+  
+                  <tr mat-header-row *matHeaderRowDef="columnasParticulares"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnasParticulares"></tr>
+                </table>
+  
+                <div class="empty" *ngIf="dataSourceParticular === null">
+                  No existe archivos adjuntos a mostrar
+                </div>
+              </div>
+
+
+          
+  
+            </mat-expansion-panel>
+          </mat-accordion>
+
+          <mat-accordion>
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+  
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <b>CONFORMIDAD DE LA PRESTACIÓN</b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+  
+              <ckeditor [config]="{toolbar: [] }" [editor]="EditorConformidad" [(ngModel)]="ckeditorConformidad"
+                name="ckeditorConformidad" (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+              </ckeditor>
+            </mat-expansion-panel>
+          </mat-accordion>
+  
+  
+          <mat-accordion>
+            <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+  
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <b>CONFIDENCIALIDAD</b>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+  
+              <ckeditor [config]="{toolbar: [] }" [editor]="EditorConfidencialidad" [(ngModel)]="ckeditorConfidencialidad" name="ckeditorConfidencialidad"
+                (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+              </ckeditor>
+            </mat-expansion-panel>
+          </mat-accordion>
+
+<!--           <mat-accordion>
+              <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+    
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    <b>FORMA DE PAGO</b>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+    
+    
+                <div class="columna">
+                  <mat-label><b style="padding-left: 20px;">Adicionar Forma de Pago</b></mat-label>
+                  <button mat-fab class="nuevo-intrv mat-blue" (click)="abrirFormularioFormaPago()">
+                    <mat-icon class="white-fg">add</mat-icon>
+                  </button>
+                </div>
+    
+                <div class="bandeja scrollPersonal">
+    
+                  <table mat-table [dataSource]="dataSourceFormaPago">
+    
+    
+                    <ng-container matColumnDef="Nro">
+                      <th mat-header-cell *matHeaderCellDef style="text-align: left"> NRO</th>
+                      <td mat-cell *matCellDef="let formaPago; let i = index">{{i + 1}}</td>
+                    </ng-container>
+    
+    
+                    <ng-container matColumnDef="forma">
+                      <th mat-header-cell *matHeaderCellDef style="text-align: left"> FORMA DE PAGO </th>
+                      <td mat-cell *matCellDef="let formaPago">{{formaPago.nombre}} </td>
+                    </ng-container>
+    
+                    <ng-container matColumnDef="Descripcion">
+                      <th mat-header-cell *matHeaderCellDef style="text-align: center"> DESCRIPCION </th>
+                      <td mat-cell *matCellDef="let formaPago">{{formaPago.plazo}} </td>
+                    </ng-container>
+    
+    
+    
+                    <ng-container matColumnDef="accion" stickyEnd>
+                      <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+                      <td mat-cell *matCellDef="let formaPago">
+    
+                        <button mat-icon-button color="primary" (click)="editarFormaPago(formaPago.idCodigo)"
+                          matTooltip="Editar Forma Pago">
+                          <mat-icon> border_color</mat-icon>
+                        </button>
+    
+                        <button class="tableIconButton mat-icon-btn-style" [disabled]="btnEliminar" mat-icon-button
+                          matTooltip="Eliminar Forma Pago" (click)="eliminarFormaPago(formaPago.idCodigo)">
+                          <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close
+                          </mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+    
+    
+                    <tr mat-header-row *matHeaderRowDef="columnasFormaPago"></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnasFormaPago"></tr>
+                  </table>
+    
+                  <div class="empty" *ngIf="dataSourceFormaPago === null">
+                    No existe archivos adjuntos a mostrar
+                  </div>
+                </div>
+    
+              </mat-expansion-panel>
+            </mat-accordion> -->
+
+        
+
+      </div>
+
+      <br><br>
+      <br>
+      <br>
+      <div align="right" class="example-button-row">
+        <button color="primary" mat-raised-button (click)="registrarTab_4()">
+          <mat-icon>near_me</mat-icon>Guardar
+        </button>
+      </div>
+      <br>
+    </mat-tab>
+
+
+
+
+
+    <mat-tab label="Otros Datos" [disabled]="tabOtrosDatos">
+     
+
+      <div class="bandeja">
+      
+
+
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>PENALIDADES</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorPenalidad" [(ngModel)]="ckeditorPenalidad" name="ckeditorPenalidad"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>PROPIEDAD INTELECTUAL</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorPropiedadIntelectual" [(ngModel)]="ckeditorPropiedadIntelectual" name="ckeditorPropiedadIntelectual"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>ANTICORRUPCIÓN</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorAnticorrupcion" [(ngModel)]="ckeditorAnticorrupcion" name="ckeditorAnticorrupcion"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>RESPONSABILIDAD POR VICIOS OCULTOS</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorResponsabilidad" [(ngModel)]="ckeditorResponsabilidad" name="ckeditorResponsabilidad"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>OTRAS CONDICIONES</b>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <ckeditor [config]="{toolbar: [] }" [editor]="EditorOtraCondicion" [(ngModel)]="ckeditorOtraCondicion" name="ckeditorOtraCondicion"
+              (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
+          </mat-expansion-panel>
+        </mat-accordion>
+
+      </div>
+      <br><br>
+      <br>
+      <br>
+      <div align="right" class="example-button-row">
+        <button color="primary" mat-raised-button (click)="registrarTab_5()">
+          <mat-icon>near_me</mat-icon>Guardar
+        </button>
+      </div>
+      <br>
+
+    </mat-tab>
+
+  </mat-tab-group>
+
+</div>

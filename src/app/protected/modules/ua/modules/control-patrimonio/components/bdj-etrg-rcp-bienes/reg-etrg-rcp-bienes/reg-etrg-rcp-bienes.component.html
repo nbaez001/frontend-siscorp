@@ -1,0 +1,147 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>N° Documento</mat-label>
+            <input matInput formControlName="nroDocumento" placeholder="N° documento" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha</mat-label>
+            <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="Fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <h4 class="field-title">Usuario que entrega los bienes</h4>
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 8, lg: 8, xl: 8}">
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario que entrega</mat-label>
+            <input matInput formControlName="nombresUsuEntrega" placeholder="Usuario responsable" type="text"
+              [appUpperCase]>
+            <button mat-icon-button matTooltip="Buscar trabajador contratado/ usuario responsable" type="button"
+              class="btn-icon-input" color="primary" (click)="buscarEmpleado($event)" *ngIf="!responsable"
+              cdkFocusInitial>
+              <mat-icon>person_add</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Quitar trabajador" type="button" class="btn-icon-input" color="primary"
+              (click)="quitarEmpleado($event)" *ngIf="responsable" cdkFocusInitial>
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Dni</mat-label>
+            <input matInput formControlName="dniUsuEntrega" placeholder="Dni" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Dependencia</mat-label>
+            <input matInput formControlName="depUsuEntrega" placeholder="Dependencia" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Area</mat-label>
+            <input matInput formControlName="areaUsuEntrega" placeholder="Area" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <h4 class="field-title">Usuario que recepciona los bienes</h4>
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 8, lg: 8, xl: 8}">
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario que recepciona</mat-label>
+            <input matInput formControlName="nombresUsuRecibe" placeholder="Usuario responsable" type="text"
+              [appUpperCase]>
+            <button mat-icon-button matTooltip="Buscar trabajador contratado/ usuario responsable" type="button"
+              class="btn-icon-input" color="primary" (click)="buscarEmpleado2($event)" *ngIf="!responsable2"
+              cdkFocusInitial>
+              <mat-icon>person_add</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Quitar trabajador" type="button" class="btn-icon-input" color="primary"
+              (click)="quitarEmpleado2($event)" *ngIf="responsable2" cdkFocusInitial>
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Dni</mat-label>
+            <input matInput formControlName="dniUsuRecibe" placeholder="Dni" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Dependencia</mat-label>
+            <input matInput formControlName="depUsuRecibe" placeholder="Dependencia" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Area</mat-label>
+            <input matInput formControlName="areaUsuRecibe" placeholder="Area" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list cols="12" rowHeight="75px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field appearance="outline">
+            <mat-label>Motivo</mat-label>
+            <textarea matInput formControlName="motivo" placeholder="Motivo" type="text" [appUpperCase]></textarea>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+    <h4 class="field-title">Lista de bienes patrimoniales para asignacion</h4>
+    <!-- <button mat-raised-button color="primary" type="button" (click)="buscarSolicitudesMant()" [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1"> -->
+    <button mat-raised-button color="primary" type="button" (click)="buscarBienes()">
+      <mat-icon>search</mat-icon>
+      Agregar bienes
+    </button>
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+          <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="opt" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef>OPT.</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="Quitar bien" (click)="quitarBien(element)">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div class="empty" *ngIf="dataSource === null">
+        No existe datos para mostrar en la tabla
+      </div>
+
+      <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="fichaAsignacion()">Vista previa</button>
+    <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  </div>
+</div>

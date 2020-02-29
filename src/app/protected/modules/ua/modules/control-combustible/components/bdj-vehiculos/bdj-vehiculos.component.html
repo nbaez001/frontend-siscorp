@@ -1,0 +1,159 @@
+<div class="page">
+  <!-- <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner> -->
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+      <mat-panel-title>
+        BUSQUEDA VEHICULOS
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="mat-expansion-panel-cuerpo">
+      <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp">
+        <mat-grid-list cols="12" rowHeight="50px">
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Unidad</mat-label>
+              <mat-select formControlName="unidad" (selectionChange)="cargarTambos()">
+                <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+                  {{unidad.cidNombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Tambo</mat-label>
+              <mat-select formControlName="tambo" (selectionChange)="cargarTiposvehiculo()">
+                <mat-option *ngFor="let tambo of tambos" [value]="tambo">
+                  {{tambo.cidNombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Tipo vehiculo</mat-label>
+              <mat-select formControlName="tipovehiculo">
+                <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo">
+                  {{tipovehiculo.nomDenominacion}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}" *ngIf="getUser.perfil.id==3"> -->
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha inicio busqueda</mat-label>
+              <input formControlname="fechaInicio" matInput [matDatepicker]="picker"
+                placeholder="Fecha inicio busqueda">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+          <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}" *ngIf="getUser.perfil.id==3"> -->
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha fin busqueda</mat-label>
+              <input formControlname="fechaFin" matInput [matDatepicker]="picker2" placeholder="Fecha fin busqueda">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}" class="dialog-form-actions">
+            <button mat-mini-fab matTooltip="BUSCAR" color="primary" (click)="buscar()" matTooltipClass="tooltip">
+              <mat-icon>search</mat-icon>
+            </button>
+            <button mat-mini-fab matTooltip="LIMPIAR FILTROS DE BUSQUEDA" class="mat-grey-300-bg" (click)="limpiar()"
+              matTooltipClass="tooltip">
+              <mat-icon>clear_all</mat-icon>
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-card class="table-resultados">
+    <mat-card-header>
+      <mat-card-title> LISTA DE VEHICULOS: </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-container">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+            <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+          </ng-container>
+
+          <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+            <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="opt" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef>
+              OPCIONES
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <!-- <button mat-icon-button matTooltip="configurar Vehiculo" (click)="regVehiculo(element)">
+                  <mat-icon>settings</mat-icon>
+                </button> -->
+              <button mat-icon-button matTooltip="Registrar revision tecnica" (click)="regRevTecnica(element)">
+                <mat-icon><img class="icono" src="assets/images/ua/rev-tecnica.png"></mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Registrar SOAT" (click)="regSOAT(element)">
+                <mat-icon><img class="icono" src="assets/images/ua/soat.png"></mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Declaracion de articulos de emergencia"
+                (click)="regArticulosEmergencia(element)">
+                <mat-icon>
+                  <img class="icono" src="assets/images/ua/art-emergencia.png">
+                </mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Conductor del vehiculo" (click)="regConductor(element)">
+                <mat-icon>
+                  <img class="icono" src="assets/images/ua/conductor.png">
+                </mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Alerta preventivo Lubricantes" (click)="regLubricante(element)">
+                <mat-icon matBadge="!" matBadgeColor="warn">
+                  <img class="icono" src="assets/images/ua/lubricante.png">
+                </mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        </table>
+
+        <div class="empty" *ngIf="dataSource === null && !isLoading">
+          No existe datos para mostrar en la tabla
+        </div>
+
+        <div *ngIf="isLoading" class="spinerTable">
+          <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+
+        <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+      <div class="table-container-foot-actions">
+        <button mat-mini-fab (click)="exportarExcel()" matTooltip="EXPORTAR ESTADO DE VEHICULOS"
+          class="mat-grey-300-bg">
+          <mat-icon><img class="icono" src="assets/images/ua/excel.png"></mat-icon>
+        </button>
+        <button mat-mini-fab (click)="exportarArtEmerg()" matTooltip="EXPORTAR ARTICULOS DE EMERGENCIA DEL VEHICULO"
+          class="mat-grey-300-bg">
+          <mat-icon><img class="icono" src="assets/images/ua/excel.png"></mat-icon>
+        </button>
+        <button mat-mini-fab (click)="exportarConductores()" matTooltip="EXPORTAR CONDUCTORES DE VEHICULOS"
+          class="mat-grey-300-bg">
+          <mat-icon><img class="icono" src="assets/images/ua/excel.png"></mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

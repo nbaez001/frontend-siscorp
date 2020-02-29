@@ -1,0 +1,266 @@
+<mat-accordion>
+  <mat-expansion-panel [ngClass]="'mat-' + colorServ + '-50-bg'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h5>FILTROS</h5>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="fila" [formGroup]="formFiltrosGeneral">
+      <mat-form-field appearance="outline">
+        <mat-label>N° SNIP</mat-label>
+        <input matInput formControlName="snip">
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Plataforma</mat-label>
+        <input matInput formControlName="plataforma">
+      </mat-form-field>
+
+      <!--<mat-form-field appearance="outline">
+        <mat-label>Certificados</mat-label>
+        <input matInput formControlName="certificados">
+      </mat-form-field>-->
+      
+      <mat-button-toggle-group #servicio="matButtonToggleGroup">
+        <mat-button-toggle value="internet" (change)="seleccionarServicio($event.value)" [class.green-fg]="servicioActual === 'internet'">
+          <mat-icon>public</mat-icon> INTERNET
+        </mat-button-toggle>
+        <mat-button-toggle value="telefonia" (change)="seleccionarServicio($event.value)" [class.blue-fg]="servicioActual === 'telefonia'">
+          <mat-icon>phone</mat-icon> TELEFONÍA IP
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <div class="fila" *ngIf="servicioActual === 'internet'" [formGroup]="formFiltrosInternet">
+      <mat-form-field appearance="outline">
+        <mat-label>TIPO CONTRATO</mat-label>
+        <input matInput formControlName="tipoContrato">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>CIRCUITO</mat-label>
+        <input matInput formControlName="circuito">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>FEC. INST</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaInst" readonly (click)="picker.open()">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <ng-container *ngTemplateOutlet="temEstados"></ng-container>
+    </div>
+
+    <div class="fila" *ngIf="servicioActual === 'telefonia'" [formGroup]="formFiltrosTelefonia">
+      <mat-form-field appearance="outline">
+        <mat-label>CIRCUITO</mat-label>
+        <input matInput formControlName="circuito">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>NÚMERO</mat-label>
+        <input matInput formControlName="numero">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ANEXO</mat-label>
+        <input matInput formControlName="anexo">
+      </mat-form-field>
+
+      <ng-container *ngTemplateOutlet="temEstados"></ng-container>
+    </div>
+
+    <div class="fila">
+      <button mat-raised-button color="primary" (click)="cargarPlataformas()">
+        <mat-icon>filter_list</mat-icon>
+        FILTRAR
+      </button>
+
+      <button mat-raised-button (click)="crearForm(); cargarPlataformas()">
+        <mat-icon>clear_all</mat-icon>
+        LIMPIAR
+      </button>
+    </div>
+    
+  </mat-expansion-panel>
+</mat-accordion>
+
+<br>
+
+<div class="mat-elevation-z2 datos" [ngClass]="'mat-' + colorServ + '-50-bg'">
+
+  <button mat-fab id="exportar" class="mat-green-bg" matTooltip="Exportar"><mat-icon class="white-fg">get_app</mat-icon></button>
+
+  <table mat-table [dataSource]="plataformas" [@animateStagger]="{value:'50'}" [ngClass]="'mat-' + colorServ + '-50-bg'">
+
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef width="50"> N°. </th>
+      <td mat-cell *matCellDef="let plat; let i = index" width="50"> {{pagina * cantidad - cantidad + i + 1}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="plataforma">
+      <th mat-header-cell *matHeaderCellDef align="left"> Plataforma </th>
+      <td mat-cell *matCellDef="let plat" align="left">
+        <strong>Nombre:</strong> {{plat.plataforma}} <br>
+        <strong>SNIP:</strong> {{plat.snipPlataforma}} <br>
+        <strong>UT:</strong> {{plat.unidadTerritorial}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="certificados">
+      <th mat-header-cell *matHeaderCellDef align="left"> Certificados </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        {{certificados(plat.certificados)}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="certificado">
+      <th mat-header-cell *matHeaderCellDef align="center"> CERTIFICADO </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        {{plat.certificado}}
+      </td>
+    </ng-container>
+
+    <!--INTERNET-->
+    <ng-container matColumnDef="tipoContrato">
+      <th mat-header-cell *matHeaderCellDef align="center"> TIP. CONTRATO </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        {{plat.tipoContrato}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="circuitoI">
+      <th mat-header-cell *matHeaderCellDef align="center"> CIRCUITO DIGITAL </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        {{plat.circuitoInt}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="porcentaje">
+      <th mat-header-cell *matHeaderCellDef align="center"> % VELOCIDAD </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+
+        <ng-template [ngIf]="plat.idServInt">
+          <span>{{plat.porcentajeVel}}%</span>
+          <span><mat-icon inline>expand_more</mat-icon> {{plat.velSubidaPorc}} {{plat.unidadMedida}}</span>
+          <span><mat-icon inline>expand_less</mat-icon> {{plat.velBajadaPorc}} {{plat.unidadMedida}}</span>
+        </ng-template>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="velocidades">
+      <th mat-header-cell *matHeaderCellDef align="center"> VELOCIDAD </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+
+        <ng-template [ngIf]="plat.idServInt">
+          <span><mat-icon inline>expand_more</mat-icon> {{plat.velSubida}} {{plat.unidadMedida}}</span>
+          <span><mat-icon inline>expand_less</mat-icon> {{plat.velBajada}} {{plat.unidadMedida}}</span>
+        </ng-template>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaInst">
+      <th mat-header-cell *matHeaderCellDef align="center"> FEC. INSTALACIÓN </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        {{plat.fecInstalacion | date:'d/M/y, h:mm a'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="internet">
+      <th mat-header-cell *matHeaderCellDef align="center"> SERV. INT OPERATIVIDAD </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        <span
+          [ngClass]="'mat-' + plat.colorEstadoInternet + '-bg'"
+          (click)="verEstadoActual(plat.idServInt, 'internet')">
+          {{plat.estadoInternet || 'NO DEFINIDO'}}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="operadorMovil">
+      <th mat-header-cell *matHeaderCellDef align="center"> OPER. MÓVIL </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        {{plat.mejorOperador}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="priorUAGS">
+      <th mat-header-cell *matHeaderCellDef align="center"> PRIOR. UAGS </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        <span *ngIf="plat.idServInt && plat.prioUAGS > 0">{{plat.prioUAGS}}</span>
+      </td>
+    </ng-container>
+    <!--INTERNET-->
+
+    <!--TELEFONIA IP-->
+    <ng-container matColumnDef="telefonia">
+      <th mat-header-cell *matHeaderCellDef align="center"> SERV. TEL IP OPERATIVIDAD </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        <span
+          [ngClass]="'mat-' + plat.colorEstadoTelefonia + '-bg'"
+          (click)="verEstadoActual(plat.idServTel, 'telefonia')">
+          {{plat.estadoTelefonia || 'NO DEFINIDO'}}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="circuitoT">
+      <th mat-header-cell *matHeaderCellDef align="center"> CIRCUITO DIGITAL </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+        {{plat.circuitoTel}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numeros">
+      <th mat-header-cell *matHeaderCellDef align="center"> NÚMERO </th>
+      <td mat-cell *matCellDef="let plat" align="center">
+
+        <ng-template [ngIf]="plat.idServTel">
+          <span>ANEXO.: {{plat.anexo}}</span>
+          <span>TEL: {{plat.telefono}}</span>
+        </ng-template>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef width="100"> </th>
+      <td mat-cell *matCellDef="let plat" width="100">
+        <button mat-icon-button matTooltip="Historial" (click)="verHistorial(plat.idPlataforma)"><mat-icon>history</mat-icon></button>
+        <button mat-icon-button matTooltip="Gestionar datos" (click)="configurar(plat)"><mat-icon>settings</mat-icon></button>
+      </td>
+    </ng-container>
+    <!--TELEFONIA IP-->
+  
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr
+      mat-row
+      [class.alterado]="idPlatAlterado === plat.idPlataforma"
+      *matRowDef="let plat; columns: columnas"
+      [@animate]="{ value: '*', params: { y: '100%' } }"></tr>
+  
+  </table>
+
+  <mat-paginator
+    [ngClass]="'mat-' + colorServ + '-50-bg'"
+    [length]="total"
+    [pageSize]="cantidad"
+    (page)="cambiarPagina($event)"
+    showFirstLastButtons
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+</div>
+
+<ng-template #temEstados>
+  <mat-form-field appearance="outline" class="nm">
+    <mat-label>ESTADO</mat-label>
+    <mat-select [formControl]="filtroEstado">
+      <mat-option *ngFor="let e of estados" [value]="e.idCodigo">{{e.nombre}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-template>

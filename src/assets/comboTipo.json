@@ -1,0 +1,39 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "OFICIAL"
+        }, 
+        {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "OPERARIO"
+        },
+        {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "MAESTRO DE OBRA"
+        },
+        {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "ALMACENERO"
+        },
+        
+        {
+            "idCodigo": 5,
+            "cidCodigo": "005",
+            "cidNombre": "GUARDIÁN"
+        },
+        {
+            "idCodigo": 6,
+            "cidCodigo": "006",
+            "cidNombre": "COCINERO"
+        }
+    ],
+	"idPerfil": null
+}

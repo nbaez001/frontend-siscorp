@@ -1,0 +1,157 @@
+
+
+<div class="page">
+
+  
+
+  <mat-card class="example-card"> 
+    <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+      <span>DATOS GENERALES DEL PROYECTO</span>
+      
+    </mat-toolbar>
+<div class="contenido-formulario" [formGroup]="proyectoForm">
+   
+  
+
+  <mat-grid-list cols="12" rowHeight="50px">
+    
+
+   
+
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del Proyecto</mat-label>
+        <input matInput formControlName="nombreProyecto"  solonumero
+         >
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del Tambo</mat-label>
+        <input matInput formControlName="nombreTambo"  solonumero
+         >
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+      <mat-form-field appearance="outline">
+        <mat-label>Ubigeo</mat-label>
+        <input matInput formControlName="ubigeo"  solonumero
+         >
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+      <mat-form-field appearance="outline">
+        <mat-label>Departamento-Provincia-Distrito</mat-label>
+        <input matInput formControlName="lugar"  solonumero
+         >
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+      <mat-form-field appearance="outline">
+        <mat-label>SNIP</mat-label>
+        <input matInput formControlName="snip"  solonumero
+         >
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+      
+
+    </mat-grid-tile>
+
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+      <mat-form-field appearance="outline">
+        <mat-label>Monto viable S/.</mat-label>
+        <input matInput formControlName="montoviable"  solonumero
+         >
+      </mat-form-field>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+      
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+    <mat-form-field>
+      <mat-label>CRP</mat-label>
+      <mat-select formControlName="crp">
+        <mat-option >
+          <!-- {{food.viewValue}} -->
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+      <mat-form-field>
+        <mat-label>CGP</mat-label>
+        <mat-select formControlName="cgp">
+          <mat-option >
+            <!-- {{food.viewValue}} -->
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </mat-grid-tile>
+
+      <!-- <mat-grid-tile [responsiveRows]="{xs: 0, sm: 0, md: 4, lg: 4, xl: 4}">
+      
+
+      </mat-grid-tile>
+
+      <mat-grid-tile [responsiveRows]="{xs: 0, sm: 0, md: 4, lg: 4, xl: 4}">
+      
+
+      </mat-grid-tile>
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 2, lg: 2, xl: 2}">
+        <button color="primary" mat-raised-button (click)="guardarTrabajador()">
+          <mat-icon>save</mat-icon>Guardar
+        </button>
+      </mat-grid-tile>
+
+   
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 2, lg: 2, xl: 2}">
+        <button color="primary" mat-raised-button (click)="guardarTrabajador()">
+          <mat-icon>save</mat-icon>Guardar
+        </button>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile [responsiveRows]="{xs: 0, sm: 0, md: 4, lg: 4, xl: 4}">
+      
+
+      </mat-grid-tile> -->
+
+</mat-grid-list>
+
+</div>
+</mat-card>
+
+<div align="center" class="example-button-row acciones-margen-derecho">
+  <button color="primary" mat-raised-button >
+    <mat-icon>save</mat-icon>Guardar
+  </button>
+
+  <button color="primary" mat-raised-button >
+    <mat-icon>cancel</mat-icon>Cancelar
+  </button>
+
+</div>
+
+</div>

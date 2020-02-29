@@ -1,0 +1,13 @@
+
+<div [ngSwitch]="view" class="views">
+  <app-chats class="view"
+       *ngSwitchCase="'chats'"
+       (toggleLeftSidenav)="toggleLeftSidenavFromChat($event)"
+  >
+  </app-chats>
+
+  <!-- <fuse-chat-user-sidenav class="view"
+                          *ngSwitchCase="'user'"
+                          [@slideInLeft]>
+  </fuse-chat-user-sidenav> -->
+</div>

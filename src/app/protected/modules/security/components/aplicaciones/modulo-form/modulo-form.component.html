@@ -1,0 +1,49 @@
+<mat-toolbar mat-dialog-title class="mat-primary">
+  <span class="titulo"><mat-icon>apps</mat-icon> {{ titulo }}</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div mat-dialog-content [formGroup]="formModulo">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="nombreModulo">
+    <mat-error *ngIf="formModulo.get('nombreModulo').invalid && formModulo.get('nombreModulo').touched">
+      {{ formModulo.get('nombreModulo').errors | errorMessage:"Nombre" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Unidad</mat-label>
+    <mat-select formControlName="codigoUnidad">
+      <mat-option *ngFor="let u of unidades" [value]="u.codigoUnidad">
+        {{u.nombreUnidad}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="formModulo.get('codigoUnidad').invalid && formModulo.get('codigoUnidad').touched">
+      {{ formModulo.get('codigoUnidad').errors | errorMessage:"Nombre" }}
+    </mat-error>
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    (click)="guardar()"
+    color="primary">
+    <mat-icon>save</mat-icon> Guardar
+  </button>
+
+  <button
+    *ngIf="!nuevoModulo"
+    type="button"
+    color="error"
+    (click)="eliminar()"
+    matTooltip="Eliminar"
+    mat-icon-button>
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

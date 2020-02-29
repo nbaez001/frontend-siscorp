@@ -1,0 +1,41 @@
+
+.texto-color-deshabilitado{
+    font-weight: 600;
+}
+
+.formato_header_table{
+    color: black;
+    font-weight: 600;
+  }
+  
+.formato_header_table-acciones{
+    color: black;
+    font-weight: 600;
+    text-align: center;
+}
+  
+.mat-header-row-formato {
+    //background-color: #d8e9f5; 
+    background-color: #D3E1EE;
+    font-size: 14px; 
+    font-weight: 600
+}
+
+.icono-busqueda-formato {
+    width: "26px"; 
+    height: "26px"
+}
+  
+
+//TOOLTIP MODIFICACION TAMAÑO
+::ng-deep .formato-tooltip {
+  background-color: black !important;
+  color: white;
+  font-size: 18px;
+  width: auto !important;
+}
+
+ button:hover mat-icon {
+   font-size:36px !important;
+ }
+//FIN TOOLTIP

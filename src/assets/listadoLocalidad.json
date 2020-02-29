@@ -1,0 +1,32 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "localidad 01",
+			"fidDistrito":1
+        }, 
+		{
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "localidad 02",
+			"fidDistrito":1
+        },
+		{
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "localidad 04",
+			"fidDistrito":2
+        }, 
+		{
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "localidad 04",
+			"fidDistrito":2
+        }
+    ],
+	"idPerfil": null
+}

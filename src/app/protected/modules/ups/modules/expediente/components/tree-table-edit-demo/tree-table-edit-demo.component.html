@@ -1,0 +1,119 @@
+<p-treeTable 
+    [value]="files"
+
+    [columns]="Scrollcolumna"
+    [frozenColumns]="Frozencolumna"
+    [scrollable]="true" 
+    scrollHeight="700px" 
+    frozenWidth="230px"
+
+    [loading]="loading"
+    [totalRecords]="3" 
+    [paginator]="false" 
+    [rows]="2"
+    [lazy]="true" 
+    (onLazyLoad)="cargaCronogramaPadre($event)" 
+    (onNodeExpand)="cargaCronogramaHijo($event)"
+    (onEditComplete)="editar($event)"
+    
+    frozenWidth="930px"
+
+    selectionMode="checkbox"
+    (onNodeSelect)="selecciona($event)"  
+    [(selection)]="selectedNodes"
+
+    >
+        <ng-template pTemplate="frozencolgroup" let-columns>
+            <colgroup>
+                <col style="width:200px">
+                <col style="width:730px">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja-large'>
+                <col class='caja-large'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+                <col class='caja'>
+            </colgroup>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <ng-container *ngFor="let col of columns; let i = index">
+                        <th *ngIf="i<8" [attr.colspan]="0" ><br><br><br> </th>
+                        <th *ngIf="i>=8 && i<=11" [attr.colspan]="3" > <span style="font-size: 16px;" > MES {{i-7}}</span> </th>
+                    </ng-container>    
+                </tr>
+                <tr>
+                    <th *ngFor="let col of columns" style="font-size: 13px;" >  {{col.header}} </th>
+                </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+            <tr  (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover" >
+                
+                <td class="celda" > {{rowData.und}} </td>
+                <td class="celda"  [ttEditableColumn]="rowData" [ttEditableColumnField] = "rowData.cuadrilla"  [ngClass]="{'ui-toggler-column': true}">
+                    <p-treeTableCellEditor >
+                        <ng-template  pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.cuadrilla" [ngStyle]="{'width':'100%'}">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{rowData.cuadrilla}} </ng-template>
+                    </p-treeTableCellEditor>
+                </td>
+                <td class="celda" >{{rowData.cantidad}}</td>
+                <td class="celda" >{{rowData.preciounitario}}</td>
+                <td class="celda" >{{rowData.parcialunitario}}</td>
+                <td class="celda" >{{rowData.metrado}}</td>
+                <td class="celda" >{{rowData.precio}}</td>
+                <td class="celda" >{{rowData.parcial}}</td>
+
+                <td class="celda" >{{rowData.metrado1}}</td>
+                <td class="celda" >{{rowData.soles1}}</td>
+                <td class="celda" >{{rowData.porcentaje1}}</td>
+
+                <td class="celda" >{{rowData.metrado2}}</td>
+                <td class="celda" >{{rowData.soles2}}</td>
+                <td class="celda" >{{rowData.porcentaje2}}</td>
+
+                <td class="celda" >{{rowData.metrado3}}</td>
+                <td class="celda" >{{rowData.soles3}}</td>
+                <td class="celda" >{{rowData.porcentaje3}}</td>
+
+                <td class="celda" >{{rowData.metrado4}}</td>
+                <td class="celda" >{{rowData.soles4}}</td>
+                <td class="celda" >{{rowData.porcentaje4}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="frozenbody" let-rowNode let-rowData="rowData">
+                <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover">
+                     <td class="celda-frozen" >
+                            <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                            <p-treeTableCheckbox *ngIf="rowData.item=='01.02'" [value]="rowNode" ></p-treeTableCheckbox>
+                            {{rowData.item}} 
+                     </td>
+                     <td class="celda-frozen" > {{rowData.descripcion}}</td>
+                </tr>     
+        </ng-template>
+
+    </p-treeTable>
+
+
+

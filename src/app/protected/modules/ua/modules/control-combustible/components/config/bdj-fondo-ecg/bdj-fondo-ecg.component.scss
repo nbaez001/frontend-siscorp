@@ -1,0 +1,33 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nroResAdministracion: (
+      width: 5rem
+    ),
+    concepto: (
+      width: 20rem
+    ),
+    fecha: (
+      width: 5rem
+    ),
+    monto: (
+      width: 5rem
+    ),
+    opt: (
+      width: 5rem
+    )
+  )
+);
+
+.page {
+  .table-resultados {
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

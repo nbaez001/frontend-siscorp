@@ -1,0 +1,71 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "100.01",
+                "descripcion": "HONORARIOS PROFESIONALES - RESIDENTE DE OBRA (EJECUCIÓN) X AVANCE FISICO ",
+                "unidad": "JORNAL",
+                "saldo": "100",
+                "cantidad": "21.00",
+                "precioUnitario": "90.00",
+                "importe": "1890.00",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "XXXXXXXXXXXXXXXXX",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "100.02",
+                "descripcion": "HONORARIOS MAESTRO DE OBRA",
+                "unidad": "JORNAL",
+                "saldo": "200",
+                "cantidad": "20.00",
+                "precioUnitario": "80.00",
+                "importe": "1600.00",
+                "razonSocial": "GUILLERMO GARCIA ESCALANTE",
+                "formaPago": "EFECTIVO",
+                "sustento": "ZZZZZZZZZZZZZZZZZ",
+                "observacion": "asa"  
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "100.03",
+                "descripcion": "HONORARIOS ALMACENERO",
+                "unidad": "JORNAL",
+                "saldo": "300",
+                "cantidad": "20.00",
+                "precioUnitario": "80.00",
+                "importe": "1600.00",
+                "razonSocial": "GUILLERMO GARCIA ESCALANTE",
+                "formaPago": "EFECTIVO",
+                "sustento": "ZZZZZZZZZZZZZZZZZ",
+                "observacion": "as"  
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "100.04",
+                "descripcion": "HONORARIOS GUARDIAN",
+                "unidad": "JORNAL",
+                "saldo": "400",
+                "cantidad": "20.00",
+                "precioUnitario": "80.00",
+                "importe": "1600.00",
+                "razonSocial": "GUILLERMO GARCIA ESCALANTE",
+                "formaPago": "EFECTIVO",
+                "sustento": "ZZZZZZZZZZZZZZZZZ",
+                "observacion": "asa"  
+            },
+            "leaf": true
+        }
+
+        
+        
+    ]
+}

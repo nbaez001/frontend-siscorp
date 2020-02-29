@@ -1,0 +1,16 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 2019,
+            "cidCodigo": 2019
+        }, 
+		{
+            "idCodigo": 2018,
+            "cidCodigo": 2018
+        }
+    ],
+	"idPerfil": null
+}

@@ -1,0 +1,139 @@
+<div class="page">
+  <mat-accordion class="filtros">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <strong style="color: white;">Filtros de Búsqueda</strong>
+      </mat-expansion-panel-header>
+      <!-- <mat-tab-group> -->
+        <div class="inputs" [formGroup]="formFiltrosGrp">
+          <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+              <mat-form-field appearance="outline">
+                <mat-label>FECHA INICIO</mat-label>
+                <input matInput [matDatepicker]="picker" readonly (click)="picker.open()" formControlName="fechaIniFrmCtrl">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>          
+            </mat-grid-tile>  
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+              <mat-form-field appearance="outline">
+                <mat-label>FECHA FIN</mat-label>
+                <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fechaFinFrmCtrl">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>          
+            </mat-grid-tile>  
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 2, lg: 2, xl: 2}" class="botonBusqueda">
+              <button mat-mini-fab (click)="buscar()" [disabled]="disableBuscar"><mat-icon matTooltip="búsqueda">search</mat-icon></button>
+              <button mat-mini-fab class="separar" (click)="reiniciar()"   ><mat-icon matTooltip="Limpiar filtros de búsqueda">clear_all</mat-icon></button>
+            </mat-grid-tile>  
+          </mat-grid-list>  
+        </div>
+      <!-- </mat-tab-group> -->
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" > 
+
+     <!-- Cabeceras Priner grupo - INICIO-->
+     
+     <ng-container matColumnDef="colMaterial">
+       <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> Material</th>
+       <td mat-cell *matCellDef="let tabla">{{tabla.material}} </td>
+     </ng-container>
+
+     <ng-container matColumnDef="colUnidad">
+       <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> Unidad </th>
+       <td mat-cell *matCellDef="let tabla"> {{tabla.unidad}} </td>
+     </ng-container>
+     
+     <ng-container matColumnDef="colSaldoAnterior">
+       <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> SALDO  </th>
+       <td mat-cell *matCellDef="let tabla"> {{tabla.saldoAnterior}} </td>
+     </ng-container>
+     
+     <ng-container matColumnDef="colFechaIngreso">
+       <th mat-header-cell *matHeaderCellDef> FECHA </th>
+       <td mat-cell *matCellDef="let tabla"> {{tabla.fechaIngreso}} </td>
+     </ng-container>
+
+     <ng-container matColumnDef="colProveedor">
+      <th mat-header-cell *matHeaderCellDef> PROVEEDOR </th>
+      <td mat-cell *matCellDef="let tabla"> {{tabla.proveedor}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="colCantidadIngreso">
+      <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
+      <td mat-cell *matCellDef="let tabla"> {{tabla.cantidadIngreso}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="colAcumulado">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}">Ingreso Acumulado </th>
+      <td mat-cell *matCellDef="let tabla"> {{tabla.acumulado}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="colFechaEgreso">
+      <th mat-header-cell *matHeaderCellDef> FECHA </th>
+      <td mat-cell *matCellDef="let tabla"> {{tabla.fechaEgreso}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="colPartida">
+      <th mat-header-cell *matHeaderCellDef> PARTIDAS </th>
+      <td mat-cell *matCellDef="let tabla"> {{tabla.partida}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="colCantidadEgreso">
+      <th mat-header-cell *matHeaderCellDef> CANTIDAD </th>
+      <td mat-cell *matCellDef="let tabla"> {{tabla.cantidadEgreso}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="colSaldo">
+      <th mat-header-cell *matHeaderCellDef [ngStyle]="{'display': 'none'}"> SALDO </th>
+      <td mat-cell *matCellDef="let tabla"> {{tabla.saldo}} </td>
+    </ng-container>
+    <!-- Cabeceras Priner grupo- FIN-->
+
+    <!-- Cabeceras Segundo grupo - INICIO-->
+     <ng-container matColumnDef="colMaterial2">
+      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">MATERIAL</th>
+     </ng-container>
+     <ng-container matColumnDef="colUnidad2">
+      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">UNIDAD</th>
+     </ng-container>
+     <ng-container matColumnDef="colSaldoAnterior2">
+      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">SALDO ANTERIOR </th>
+     </ng-container>
+     <ng-container matColumnDef="ingresos">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="3" > INGRESOS </th>
+     </ng-container>
+     <ng-container matColumnDef="colAcumulado2">
+      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">INGRESO ACUMULADO  </th>
+     </ng-container>
+     <ng-container matColumnDef="egresos">
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="3" > EGRESOS </th>
+     </ng-container>
+     <ng-container matColumnDef="colSaldo2">
+      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2">SALDO </th>
+     </ng-container>
+    <!-- Cabeceras Segundo grupo - FIN--> 
+
+    <!-- columnas segundo grupo -->
+    <tr mat-header-row *matHeaderRowDef="['colMaterial2', 'colUnidad2','colSaldoAnterior2','ingresos','colAcumulado2','egresos','colSaldo2']"></tr>
+ 
+
+     <tr mat-header-row *matHeaderRowDef="columnas;" class="encabezadoTabla"></tr>
+     <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+   </table>
+
+   <div class="empty" *ngIf=" dataSource === null">
+     No existe datos para mostrar en la tabla
+   </div>
+
+
+      <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+</div>
+ 

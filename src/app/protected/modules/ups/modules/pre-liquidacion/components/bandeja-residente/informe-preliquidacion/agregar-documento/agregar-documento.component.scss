@@ -1,0 +1,42 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+:host {
+  
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+  }
+  #formularioDocumentoGrp{
+      padding: 30px;
+    }
+    
+    // .encabezadoTabla {
+    //   background-color: #e2f0f5;
+    // }
+    
+  
+    /deep/  .alinear-boton .mat-figure{
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+   }
+
+   
+  @include mat-table-columns(
+    (
+      id: (
+        width: 2rem
+      ),
+      colDescripcion: (
+        width: 10rem
+      )
+      ,
+      colArchivo: (
+        width: 10rem
+      ),
+      acciones: (
+        width: 2rem
+      )
+    )
+    );

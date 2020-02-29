@@ -1,0 +1,25 @@
+{
+    "data": [
+       
+        {
+            "data": {
+                "item": "103",
+                "descripcion": "MATERIALES",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": ""  
+            },
+            "leaf": false,
+            "expanded": {
+                "expanded": true
+            }
+        }
+        
+    ]
+}

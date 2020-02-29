@@ -1,0 +1,30 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+    <span>Alcance y Descripción del Servicio </span>
+      {{codProyecto}}
+</mat-toolbar>
+  <!-- CABECERA -->
+  
+  <!-- FORMULARIO -->
+  <div  mat-dialog-content class="contenido-formulario" [formGroup]="proyectoForm">
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>Registrar Alcance y Descripción del Servicio</mat-label>
+      <textarea  rows="3" matInput formControlName="alcanceDescripcion" maxlength="500"></textarea>
+    </mat-form-field>
+
+    <div align = "right">
+      <button color="primary" class="espacio_entre_botones" mat-raised-button (click)="validarRegistro($event)" [disabled]="proyectoForm.invalid">
+        <mat-icon>save</mat-icon> Grabar
+      </button>
+
+      <button color="warn"  mat-raised-button (click)="dialogRef.close()">
+          <mat-icon>highlight_off</mat-icon> Cerrar
+        </button>
+  
+    </div>
+
+   
+  
+  </div>
+  <!-- FORMULARIO -->

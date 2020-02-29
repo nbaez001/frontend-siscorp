@@ -1,0 +1,10 @@
+<div class="contenido">
+
+  <p><span class="estado" [ngClass]="'mat-' + estadoActual.colorEstadoServicio + '-bg'">{{estadoActual.estadoServicio}}</span></p>
+
+  <p><mat-icon>person</mat-icon> Actualizado por: <strong> {{estadoActual.usuario.trim() ? estadoActual.usuario : '(no definido)'}}</strong></p>
+
+  <p><mat-icon>event</mat-icon> Fech. actualización: <strong> {{estadoActual.fecha | date:'d/M/y, h:mm a'}}</strong></p>
+
+  <p><mat-icon>assignment</mat-icon> Detalle: {{estadoActual.detalle || '(no definido)'}} </p>
+</div>

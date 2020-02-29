@@ -1,0 +1,155 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "101.01",
+                "descripcion": "Abrazadera de tubería 1.1/2",
+                "unidad": "und",
+                "saldo": "830",
+                "cantidad": "7.00",
+                "precioUnitario": "150",
+                "importe": "10.50",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        },
+        {
+            "data": {
+                "item": "101.02",
+                "descripcion": "Abrazadera de tubería 2",
+                "unidad": "und",
+                "saldo": "840",
+                "cantidad": "7.00",
+                "precioUnitario": "3.50",
+                "importe": "24.50",
+                "razonSocial": "GUILLERMO GARCIA ESCALANTE",
+                "formaPago": "EFECTIVO",
+                "sustento": "",
+                "observacion": ""  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        },
+        {
+            "data": {
+                "item": "101.01",
+                "descripcion": "Abrazadera de tubería 1",
+                "unidad": "und",
+                "saldo": "830",
+                "cantidad": "7.00",
+                "precioUnitario": "150",
+                "importe": "10.50",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        }, {
+            "data": {
+                "item": "101.01",
+                "descripcion": "Accesorios de Termofusión",
+                "unidad": "und",
+                "saldo": "830",
+                "cantidad": "7.00",
+                "precioUnitario": "150",
+                "importe": "10.50",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        }, {
+            "data": {
+                "item": "101.01",
+                "descripcion": "Clavos",
+                "unidad": "und",
+                "saldo": "830",
+                "cantidad": "7.00",
+                "precioUnitario": "150",
+                "importe": "10.50",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        }, {
+            "data": {
+                "item": "101.01",
+                "descripcion": "Cielo raso de lamina machimbrada de PVC 200x9mm",
+                "unidad": "und",
+                "saldo": "830",
+                "cantidad": "7.00",
+                "precioUnitario": "150",
+                "importe": "10.50",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        }, {
+            "data": {
+                "item": "101.01",
+                "descripcion": "Madera",
+                "unidad": "und",
+                "saldo": "830",
+                "cantidad": "7.00",
+                "precioUnitario": "150",
+                "importe": "10.50",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        }
+        , {
+            "data": {
+                "item": "101.01",
+                "descripcion": "Cemento Tipo ! de 42.5 KG",
+                "unidad": "und",
+                "saldo": "830",
+                "cantidad": "7.00",
+                "precioUnitario": "150",
+                "importe": "10.50",
+                "razonSocial": "JULIO JUAN PINEDA",
+                "formaPago": "CHEQUE",
+                "sustento": "",
+                "observacion": "PERIÓDO 09-10-2019 AL 29-10-2019"  
+            },
+            "leaf": true,
+            "expanded": {
+                "expanded": true
+            }
+        }
+        
+        
+        
+    ]
+}

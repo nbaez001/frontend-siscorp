@@ -1,0 +1,163 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary cabecera">
+  <span>CONFIGURAR</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon class="white-fg">clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<div mat-dialog-content>
+  <mat-tab-group mat-stretch-tabs (selectedIndexChange)="tabIndex = $event" [selectedIndex]="tabIndex">
+    <mat-tab label="Serv. Internet">
+
+      <p *ngIf="errorTabIndex === 0 && !!errorMensaje" class="mat-red-bg">
+        <strong>ERROR DE VALIDACIÓN:</strong> <br>
+        {{errorMensaje}}
+      </p>
+
+      <div [formGroup]="formInternet">
+        <div class="fila">
+          <mat-form-field appearance="outline" class="mr">
+            <mat-label>TIPO CONTRATO</mat-label>
+            <input matInput formControlName="tipoContrato">
+            <mat-error *ngIf="formInternet.get('tipoContrato').invalid && formInternet.get('tipoContrato').touched">
+              {{ formInternet.get('tipoContrato').errors | errorMessage:"TIPO CONTRATO" }}
+            </mat-error>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline">
+            <mat-label>CIRCUITO DIGITAL</mat-label>
+            <input matInput formControlName="circuitoDigital">
+            <mat-error *ngIf="formInternet.get('circuitoDigital').invalid && formInternet.get('circuitoDigital').touched">
+              {{ formInternet.get('circuitoDigital').errors | errorMessage:"CIRCUITO DIGITAL" }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <br>
+
+        <div class="fila">
+          <mat-form-field appearance="outline" class="mr">
+            <mat-label>FECHA INSTALACIÓN</mat-label>
+            <input matInput [matDatepicker]="picker" readonly formControlName="fecInstalacion" (click)="picker.open()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="formInternet.get('fecInstalacion').invalid && formInternet.get('fecInstalacion').touched">
+              {{ formInternet.get('fecInstalacion').errors | errorMessage:"FECHA INSTALACIÓN" }}
+            </mat-error>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" class="mr auto">
+            <mat-label>MEJOR OPERADOR</mat-label>
+            <input matInput formControlName="mejorOperador">
+            <mat-icon matSuffix>router</mat-icon>
+            <mat-error *ngIf="formInternet.get('mejorOperador').invalid && formInternet.get('mejorOperador').touched">
+              {{ formInternet.get('mejorOperador').errors | errorMessage:"MEJOR OPERADOR" }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="auto">
+            <mat-label>PRIORIZACIÓN UAGS</mat-label>
+            <input matInput formControlName="priorizacion">
+            <mat-error *ngIf="formInternet.get('priorizacion').invalid && formInternet.get('priorizacion').touched">
+              {{ formInternet.get('priorizacion').errors | errorMessage:"PRIORIZACIÓN UAGS" }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+
+        <h4>VELOCIDAD</h4>
+
+        <div class="fila">
+          <mat-form-field appearance="outline" class="mr auto">
+            <mat-label>PORC. ASEGURADO</mat-label>
+            <input matInput formControlName="porcAsegurado">
+            <mat-error *ngIf="formInternet.get('porcAsegurado').invalid && formInternet.get('porcAsegurado').touched">
+              {{ formInternet.get('porcAsegurado').errors | errorMessage:"PORC. ASEGURADO" }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="mr auto">
+            <mat-label>BAJADA</mat-label>
+            <input matInput formControlName="velBajada">
+            <mat-icon matSuffix>keyboard_arrow_down</mat-icon>
+            <mat-error *ngIf="formInternet.get('velBajada').invalid && formInternet.get('velBajada').touched">
+              {{ formInternet.get('velBajada').errors | errorMessage:"BAJADA" }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="mr auto">
+            <mat-label>SUBIDA</mat-label>
+            <input matInput formControlName="velSubida">
+            <mat-icon matSuffix>keyboard_arrow_up</mat-icon>
+            <mat-error *ngIf="formInternet.get('velSubida').invalid && formInternet.get('velSubida').touched">
+              {{ formInternet.get('velSubida').errors | errorMessage:"SUBIDA" }}
+            </mat-error>
+          </mat-form-field>
+    
+          <mat-form-field appearance="outline" class="auto">
+            <mat-label>MEDIDA</mat-label>
+            <mat-select formControlName="idUnidadMedida">
+              <mat-option *ngFor="let medida of medidas" [value]="medida.idCodigo">{{medida.nombre}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formInternet.get('idUnidadMedida').invalid && formInternet.get('idUnidadMedida').touched">
+              {{ formInternet.get('idUnidadMedida').errors | errorMessage:"MEDIDA" }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <br>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="Serv. Telefonía IP">
+
+        <p *ngIf="errorTabIndex === 1 && !!errorMensaje" class="mat-red-bg">
+          <strong>ERROR DE VALIDACIÓN:</strong> <br>
+          {{errorMensaje}}
+        </p>
+
+      <div [formGroup]="formTelefonia">
+        <div class="fila">
+          <mat-form-field appearance="outline">
+            <mat-label>CIRCUITO DIGITAL</mat-label>
+            <input matInput formControlName="circuitoDigital">
+            <mat-error *ngIf="formTelefonia.get('circuitoDigital').invalid && formTelefonia.get('circuitoDigital').touched">
+              {{ formTelefonia.get('circuitoDigital').errors | errorMessage:"CIRCUITO DIGITAL" }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="fila">
+          <mat-form-field appearance="outline" class="mr">
+            <mat-label>N° ANEXO</mat-label>
+            <input matInput formControlName="numeroAnexo">
+            <mat-icon matSuffix>phone_forwarded</mat-icon>
+            <mat-error *ngIf="formTelefonia.get('numeroAnexo').invalid && formTelefonia.get('numeroAnexo').touched">
+              {{ formTelefonia.get('numeroAnexo').errors | errorMessage:"ANEXO" }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>N° TELEFONO</mat-label>
+            <input matInput formControlName="numeroTelefono">
+            <mat-icon matSuffix>phone_in_talk</mat-icon>
+            <mat-error *ngIf="formTelefonia.get('numeroTelefono').invalid && formTelefonia.get('numeroTelefono').touched">
+              {{ formTelefonia.get('numeroTelefono').errors | errorMessage:"N° TELEFONO" }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="tabIndex === 0 ? guardarInternet() : guardarTelefonia()">
+    GUARDAR SERV. {{tabIndex === 0 ? 'INTERNET' : 'TELEFONÍA IP'}}
+  </button>
+</div>

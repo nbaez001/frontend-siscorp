@@ -1,0 +1,28 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "EN ELABORACIÓN"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "EN REVISIÓN"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "APROBADO"
+        }, {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "OBSERVADO"
+        }
+    ],
+	"idPerfil": null
+}
+
+
+ 

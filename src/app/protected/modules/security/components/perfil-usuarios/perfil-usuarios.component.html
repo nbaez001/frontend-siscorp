@@ -1,0 +1,94 @@
+<mat-toolbar mat-dialog-title class="mat-primary">
+  <span class="titulo"><mat-icon>group</mat-icon> Usuarios</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div mat-dialog-content>
+
+  <div class="agregar" *ngIf="agregando">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Filtre y seleccione usuario</mat-label>
+      <input matInput [(ngModel)]="filtroUsuario" (ngModelChange)="filtrarUsuario()" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option
+          *ngFor="let usu of usuariosBuscados"
+          (onSelectionChange)="seleccionarUsuario(usu)"
+          [disabled]="usu.seleccionado"
+          [value]="usu.nombrePersona | uppercase">
+          {{usu.nombrePersona | uppercase}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <ng-template [ngIf]="!!usuarioBuscadoSeleccionado">
+      <div class="indicador"><mat-icon>forward</mat-icon></div>
+
+      <div class="usuarioBuscado">
+
+        <div class="datos">
+          <span>{{usuarioBuscadoSeleccionado.nombrePersona | uppercase}}</span>
+          <small>DNI: {{usuarioBuscadoSeleccionado.numeroDocumento}}</small>
+          <small *ngIf="usuarioBuscadoSeleccionado.nombrePuesto">PUESTO: {{usuarioBuscadoSeleccionado.nombrePuesto}}</small>
+          <small *ngIf="usuarioBuscadoSeleccionado.nombreUnidadTerritorial">UT: {{usuarioBuscadoSeleccionado.nombreUnidadTerritorial}}</small>
+          <small *ngIf="usuarioBuscadoSeleccionado.nombrePlataforma">PLATAFORMA: {{usuarioBuscadoSeleccionado.nombrePlataforma}}</small>
+          <small *ngIf="usuarioBuscadoSeleccionado.otrosPerfiles">PERFILES: {{usuarioBuscadoSeleccionado.otrosPerfiles}}</small>
+        </div>
+        <div class="acciones">
+          <button mat-icon-button matTooltip="Cancelar" (click)="usuarioBuscadoSeleccionado = null"><mat-icon>clear</mat-icon></button>
+          <button mat-icon-button matTooltip="Agregar" (click)="agregarUsuario()" color="primary"><mat-icon>add_circle</mat-icon></button>
+        </div>
+        
+      </div>
+    </ng-template>
+
+  </div>
+
+  <table mat-table [dataSource]="usuarios"  *ngIf="!agregando">
+
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let usu; let i = index"> {{i+1}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Usuario </th>
+      <td mat-cell *matCellDef="let usu">
+        {{usu.nombrePersona}} <br>
+        <ng-template [ngIf]="usu.nombrePuesto"><small>PUESTO: {{usu.nombrePuesto}}</small> <br></ng-template>
+        <ng-template [ngIf]="usu.nombreUnidadTerritorial"><small>UT: {{usu.nombreUnidadTerritorial}}</small> <br></ng-template>
+        <ng-template [ngIf]="usu.nombrePlataforma"><small>PLATAFORMA: {{usu.nombrePlataforma}}</small> <br></ng-template>
+        <ng-template [ngIf]="usu.otrosPerfiles"><small>PERFILES: {{usu.otrosPerfiles}}</small> <br></ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="eliminar">
+      <th mat-header-cell *matHeaderCellDef width="40"> Quitar </th>
+      <td mat-cell *matCellDef="let usu" width="40"> <button mat-icon-button color="error" (click)="quitarUsuario(usu.codigoUsuarioPerfilModulo)"><mat-icon>remove_circle</mat-icon></button> </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let usu; columns: columnas"></tr>
+  </table>
+
+</div>
+
+<div mat-dialog-actions>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="mostrarFormulario()"
+    *ngIf="!agregando"
+    matTooltip="Agregar usuario"><mat-icon>person_add</mat-icon></button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="agregando = false"
+    *ngIf="agregando"
+    matTooltip="Ir a la lista de usuarios"><mat-icon>list</mat-icon> ({{usuarios.length}})</button>
+
+</div>

@@ -1,0 +1,88 @@
+<div class="mat-elevation-z1 contenido">
+
+  <span class="ultima-actualizacion">
+    <span>Última actualización: </span>
+    <span>{{ultimaFechaActualizacion | date:'d/M/y, h:mm a'}}</span>
+  </span>
+
+  <div class="cabecera">
+    <div class="forma"></div>
+    <div class="texto">{{situacionSeleccinado.estado ? ('TAMBOS ' + situacionSeleccinado.estado) : 'TOTAL DE TAMBOS'}}</div>
+    <img src="assets/images/logoexcel.png" matTooltip="Exportar resultados" (click)="exportar()">
+  </div>
+
+  <div class="parte1">
+    <div class="principal">
+      <button mat-icon-button class="actualizar" matTooltip="Ver total de Tambos" *ngIf="situacionSeleccinado.idCodigo" (click)="obtenerSituaciones()"><mat-icon>replay</mat-icon></button>
+      <div id="estados"></div>
+    </div>
+
+    <div class="situaciones">
+      <div
+        class="situacion"
+        *ngFor="let s of situaciones"
+        [class.activo]="s.idCodigo === situacionSeleccinado.idCodigo"
+        (click)="seleccionarSituacion(s)">
+        <img src="assets/images/ups-dashboard/casita.png" width="70">
+
+        <div class="datos">
+          <div class="cantidad">
+            <svg viewBox="0 0 55.84 67.1" width="60">
+              <path [attr.fill]="s.estilo" d="M28.08,2.14A25.57,25.57,0,0,0,10.26,46.06l17.82,19.3L45.9,46.06A25.57,25.57,0,0,0,28.08,2.14Zm.18,41A15.62,15.62,0,1,1,43.88,27.56,15.62,15.62,0,0,1,28.26,43.18Z"/>
+              <path fill="#fff" opacity="0.4" d="M39.91,17.3a15.61,15.61,0,0,1-22,22,15.61,15.61,0,1,0,22-22Z"/>
+            </svg>
+            <div><strong>{{s.cantidadTambos}}</strong></div>
+          </div>
+          <div><strong><small>{{s.estado}}</small></strong></div>
+          <svg viewBox="0 0 18 17.83" width="20">
+            <path [attr.fill]="s.estilo" d="M16.55,8.92A7.55,7.55,0,1,1,9,1.36,7.55,7.55,0,0,1,16.55,8.92Z"/>
+          </svg>
+          <div><strong>{{s.porcentaje}} %</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="parte2">
+    
+    <div class="detallado">
+      <div #arregloEstados *ngFor="let e of estados" class="estado">
+        <strong class="titulo"><mat-icon [style.color]="e.estilo">stop</mat-icon> {{e.estado}}</strong>
+        <div [id]="'estado-detalle' + e.idCodigo" class="estado"></div>
+        <div class="pie">
+          <div>TOTAL</div>
+          <div class="total">{{e.cantidadTambos}}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subestados">
+
+      <ng-template [ngIf]="subestadoSeleccionado">
+
+        <h4><mat-icon class="item" [style.color]="subestadoSeleccionado.estilo" inline>play_arrow</mat-icon> {{subestadoSeleccionado.estado}}</h4>
+
+        <div class="contenido2">
+          <div
+            *ngFor="let sse of ssubestados; let i = index"
+            (click)="verPlataformas(sse)"
+            class="ssubestado">
+            <div class="barra">
+              <div class="carga"
+                [style.opacity]="sse.opacity"
+                [style.background-color]="subestadoSeleccionado.estilo"
+                [matTooltip]="sse.cantidadTambos + ' TAMBOS'">
+                {{sse.estado}}
+
+                <mat-icon class="white-fg">play_arrow</mat-icon>
+              </div>
+            </div>
+            <div class="porcentaje">{{sse.porcentaje}}%</div>
+          </div>
+        </div>
+
+      </ng-template>
+
+    </div>
+  </div>
+</div>

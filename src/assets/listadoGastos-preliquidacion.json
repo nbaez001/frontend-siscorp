@@ -1,0 +1,34 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "Pasaje"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "Alimentación"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "Movilidad"
+        }, {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "Hospedaje"
+        }, {
+            "idCodigo": 5,
+            "cidCodigo": "005",
+            "cidNombre": "Otros"
+        }
+
+    ],
+	"idPerfil": null
+} 
+
+
+
+

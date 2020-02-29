@@ -1,0 +1,12 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "numero": "44705433",
+            "existencia": true
+		}
+    ],
+	"idPerfil": 1
+}

@@ -1,0 +1,45 @@
+<div class="page">
+
+  <mat-toolbar class="mat-primary  mat-dialog-header">
+    <span style="font-size: 20px !important; font-weight: bold;">PRESIDENTE - NÚCLEO EJECUTOR</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+
+  <div mat-dialog-content>
+
+    <mat-grid-list cols="12" rowHeight="220px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 6, xl: 6}">
+        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Nature">
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 6, xl: 6}">
+        <div class="rightDiv">
+          <span class="label-datos">NOMBRE:
+          </span> <span class="nombre-responsable"> &nbsp;&nbsp;&nbsp; Juan Perez </span>
+          <br>
+          <br>
+          <span class="label-datos">DNI:
+          </span> <span class="nombre-responsable"> &nbsp;&nbsp;&nbsp; 87451245 </span>
+          <br>
+          <br>
+          <span class="label-datos">PROFESIÓN:
+          </span> <span class="nombre-responsable"> &nbsp;&nbsp;&nbsp; Arquitecto </span>
+          <br>
+          <br>
+          <span class="label-datos">CELULAR:
+          </span> <span class="nombre-responsable"> &nbsp;&nbsp;&nbsp; 987456214 </span>
+          <br>
+          <br>
+          <span class="label-datos">CORREO:
+          </span> <span class="nombre-responsable"> &nbsp;&nbsp;&nbsp; juan@pais.com </span>
+
+        </div>
+
+
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+
+</div>

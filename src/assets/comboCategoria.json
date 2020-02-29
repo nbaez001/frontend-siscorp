@@ -1,0 +1,23 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "MOC"
+        }, 
+        {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "PERSONAL AUXILIAR"
+        },
+        {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "TODOS"
+        }
+    ],
+	"idPerfil": null
+}

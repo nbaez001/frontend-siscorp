@@ -1,0 +1,26 @@
+:host {
+
+  mat-toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    > span {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+
+    .mat-column-botones >.botones {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}

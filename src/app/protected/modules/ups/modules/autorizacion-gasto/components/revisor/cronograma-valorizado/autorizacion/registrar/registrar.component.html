@@ -1,0 +1,769 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span >REGISTRAR AUTORIZACIÓN DE GASTOS</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+    <mat-accordion class="filtros">
+      <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <strong>Datos del Proyecto</strong>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+            <div class="container">
+              <div class="row">
+                <div mat-dialog-content class="contenido-formulario" [formGroup]="autorizacionForm">
+    
+                <div> 
+                    <mat-form-field appearance="outline"  style="width: 20%;">
+                        <mat-label>Obra Código</mat-label>
+                        <input matInput formControlName="codigoObraFrmCtrl" readonly>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline"  style="width: 60%; padding-left: 10px;">
+                          <mat-label>Descripción</mat-label>
+                          <input matInput formControlName="descripcionFrmCtrl" readonly>
+                    </mat-form-field>
+                    
+                    <mat-form-field appearance="outline" style="width: 18%; padding-left: 10px;">
+                        <mat-label>FECHA AUTORIZACIÓN</mat-label>
+                        <input matInput (click)="picker1.open()" 
+                        formControlName="fechaAutorizacionFrmCtrl" [(ngModel)]="detalleProyectoResponse.fecAutorizacion" readonly>   
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>           
+                    </mat-form-field>
+
+                    
+                  </div>
+    
+                  <div class="columna">
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>N° Convenio Cooperación</mat-label>
+                        <input matInput formControlName="nroConvenioFrmCtrl" readonly>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline">
+                      <mat-label>Monto del Convenio S/.</mat-label>
+                      <input matInput formControlName="montoConvenioFrmCtrl" readonly>
+                    </mat-form-field>
+    
+                    <mat-form-field appearance="outline"  style="padding-left: 10px;">
+                      <mat-label>Monto Acumulado de Autorizaciones S/.</mat-label>
+                      <input matInput formControlName="montoAcumuladoFrmCtrl" readonly>
+                    </mat-form-field>
+    
+    
+                    <mat-form-field appearance="outline" style="padding-left: 10px;">
+                      <mat-label>Saldo Disponible</mat-label>
+                      <input matInput formControlName="saldoDisponibleFrmCtrl" readonly>
+                    </mat-form-field>
+    
+    
+                  </div>
+    
+                </div>
+    
+              </div>
+            </div>
+
+  </mat-expansion-panel>
+    </mat-accordion>
+
+
+    
+
+
+<div class="contenido-formulario"  [formGroup]="autorizacionForm">
+
+<!--   <mat-card  class="mat-tab-body-content"> -->
+
+    
+    <!-- <mat-card-content class="mat-tab-body-content"> -->
+
+  <mat-tab-group selectedIndex="{{selectedIndexTab}}" (selectedIndexChange)="tab_click($event)">
+
+    <mat-tab label="COSTO DIRECTO">
+      <!-- MAT-TAB COSTO DIRECTO INICIO-->
+     <!--  <mat-form-field appearance="outline" style="margin-top: 5px; margin-left: 16px;">
+        <mat-label>Mes</mat-label>
+        <mat-select formControlName="mesFrmCtrl"   [(ngModel)]="selectedOption">
+          <mat-option *ngFor="let mes of dataItemMeses?.meses" [value]="mes">
+            {{mes.cidNombre}}</mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      <div class="bandeja">
+          <mat-checkbox><span>Requerimiento</span></mat-checkbox>
+          <mat-checkbox style = "padding-left: 16px;"><span>Hoja de Jornales</span></mat-checkbox>
+      </div>
+
+
+      <div class="bandeja"  style="margin-top: 3px;">
+
+              <div class="container" >
+                  <div class="row">
+                    <!-- AGREGAR para fijar los campos [frozenColumns]="Frozencolumna"  -->
+                      <p-treeTable 
+                      [value]="files"
+                      [columns]="Scrollcolumna"
+                      [scrollable]="true" 
+                      scrollHeight="300px" 
+                      [loading]="loading"
+                      [totalRecords]="6" 
+                      [paginator]="false" 
+                      [rows]="5"
+                      [lazy]="true" 
+                      (onLazyLoad)="cargaCronogramaPadre($event)" 
+                      (onNodeExpand)="cargaCronogramaHijo($event)"
+                      (onEditComplete)="editar($event)"   
+                      >
+                    
+                          <ng-template pTemplate="colgroup" let-columns>
+                              <colgroup>
+                                <col class='caja-item'>
+                                <col class='caja-descripcion'>
+                                <col class='caja'>
+                                <col class='caja'>
+                                <col class='caja'>
+                                <col class='caja-large'><!--precio-->
+                                <col class='caja-large'><!--importe-->
+                                <col class='caja-razon-social'><!--razon-->
+                                <col class='caja-large'><!--forma pago-->
+                                <col class='caja-sustento'><!--sustento-->
+                                <col class='caja-observaciones'><!--observaciones-->
+                            </colgroup>
+                          </ng-template>
+                  
+                          <ng-template pTemplate="header" let-columns>                        
+                                  <tr>
+                                      <th *ngFor="let col of columns" style="font-size: 13px;  background-color: #cfd0d6 !important;font-weight: 600;" >  {{col.header}} </th>
+                                  </tr>
+                          </ng-template>
+                  
+                          <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+                              <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover" >
+                              
+                                  <td class="celda-frozen">
+                                      <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                      <p-treeTableCheckbox *ngIf="rowData.item=='01.01'" [value]="rowNode" ></p-treeTableCheckbox>
+                                      {{rowData.item}} 
+                                  </td>
+                                  <td class="celda-frozen"> {{rowData.descripcion}}</td>
+
+                                  <td class="celda" >{{rowData.unidad}}</td>
+
+                                  <td class="celda" >{{rowData.saldo}}</td>
+              
+
+                                  <td  class="celda"  [ttEditableColumn]="rowData" [ttEditableColumnField] = "rowData.cantidad"  [ngClass]="{'ui-toggler-column': true}">
+                                      <p-treeTableCellEditor >
+                                          <ng-template  pTemplate="input">
+                                              <input pInputText type="text" [(ngModel)]="rowData.cantidad" [ngModelOptions]="{standalone: true}"  [ngStyle]="{'width':'100%'}">
+                                          </ng-template>
+                                          <ng-template pTemplate="output">{{rowData.cantidad}} </ng-template>
+                                      </p-treeTableCellEditor>
+                                  </td> 
+                                  
+                                  
+                                  <td  class="celda"  [ttEditableColumn]="rowData" [ttEditableColumnField] = "rowData.precioUnitario"  [ngClass]="{'ui-toggler-column': true}">
+                                      <p-treeTableCellEditor >
+                                          <ng-template  pTemplate="input">
+                                              <input pInputText type="text" [(ngModel)]="rowData.precioUnitario" [ngModelOptions]="{standalone: true}"  [ngStyle]="{'width':'100%'}">
+                                          </ng-template>
+                                          <ng-template pTemplate="output">{{rowData.precioUnitario}} </ng-template>
+                                      </p-treeTableCellEditor>
+                                  </td>       
+
+                                  
+                                  <td  class="celda"  [ttEditableColumn]="rowData" [ttEditableColumnField] = "rowData.importe"  [ngClass]="{'ui-toggler-column': true}">
+                                      <p-treeTableCellEditor >
+                                          <ng-template  pTemplate="input">
+                                              <input pInputText type="text" [(ngModel)]="rowData.importe" [ngModelOptions]="{standalone: true}"  [ngStyle]="{'width':'100%'}">
+                                          </ng-template>
+                                          <ng-template pTemplate="output">{{rowData.importe}} </ng-template>
+                                      </p-treeTableCellEditor>
+                                  </td>       
+              
+                                  <td class="celda" >{{rowData.razonSocial}}</td>
+                                  <td class="celda" >{{rowData.formaPago}}</td>
+                                  <td class="celda" >{{rowData.sustento}}</td>
+                  
+                                  <td  class="celda"  [ttEditableColumn]="rowData" [ttEditableColumnField] = "rowData.observacion"  [ngClass]="{'ui-toggler-column': true}">
+                                      <p-treeTableCellEditor >
+                                          <ng-template  pTemplate="input">
+                                              <input pInputText type="text" [(ngModel)]="rowData.observacion" [ngModelOptions]="{standalone: true}"  [ngStyle]="{'width':'100%'}">
+                                          </ng-template>
+                                          <ng-template pTemplate="output">      
+                                              {{rowData.observacion}} 
+                                          </ng-template>
+                                      </p-treeTableCellEditor>
+                                  </td>       
+                              </tr>
+                          </ng-template>
+
+                          <ng-template pTemplate="footer">
+                            <tr style="text-align: right;">
+                                <td colspan="6" >SUB TOTAL COSTO DIRECTO S/. </td><td>506,202</td>
+                            </tr>
+                            <tr style="text-align: right;">
+                                <td colspan="6">MONTO TOTAL S/. </td><td>506,202</td>
+                            </tr>
+                        </ng-template>
+
+                      </p-treeTable>
+                
+                  </div>
+                </div>
+
+
+
+      </div>
+      <div align="right" class="example-button-row acciones-margen-derecho">
+
+      
+      </div>
+    </mat-tab><!-- MAT-TAB COSTO DIRECTO FIN-->
+
+
+    <mat-tab label="GASTOS GENERALES"  class="mat-tab-body-content">
+      <!-- MAT-TAB GASTOS GENERALES INICIO-->
+
+      <mat-form-field appearance="outline" style="margin-top: 5px; margin-left: 16px;">
+        <mat-label>PAGO MENSUAL</mat-label>
+        <mat-select formControlName="mesFrmCtrl"   [(ngModel)]="selectedOption">
+          <mat-option *ngFor="let mes of dataItemPagoMensual?.meses" [value]="mes">
+            {{mes.cidNombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <div class="bandeja">
+
+        <div class="container">
+          <div class="row">
+            <p-treeTable 
+            [value]="filesGastoGeneral"
+        
+            [columns]="ScrollcolumnaGeneral"
+            [frozenColumns]="FrozencolumnaGeneral"
+            [scrollable]="true" 
+            scrollHeight="300px" 
+            [loading]="loading"
+            [totalRecords]="3" 
+            [paginator]="false" 
+            [rows]="2"
+            [lazy]="true" 
+            (onLazyLoad)="cargaGastoGeneralPadre($event)" 
+            (onNodeExpand)="cargaGastoGeneralHijo($event)"
+            (onEditComplete)="editar($event)"
+            
+            frozenWidth="750px"
+            >
+
+              <ng-template pTemplate="frozencolgroup" let-columns>
+                  <colgroup>
+                      <col style="width:150px;">
+                      <col style="width:600px">
+                  </colgroup>
+              </ng-template>
+
+                <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                          <col class='caja-unid'><!--UNIDAD-->
+                          <col class='caja-precio'><!--SALDO-->
+                          <col class='caja-cant'><!--CANT.-->
+                          <col class='caja-precio'><!--PRECIO-->
+                          <col class='caja-importe'><!--importe-->
+                          <col class='caja-razon-social'><!--razon-->
+                          <col class='caja-large'><!--forma pago-->
+                          <col class='caja-sustento'><!--sustento-->
+                          <col class='caja-observaciones'><!--observaciones-->
+                        </colgroup>
+                </ng-template>
+
+                <ng-template pTemplate="header" let-columns>
+                             
+                    <tr>
+                        <th *ngFor="let col of columns" class = "header-colum">  {{col.header}} </th>
+                    </tr>
+               </ng-template>
+        
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+
+                
+
+                    <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover" >
+
+                        <td class="celda" >{{rowData.unidad}}</td>
+                        <td class="celda" >{{rowData.saldo}}</td>
+                        <td class="celda" >{{rowData.cantidad}}</td>
+                        <td class="celda" >{{rowData.precioUnitario}}</td>
+                        <td class="celda" >{{rowData.importe}}</td>
+                        <td class="celda-painted" >{{rowData.razonSocial}}</td>
+                        <td class="celda-painted" >{{rowData.formaPago}}</td>
+                        <td class="celda-painted" >{{rowData.sustento}}</td>
+                     
+                    
+                        <td class="celda-painted" *ngIf="rowData.flagPadre == '1'" style="color: white;">{{rowData.flagPadre}}</td>
+                        
+                        <td class="celda-painted" *ngIf="rowData.flagPadre != '1'">{{rowData.observacion}}</td>
+
+                        
+
+        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="frozenbody" let-rowNode let-rowData="rowData">
+                        <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover">
+                            <td class="celda-frozen"  >
+                                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                {{rowData.item}}
+                            </td>
+                            <td class="celda-frozen" > {{rowData.descripcion}}</td>
+                        </tr>     
+
+                 
+                </ng-template>
+
+
+                <ng-template pTemplate="footer">
+                  <tr style="text-align: right;">
+                      <td colspan="4" >SUB TOTAL GENERALES S/. </td><td>856,202</td>
+                  </tr>
+                  <tr style="text-align: right;">
+                      <td colspan="4">MONTO TOTAL S/. </td><td>856,202</td>
+                  </tr>
+              </ng-template>
+
+            </p-treeTable>
+      
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </mat-tab><!-- MAT-TAB GASTOS GENERALES FIN-->
+
+    <mat-tab label="GASTOS DE RESIDENTE" [disabled]="false">
+      <!-- MAT-TAB PROGRAMACION INICIO-->
+
+      <div class="bandeja">
+          <mat-checkbox><span>Pago mensual - residente</span></mat-checkbox>
+
+      </div>
+      <div class="bandeja">
+      <div class="container">
+          <div class="row">
+            <p-treeTable 
+            [value]="filesGastoSupervision"
+        
+            [columns]="ScrollcolumnaSupervision"
+            [frozenColumns]="FrozencolumnaSupervision"
+            [scrollable]="true" 
+            scrollHeight="300px" 
+            [loading]="loading"
+            [totalRecords]="3" 
+            [paginator]="false" 
+            [rows]="2"
+            [lazy]="true" 
+            (onLazyLoad)="cargaGastoSupervisionPadre($event)" 
+            (onNodeExpand)="cargaGastoSupervisionHijo($event)"
+            (onEditComplete)="editar($event)"
+            
+            frozenWidth="750px"
+            >
+
+              <ng-template pTemplate="frozencolgroup" let-columns>
+                  <colgroup>
+                      <col style="width:150px;">
+                      <col style="width:600px">
+                  </colgroup>
+              </ng-template>
+
+                <ng-template pTemplate="colgroup" let-columns>
+                        <colgroup>
+                          <col class='caja-unid'><!--UNIDAD-->
+                          <col class='caja-precio'><!--SALDO-->
+                          <col class='caja-cant'><!--CANT.-->
+                          <col class='caja-precio'><!--PRECIO-->
+                          <col class='caja-importe'><!--importe-->
+                          <col class='caja-razon-social'><!--razon-->
+                          <col class='caja-large'><!--forma pago-->
+                          <col class='caja-sustento'><!--sustento-->
+                          <col class='caja-observaciones'><!--observaciones-->
+                        </colgroup>
+                </ng-template>
+
+                <ng-template pTemplate="header" let-columns>
+                             
+                    <tr>
+                        <th *ngFor="let col of columns" class = "header-colum">  {{col.header}} </th>
+                    </tr>
+               </ng-template>
+        
+                <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+                    <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover" >
+
+                        <td class="celda" >{{rowData.unidad}}</td>
+                        <td class="celda" >{{rowData.saldo}}</td>
+                        <td class="celda" >{{rowData.cantidad}}</td>
+                        <td class="celda" >{{rowData.precioUnitario}}</td>
+                        <td class="celda" >{{rowData.importe}}</td>
+                        <td class="celda-painted" >{{rowData.razonSocial}}</td>
+                        <td class="celda-painted" >{{rowData.formaPago}}</td>
+                        <td class="celda-painted" >{{rowData.sustento}}</td>
+                        <td class="celda-painted" *ngIf="rowData.flagPadre == '1'" style="color: white;">{{rowData.flagPadre}}</td>
+                  
+                        <td class="celda-painted" *ngIf="rowData.flagPadre != '1'">{{rowData.observacion}}</td>
+                        
+
+        
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="frozenbody" let-rowNode let-rowData="rowData" >
+                        <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover">
+                            <td class="celda-frozen"  >
+                                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                {{rowData.item}}
+                            </td>
+                            <td class="celda-frozen" > {{rowData.descripcion}}</td>
+                        </tr>     
+
+                 
+                </ng-template>
+
+
+                
+        <ng-template pTemplate="frozenrows" >
+            <tr style="text-align: right;">
+                <td>SUB TOTAL SUPERVISIÓN S/. 1506,202</td>
+            </tr>
+            <tr style="text-align: right;">
+                <td>MONTO TOTAL S/. </td><td>1506,202</td>
+            </tr>
+        </ng-template>
+            </p-treeTable>
+
+           
+      
+
+
+          </div>
+        </div>
+  
+      </div>
+
+    </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+
+
+    <mat-tab label="GASTOS FINANCIEROS U OTROS" [disabled]="true">
+        <!-- MAT-TAB PROGRAMACION INICIO-->
+        <div class="bandeja">
+  
+          <div class="container">
+            <div class="row">
+              <!-- row INICIO -->
+  
+  
+              <div mat-dialog-content class="contenido-formulario">
+
+                  GASTOS DE RESIDENTE
+  
+        
+  
+         <!--        <div class="div-tabla-programacion">
+  
+                  <table mat-table [dataSource]="dataSourceProgramacion">
+  
+                    <ng-container matColumnDef="nro" >
+                      <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Nro.</th>
+                    
+                      <td mat-cell *matCellDef="let prog; let i = index">{{i + 1}} </td>
+  
+  
+                    </ng-container>
+  
+                    <ng-container matColumnDef="mes" >
+                      <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Mes </th>
+                      <td mat-cell *matCellDef="let prog">{{prog.mes}} </td>
+                    </ng-container>
+  
+  
+                    <ng-container matColumnDef="metrado" >
+                      <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Metrado </th>
+                      <td mat-cell *matCellDef="let prog">{{prog.metrado}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="precio">
+                      <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Precio(S/.) </th>
+                      <td mat-cell *matCellDef="let prog">{{prog.precio}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="porcentaje">
+                      <th mat-header-cell *matHeaderCellDef style=" text-align: center;">Porcentaje(%) </th>
+                      <td mat-cell *matCellDef="let prog">{{prog.porcentaje}} </td>
+                    </ng-container>
+  
+                    <ng-container matColumnDef="acciones" style="text-align: center;">
+                      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                      <td mat-cell *matCellDef="let prog">
+                        <button mat-icon-button color="primary" matTooltip="Editar Programación" (click) = "editarProgramacion(prog, i)">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+  
+                        <button mat-icon-button color="primary" matTooltip="Eliminar Programación" (click) = "eliminarProgramacion(prog)">
+                          <mat-icon>delete_forever</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+  
+                    <tr mat-header-row *matHeaderRowDef="columnasProgramacion" ></tr>
+                    <tr mat-row *matRowDef="let row; columns: columnasProgramacion" style="text-align: center;"></tr>
+                  </table>
+  
+                  <div class="empty" *ngIf="dataSourceProgramacion === null">
+                    No existe programación a mostrar
+                  </div>
+  
+            
+  
+                </div>
+   -->
+                <br>
+              
+  
+              
+              </div>
+  
+              <!-- TAB PROGRAMACION FIN    -->
+  
+  
+            </div> <!-- row FIN -->
+          </div>
+  
+        </div>
+  
+      </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+
+
+    <mat-tab label="GASTOS NUCLEO EJECUTOR" [disabled]="true">
+          <!-- MAT-TAB PROGRAMACION INICIO-->
+          <div class="bandeja">
+    
+            <div class="container">
+              <div class="row">
+                <!-- row INICIO -->
+    
+    
+                <div mat-dialog-content class="contenido-formulario">
+  
+                    GASTOS DE  NUCLEO EJECUTOR
+    
+          
+    
+           <!--        <div class="div-tabla-programacion">
+    
+                    <table mat-table [dataSource]="dataSourceProgramacion">
+    
+                      <ng-container matColumnDef="nro" >
+                        <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Nro.</th>
+                      
+                        <td mat-cell *matCellDef="let prog; let i = index">{{i + 1}} </td>
+    
+    
+                      </ng-container>
+    
+                      <ng-container matColumnDef="mes" >
+                        <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Mes </th>
+                        <td mat-cell *matCellDef="let prog">{{prog.mes}} </td>
+                      </ng-container>
+    
+    
+                      <ng-container matColumnDef="metrado" >
+                        <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Metrado </th>
+                        <td mat-cell *matCellDef="let prog">{{prog.metrado}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="precio">
+                        <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Precio(S/.) </th>
+                        <td mat-cell *matCellDef="let prog">{{prog.precio}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="porcentaje">
+                        <th mat-header-cell *matHeaderCellDef style=" text-align: center;">Porcentaje(%) </th>
+                        <td mat-cell *matCellDef="let prog">{{prog.porcentaje}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="acciones" style="text-align: center;">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let prog">
+                          <button mat-icon-button color="primary" matTooltip="Editar Programación" (click) = "editarProgramacion(prog, i)">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+    
+                          <button mat-icon-button color="primary" matTooltip="Eliminar Programación" (click) = "eliminarProgramacion(prog)">
+                            <mat-icon>delete_forever</mat-icon>
+                          </button>
+                        </td>
+                      </ng-container>
+    
+                      <tr mat-header-row *matHeaderRowDef="columnasProgramacion" ></tr>
+                      <tr mat-row *matRowDef="let row; columns: columnasProgramacion" style="text-align: center;"></tr>
+                    </table>
+    
+                    <div class="empty" *ngIf="dataSourceProgramacion === null">
+                      No existe programación a mostrar
+                    </div>
+    
+              
+    
+                  </div>
+     -->
+                  <br>
+                
+    
+                
+                </div>
+    
+                <!-- TAB PROGRAMACION FIN    -->
+    
+    
+              </div> <!-- row FIN -->
+            </div>
+    
+          </div>
+    
+        </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+
+
+    <mat-tab label="GASTOS DE SUPERVISIÓN" class="mat-tab-body-content">
+            <!-- MAT-TAB PROGRAMACION INICIO-->
+            <div class="bandeja">
+                <mat-checkbox><span>Pago mensual - supervisor</span></mat-checkbox>
+            </div>
+            <div class="bandeja" >
+      
+              <div class="container">
+                <div class="row">
+                  <p-treeTable 
+                  [value]="filesGastoSupervision"
+              
+                  [columns]="ScrollcolumnaSupervision"
+                  [frozenColumns]="FrozencolumnaSupervision"
+                  [scrollable]="true" 
+                  scrollHeight="300px" 
+                  [loading]="loading"
+                  [totalRecords]="3" 
+                  [paginator]="false" 
+                  [rows]="2"
+                  [lazy]="true" 
+                  (onLazyLoad)="cargaGastoSupervisionPadre($event)" 
+                  (onNodeExpand)="cargaGastoSupervisionHijo($event)"
+                  (onEditComplete)="editar($event)"
+                  
+                  frozenWidth="750px"
+                  >
+      
+                    <ng-template pTemplate="frozencolgroup" let-columns>
+                        <colgroup>
+                            <col style="width:150px;">
+                            <col style="width:600px">
+                        </colgroup>
+                    </ng-template>
+      
+                      <ng-template pTemplate="colgroup" let-columns>
+                              <colgroup>
+                                <col class='caja-unid'><!--UNIDAD-->
+                                <col class='caja-precio'><!--SALDO-->
+                                <col class='caja-cant'><!--CANT.-->
+                                <col class='caja-precio'><!--PRECIO-->
+                                <col class='caja-importe'><!--importe-->
+                                <col class='caja-razon-social'><!--razon-->
+                                <col class='caja-large'><!--forma pago-->
+                                <col class='caja-sustento'><!--sustento-->
+                                <col class='caja-observaciones'><!--observaciones-->
+                              </colgroup>
+                      </ng-template>
+      
+                      <ng-template pTemplate="header" let-columns>
+                                   
+                          <tr>
+                              <th *ngFor="let col of columns" class = "header-colum">  {{col.header}} </th>
+                          </tr>
+                     </ng-template>
+              
+                      <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+                          <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover" >
+      
+                              <td class="celda" >{{rowData.unidad}}</td>
+                              <td class="celda" >{{rowData.saldo}}</td>
+                              <td class="celda" >{{rowData.cantidad}}</td>
+                              <td class="celda" >{{rowData.precioUnitario}}</td>
+                              <td class="celda" >{{rowData.importe}}</td>
+                              <td class="celda-painted" >{{rowData.razonSocial}}</td>
+                              <td class="celda-painted" >{{rowData.formaPago}}</td>
+                              <td class="celda-painted" >{{rowData.sustento}}</td>
+                              <td class="celda-painted" *ngIf="rowData.flagPadre == '1'" style="color: white;">{{rowData.flagPadre}}</td>
+                        
+                              <td class="celda-painted" *ngIf="rowData.flagPadre != '1'">{{rowData.observacion}}</td>
+                              
+      
+              
+                          </tr>
+                      </ng-template>
+                      <ng-template pTemplate="frozenbody" let-rowNode let-rowData="rowData" >
+                              <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover">
+                                  <td class="celda-frozen"  >
+                                      <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                                      {{rowData.item}}
+                                  </td>
+                                  <td class="celda-frozen" > {{rowData.descripcion}}</td>
+                              </tr>     
+      
+                       
+                      </ng-template>
+
+
+                      
+              <ng-template pTemplate="frozenrows" >
+                  <tr style="text-align: right;">
+                      <td>SUB TOTAL SUPERVISIÓN S/. 1506,202</td>
+                  </tr>
+                  <tr style="text-align: right;">
+                      <td>MONTO TOTAL S/. </td><td>1506,202</td>
+                  </tr>
+              </ng-template>
+                  </p-treeTable>
+
+                </div>
+              </div>
+        
+            </div>
+      
+          </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+  </mat-tab-group>
+
+  <!--  </mat-card-content> -->
+  <!-- </mat-card> -->
+  <div>
+    <label style="padding-left:16px;"> 
+      <span class="nota_label">Nota: </span> 
+      <span class="nota_descripcion">Los cambios se guardarán de manera automática al dar enter en cada fila.</span> 
+    </label>
+
+    
+    <button class="btn-alinear_derecha" style="right: 5px;"color="primary" mat-raised-button (click)="generarAutorizacion()" matTooltip="Generar Autorización de gasto">
+      Generar Autorización de Gastos
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- BANDEJA -->

@@ -1,0 +1,108 @@
+<div class="departamentos mat-elevation-z1">
+  <div class="titulo">DEPARTAMENTOS</div>
+
+  <div
+    *ngFor="let d of ['HUANUCO', 'CUSCO', 'LIMA']"
+    class="departamento">
+    {{d}}
+  </div>
+</div>
+
+<div class="dashboard">
+
+  <div class="seguimiento">
+
+    <div class="general mat-elevation-z1">
+      <span class="titulo">SEGUIMIENTO Y CONTROL</span>
+
+      <div id="general"></div>
+    </div>
+
+    <div class="detalle mat-elevation-z1">
+      <div class="titulo">INFORMACIÓN</div>
+
+      <div class="items">
+        <div
+          *ngFor="let d of departamentos"
+          [style.left]="(d * 110) + 'px'"
+          [style.z-index]="d"
+          class="item"
+          >
+
+          <div [id]="'detalle' + d"></div>
+
+          <div class="linea" style="top: 180px" *ngIf="d === 0">
+            <div class="inicio">..........</div>
+            <div class="final">°</div>
+
+            <div class="final2">•</div>
+            <div class="inicio2" [style.height]="'100px'"></div>
+
+            <div class="nombre">San Martin</div>
+          </div>
+          <div class="linea" style="top: 250px" *ngIf="d === 1">
+            <div class="inicio">..........</div>
+            <div class="final">°</div>
+
+            <div class="final2">•</div>
+            <div class="inicio2" [style.height]="'50px'"></div>
+
+            <div class="nombre">Ucayali</div>
+          </div>
+          <div class="linea" style="top: 180px" *ngIf="d === 2">
+            <div class="inicio">..........</div>
+            <div class="final">°</div>
+
+            <div class="final2">•</div>
+            <div class="inicio2" [style.height]="'100px'"></div>
+
+            <div class="nombre">Loreto</div>
+          </div>
+          <div class="linea" style="top: 250px" *ngIf="d === 3">
+            <div class="inicio">..........</div>
+            <div class="final">°</div>
+
+            <div class="final2">•</div>
+            <div class="inicio2" [style.height]="'50px'"></div>
+
+            <div class="nombre">Amazonas</div>
+          </div>
+
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <div class="informacion mat-elevation-z1">
+    <div>
+      <div class="titulo">PRESUPUESTO</div>
+    </div>
+
+    <div class="contenido">
+      <div class="general">
+        <div id="info"></div>
+      </div>
+  
+      <div class="detalle">
+        
+        <div class="items">
+          <div
+            *ngFor="let i of [0,1,2,3,4,5]"
+            class="item">
+            <div class="foco"><span>•</span></div>
+            <div class="datos">
+              <div>LOREM IPSUS</div>
+              <div class="separador"></div>
+              <div class="monto">10,000 SOLES</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

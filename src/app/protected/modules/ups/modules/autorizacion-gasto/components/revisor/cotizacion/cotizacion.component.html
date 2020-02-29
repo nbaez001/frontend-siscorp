@@ -1,0 +1,194 @@
+
+
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+    <mat-expansion-panel  [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong style="color: white;">Búsqueda de Cotizaciones</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <br>
+      <!-- INPUTS -->
+      <div class="inputs" [formGroup]="cotizacionFiltroForm" fxLayout.xl="row" fxLayout.lg="row">
+
+     
+        <mat-form-field appearance="outline">
+          <mat-label>RUBRO</mat-label>
+          <input matInput formControlName="rubroFrmCtrl">
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+            <mat-label>PROVEEDOR GANADOR</mat-label>
+            <mat-select  formControlName="proveeedorFrmCtrl" >
+            <mat-option  [value]="-1">--SELECCIONAR--</mat-option>
+            <mat-option *ngFor="let prov of dataItemProveedor?.proveedores" [value]="prov.idCodigo">{{prov.cidNombre}}</mat-option>
+            </mat-select>                                               
+          </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>ESTADO</mat-label>
+          <mat-select  formControlName="estadoFrmCtrl" >
+          <mat-option  [value]="-1">--SELECCIONAR--</mat-option>
+          <mat-option *ngFor="let est of dataItemEstado?.estados" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+          </mat-select>                                               
+        </mat-form-field>
+    
+        <div class="acciones">
+          <button mat-mini-fab (click)="buscarCotizaciones($event)" [disabled]="disableBuscar"><mat-icon matTooltip="búsqueda">search</mat-icon></button>
+          <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()" matTooltip="Limpiar filtros de búsqueda"  ><mat-icon >clear_all</mat-icon></button>
+        </div>
+      </div>
+      <!-- INPUTS -->
+  
+    </mat-expansion-panel>
+  </mat-accordion>
+<!-- FILTROS -->
+
+<div class = "btn_agregar_position">
+  <button matTooltip="Registrar Cotización" mat-mini-fab class= "btn_agregar"  (click) = "generarCotizacion()" >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+  
+<!-- BANDEJA -->
+
+<div class="bandeja">
+
+    <table mat-table [dataSource]="dataSource">
+  
+      <ng-container matColumnDef="Nro">
+          <th mat-header-cell *matHeaderCellDef> Nro</th>
+          <td mat-cell *matCellDef="let coti ; let i = index">{{i + 1}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="codigoCotizacion">
+        <th mat-header-cell *matHeaderCellDef> Código<br>Cotización </th>
+        <td mat-cell *matCellDef="let coti"> {{coti.codigo}} </td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="fechaCreacion">
+        <th mat-header-cell *matHeaderCellDef>Fecha Creación</th>
+        <td mat-cell *matCellDef="let coti">{{coti.fechaCreacion}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="rubro">
+        <th mat-header-cell *matHeaderCellDef>Rubro</th>
+        <td mat-cell *matCellDef="let coti"> {{coti.rubro}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="proveedor">
+        <th mat-header-cell *matHeaderCellDef>Proveedor</th>
+        <td mat-cell *matCellDef="let coti"> {{coti.proveedor}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="nroRuc">
+        <th mat-header-cell *matHeaderCellDef>Ruc</th>
+        <td mat-cell *matCellDef="let coti"> {{coti.nroRuc}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef> Estado </th>
+        
+        <td mat-cell *matCellDef="let coti" > 
+          <span *ngIf= "coti.cidEstado == '001'" style="color: rgb(199, 0, 0); font-weight: 600px; font-family:Arial, Helvetica, sans-serif">
+              {{coti.estado}} 
+          </span> 
+          <span *ngIf= "coti.cidEstado != '001'" style="color:black; font-weight: 600;">
+              {{coti.estado}} 
+          </span> 
+         </td> 
+      </ng-container>
+  
+    
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef >Acciones</th>
+        <td mat-cell *matCellDef="let coti">
+  
+         <div *ngIf =  "coti.cidEstado == '001'">
+  
+            <button mat-icon-button color="primary" (click)="verSolicitud(coti.idCodigo)" matTooltip="Ver Solicitud de Cotización">
+                <mat-icon>picture_as_pdf</mat-icon>
+              </button>
+  
+            <button mat-icon-button color="primary" (click)="editarCotizacion(coti.idCodigo)" matTooltip="Editar Insumos a la Cotización">
+                <mat-icon>edit</mat-icon>
+            </button>
+      
+            <button mat-icon-button color="primary" (click)="eliminarAutorizacion(coti)" matTooltip="Eliminar Solicitud de Cotización">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+           
+         </div> 
+  
+         <div *ngIf =  "coti.cidEstado == '002'">
+            <button mat-icon-button color="primary" (click)="verSolicitud(coti.idCodigo)" matTooltip="Ver Solicitud de Cotización">
+                <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="adjuntarCotizacion(coti.idCodigo)" matTooltip="Adjuntar Cotización">
+                <mat-icon>attach_file</mat-icon>
+            </button>              
+         </div> 
+
+         <div *ngIf =  "coti.cidEstado == '003'">
+          <button mat-icon-button color="primary" (click)="verSolicitud(coti.idCodigo)" matTooltip="Ver Solicitud de Cotización">
+              <mat-icon>picture_as_pdf</mat-icon>
+          </button>       
+         </div> 
+
+         <div *ngIf =  "coti.cidEstado == '004'">
+          <button mat-icon-button color="primary" (click)="verSolicitud(coti.idCodigo)" matTooltip="Ver Solicitud de Cotización">
+              <mat-icon>picture_as_pdf</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="verCuadroComparativo(coti.idCodigo)" matTooltip="Cuadro Comparativo">
+              <mat-icon>list_alt</mat-icon>
+          </button>              
+       </div> 
+
+
+         
+  
+
+            
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row [ngClass]="{'background_row': row.cidEstado == '001'}" *matRowDef="let row; columns: columnas"></tr>
+    </table>
+  
+      <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe autorizaciones para mostrar
+      </div>
+        
+      <mat-toolbar>
+        <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+          <div *ngIf="dataSource !== null" style="float: left !important;">
+            <mat-icon svgIcon="excel-pais" (click)="descargarExcel($event)" class="excel-icon-top"  matTooltip="Descargar Excel"></mat-icon>
+            <span class="example-spacer"></span>   
+          </div>
+          <div>
+              <mat-paginator 
+              [length]="total" 
+              [pageIndex]="pagina - 1" 
+              [pageSize]="cantidad" 
+              [showFirstLastButtons]="true"
+              [pageSizeOptions]="[15, 30, 50]" 
+              (page)="cambiarPagina($event)">
+              </mat-paginator>
+  
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar> 
+   
+  </div>
+<!-- BANDEJA -->
+
+
+
+
+
+
+

@@ -1,0 +1,130 @@
+:host {
+  mat-toolbar mat-icon {
+    margin-right: 10px;
+  }
+
+  .perfiles {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+
+    .botones {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    > .contenido {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 10px;
+      border-right: solid 1px #e4e4e4;
+
+      .item {
+        padding: 10px;
+        border-bottom: solid 0.5px #e6e6e6;
+        height: 25px;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        small {
+          color: grey;
+        }
+
+        .icono {
+          width: 30px;
+        }
+
+        > span, > small {
+          flex: 1;
+        }
+
+        .acciones {
+          display: flex;
+          flex-direction: row;
+
+          button {
+            margin-right: 10px;
+          }
+
+          button.mat-icon-button {
+            background-color: #e2e2e2;
+          }
+        }
+
+      }
+
+      .item.seleccionado {
+        background-color: #f5f4f4;
+        border-left: solid 1px grey;
+      }
+
+      .item:last-of-type {
+        border-bottom: none;
+      }
+
+    }
+
+    .modulos {
+      flex: 1;
+
+      .cabecera {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        font-size: 30px;
+        min-height: 70px;
+      }
+
+      .cabecera small {
+        font-size: 15px;
+      }
+
+      .contenido {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        .item {
+          padding: 10px;
+          border-bottom: solid 0.5px #e6e6e6;
+          height: 25px;
+  
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          small {
+            color: grey;
+          }
+
+          .acciones {
+            display: flex;
+            flex-direction: row;
+
+            button {
+              margin-right: 10px;
+            }
+
+            button.mat-icon-button {
+              background-color: #e2e2e2;
+            }
+          }
+
+        }
+
+        .item:last-of-type {
+          border-bottom: none;
+        }
+
+      }
+    }
+
+  }
+
+}

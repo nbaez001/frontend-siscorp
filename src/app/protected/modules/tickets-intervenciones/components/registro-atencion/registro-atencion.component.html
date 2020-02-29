@@ -1,0 +1,124 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>{{ datos.idPersona ? 'DERIVAR INTERVENCION' : 'NUEVA INTERVENCION' }}</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon class="white-fg">clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FORMULARIO -->
+<div mat-dialog-content class="contenido-formulario" [formGroup]="atencionForm">
+
+  <div class="columna">
+    <mat-form-field appearance="outline">
+      <mat-label>MOD. EMISOR</mat-label>
+      <input matInput readonly [value]="datos.moduloPertenece?.entidad">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>MOD. RECEPTOR</mat-label>
+      <mat-select formControlName="fidModuloAtencion">
+        <mat-option *ngFor="let modulo of datos.modulos" [value]="modulo.idModulo">{{modulo.entidad}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="atencionForm.get('fidModuloAtencion').invalid && atencionForm.get('fidModuloAtencion').touched">
+        {{ atencionForm.get('fidModuloAtencion').errors | errorMessage:"MOD. RECEPTOR" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <h4>Persona</h4>
+
+  <mat-form-field appearance="outline">
+    <mat-label>NOMBRE</mat-label>
+    <input matInput formControlName="nombre" [readonly]="datos.idPersona || consultaReniecOk">
+    <mat-error *ngIf="atencionForm.get('nombre').invalid && atencionForm.get('nombre').touched">
+      {{ atencionForm.get('nombre').errors | errorMessage:"NOMBRE" }}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="columna">
+    <mat-form-field appearance="outline">
+      <mat-label>APELLIDO PATERNO</mat-label>
+      <input matInput formControlName="apellidoPaterno" [readonly]="datos.idPersona || consultaReniecOk">
+      <mat-error *ngIf="atencionForm.get('apellidoPaterno').invalid && atencionForm.get('apellidoPaterno').touched">
+        {{ atencionForm.get('apellidoPaterno').errors | errorMessage:"APELLIDO PATERNO" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>APELLIDO MATERNO</mat-label>
+      <input matInput formControlName="apellidoMaterno" [readonly]="datos.idPersona || consultaReniecOk">
+      <mat-error *ngIf="atencionForm.get('apellidoMaterno').invalid && atencionForm.get('apellidoMaterno').touched">
+        {{ atencionForm.get('apellidoMaterno').errors | errorMessage:"APELLIDO MATERNO" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="columna">
+    <mat-form-field appearance="outline">
+      <mat-label>TIPO DOC.</mat-label>
+      <mat-select #tipoDoc formControlName="fidTipoDocumento" [value]="1">
+        <mat-option *ngFor="let documentoTipo of documentoTipos" [value]="documentoTipo.idTipo">{{documentoTipo.nombre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="atencionForm.get('fidTipoDocumento').invalid && atencionForm.get('fidTipoDocumento').touched">
+        {{ atencionForm.get('fidTipoDocumento').errors | errorMessage:"TIPO DOC." }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>NRO DOCUMENTO</mat-label>
+      <input matInput formControlName="nroDocumento" [readonly]="datos.idPersona || consultaReniecOk" (keyup)="escribiendoDni()">
+      <mat-error *ngIf="atencionForm.get('nroDocumento').invalid && atencionForm.get('nroDocumento').touched">
+        {{ atencionForm.get('nroDocumento').errors | errorMessage:"NRO DOCUMENTO" }}
+      </mat-error>
+      <button *ngIf="tipoDoc.value == 1 && !datos.idPersona && !consultaReniecOk" matSuffix mat-icon-button (click)="buscarReniec()"><mat-icon>search</mat-icon></button>
+      <button *ngIf="!datos.idPersona && consultaReniecOk" matSuffix mat-icon-button (click)="revertirBusqueda()"><mat-icon>clear</mat-icon></button>
+    </mat-form-field>
+  </div>
+
+  <div class="columna">
+    <mat-form-field appearance="outline">
+      <mat-label>FECHA NACIMIENTO</mat-label>
+      <input matInput formControlName="fechaNacimiento" readonly (click)="pickerNac.open()" [matDatepicker]="pickerNac" [max]="fechaActual">
+      <mat-error *ngIf="atencionForm.get('fechaNacimiento').invalid && atencionForm.get('fechaNacimiento').touched">
+        {{ atencionForm.get('fechaNacimiento').errors | errorMessage:"FECHA NACIMIENTO" }}
+      </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="pickerNac"></mat-datepicker-toggle>
+      <mat-datepicker #pickerNac></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>GENERO</mat-label>
+      <mat-select formControlName="fidGenero">
+        <mat-option *ngFor="let genero of generos" [value]="genero.idGenero">{{genero.nombre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="atencionForm.get('fidGenero').invalid && atencionForm.get('fidGenero').touched">
+        {{ atencionForm.get('fidGenero').errors | errorMessage:"GENERO" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <h4>Adjuntar Archivos</h4>
+
+  <div class="columna archivos">
+    <mat-card *ngFor="let archivo of archivos"><mat-icon>attach_file</mat-icon></mat-card>
+    <mat-card (click)="adjuntar.click()"><mat-icon>add</mat-icon></mat-card>
+  </div>
+</div>
+<!-- FORMULARIO -->
+
+<input #adjuntar (change)="subirArchivos($event.target.files)" type="file">
+
+<!-- ACCIONES -->
+<div mat-dialog-actions>
+
+  <button
+    color="primary"
+    mat-raised-button
+    (click)="registrar()">
+      GUARDAR
+  </button>
+
+</div>
+<!-- ACCIONES -->

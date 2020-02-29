@@ -1,0 +1,14 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "AGUA PARA LA CONSTRUCCION"
+        }
+       
+    ],
+	"idPerfil": null
+}

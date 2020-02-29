@@ -1,0 +1,340 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>REGISTRAR INFORME TÉCNICO</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<mat-card class="mat-card-formato">
+  <mat-card-content>
+
+    <div class="container">
+      <div class="row">
+        <div mat-dialog-content class="contenido-formulario" [formGroup]="autorizacionForm">
+
+          <div>
+            <mat-form-field appearance="outline" style="width: 20%;">
+              <mat-label>Nro. Informe</mat-label>
+              <input matInput formControlName="codigoObraFrmCtrl">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="width: 60%; padding-left: 10px;">
+              <mat-label>Proyecto</mat-label>
+              <input matInput formControlName="descripcionFrmCtrl">
+            </mat-form-field>
+
+          
+
+            <mat-form-field appearance="outline"  style="width: 18%; padding-left: 10px;">
+              <mat-label>Fecha Informe</mat-label>
+              <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fechaAutorizacionFrmCtrl">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+
+
+          </div>
+
+          <div>
+
+            <mat-form-field appearance="outline" style="width: 30%;">
+              <mat-label>Asunto</mat-label>
+              <input matInput formControlName="montoAcumuladoFrmCtrl">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" style="padding-left: 10px;width: 35%;">
+              <mat-label>Destinatario</mat-label>
+              <input matInput formControlName="saldoDisponibleFrmCtrl">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" style="padding-left: 10px; width: 20%;">
+              <mat-label>N° Convenio Cooperación</mat-label>
+              <input matInput formControlName="nroConvenioFrmCtrl">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" style="padding-left: 10px; width: 12.4%;">
+              <mat-label>Monto Solicitado S/.</mat-label>
+              <input matInput formControlName="montoConvenioFrmCtrl">
+            </mat-form-field>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+
+
+
+<mat-card class="mat-card-formato" style="min-height: 340px; margin-top: -8px;">
+  <mat-card-content>
+    <div class="contenido-formulario" [formGroup]="autorizacionForm">
+
+      <!--   <mat-card  class="mat-tab-body-content"> -->
+
+
+      <!-- <mat-card-content class="mat-tab-body-content"> -->
+
+      <mat-tab-group selectedIndex="{{selectedIndexTab}}" (selectedIndexChange)="tab_click($event)">
+
+        <mat-tab label="Aspectos Generales">
+          <!-- MAT-TAB COSTO DIRECTO INICIO-->
+          <div class="bandeja">
+
+            <div class="container">
+              <div class="row">
+                <p><span style="color: red; font-weight: 500;">Se añadió la partida 01.02.01.05 xxx al cronograma de avance.</span></p>
+                <p><span style="color: red; font-weight: 500;">Se eliminó la partida 01.02.01.03 xxxx del cronograma de avance.</span></p>  
+              </div>
+            </div>
+          </div>
+          <div align="right" class="example-button-row acciones-margen-derecho">
+          </div>
+        </mat-tab><!-- MAT-TAB COSTO DIRECTO FIN-->
+
+
+        <mat-tab label="Aspectos Técnicos" class="mat-tab-body-content">
+          <!-- MAT-TAB GASTOS GENERALES INICIO-->
+
+          <div class="bandeja">
+
+            <div class="container">
+              <div class="row">            
+                <ckeditor  [config]="	{removePlugins: [ 'FontFamily','Highlight','Italic', 'Strikethrough','Link','BlockQuote','ImageUpload','MediaEmbed'],
+                  table: {contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells']}}" [editor]="EditorAspectoTecnico" [(ngModel)]="ckeditorAspectoTecnico" name="ckeditorAspectoTecnico"
+                  (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+                </ckeditor>      
+              </div>
+            </div>
+
+          </div>
+
+        </mat-tab><!-- MAT-TAB GASTOS GENERALES FIN-->
+
+        <mat-tab label="Aspectos de Importancia">
+          <!-- MAT-TAB PROGRAMACION INICIO-->
+          <div class="bandeja">
+
+            <div class="container">
+              <div class="row">
+                <ckeditor  [config]="	{removePlugins: [ 'FontFamily','Highlight','Italic', 'Strikethrough','Link','BlockQuote','ImageUpload','MediaEmbed'],
+                table: {contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells']}}" [editor]="EditorAspectoImportancia" [(ngModel)]="ckeditorAspectoImportancia" name="ckeditorAspectoImportancia"
+                (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+                </ckeditor>      
+              </div>
+            </div>
+
+          </div>
+
+        </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+
+
+        <mat-tab label="Aspectos Económicos">
+          <!-- MAT-TAB PROGRAMACION INICIO-->
+          <div class="bandeja">
+
+            <div class="container">
+              <div class="row">
+                <ckeditor  [config]="	{removePlugins: [ 'FontFamily','Highlight','Italic', 'Strikethrough','Link','BlockQuote','ImageUpload','MediaEmbed'],
+                table: {contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells']}}" [editor]="EditorAspectoEconomico" [(ngModel)]="ckeditorAspectoEconomico" name="ckeditorAspectoEconomico"
+                (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+                </ckeditor>      
+
+
+              </div> <!-- row FIN -->
+            </div>
+
+          </div>
+
+        </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+
+
+        <mat-tab label="Impacto Ambiental">
+          <!-- MAT-TAB PROGRAMACION INICIO-->
+          <div class="bandeja">
+
+            <div class="container">
+              <div class="row">
+                <ckeditor  [config]="	{removePlugins: [ 'FontFamily','Highlight','Italic', 'Strikethrough','Link','BlockQuote','ImageUpload','MediaEmbed'],
+                table: {contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells']}}" [editor]="EditorImpactoAmbiental" [(ngModel)]="ckeditorImpactoAmbiental" name="ckeditorImpactoAmbiental"
+                (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+                </ckeditor>      
+
+
+
+              </div> <!-- row FIN -->
+            </div>
+
+          </div>
+
+        </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+
+
+        <mat-tab label="Aspectos Relevantes" class="mat-tab-body-content">
+          <!-- MAT-TAB PROGRAMACION INICIO-->
+          <div class="bandeja">
+
+            <div class="container">
+              <div class="row">
+
+
+                <ckeditor  [config]="	{removePlugins: [ 'FontFamily','Highlight','Italic', 'Strikethrough','Link','BlockQuote','ImageUpload','MediaEmbed'],
+                table: {contentToolbar: [ 'tableColumn', 'tableRow', 'mergeTableCells']}}" [editor]="EditorAspectoRelevante" [(ngModel)]="ckeditorAspectoRelevante" name="ckeditorAspectoRelevante"
+                (ready)="onReady($event)" [ngModelOptions]="{standalone: true}">
+                </ckeditor>      
+
+              </div>
+            </div>
+
+          </div>
+
+        </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+      </mat-tab-group>
+
+      <!--  </mat-card-content> -->
+      <!-- </mat-card> -->
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+<mat-card class="mat-card-formato" style="min-height: 300px; margin-top: -8px;">
+  <mat-card-header>
+    <mat-card-title>Documentos Sustentatorios</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <!-- ADJUNTAR DOCUMENTOS SUSTENTATORIOS -->
+
+    <div class="contenido-formulario" [formGroup]="archivoForm" style="	margin-left: 90px; margin-right: 90px;">
+
+        <div>
+
+
+          <mat-form-field appearance="outline" style="width: 20%;">
+              <mat-label>Tipo Documento:</mat-label>
+              <mat-select formControlName="tipoDocArchivoFrmCtrl">
+                <mat-option *ngFor="let tipoDoc of tipoDocArchivo" [value]="tipoDoc">{{tipoDoc.cidNombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+        
+            <input type="file" style="display: none; padding-left: 10px;" #fileInput accept="image/*" (change)="selectFile($event)" />
+            <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+              <mat-icon matTooltip = "Seleccione un archivo" >attach_file</mat-icon>
+              Examinar...
+            </button>
+          
+           
+            <mat-label style="width: 18%; padding-left: 10px;">        
+             <!--  {{archivo}} -->
+              <p class="file-name" *ngIf="!archivo; else fileName">Elija un archivo...</p>
+              <ng-template #fileName>
+                <p class="file-name">{{ archivo }}</p>
+              </ng-template>
+            </mat-label>
+           
+                <button matTooltip="Registrar Documento" color="primary" mat-mini-fab class= "btn_agregar"  [disabled]="!selectedFiles" (click) = "validarSubidaArchivo($event)" >
+                  <mat-icon>add</mat-icon>
+                </button>
+    
+        </div>
+
+      </div>
+
+
+      <div class="bandeja scrollPersonal" style="margin-left: 100px; margin-right: 100px; border: 1px solid #dadcde;">
+
+        <!-- BANDEJA -->
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="nro">
+            <th mat-header-cell *matHeaderCellDef> NRO</th>
+            <td mat-cell *matCellDef="let archivo; let i = index">{{i + 1}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="archivo">
+            <th mat-header-cell *matHeaderCellDef> ARCHIVO </th>
+            <td mat-cell *matCellDef="let archivo" class="convertir-label-link" matTooltip="Descargar Archivo"
+              (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">{{archivo.nombreArchivo}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipoDoc">
+            <th mat-header-cell *matHeaderCellDef> TIPO DOC. </th>
+            <td mat-cell *matCellDef="let archivo">{{archivo.tipoArchivo}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="descripcion">
+            <th mat-header-cell *matHeaderCellDef> DESCRIPCION </th>
+            <td mat-cell *matCellDef="let archivo">{{archivo.descripcion}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="accion" stickyEnd >
+            <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
+            <td mat-cell *matCellDef="let archivo" style="width: 80px;">         
+                <button mat-icon-button color="primary"
+                  (click)="visualizarArchivoExcel(archivo.fidProyecto, archivo.cidTipoArchivo, archivo.idCodigoArchivo)">
+                  <mat-icon matTooltip="Visualizar Archivos Temporales Desagregados Gastos Supervisión">search
+                  </mat-icon>
+                </button>
+
+                <button class="tableIconButton mat-icon-btn-style" mat-icon-button matTooltip="Eliminar Archivo"
+                  (click)="eliminarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo, archivo.cidNombreEstado)">
+                  <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close</mat-icon>
+                </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+        </table>
+
+      
+      </div>
+
+
+
+
+  </mat-card-content>
+</mat-card>
+
+<div class="contenido-formulario">
+  <div class="columna">
+    <mat-toolbar>
+      <mat-toolbar-row class=" mat-toolbar-fondo">
+
+        <button mat-raised-button color="primary" style="margin-right: 10px;"  (click) = "guardarInsumoCotizacionSinEnviar()">
+          <mat-icon>save</mat-icon> Guardar Sin enviar
+        </button>
+
+        <button mat-raised-button color="primary" style="margin-right: 10px;" (click) = "enviarInsumoCotizacion()">
+          <mat-icon>call_made</mat-icon> Enviar
+        </button>
+
+        <button mat-raised-button color="primary" style="margin-right: 10px;" (click) = "vistaPreviaInsumoCotizacion()">
+          <mat-icon>description</mat-icon> Vista Previa
+        </button>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+  </div>
+</div>
+
+
+<!-- BANDEJA -->

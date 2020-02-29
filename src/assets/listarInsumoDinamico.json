@@ -1,0 +1,43 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 9,
+	"response": [
+       
+       
+        {
+            "idCodigo": 1,
+            "nro": "01",
+            "recurso": "Abrazadera de tubería 1.1/2",
+            "unidad": "und",
+            "cantidad": "7.00",
+            "cantidaProveedor":2
+        }, 
+        {
+            "idCodigo": 2,
+            "nro": "02",
+            "recurso": "Abrazadera de tubería 2",
+            "unidad": "und",
+            "cantidad": "7.00",
+            "cantidaProveedor":2
+        }, 
+        {
+            "idCodigo": 3,
+            "nro": "03",
+            "recurso": "Abrazadera de tubería 1",
+            "unidad": "und",
+            "cantidad": "14.00",
+            "cantidaProveedor":2
+        }, 
+        {
+            "idCodigo": 4,
+            "nro": "04",
+            "recurso": "Accesorios de Termofusión",
+            "unidad": "und",
+            "cantidad": "24.00",
+            "cantidaProveedor":2
+         
+        }
+    ],
+	"idPerfil": 1
+}

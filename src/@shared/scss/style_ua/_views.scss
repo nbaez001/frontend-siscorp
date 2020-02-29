@@ -1,0 +1,7 @@
+@import "views/card";
+@import "views/dialog";
+
+::ng-deep .mat-tooltip {
+  font-size: 14px;
+  font-weight: bolder;
+}

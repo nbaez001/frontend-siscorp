@@ -1,0 +1,110 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+:host {
+
+    /deep/  .mat-grid-tile .mat-figure{
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+
+    
+    th.mat-header-cell, td.mat-cell {
+      text-align: center;
+      border: 1px solid #CCC;
+      padding: 0 !important;
+    }
+
+    tr.mat-header-row{
+      height: 20px;
+    }
+    .mat-header-cell{
+      font-weight: bold;
+      color: #494949;
+    }
+  
+    p-fieldset{
+      width: 100%;
+    }
+    
+    .page {//input de las celdas ocupe todo el espacio
+      .table-container{
+        mat-form-field{
+          margin: auto;
+          text-align:center;
+        }
+      }
+    }
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper{
+      margin:0;
+    }
+
+    ::ng-deep .mat-form-field-wrapper{
+      padding-bottom: 0px;
+    }
+    ::ng-deep .tr.mat-footer-row, tr.mat-row{
+      height: 30px;
+    }
+    
+//     /deep/   tr.mat-footer-row {
+//       border: 1px solid #e7e7e7;
+//       font-weight: bold;
+//       height: 10px !important;
+// }
+
+}
+
+@include mat-table-columns(
+  (
+    colPartida: (
+      width: 2rem
+    ),
+    colDescripcion: (
+      width: 20rem
+    ),
+    colUndPre: (
+      width: 2rem
+    ),
+    colMetPre: (
+      width: 2rem
+    ) ,
+    colPrecioUnitPre: (
+      width: 2rem
+    ), 
+    colPresupuesto: (
+      width: 2rem
+    ),
+    colMetAnt: (
+      width: 2rem
+    ),
+    colValAnt: (
+      width: 2rem
+    ),
+    colMetAct: (
+      width: 2rem
+    ),
+
+    colValAct: (
+      width: 2rem
+    ),
+    colMetAcu: (
+      width: 2rem
+    ),
+    colValAcu: (
+      width: 2rem
+    ),
+    colPorcentajeAcu: (
+      width: 2rem
+    ),
+    colMetSaldo: (
+      width: 2rem
+    ),
+    colValSaldo: (
+      width: 2rem
+    ),
+    colPorcentajeSaldo: (
+      width: 2rem
+    )
+
+  )
+);

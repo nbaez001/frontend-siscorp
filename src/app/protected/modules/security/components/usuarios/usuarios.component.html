@@ -1,0 +1,46 @@
+<div class="mat-elevation-z1">
+  <mat-toolbar class="mat-primary">
+    <span><mat-icon class="mr-12">group</mat-icon> Usuarios</span>
+    <button mat-icon-button matTooltip="Crear usuario"><mat-icon>add_circle</mat-icon></button>
+  </mat-toolbar>
+
+  <table mat-table [dataSource]="usuarios">
+
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let usu"> {{usu.numero}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef> Usuario </th>
+      <td mat-cell *matCellDef="let usu"> {{usu.nombre}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="perfiles">
+      <th mat-header-cell *matHeaderCellDef> Perfiles </th>
+      <td mat-cell *matCellDef="let usu">
+        <button mat-raised-button color="primary"><mat-icon>contacts</mat-icon> {{usu.perfiles}}</button>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="botones">
+      <th mat-header-cell *matHeaderCellDef width="100"> </th>
+      <td mat-cell *matCellDef="let usu" width="100">
+        <div class="botones">
+          <button mat-icon-button color="primary" matTooltip="Editar"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="error" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+        </div>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let usu; columns: columnas;"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    showFirstLastButtons
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

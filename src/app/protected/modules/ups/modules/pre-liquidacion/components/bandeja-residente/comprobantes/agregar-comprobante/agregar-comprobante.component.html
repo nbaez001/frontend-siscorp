@@ -1,0 +1,714 @@
+<div class="page">
+ 
+ <!-- CABECERA -->
+ <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>{{titulo_requerimiento}}</span>
+   <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+  </button> 
+</mat-toolbar>
+<!-- CABECERA -->
+
+
+
+<mat-tab-group>
+    <mat-tab label="COMPROBANTE DE PAGO">
+      <!-- FORMULARIO -->
+          <div [formGroup]="formularioComprobanteGrp" id="formularioComprobanteGrp">
+            <mat-card>
+                <mat-grid-list cols="12" rowHeight="50px">
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Mes a declarar</mat-label>
+                          <mat-select formControlName="frmMesDeclarar" class = "tamanio-seleccionar">
+                            <mat-option *ngFor="let mes of dataItemMes?.mesesDeclarar" [value]="mes.idCodigo">{{mes.cidNombre}}</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                    </mat-grid-tile>
+                
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Rubro</mat-label>
+                          <mat-select formControlName="frmRubro" class = "tamanio-seleccionar" >
+                            <mat-option *ngFor="let ru of dataItemRubro?.rubros" [value]="ru.idCodigo">{{ru.cidNombre}}</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                    </mat-grid-tile>
+
+                </mat-grid-list>    
+            
+
+                <mat-grid-list cols="12" rowHeight="50px">
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 4}">
+                      <mat-form-field appearance="outline"  >
+                        <mat-label>Número RUC</mat-label>
+                        <input matInput formControlName="frmNumRuc" (keyup.enter)="wsSunatRuc()" (focusout)="wsSunatRuc()" >
+                      </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 4}">
+                    <mat-form-field appearance="outline"  >
+                        <mat-label>Estado</mat-label>
+                        <input matInput formControlName="frmEstado"   >
+                      </mat-form-field> 
+                    </mat-grid-tile>  
+                    <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 4}">
+                      <mat-form-field appearance="outline" >
+                          <mat-label>Condición</mat-label>
+                          <input matInput formControlName="frmCondicion" >
+                      </mat-form-field>
+                    </mat-grid-tile>
+                   <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 4}">
+                   </mat-grid-tile>
+                </mat-grid-list>
+
+                <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 10, lg: 10, xl: 10}">
+                    <mat-form-field appearance="outline"  >
+                      <mat-label>Razón social</mat-label>
+                      <input matInput formControlName="frmRazonSocial" >
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 4}">
+                  </mat-grid-tile> -->
+                </mat-grid-list>
+
+              <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                  <mat-form-field appearance="outline">
+                      <mat-label>Tipo comprobante</mat-label>
+                      <mat-select formControlName="frmTipoComprobante" >
+                        <mat-option *ngFor="let tc of dataItemTipoComprobante?.tipoComprobantes" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 4}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Nro. Comprobante</mat-label>
+                    <input matInput formControlName="frmNumComprobante"> 
+                  </mat-form-field> 
+                </mat-grid-tile>  
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 4}">
+                  <mat-form-field appearance="outline" >
+                      <mat-label>Fecha comprobante</mat-label>
+                      <input matInput formControlName="frmFechaComprobante" [matDatepicker]="picker" (click)="picker.open()"  placeholder="Fecha comprobante">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Importe total</mat-label>
+                  <input matInput formControlName="frmImporte"> 
+                </mat-form-field> 
+              </mat-grid-tile>  
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 8, xl: 8}">
+                <mat-form-field appearance="outline" >
+                    <mat-label>Insumo material</mat-label>
+                    <input matInput formControlName="frmInsumo" >
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+     
+            <mat-grid-list cols="12" rowHeight="50px">
+               
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 2, lg: 2, xl: 2}"> 
+                <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+                    <mat-icon matTooltip = "Seleccione un archivo" >attach_file</mat-icon>
+                    Examinar...
+                </button>
+                <input type="file" style="display: none; padding-left: 10px;" #fileInput accept="image/*" (change)="selectFile($event)" />
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}" style="text-align:left !important;"> 
+                <!--  {{archivo}} -->
+                 <p class="file-name" *ngIf="!archivo; else fileName">Elija un archivo...</p>
+                 <ng-template #fileName>
+                   <p class="file-name">{{ archivo }}</p>
+                 </ng-template> 
+              </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="100px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Observaciones</mat-label>
+                  <textarea matInput formControlName="frmObsComprobante" ></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-card>
+          
+          <mat-grid-list cols="12"  >
+            <mat-grid-tile [responsiveRows]="{xs: 0, sm: 4, md: 4, lg: 8, xl: 10}" ></mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 4, xl: 2}" class="alinear-boton">
+              <div mat-dialog-actions   >
+                <button mat-raised-button color="primary" (click)="guardar()" style="margin-left: 5px;">Guardar</button>
+                <button mat-raised-button  color="warn" [mat-dialog-close]="null" cdkFocusInitial>Cancelar</button>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        </div>
+
+        
+
+      <!-- FORMULARIO -->
+    </mat-tab>
+
+    
+    
+    <mat-tab label="DECLARACION JURADA DE BIENES">
+       <!-- FORMULARIO -->
+        <div [formGroup]="formularioBienesGrp" id="formularioBienesGrp">
+          <mat-grid-list cols="12" rowHeight="50px">
+            
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+              <mat-form-field appearance="outline">
+                  <mat-label>Mes a declarar</mat-label>
+                  <mat-select formControlName="frmMesDeclararB" class = "tamanio-seleccionar">
+                    <mat-option *ngFor="let mes of dataItemMes?.mesesDeclarar" [value]="mes.idCodigo">{{mes.cidNombre}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+              <mat-form-field appearance="outline">
+                  <mat-label>Rubro</mat-label>
+                  <mat-select formControlName="frmRubroB" class = "tamanio-seleccionar">
+                    <mat-option *ngFor="let ru of dataItemRubro?.rubros" [value]="ru.idCodigo">{{ru.cidNombre}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>    
+    
+          <p-fieldset legend="Datos declaración">
+            <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>N°</mat-label>
+                    <input matInput formControlName="frmNro" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline" >
+                      <mat-label>Fecha</mat-label>
+                      <input matInput formControlName="frmFechaBien" [matDatepicker]="picker1" (click)="picker1.open()"  placeholder="Fecha">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+          </p-fieldset>
+
+          <p-fieldset legend="Domicilio del NE">
+            <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Departamento</mat-label>
+                        <mat-select formControlName="frmDepartamento" (selectionChange)="listarProvincias($event.value)" >
+                          <mat-option *ngFor="let tc of dataItemDepartamento?.departamentos" [value]="tc.idCodigo" 
+                          >{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Provincia</mat-label>
+                        <mat-select formControlName="frmProvincia" (selectionChange)="listarDistritos($event.value)">
+                          <mat-option *ngFor="let tc of dataItemProvincia?.provincias" [value]="tc.idCodigo"
+                           >{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Distrito</mat-label>
+                        <mat-select formControlName="frmDistrito" (selectionChange)="listarLocalidades($event.value)">
+                          <mat-option *ngFor="let tc of dataItemDistrito?.distritos" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Localidad</mat-label>
+                        <mat-select formControlName="frmLocalidad" >
+                          <mat-option *ngFor="let tc of dataItemLocalidad?.localidades" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+            </mat-grid-list>
+          </p-fieldset>
+
+          <p-fieldset legend="Detalle Bien">
+            <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Nombre del proveedor</mat-label>
+                    <input matInput formControlName="frmNombreProv" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>DNI</mat-label>
+                    <input matInput formControlName="frmDni" >
+                  </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Material</mat-label>
+                  <input matInput formControlName="frmMaterial" >
+                </mat-form-field>
+              </mat-grid-tile>
+          </mat-grid-list>
+
+          <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+              <mat-form-field appearance="outline"  >
+                <mat-label>Cantidad</mat-label>
+                <input matInput formControlName="frmCantidad" >
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+              <mat-form-field appearance="outline"  >
+                <mat-label>Precio unitario</mat-label>
+                <input matInput formControlName="frmPrecioUni" >
+              </mat-form-field>
+            </mat-grid-tile>
+            
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+              <mat-form-field appearance="outline"  >
+                <mat-label>Total a pagar</mat-label>
+                <input matInput formControlName="frmTotal" >
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+          <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 2, lg: 2, xl: 2}"> 
+              <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+                  <mat-icon matTooltip = "Seleccione un archivo" >attach_file</mat-icon>
+                  Examinar...
+              </button>
+              <input type="file" style="display: none; padding-left: 10px;" #fileInput accept="image/*" (change)="selectFile($event)" />
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}" style="text-align:left !important;"> 
+              <!--  {{archivo}} -->
+               <p class="file-name" *ngIf="!archivo; else fileName">Elija un archivo...</p>
+               <ng-template #fileName>
+                 <p class="file-name">{{ archivo }}</p>
+               </ng-template> 
+            </mat-grid-tile>
+          </mat-grid-list>
+        
+          <mat-grid-list cols="12" rowHeight="100px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+              <mat-form-field appearance="outline"  >
+                <mat-label>Observaciones</mat-label>
+                <textarea matInput formControlName="frmObsBien" ></textarea>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </p-fieldset>
+
+        <mat-grid-list cols="12"  >
+          <mat-grid-tile [responsiveRows]="{xs: 0, sm: 4, md: 4, lg: 8, xl: 10}" ></mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 4, xl: 2}" class="alinear-boton">
+            <div mat-dialog-actions   >
+              <button mat-raised-button color="primary" (click)="guardar()" style="margin-left: 5px;">Guardar</button>
+              <button mat-raised-button  color="warn" [mat-dialog-close]="null" cdkFocusInitial>Cancelar</button>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    <!-- FORMULARIO -->
+    </mat-tab>
+
+    <mat-tab label="DECLARACION JURADA DE SERVICIOS">
+        <!-- FORMULARIO -->
+        <div [formGroup]="formularioServiciosGrp" id="formularioServiciosGrp">
+          <mat-grid-list cols="12" rowHeight="50px">
+            
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+              <mat-form-field appearance="outline">
+                  <mat-label>Mes a declarar</mat-label>
+                  <mat-select formControlName="frmMesDeclararSer" class = "tamanio-seleccionar">
+                    <mat-option *ngFor="let mes of dataItemMes?.mesesDeclarar" [value]="mes.idCodigo">{{mes.cidNombre}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+              <mat-form-field appearance="outline">
+                  <mat-label>Rubro</mat-label>
+                  <mat-select formControlName="frmRubroSer" class = "tamanio-seleccionar">
+                    <mat-option *ngFor="let ru of dataItemRubro?.rubros" [value]="ru.idCodigo">{{ru.cidNombre}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>    
+    
+          <p-fieldset legend="Datos declaración">
+            <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>N°</mat-label>
+                    <input matInput formControlName="frmNroSer" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline" >
+                      <mat-label>Fecha</mat-label>
+                      <input matInput formControlName="frmFechaSer" [matDatepicker]="picker2"   placeholder="Fecha">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+          </p-fieldset>
+
+          <p-fieldset legend="Domicilio del NE">
+            <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Departamento</mat-label>
+                        <mat-select formControlName="frmDepartamentoSer" (selectionChange)="listarProvincias($event.value)">
+                          <mat-option *ngFor="let tc of dataItemDepartamento?.departamentos" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Provincia</mat-label>
+                        <mat-select formControlName="frmProvinciaSer" (selectionChange)="listarDistritos($event.value)">
+                          <mat-option *ngFor="let tc of dataItemProvincia?.provincias" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Distrito</mat-label>
+                        <mat-select formControlName="frmDistritoSer" (selectionChange)="listarLocalidades($event.value)">
+                          <mat-option *ngFor="let tc of dataItemDistrito?.distritos" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Localidad</mat-label>
+                        <mat-select formControlName="frmLocalidadSer" >
+                          <mat-option *ngFor="let tc of dataItemLocalidad?.localidades" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+            </mat-grid-list>
+          </p-fieldset>
+
+          <p-fieldset legend="Detalle Servicio">
+            <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Nombre del proveedor</mat-label>
+                    <input matInput formControlName="frmNombreProvSer" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>DNI</mat-label>
+                    <input matInput formControlName="frmDniSer" >
+                  </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Actividad realizada</mat-label>
+                  <input matInput formControlName="frmActividadSer" >
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Lugar transporte dias trabajados</mat-label>
+                  <input matInput formControlName="frmLugarSer" >
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Cantidad insumo servicio</mat-label>
+                  <input matInput formControlName="frmCantidadSer" >
+                </mat-form-field>
+              </mat-grid-tile>
+
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Precio unitario/día</mat-label>
+                  <input matInput formControlName="frmPrecioUniSer" >
+                </mat-form-field>
+              </mat-grid-tile>
+              
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Total a pagar</mat-label>
+                  <input matInput formControlName="frmTotalSer" >
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+        
+            <mat-grid-list cols="12" rowHeight="100px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                <mat-form-field appearance="outline"  >
+                  <mat-label>Observaciones</mat-label>
+                  <textarea matInput formControlName="frmObsServicio" ></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+        </p-fieldset>
+
+        <mat-grid-list cols="12"  >
+          <mat-grid-tile [responsiveRows]="{xs: 0, sm: 4, md: 4, lg: 8, xl: 10}" ></mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 4, xl: 2}" class="alinear-boton">
+            <div mat-dialog-actions   >
+              <button mat-raised-button color="primary" (click)="guardar()" style="margin-left: 5px;">Guardar</button>
+              <button mat-raised-button  color="warn" [mat-dialog-close]="null" cdkFocusInitial>Cancelar</button>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        </div>
+    <!-- FORMULARIO -->
+    </mat-tab>
+
+    <mat-tab label="DECLARACION JURADA DE VIÁTICOS">
+        <!-- FORMULARIO -->
+        <div [formGroup]="formularioViaticosGrp" id="formularioViaticosGrp">
+          <mat-grid-list cols="12" rowHeight="50px">
+            
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+              <mat-form-field appearance="outline">
+                  <mat-label>Mes a declarar</mat-label>
+                  <mat-select formControlName="frmMesDeclararVia" class = "tamanio-seleccionar">
+                    <mat-option *ngFor="let mes of dataItemMes?.mesesDeclarar" [value]="mes.idCodigo">{{mes.cidNombre}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+        
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+              <mat-form-field appearance="outline">
+                  <mat-label>Rubro</mat-label>
+                  <mat-select formControlName="frmRubroVia" class = "tamanio-seleccionar">
+                    <mat-option *ngFor="let ru of dataItemRubro?.rubros" [value]="ru.idCodigo">{{ru.cidNombre}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>    
+    
+          <p-fieldset legend="Datos declaración">
+
+              <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                    <mat-form-field appearance="outline"  >
+                      <mat-label>N°</mat-label>
+                      <input matInput formControlName="frmNroVia" >
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Localidad</mat-label>
+                        <mat-select formControlName="frmLocalidadVia" >
+                          <mat-option *ngFor="let tc of dataItemLocalidad?.localidades" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>Fecha </mat-label>
+                        <input matInput formControlName="frmFechaVia" [matDatepicker]="picker3"   placeholder="Fecha">
+                        <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                        <mat-datepicker #picker3></mat-datepicker>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Cargo NE</mat-label>
+                          <mat-select formControlName="frmCargoVia" >
+                            <mat-option *ngFor="let tc of dataItemCargoNE?.cargosNE" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                  </mat-grid-tile>
+              </mat-grid-list>
+
+              <mat-grid-list cols="12" rowHeight="50px">
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Referencia</mat-label>
+                        <mat-select formControlName="frmComboReferenciaVia" (selectionChange)="habilitarReferencia($event.value)">
+                          <mat-option *ngFor="let tc of dataItemReferencia?.referencias" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                  </mat-grid-tile>
+                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                    <mat-form-field appearance="outline"  >
+                      <mat-label>Referencia</mat-label>
+                      <input matInput formControlName="frmReferenciaVia"  >
+                    </mat-form-field>
+                  </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="12" rowHeight="100px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Observaciones</mat-label>
+                    <textarea matInput formControlName="frmObsViatico" ></textarea>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </mat-grid-list>
+
+          </p-fieldset>
+
+          <p-fieldset legend="Gasto detalle" class="table-responsive">
+
+              <mat-grid-list cols="12" rowHeight="50px">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}"> 
+                  <mat-form-field appearance="outline">
+                      <mat-label>Gasto</mat-label>
+                      <mat-select formControlName="frmGastoVia" >
+                        <mat-option *ngFor="let tc of dataItemGasto?.gastos" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Detalle</mat-label>
+                    <input matInput formControlName="frmDetalleVia" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                  <mat-form-field appearance="outline"  >
+                    <mat-label>Monto</mat-label>
+                    <input matInput formControlName="frmMontoVia" >
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+                  <mat-form-field appearance="outline" >
+                      <mat-label>Fecha</mat-label>
+                      <input matInput formControlName="frmFechaDetalleVia" [matDatepicker]="picker4"   placeholder="Fecha">
+                      <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                      <mat-datepicker #picker4></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 1, xl: 1}">
+                    <button color="primary" mat-raised-button (click)="agregarViatico()">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <div class="table-container">
+               <table mat-table [dataSource]="dataSource"  > 
+
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+                  <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="colGasto">
+                  <th mat-header-cell *matHeaderCellDef> Gasto</th>
+                  <td mat-cell *matCellDef="let tablaGasto">{{tablaGasto.nomGasto}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="colDetalle">
+                  <th mat-header-cell *matHeaderCellDef> Detalle </th>
+                  <td mat-cell *matCellDef="let tablaGasto"> {{tablaGasto.detalle}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="colMonto">
+                  <th mat-header-cell *matHeaderCellDef> Monto  </th>
+                  <td mat-cell *matCellDef="let tablaGasto"> {{tablaGasto.monto}} </td>
+                </ng-container>
+          
+                <ng-container matColumnDef="colFecha">
+                  <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                  <td mat-cell *matCellDef="let tablaGasto"> {{tablaGasto.fecha}} </td>
+                </ng-container>
+          
+               <ng-container matColumnDef="acciones"> 
+                  <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                  <td mat-cell *matCellDef="let tablaGasto">
+          
+                    <button mat-icon-button color="primary"
+                      (click)="obtenerCalculoPagoMensual(tablaGasto.idCodigoPagoMensual)"
+                      matTooltip="Editar Trabajador">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+          
+                    <button mat-icon-button color="primary"
+                      (click)="eliminarCalculoPagoMensual(tablaGasto.idCodigoPagoMensual,tablaGasto.concepto)"
+                      matTooltip="Eliminar Trabajador">
+                      <mat-icon>delete_forever</mat-icon>
+                    </button>
+          
+                  </td>
+                </ng-container>
+          
+                <tr mat-header-row *matHeaderRowDef="columnas;" class="encabezadoTabla"></tr>
+                <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+              </table>
+
+              <div class="empty" *ngIf=" dataSource === null">
+                No existe datos para mostrar en la tabla
+              </div>
+        
+        
+              <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+              </mat-paginator>
+            </div>
+          
+
+          </p-fieldset>
+
+          <mat-grid-list cols="12"  >
+            <mat-grid-tile [responsiveRows]="{xs: 0, sm: 4, md: 4, lg: 8, xl: 10}" ></mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 4, xl: 2}" class="alinear-boton">
+              <div mat-dialog-actions   >
+                <button mat-raised-button color="primary" (click)="guardar()" style="margin-left: 5px;">Guardar</button>
+                <button mat-raised-button  color="warn" [mat-dialog-close]="null" cdkFocusInitial>Cancelar</button>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        </div>
+      <!-- FORMULARIO -->
+    </mat-tab>
+    
+   
+
+</mat-tab-group>
+
+
+
+
+</div>

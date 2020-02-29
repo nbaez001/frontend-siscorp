@@ -1,0 +1,72 @@
+<div class="dialog-content-wrapper">
+  <mat-toolbar mat-dialog-title class="mat-primary">
+    <span>Nuevo Menu</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div mat-dialog-content>
+    <form [formGroup]="menuForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Código Menu padre</mat-label>
+        <input matInput [value]="data.menu.id_menu_padre" readonly>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Código Menu</mat-label>
+        <input matInput formControlName="id_menu_hijo">
+        <mat-error *ngIf="menuForm.get('id_menu_hijo').invalid && menuForm.get('id_menu_hijo').touched">
+          {{ menuForm.get('id_menu_hijo').errors | errorMessage:"Código Menu" }}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Título</mat-label>
+        <input matInput formControlName="menu_texto">
+        <mat-error *ngIf="menuForm.get('menu_texto').invalid && menuForm.get('menu_texto').touched">
+          {{ menuForm.get('menu_texto').errors | errorMessage:"Título" }}
+        </mat-error>
+      </mat-form-field>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="accion_icono">
+          <mat-error *ngIf="menuForm.get('accion_icono').invalid && menuForm.get('accion_icono').touched">
+            {{ menuForm.get('accion_icono').errors | errorMessage:"Dirección" }}
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Icono</mat-label>
+          <input matInput formControlName="accion_codigo">
+          <mat-error *ngIf="menuForm.get('accion_codigo').invalid && menuForm.get('accion_codigo').touched">
+            {{ menuForm.get('accion_codigo').errors | errorMessage:"Icono" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field appearance="outline">
+          <mat-label>Secuencia</mat-label>
+          <input matInput formControlName="menu_secuencia">
+          <mat-error *ngIf="menuForm.get('menu_secuencia').invalid && menuForm.get('menu_secuencia').touched">
+            {{ menuForm.get('menu_secuencia').errors | errorMessage:"Secuencia" }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="control-state">
+          <small>Estado</small>
+          <mat-slide-toggle formControlName="estado">Activo</mat-slide-toggle>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button class="mat-primary" (click)="onSubmit()">Guardar</button>
+  </div>
+</div>

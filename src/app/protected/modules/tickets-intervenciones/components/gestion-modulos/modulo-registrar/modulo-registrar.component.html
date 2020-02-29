@@ -1,0 +1,68 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>{{ modulo.idModulo ? 'ACTUALIZAR MÓDULO' : 'REGISTRAR MÓDULO' }}</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon class="white-fg">clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FORMULARIO -->
+<div mat-dialog-content class="contenido-formulario" [formGroup]="form">
+
+  <div class="columna">
+    <mat-form-field appearance="outline">
+      <mat-label>ENTIDAD</mat-label>
+      <mat-select formControlName="idEntidad">
+        <mat-option *ngFor="let entidad of entidades" [value]="entidad.idEntidad">{{entidad.nombre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('idEntidad').invalid && form.get('idEntidad').touched">
+        {{ form.get('idEntidad').errors | errorMessage:"ENTIDAD" }}
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-mini-fab *ngIf="form.get('idEntidad').value !== 0"><mat-icon>add</mat-icon></button>
+    <button mat-mini-fab class="mat-red-bg" *ngIf="form.get('idEntidad').value === 0"><mat-icon>clear</mat-icon></button>
+  </div>
+
+  <div class="columna">
+    <mat-form-field appearance="outline">
+      <mat-label>ENCARGADO</mat-label>
+      <mat-select formControlName="idUsuario">
+        <mat-option *ngFor="let encargado of encargados" [value]="encargado.idEncargado">{{encargado.nombre}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('idUsuario').invalid && form.get('idUsuario').touched">
+        {{ form.get('idUsuario').errors | errorMessage:"ENCARGADO" }}
+      </mat-error>
+    </mat-form-field>
+
+    <button mat-mini-fab><mat-icon>add</mat-icon></button>
+  </div>
+
+  <div class="columna">
+    <mat-checkbox formControlName="moduloActivo">Activo</mat-checkbox>
+  </div>
+
+  <!--<h4>Adjuntar Archivos</h4>
+
+  <div class="columna archivos">
+    <mat-card *ngFor="let archivo of archivos"><mat-icon>attach_file</mat-icon></mat-card>
+    <mat-card (click)="adjuntar.click()"><mat-icon>add</mat-icon></mat-card>
+  </div>-->
+</div>
+<!-- FORMULARIO -->
+
+<!--<input #adjuntar (change)="subirArchivos($event.target.files)" type="file">-->
+
+<!-- ACCIONES -->
+<div mat-dialog-actions>
+
+  <button
+    color="primary"
+    mat-raised-button
+    (click)="registrar()">
+      GUARDAR
+  </button>
+
+</div>
+<!-- ACCIONES -->

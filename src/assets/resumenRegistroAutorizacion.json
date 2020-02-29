@@ -1,0 +1,42 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"response": [
+        {
+            "codigo": "001",
+            "rubro": "COSTO DIRECTO",
+            "montoSolicitado": 350,
+            "flag":0
+        }, {
+            "codigo": "002",
+            "rubro": "GASTOS GENERALES",
+            "montoSolicitado": 400,
+            "flag":0
+        }, {
+            "codigo": "003",
+            "rubro": "GASTOS RESIDENTE",
+            "montoSolicitado": 1500,
+            "flag":0
+        }, {
+            "codigo": "004",
+            "rubro": "GASTOS FINANCIEROS U OTROS",
+            "montoSolicitado": 1200,
+            "flag":0
+        }, {
+            "codigo": "005",
+            "rubro": "GASTOS NUCLEO EJECUTOR",
+            "montoSolicitado": 0,
+            "flag":0
+        }, {
+            "codigo": "006",
+            "rubro": "GASTOS DE SUPERVISIÓN",
+            "montoSolicitado": 0,
+            "flag":0
+        }, {
+            "codigo": "007",
+            "rubro": "TOTAL",
+            "montoSolicitado": 1251111,
+            "flag":1
+        }
+    ]
+}

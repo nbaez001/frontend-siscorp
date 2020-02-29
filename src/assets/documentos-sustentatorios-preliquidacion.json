@@ -1,0 +1,27 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "id": 1,
+            "descripcion": "Valorización de Avance del Proyecto (Anexo N° 15)",
+            "archivo": "archivo1.pdf"
+        },{
+            "id": 2,
+            "descripcion": "Cronograma de Avance del Proyecto Valorizado (Anexo N° 04)",
+            "archivo": "archivo2.pdf"
+        }
+        ,{
+            "id": 3,
+            "descripcion": "Resumen del Estado Financiero (Anexo N° 16)",
+            "archivo": "archivo3.pdf"
+        }
+        ,{
+            "id": 4,
+            "descripcion": "Manifiesto de Gastos (Anexo N° 09)",
+            "archivo": "archivo4.pdf"
+        }
+    ],
+	"idPerfil": 1
+}

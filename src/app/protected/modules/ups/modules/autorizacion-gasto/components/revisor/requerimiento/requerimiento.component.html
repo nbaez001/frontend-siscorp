@@ -1,0 +1,236 @@
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <img src="assets/images/busqueda.png" width="26px" height="26px"> <strong style="color: white;">FILTROS DE
+          BÚSQUEDA</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <br>
+    <!-- INPUTS -->
+    <div class="inputs" [formGroup]="cotizacionFiltroForm" fxLayout.xl="row" fxLayout.lg="row">
+
+
+      <mat-form-field appearance="outline" style="width: 20%;">
+        <mat-label>FECHA PRESENTACIÓN INICIO</mat-label>
+        <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()"
+          formControlName="fechaRegDesdeFrmCtrl">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 20%;">
+        <mat-label>FECHA PRESENTACIÓN FIN</mat-label>
+        <input matInput [matDatepicker]="picker2" readonly (click)="picker2.open()"
+          formControlName="fechaRegHastaFrmCtrl">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" style="width: 20%;">
+        <mat-label>ESTADO</mat-label>
+        <mat-select formControlName="estadoFrmCtrl">
+          <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+          <mat-option *ngFor="let est of dataItemEstado?.estados" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="acciones">
+        <button mat-mini-fab (click)="buscarCotizaciones($event)" [disabled]="disableBuscar">
+              <mat-icon matTooltip="Buscar Autorización" matTooltipClass="formato-tooltip" >search</mat-icon></button>
+        <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()"   >
+              <mat-icon matTooltip="Limpiar filtros de búsqueda" matTooltipClass="formato-tooltip">clear_all</mat-icon></button>
+      </div>
+    </div>
+    <!-- INPUTS -->
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- FILTROS -->
+
+<div class="btn_agregar_position">
+  <button  matTooltip="Registrar Autorización de Gasto"  
+  matTooltipClass="formato-tooltip" mat-mini-fab class="btn_agregar"
+    (click)="generarRequerimiento()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<!-- BANDEJA -->
+
+<div class="bandeja mat-elevation-z6">
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ITEM</th>
+      <td mat-cell *matCellDef="let coti ; let i = index" class="estilo-center-cuerpo-tabla" style="height: 40px !important;" >{{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroHojaTramite">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> N° HOJA<br>TRÁMITE </th>
+      <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.numeroHojaTramite}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="numeroAutorizacionGasto">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">N° AUTORIZACIÓN <br>GASTO</th>
+      <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.numeroAutorizacionGasto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaPresentacionPrograma">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">FECHA PRESENTACIÓN <br>AL PROGRAMA</th>
+      <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.fechaPresentacionPrograma}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="montoSolicitado">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">MONTO <br> SOLICITADO S/.</th>
+      <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.montoSolicitado | number : '1.2-2' :'en-US'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="montoAutorizado">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">MONTO <br>AUTORIZADO S/.</th>
+      <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.montoAutorizado | number : '1.2-2' :'en-US'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ESTADO </th>
+      <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.estado}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaAprobacionAutorizacion">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> FECHA APROBACIÓN <br>AUTORIZACIÓN </th>
+      <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.fechaAprobacionAutorizacion}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">ACCIONES</th>
+      <td mat-cell *matCellDef="let coti">
+
+        <div *ngIf="coti.cidEstado == '001' || coti.cidEstado == '002' || coti.cidEstado == '004' ">
+          
+          <button (click)="generarRequerimiento()" mat-icon-button color="primary"
+            matTooltip="Editar Autorización Gasto"
+            matTooltipClass="formato-tooltip">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button (click)="eliminarAutorizacion(coti.numeroAutorizacionGasto)" mat-icon-button color="primary"  
+          matTooltip="Eliminar Autorización Gasto"
+          matTooltipClass="formato-tooltip">
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button mat-icon-button color="primary"
+          matTooltip="Sustentar Autorización Gasto"
+          matTooltipClass="formato-tooltip">
+            <mat-icon>event_note</mat-icon>
+          </button>
+
+          <!-- <button mat-icon-button color="primary" (click)="verRequerimiento(coti.idCodigo)"
+            matTooltip="Ver Solicitud de la autorizaciòn de gasto">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="generarInformeTecnico(coti.idCodigo)"
+            matTooltip="Generar Informe Técnico">
+            <mat-icon>add_to_home_screen</mat-icon>
+          </button> -->
+        </div>
+
+        <!-- <div *ngIf="coti.cidEstado == '002'">
+          <button mat-icon-button color="primary" (click)="verRequerimiento(coti.idCodigo)"
+            matTooltip="Ver Solicitud de la autorizaciòn de gasto">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="generarCotizacion(coti.idCodigo)"
+            matTooltip="Cotizar Requerimiento">
+            <mat-icon>event_note</mat-icon>
+          </button>
+        </div>
+
+        <div *ngIf="coti.cidEstado == '005'">
+          <button mat-icon-button color="primary" (click)="verRequerimiento(coti.idCodigo)"
+            matTooltip="Ver Solicitud de la autorizaciòn de gasto">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </div>
+
+        <div *ngIf="coti.cidEstado == '006'">
+          <button mat-icon-button color="primary" (click)="verRequerimiento(coti.idCodigo)"
+            matTooltip="Ver Solicitud de la autorizaciòn de gasto">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </div>
+
+
+        <div *ngIf="coti.cidEstado == '007'">
+          <button mat-icon-button color="primary" (click)="verRequerimiento(coti.idCodigo)"
+            matTooltip="Ver Solicitud de la autorizaciòn de gasto">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editarCotizacion(coti.idCodigo)"
+            matTooltip="Editar  la autorizaciòn de gasto">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="eliminarAutorizacion(coti)"
+            matTooltip="Eliminar  la autorizaciòn de gasto">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="generarCotizacion(coti.idCodigo)"
+            matTooltip="Cotizar Requerimiento">
+            <mat-icon>event_note</mat-icon>
+          </button>
+        </div>
+
+
+        <div *ngIf="coti.cidEstado == '003'">
+          <button mat-icon-button color="primary" (click)="verRequerimiento(coti.idCodigo)"
+            matTooltip="Ver Solicitud del Requerimiento">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </div>
+
+        <div *ngIf="coti.cidEstado == '004'">
+          <button mat-icon-button color="primary" (click)="verRequerimiento(coti.idCodigo)"
+            matTooltip="Ver Solicitud del Requerimiento">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editarCotizacion(coti.idCodigo)"
+            matTooltip="Editar Requerimiento">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div> -->
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas" class="mat-header-row-formato"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+  <div class="empty" *ngIf="!isLoading && dataSource === null">
+    No existe autorizaciones para mostrar
+  </div>
+
+  <!-- <mat-toolbar>
+    <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+      <div *ngIf="dataSource !== null" style="float: left !important;">
+        <mat-icon svgIcon="excel-pais" (click)="descargarExcel($event)" class="excel-icon-top"
+          matTooltip="Descargar Excel"></mat-icon>
+        <span class="example-spacer"></span>
+      </div>
+      <div>
+        <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+          [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+        </mat-paginator>
+
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar> -->
+
+</div>
+<!-- BANDEJA -->

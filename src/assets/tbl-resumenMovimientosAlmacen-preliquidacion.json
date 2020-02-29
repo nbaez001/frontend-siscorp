@@ -1,0 +1,37 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "id": 1,
+            "material": "material 01",
+            "unidad": "unidad 01",
+            "saldoAnterior": "12.555",
+            "fechaIngreso": "15/01/2020",
+            "proveedor": "proveedor 01",
+            "cantidadIngreso": "1235",
+            "acumulado": "152.666",
+            "fechaEgreso": "26/02/2020",
+            "partida": "partida 01",
+            "cantidadEgreso": "253.122",
+            "saldo": "25.33"
+        },{
+           
+            "id": 2,
+            "material": "material 02",
+            "unidad": "unidad 02",
+            "saldoAnterior": "3434.555",
+            "fechaIngreso": "14/01/2020",
+            "proveedor": "proveedor 02",
+            "cantidadIngreso": "433",
+            "acumulado": "52.666",
+            "fechaEgreso": "29/02/2020",
+            "partida": "partida 02",
+            "cantidadEgreso": "253.122",
+            "saldo": "2544.33"
+        }
+       
+    ],
+	"idPerfil": 1
+}

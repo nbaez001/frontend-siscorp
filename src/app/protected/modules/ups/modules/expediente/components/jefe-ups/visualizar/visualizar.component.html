@@ -1,0 +1,137 @@
+
+
+    <!-- CABECERA -->
+  <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+    <span>VISUALIZAR PROYECTO</span>
+     <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+        <mat-icon>clear</mat-icon>
+    </button> 
+  </mat-toolbar>
+  <!-- CABECERA -->
+  <br>
+    <!-- FORMULARIO -->
+    <div mat-dialog-content class="contenido-formulario" [formGroup]="proyectoForm">
+
+        <div class="columna">
+            <mat-form-field appearance="outline">
+              <mat-label>Código Proyecto</mat-label>
+              <input matInput formControlName="codigo" value = {{datos.proyectos.codigo}} readonly>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline" style="margin-right: 10px;">
+              <mat-label>Fecha Recepción</mat-label>
+              <input matInput formControlName="fechaRecepcionProyecto" value = {{datos.proyectos.fecRecepcion}}  readonly>
+            </mat-form-field>   
+            
+            <mat-form-field appearance="outline">
+              <mat-label>Estado</mat-label>
+              <input matInput formControlName="estadoProyecto" value ="{{datos.proyectos.estado}}" readonly>
+            </mat-form-field>
+        </div>
+
+        <div >
+              <mat-form-field appearance="outline" class="width_campo_coordinador">
+                <mat-label>Coordinador</mat-label>
+                <input matInput formControlName="encargadoAsignado"  value = {{datos.proyectos.nombreCoordinador}}  readonly>
+              </mat-form-field>
+        
+            <mat-form-field appearance="outline"  class="width_campo_fecha">
+              <mat-label>Fecha Asignación</mat-label>
+              <input matInput formControlName="fechaAsignacionCoordinador"  value = {{datos.proyectos.fecAsignacion}}  readonly>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="outline"  class="width_campo_plazo">
+                <mat-label>Plazo</mat-label>
+    
+                <input matInput formControlName="coordinadorAsignado"  value = {{datos.proyectos.numPlazo}}  readonly 
+                *ngIf = "datos.proyectos.cidEstado == '001'  || datos.proyectos.cidEstado == '005'"
+                class="color-grey"
+                matTooltip="días restantes de atención">
+    
+                <input matInput formControlName="coordinadorAsignado"  value = {{datos.proyectos.numPlazo}}  readonly 
+                *ngIf = "datos.proyectos.numPlazo > 5 && datos.proyectos.cidEstado != '001'  &&  datos.proyectos.cidEstado != '005'"
+                class="color-orange"
+                matTooltip="días restantes de atención">
+    
+                <input matInput formControlName="coordinadorAsignado"  value = {{datos.proyectos.numPlazo}}   readonly 
+                *ngIf = "datos.proyectos.numPlazo < 6 && datos.proyectos.cidEstado != '001' &&  datos.proyectos.cidEstado != '005'"
+                class="color-red"
+                matTooltip="días restantes de atención!..">
+    
+            </mat-form-field>
+
+          </div>
+    
+
+
+        
+
+            
+
+
+              <!-- BANDEJA -->
+
+      <div class="bandeja">
+    
+
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="Nro">
+        <th mat-header-cell *matHeaderCellDef> NRO</th>
+        <td mat-cell *matCellDef="let archivo; let i = index">{{i + 1}}</td>    
+    </ng-container>
+
+    <ng-container matColumnDef="Archivo">
+      <th mat-header-cell *matHeaderCellDef> Archivo </th>
+      <td mat-cell *matCellDef="let archivo"><span (click)="downloadFile(archivo.nomArchivo)">{{archivo.nombreArchivo}} </span></td>
+    </ng-container>
+
+    <ng-container matColumnDef="Tipo Documento">
+      <th mat-header-cell *matHeaderCellDef> Tipo Documento </th>
+      <td mat-cell *matCellDef="let archivo"><span (click)="downloadFile(archivo.nomArchivo)">{{archivo.tipoArchivo}} </span></td>
+    </ng-container>
+    
+
+  <ng-container matColumnDef="Descargar" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef>DESCARGAR</th>
+      <td mat-cell *matCellDef="let archivo">
+        <button class="tableIconButton mat-icon-btn-style" mat-icon-button matTooltip="Descargar documento"
+          (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">
+          <mat-icon>save_alt</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="columnasArchivo"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnasArchivo"></tr>
+  </table>
+
+    <div class="empty" *ngIf="dataSource === null">
+        No existe archivos adjuntos a mostrar
+    </div>    
+
+</div>
+
+
+
+
+            
+
+
+        <div align="right" class="example-button-row acciones-margen-derecho">
+
+            <button color="primary" mat-raised-button (click)="dialogRef.close()">
+              Aceptar
+            </button>
+        </div>
+    </div>
+      <!-- FORMULARIO -->
+  
+ 
+   
+
+
+  

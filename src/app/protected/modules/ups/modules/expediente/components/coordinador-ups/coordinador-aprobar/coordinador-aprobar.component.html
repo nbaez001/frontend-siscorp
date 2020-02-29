@@ -1,0 +1,186 @@
+
+
+    <!-- CABECERA -->
+    <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+        <span>EXPEDIENTE APROBAR - RECHAZAR</span>
+         <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+        </button> 
+      </mat-toolbar>
+      <!-- CABECERA -->
+      <br>
+        <!-- FORMULARIO -->
+        <div mat-dialog-content class="contenido-formulario" [formGroup]="proyectoForm">
+    
+            <div class="columna">
+                <mat-form-field appearance="outline">
+                  <mat-label>Código Proyecto</mat-label>
+                  <input matInput formControlName="codigo" value = {{datos.proyectos.codigo}} readonly>
+                </mat-form-field>
+            
+               
+              <mat-form-field appearance="outline">
+                  <mat-label>Estado</mat-label>
+                  <input matInput formControlName="estadoProyecto" value ="{{datos.proyectos.estado}}" readonly>
+                </mat-form-field>
+            </div>
+  
+
+            <mat-form-field appearance="outline">
+              <mat-label>Observacion</mat-label>
+              <input matInput  formControlName="observacion" maxlength="100" [appUpperCase]>
+            </mat-form-field>
+  
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab label="Profesionales Elaboración">
+                    
+                  <div class="bandeja">
+          
+                        <table mat-table [dataSource]="dataSourceEquipoElaborador">
+                      
+                          <ng-container matColumnDef="Nro">
+                              <th mat-header-cell *matHeaderCellDef> NRO</th>
+                              <td mat-cell *matCellDef="let equipo; let i = index">{{i + 1}}</td>
+                              
+                          </ng-container>
+                      
+                          <ng-container matColumnDef="Profesional">
+                            <th mat-header-cell *matHeaderCellDef> Profesional </th>
+                            <td mat-cell *matCellDef="let equipo"><span >{{equipo.profesion}} </span></td>
+                          </ng-container>
+                      
+                      
+                          <ng-container matColumnDef="Puesto">
+                            <th mat-header-cell *matHeaderCellDef>Puesto </th>
+                            <td mat-cell *matCellDef="let equipo"><span>{{equipo.colaborador}} </span></td>
+                          </ng-container>
+        
+        
+                          <ng-container matColumnDef="Tipo">
+                              <th mat-header-cell *matHeaderCellDef>Tipo </th>
+                                         
+                                  <td mat-cell *matCellDef="let equipo">
+                                    <span *ngIf = "equipo.tipo == 'JEFE_ELABORADOR'" style="color: rgb(163, 4, 4); font-weight: 600px;">{{equipo.tipo}} </span>
+                                    <span *ngIf = "equipo.tipo != 'JEFE_ELABORADOR'" >{{equipo.tipo}} </span>
+                                  </td>      
+                    
+                            </ng-container>
+                      
+                           
+                            
+                          
+                      
+                        <ng-container matColumnDef="Descargar" stickyEnd>
+                            <th mat-header-cell *matHeaderCellDef>DESCARGAR</th>
+                            <td mat-cell *matCellDef="let archivo">
+                              <button class="tableIconButton mat-icon-btn-style" mat-icon-button matTooltip="Descargar documento"
+                                (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">
+                                <mat-icon>save_alt</mat-icon>
+                              </button>
+                            </td>
+                        </ng-container>
+                      
+                      
+                          <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                          <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+                        </table>
+                      
+                     
+                      </div>
+        
+                  
+                </mat-tab>
+        
+                <mat-tab label="Profesionales Revisión">
+        
+                    <div class="bandeja">
+          
+                    <table mat-table [dataSource]="dataSourceEquipoRevisor">
+                  
+                      <ng-container matColumnDef="Nro">
+                          <th mat-header-cell *matHeaderCellDef> NRO</th>
+                          <td mat-cell *matCellDef="let equipo; let i = index">{{i + 1}}</td>
+                          
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="Profesional">
+                        <th mat-header-cell *matHeaderCellDef> Profesional </th>
+                        <td mat-cell *matCellDef="let equipo"><span >{{equipo.profesion}} </span></td>
+                      </ng-container>
+                  
+                  
+                      <ng-container matColumnDef="Puesto">
+                        <th mat-header-cell *matHeaderCellDef>Puesto </th>
+                        <td mat-cell *matCellDef="let equipo"><span>{{equipo.colaborador}} </span></td>
+                      </ng-container>
+                  
+        
+                      <ng-container matColumnDef="Tipo">
+                          <th mat-header-cell *matHeaderCellDef>Tipo </th>
+                          <td mat-cell *matCellDef="let equipo">
+                          <span *ngIf = "equipo.tipo == 'JEFE_REVISOR'" style="color: rgb(163, 4, 4); font-weight: 500px;">{{equipo.tipo}} </span>
+                          <span *ngIf = "equipo.tipo != 'JEFE_REVISOR'" >{{equipo.tipo}} </span>
+                          </td>
+                      </ng-container>
+                  
+                      
+                  
+                    <ng-container matColumnDef="Descargar" stickyEnd>
+                        <th mat-header-cell *matHeaderCellDef>DESCARGAR</th>
+                        <td mat-cell *matCellDef="let archivo">
+                          <button class="tableIconButton mat-icon-btn-style" mat-icon-button matTooltip="Descargar documento"
+                            (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">
+                            <mat-icon>save_alt</mat-icon>
+                          </button>
+                        </td>
+                    </ng-container>
+                  
+                  
+                      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+                    </table>
+                  
+                 
+                  </div>
+                </mat-tab>
+
+  </mat-tab-group>     
+
+  <!-- BANDEJA -->
+
+    
+      <div align="right" class="example-button-row acciones-margen-derecho">
+
+        
+    
+         <button *ngIf ="btnAprobarCoordHabilitar == true  || btnRechazarCoordHabilitar == true"  color="primary" mat-raised-button  style="margin-right: 10px;" (click) = "aprobarExpediente()"  [disabled] = "btnAprobarCoordHabilitar" >
+           <mat-icon> done_outline</mat-icon>  Aprobar
+         </button>
+
+         <button *ngIf ="btnAprobarCoordHabilitar == true  || btnRechazarCoordHabilitar == true" color="plomo"  mat-raised-button  style="margin-right: 10px;"  (click) = "rechazarExpediente($event)" [disabled] = "btnAprobarCoordHabilitar" >
+           <mat-icon> clear</mat-icon>  Rechazar
+         </button>
+
+         <button *ngIf ="btnAprobarCoordHabilitar==false" color="primary"  mat-raised-button style="margin-right: 10px;"  (click) = "aprobarExpediente()" [disabled] = "btnAprobarCoordHabilitar" >
+            <mat-icon> done_outline</mat-icon>  Aprobar
+         </button>
+
+         <button *ngIf ="btnRechazarCoordHabilitar==false" color="green"  mat-raised-button  style="margin-right: 10px;"  (click) = "rechazarExpediente($event)" [disabled] = "btnRechazarCoordHabilitar" >
+            <mat-icon> clear</mat-icon>  Rechazar
+         </button>
+
+         <button color="warn" mat-raised-button (click)="dialogRef.close()">
+             <mat-icon>highlight_off</mat-icon> Cerrar
+         </button>
+
+  
+
+
+        </div>
+      </div>
+          <!-- FORMULARIO -->
+      
+     
+       
+    
+    
+      

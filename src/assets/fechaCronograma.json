@@ -1,0 +1,25 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "Cronograma Inicial 10/01/2020"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "Cronograma - 13/01/2020"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "Cronograma - 14/01/2020"
+        }, {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "Cronograma - 15/01/2020"
+        }
+    ],
+	"idPerfil": null
+}

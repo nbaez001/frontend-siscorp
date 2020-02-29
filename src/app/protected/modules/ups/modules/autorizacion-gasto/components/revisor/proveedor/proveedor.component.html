@@ -1,0 +1,143 @@
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong style="color: white;">Búsqueda</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <br>
+    <!-- INPUTS -->
+    <div class="inputs" [formGroup]="filtrosForm" fxLayout.xl="row" fxLayout.lg="row">
+      <div class="contenido-formulario">
+        <div class="columna">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre o Razón Social</mat-label>
+            <input matInput formControlName="nombreRazonSocialFrmCtrl">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo Documento</mat-label>
+            <mat-select formControlName="comboTipoDocumentoFrmCtrl" class="tamanio-seleccionar">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listTipoDocumento" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Número Documento</mat-label>
+            <input solonumero matInput formControlName="numeroDocumentoFrmCtrl">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Rubro</mat-label>
+            <mat-select formControlName="comboTipoRubroFrmCtrl" class="tamanio-seleccionar">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listRubro" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div class="acciones">
+        <button mat-mini-fab (click)="filtrarProveedor($event)" [disabled]="disableBuscar">
+          <mat-icon matTooltip="búsqueda">search</mat-icon>
+        </button>
+        <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()">
+          <mat-icon matTooltip="Limpiar filtros de búsqueda">clear_all</mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- INPUTS -->
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- FILTROS -->
+
+<!-- BANDEJA -->
+<div class="bandeja">
+
+  <button mat-mini-fab style="margin-right: 10px;" (click)="modalProveedor(null)" matTooltip="Agregar Proveedor">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef> Nro</th>
+      <td mat-cell *matCellDef="let proveedor">{{proveedor.nro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreRazonSocial">
+      <th mat-header-cell *matHeaderCellDef> Nombre o Razón Social</th>
+      <td mat-cell *matCellDef="let proveedor"> {{proveedor.nombreRazonSocial}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreTipoDocumento">
+      <th mat-header-cell *matHeaderCellDef> Tipo Documento </th>
+      <td mat-cell *matCellDef="let proveedor"> {{proveedor.nombreTipoDocumento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroDocumento">
+      <th mat-header-cell *matHeaderCellDef> Nro. Documento </th>
+      <td mat-cell *matCellDef="let proveedor"> {{proveedor.numeroDocumento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreTipoRubro">
+      <th mat-header-cell *matHeaderCellDef>Rubro </th>
+      <td mat-cell *matCellDef="let proveedor">{{proveedor.nombreTipoRubro}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let proveedor">
+
+        <button mat-icon-button color="primary" (click)="modalProveedor(proveedor.idCodigo,true)"
+          matTooltip="Ver Proveedor">
+          <mat-icon>library_books</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" (click)="modalProveedor(proveedor.idCodigo)"
+          matTooltip="Editar Proveedor">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary"
+          (click)="eliminarProveedor(proveedor.idCodigo,proveedor.nombreRazonSocial)" matTooltip="Eliminar Proveedor">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" (click)="adjuntarCotizacionProveedor(proveedor.idCodigo)"
+          matTooltip="Adjuntar Cotización">
+          <mat-icon>attachment</mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+  <div class="empty" *ngIf="!isLoading && dataSource === null">
+    No existe datos para mostrar en la tabla
+  </div>
+
+  <mat-toolbar>
+    <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+      <div>
+        <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+          [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+        </mat-paginator>
+
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+</div>
+<!-- BANDEJA -->

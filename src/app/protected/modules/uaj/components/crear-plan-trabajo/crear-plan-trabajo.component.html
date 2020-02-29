@@ -1,0 +1,71 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Nueva Tarea</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="contenido-formulario" [formGroup]="adendaForm">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput formControlName="descripcion"></textarea>
+    <mat-error *ngIf="!adendaForm.get('descripcion').valid && adendaForm.get('descripcion').touched">
+      {{ adendaForm.get('descripcion').errors | errorMessage:"Ingrese Descripción" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Objetivo</mat-label>
+    <textarea matInput formControlName="objetivo"></textarea>
+    <mat-error *ngIf="!adendaForm.get('objetivo').valid && adendaForm.get('objetivo').touched">
+      {{ adendaForm.get('objetivo').errors | errorMessage:"Ingrese Objetivo" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Responsable</mat-label>
+    <input matInput formControlName="responsable">
+    <mat-error *ngIf="!adendaForm.get('responsable').valid && adendaForm.get('responsable').touched">
+      {{ adendaForm.get('responsable').errors | errorMessage:"Ingrese Responsable" }}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field appearance="outline">
+      <mat-label>Plazo</mat-label>
+      <input matInput placeholder="Plazo" formControlName="plazo" readonly [matDatepicker]="pickerFin"
+        (click)="pickerFin.open()">
+      <mat-error *ngIf="!adendaForm.get('plazo').valid && adendaForm.get('plazo').touched">
+        {{ adendaForm.get('plazo').errors | errorMessage:"Ingrese plazo" }}
+      </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Recursos </mat-label>
+      <input matInput formControlName="recursos">
+      <mat-error *ngIf="!adendaForm.get('recursos').valid && adendaForm.get('recursos').touched">
+        {{ adendaForm.get('recursos').errors | errorMessage:"Ingrese Recursos" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <input type="file" #uploadInput (change)="cargarArchivos($event.target.files)" multiple [fxHide]="true">
+
+</div>
+
+<div align="center" class="example-button-row acciones-margen-derecho">
+  <button color="primary" mat-raised-button (click)="crearAdenda()">
+    <mat-icon>save</mat-icon>CREAR TAREA
+  </button>
+</div>
+
+<br>

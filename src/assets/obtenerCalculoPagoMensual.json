@@ -1,0 +1,32 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "idCodigo": 1,
+			"idCodigoPagoMensual": 1,
+			"nro":"01",
+			"idTipo":1,
+			"nombreApellido":"Nombre trabajador",
+			"concepto":"Valorización N°13",
+			"fecha":"2019-11-28",
+			"autorizacionAnterior":"1",
+			"periodoAnio":2019,
+			"periodoMes":11,
+			"diasDelMes":30,
+			"diasAsistidos":10,
+			"factor":10,
+			"penalidad":20,
+			"diasDeRetraso":5,
+			"montoEjecucion":"1000",
+			"avanceDelMes":"50",
+			"montoBruto":"200",
+			"penalidadFormula":"3000",
+			"montoNeto":"5000",
+			"observacion":"no hay observaciones"
+		}
+        
+    ],
+	"idPerfil": 1
+}

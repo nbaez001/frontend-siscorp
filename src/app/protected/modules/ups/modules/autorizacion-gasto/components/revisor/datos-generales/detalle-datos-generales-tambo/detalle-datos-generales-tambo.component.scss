@@ -1,0 +1,56 @@
+@import "../src/@shared/scss/style_ua";
+
+:host {
+   
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+    }
+   
+    .label-datos{
+      background-color: #f1f1f1;
+      font-weight: bold;
+    }
+  
+    .background-color-blanco{
+      background-color: white !important;
+    }
+
+    .nombre-responsable{
+      background-color: white;
+    }
+
+    img {
+      width:180px;
+      padding:1px;
+      border:10px solid #039be5;
+      }
+
+
+    //*****************************
+    .outerDiv
+			{
+				color: #fff;
+				height: 250px;
+				width: 600px;
+				margin: 0px auto;
+				padding: 5px;
+			}
+			.leftDiv
+			{
+				color: #000;
+				height: 250px;
+				width: 40%;
+				float: left;
+			}
+			.rightDiv
+			{
+				color: #000;
+				// height: 250px;
+				width: 90%;
+				// float: right;
+			}		
+
+  }
+  
+  

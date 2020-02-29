@@ -1,0 +1,77 @@
+<!-- <div class="contenido-formulario">
+  <mat-accordion class="datos-obra">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong style="color: white;"> Se modificó los items de la programación de las partidas:</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+ -->
+
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Cambios realizados</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<div class="contenido-formulario">
+
+  <mat-card class="mat-tab-body-content">
+
+    <div class="container">
+      <div class="row">
+
+
+        <!-- BANDEJA -->
+        <div class="bandeja">
+
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="Partida">
+              <th mat-header-cell *matHeaderCellDef> Partida </th>
+              <td mat-cell *matCellDef="let prefac"> {{prefac.codigo}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+          </table>
+
+          <div class="empty" *ngIf="!isLoading && dataSource === null">
+            No existe datos para mostrar en la tabla
+          </div>
+
+          <mat-toolbar>
+            <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+              <div>
+                <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad"
+                  [showFirstLastButtons]="true" [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+                </mat-paginator>
+
+              </div>
+            </mat-toolbar-row>
+          </mat-toolbar>
+
+        </div>
+        <!-- BANDEJA -->
+
+      </div>
+    </div>
+
+  </mat-card>
+
+  <br>
+
+  <!-- <div class="center">
+    <button color="warn" mat-raised-button (click)="dialogRef.close()">
+      <mat-icon>highlight_off</mat-icon> Cerrar
+    </button>
+  </div>
+ -->
+  <br>
+
+
+</div>

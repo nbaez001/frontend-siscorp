@@ -1,0 +1,63 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "nro": "01",
+            "idCodigo": 1,
+            "nombre": "Perez Perez Abrahan",
+            "numeroDocumento": "43350785",
+            "tipo": "Operario",
+            "asistencia1":0,
+            "mediojornal":false
+        },
+        {
+            "nro": "02",
+            "idCodigo": 2,
+            "nombre": "Gonzales Perez Abrahan",
+            "numeroDocumento": "56215487",
+            "tipo": "Operario",
+            "asistencia1":0,
+            "mediojornal":false
+        },
+        {
+            "nro": "03",
+            "idCodigo": 3,
+            "nombre": "Prado Perez Abrahan",
+            "numeroDocumento": "96214587",
+            "tipo": "Operario",
+            "asistencia1":0,
+            "mediojornal":false
+        },
+		{
+            "nro": "04",
+            "idCodigo": 4,
+            "nombre": "Perez Abrahan",
+            "numeroDocumento": "96214587",
+            "tipo": "Operario",
+            "asistencia1":0,
+            "mediojornal":false
+        },
+		{
+            "nro": "05",
+            "idCodigo": 5,
+            "nombre": "Prado Perez",
+            "numeroDocumento": "96214587",
+            "tipo": "Operario",
+            "asistencia1":0,
+            "mediojornal":false
+        },
+		{
+            "nro": "06",
+            "idCodigo": 6,
+            "nombre": "Prado Abrahan",
+            "numeroDocumento": "96214587",
+            "tipo": "Operario",
+            "asistencia1":0,
+            "mediojornal":false
+        }
+        
+    ],
+	"idPerfil": 1
+}

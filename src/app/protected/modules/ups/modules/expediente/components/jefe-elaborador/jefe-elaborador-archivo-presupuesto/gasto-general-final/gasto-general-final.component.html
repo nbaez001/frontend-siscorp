@@ -1,0 +1,119 @@
+
+
+    <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+      <span>ARCHIVO FINAL DE PRESUPUESTO </span>
+       <!-- <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+          <mat-icon>clear</mat-icon> 
+      </button>  -->
+    </mat-toolbar>
+
+<br><br>
+<div class="container">
+    <div class="left">
+        Presupuesto
+    </div>  
+    <div class="center_div1">
+        <span><b>{{codPresupuesto}}</b></span> 
+    </div>
+<!--     <div class="right">
+        <span><b>{{descPresupuesto}}</b></span>
+    </div> -->
+ </div>
+
+ <div class="container">
+    <div class="left">
+        Cliente
+    </div>  
+    <div class="center_div2">
+        <span><b>{{cliente}}</b></span> 
+    </div>
+    <div class="right">
+        <span style="padding-right: 20px;">Costo al :</span>  
+        <span><b>{{fechaPresupuesto}}</b></span>
+    </div>
+ </div>
+
+ <div class="container">
+    <div class="left">
+        Lugar
+    </div>  
+    <div class="center_div3">
+        <span><b>{{lugar}}</b></span> 
+    </div>
+ </div>
+
+ <br><br>
+
+      <table class="table_ancho">
+        <th  class="table_th_1"><b>Nº</b></th>
+        <th  class="table_th_2"><b>DESCRIPCIÓN</b></th>
+        <th  class="table_th_3"><b>UNID.</b></th>
+        <th  class="table_th_4"><b>CANT</b></th>
+        <th  class="table_th_5"><b>COSTO</b><br><b>UNITARIO</b><br>S/.</th>
+        <th  class="table_th_6"><b>COEF.</b><br><b>PART.</b></th>
+        <th  class="table_th_7"><b>PARCIAL</b><br><b>S/.</b></th>
+        <th  class="table_th_8"><b>SUB TOTAL</b></th>
+        <th  class="table_th_9"><b>TOTAL</b></th>
+      </table>
+
+    <div class = "scrollPersonal">
+    <div id="paginacion">
+     <mat-tree [dataSource]="treeSource" [treeControl]="treeControl" [trackBy]="trackBy">
+
+  <!-- This is the tree node template for leaf nodes -->
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+  
+    <li class="mat-tree-node" renderDebug>
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled>
+          <!--  *ngIf="node.level == 1"  -->
+          <mat-icon  *ngIf="node.cantidadHijo > 0"  class="mat-icon-rtl-mirror" (click)="add(node)">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}} 
+          </mat-icon>
+      </button>
+      {{node.numero}}  <span [className] = "'espacio_izq_elementoa' + node.id">{{node.descripcion}}</span>
+      <!-- <span>{{node.id}}</span> -->
+      <span [className] = "'espacio_izq_elementob' + node.id">{{node.unidad}}</span>
+      <span [className] = "'espacio_izq_elementob' + node.id">{{node.cantidadUnidad}}</span>
+      <span [className] = "'espacio_izq_espacio_costoUnit' + node.id">{{node.costoUnitario}}</span>
+      <span [className] = "'espacio_izq_espacio_coef' + node.id">{{node.coefPart}}</span>
+      <span [className] = "'espacio_izq_elementob' + node.id">{{node.parcial}}</span>
+      <span  class="espacio_entre_subtotal_total">{{node.subTotal}}</span>
+      <span [className] = "'espacio_izq_elementob' + node.id">{{node.total}}</span>
+     <!--  <button type="button" mat-icon-button (click)="add(node)">
+          <mat-icon inline="true">add</mat-icon>
+        </button> --> 
+    </li>
+  </mat-tree-node>
+
+  <!-- node with children -->
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+    <li class="mat-tree-node" renderDebug>
+      <div class="mat-tree-node">
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror" (click)="add(node)">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}} 
+          </mat-icon>
+        </button>
+        {{node.numero}}  <span [className] = "'espacio_izq_elementoa' + node.id">{{node.descripcion}}</span>
+        <!-- <span>{{node.id}}</span> -->
+        <span>{{node.unidad}}</span>
+        <span>{{node.cantidadUnidad}}</span>
+        <span>{{node.costoUnitario}}</span>
+        <span>{{node.coefPart}}</span>
+        <span>{{node.parcial}}</span>
+        <span class="espacio_entre_subtotal_total">{{node.subTotal}}</span>
+        <span>{{node.total}}</span>
+       <!--  <button type="button" mat-icon-button (click)="add(node)">
+          <mat-icon inline="true">add</mat-icon>
+        </button> -->
+      </div>            
+    </li>
+    <ul [class.children-invisible]="!treeControl.isExpanded(node)">
+      <ng-container matTreeNodeOutlet></ng-container>
+    </ul>
+  </mat-nested-tree-node>
+</mat-tree>
+    </div>
+  </div>  

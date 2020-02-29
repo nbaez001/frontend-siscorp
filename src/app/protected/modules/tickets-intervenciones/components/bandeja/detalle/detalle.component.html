@@ -1,0 +1,20 @@
+<mat-nav-list *ngIf="tipo === 'archivos'">
+  <a mat-list-item (click)="openLink($event)" *ngFor="let i of [1,2,3,4,5]">
+    <mat-icon mat-list-icon>get_app</mat-icon>
+    <span mat-line>ARCHIVO {{i}} </span>
+  </a>
+</mat-nav-list>
+
+<div *ngIf="tipo === 'usuario'">
+  <p>NOMBRE: JIMY NAVARRO CORDOVA</p>
+  <p>TIPO DOCUMENTO: DNI</p>
+  <p>N° DOCUMENTO: 77264580</p>
+  <p>GENERO: MASCULINO</p>
+</div>
+
+<div *ngIf="tipo === 'encargado'">
+  <p>NOMBRE: JIMY NAVARRO CORDOVA</p>
+  <p>DNI: 77264580</p>
+  <p>PROFESION: ODONTOLOGO</p>
+  <p>ENTIDAD: MINISTERIO DE SALUD</p>
+</div>

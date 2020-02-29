@@ -1,0 +1,218 @@
+<div class="page">
+
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span style="font-size: 20px !important; font-weight: bold;">DATOS DEL PROYECTO</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogDatosGenerales.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+  </ngx-spinner>
+
+  <div mat-dialog-content>
+    <div class="titulo-proyecto">TAMBO "QUILLE"</div>
+    <div class="subtitulo-proyecto">Creación del Centro de Servicios Tambo en el Centro Poblado Quille - Omacha</div>
+
+    <mat-grid-list cols="12" rowHeight="320px">
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 4, xl: 4}">
+        <div class="flex-container">
+          <div style=" background-color: white;" class="label-datos">ENCARGADOS DEL PROYECTO:</div>
+        </div>
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">CGP:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos"   matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Rosa Perez </span>
+          </div>
+        </div>
+
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">CRP:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos"   matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Rosario Mendoza </span>
+          </div>
+        </div>
+
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">SUPERVISOR:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos"   matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Ruben Perez </span>
+          </div>
+        </div>
+
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">RESIDENTE:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos"   matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Julio Suarez </span>
+          </div>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 4, xl: 4}">
+        <div class="flex-container">
+          <div style=" background-color: white;" class="label-datos">NÚCLEO EJECUTOR:</div>
+        </div>
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">PRESIDENTE:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos"   matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Juan Perez </span>
+          </div>
+        </div>
+
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">TESORERO:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos" matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Miguel Mauricio </span>
+          </div>
+        </div>
+
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">SECRETARIO:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos" matTooltipClass="formato-tooltip" class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Nestor Maldonado </span>
+          </div>
+        </div>
+
+        <div class="flex-container">
+          <div class="label-datos" style="width: 110px !important;">FISCAL:</div>
+          <div class="background-color-blanco">
+            <span matTooltip="click para ver datos" matTooltipClass="formato-tooltip" class="detalle-trabajador" (click)="detalleDatosGenerales()">
+              Diana Pereira </span>
+          </div>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 4, xl: 4}">
+        <carousel style="width: auto !important;">
+          <ng-container *ngFor="let item of items">
+            <ng-container *carouselItem>
+              <img [src]="item.url" alt="PN PAIS" width="340px" height="260px" style=" padding:1px;
+              border:1px solid #039be5;">
+            </ng-container>
+          </ng-container>
+        </carousel>
+
+      </mat-grid-tile>
+
+    </mat-grid-list>
+    <br>
+    <br>
+
+    <mat-grid-list cols="10" rowHeight="60px">
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos"> PLAZO DE <br>EJECUCIÓN</span>
+        <br>
+        <span class="background-color-blanco">120 días</span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos"> AVANCE<br> FÍSICO</span>
+        <br>
+        <span class="background-color-blanco">10%</span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos"> AVANCE<br> FINANCIERO</span>
+        <br>
+        <span class="background-color-blanco">20%</span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos">MONTO<br> FINANCIERO</span>
+        <br>
+        <span class="background-color-blanco">200</span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos">MONTO<br> RENDIDO</span>
+        <br>
+        <span class="background-color-blanco">200</span>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <br>
+    <mat-grid-list cols="12" rowHeight="115px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="verProyectoDesdeDatosGenerales(2020)" mat-raised-button color="primary" class="casilla">
+            <span>DESCARGAR DOCUMENTOS <br> DEL PROYECTO</span>
+            <br>
+            <mat-icon style="font-size: 30px;">cloud_download</mat-icon>
+            <br>
+            <br>
+          </button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="verCronogramaDesdeDatosGenerales(2020)" mat-raised-button color="primary" class="casilla">
+            <span>CRONOGRAMA <br> ACELERADO</span>
+            <br>
+            <mat-icon style="font-size: 30px;">calendar_today</mat-icon>
+            <br>
+            <br>
+          </button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="verCotizacionesDesdeDatosGenerales(200)" mat-raised-button
+            style="background-color: #EC971F; color: white;" class="casilla">
+            <span>AUTORIZACIÓN <br> DE GASTO</span>
+            <br>
+            <mat-icon style="font-size: 30px;">account_balance_wallet</mat-icon>
+            <br>
+            <br>
+          </button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="bandejaTrabajadorDesdeDatosGenerales(2020)" mat-raised-button
+            style="background-color: green; color: white;" class="casilla">
+            <br>
+            <span> TRABAJADOR</span>
+            <br>
+            <mat-icon style="font-size: 30px;">group_add</mat-icon>
+            <br>
+            <br>
+          </button>
+
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button mat-raised-button color="warn" class="casilla">
+            <br>
+            <span>PRE-LIQUIDACIÓN</span>
+            <br>
+            <mat-icon style="font-size: 30px;">library_add_check</mat-icon>
+            <br>
+            <br>
+          </button>
+
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button mat-raised-button color="warn" class="casilla">
+            <br>
+            <span> LIQUIDACIÓN</span>
+            <br>
+            <mat-icon style="font-size: 30px;">table_chart</mat-icon>
+            <br>
+            <br>
+          </button>
+
+        </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+  </div>
+
+</div>

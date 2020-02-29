@@ -1,0 +1,40 @@
+<mat-card class="mat-elevation-z5">
+  <mat-card-title>
+    <div>
+      <img src="assets/images/logo_pais.jpg" alt="">
+    </div>
+    <span>INGRESAR A TU CUENTA</span>
+  </mat-card-title>
+
+  <mat-card-content>
+    <form [formGroup]="authForm" (submit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput formControlName="username">
+        <mat-error *ngIf="authForm.get('username').invalid && authForm.get('username').touched">
+          {{ authForm.get('username').errors | errorMessage:"Usuario" }}
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="authForm.get('password').invalid && authForm.get('password').touched">
+          {{ authForm.get('password').errors | errorMessage:"Contraseña" }}
+        </mat-error>
+      </mat-form-field>
+
+      <public-captcha (codigo)="generarCodigo($event)"></public-captcha>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Código</mat-label>
+        <input matInput formControlName="codigo">
+        <mat-error *ngIf="authForm.get('codigo').invalid && authForm.get('codigo').touched">
+          {{ authForm.get('codigo').errors | errorMessage:"Código" }}
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button class="mat-accent">INGRESAR</button>
+    </form>
+  </mat-card-content>
+</mat-card>

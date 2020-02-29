@@ -1,0 +1,25 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+:host {
+
+
+  
+  
+.mat-input-element {
+  font: caption;
+
+}
+
+.example-card {
+  max-width: 800px;
+  text-align: center;
+}
+
+::ng-deep .mat-card[_ngcontent-egx-c12] {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: unset;
+  margin: auto;
+  border-radius: 10px;
+}
+}

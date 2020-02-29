@@ -1,0 +1,107 @@
+<div class="chat" fxLayout="column">
+
+    <mat-toolbar class="chat-toolbar" style="background-color: #c8e6c9">
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+
+            <div fxLayout="row" fxLayoutAlign="start center">
+
+                <div mat-button (click)="mostrarSidenav()" fxHide.gt-md class="responsive-chats-button"
+                   >
+                    <mat-icon class="">chat</mat-icon>
+                </div>
+
+                <div class="chat-contact" fxLayout="row" fxLayoutAlign="start center"
+                    fuseMatSidenavToggler="chat-right-sidenav">
+
+                    <div class="avatar-wrapper">
+
+                        <img [src]="contact.avatar" class="avatar" alt="{{contact.name}}" />
+
+                        <mat-icon class="s-16 status" [ngClass]="contact.status">
+                        </mat-icon>
+                    </div>
+
+                    <div class="chat-contact-name">
+                        {{contact.name}}
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                <button *ngIf="administrator==1 || contact.status==99 " mat-button class="mat-icon-button"
+                    [matMenuTriggerFor]="contactMenu" aria-label="more">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #contactMenu="matMenu">
+                    <button *ngIf="contact.status==99" mat-menu-item fuseMatSidenavToggler="chat-right-sidenav"
+                        (click)="verParticipantes(chatID)">
+                        <mat-icon>people</mat-icon> Ver participantes
+                    </button>
+                    <button *ngIf="administrator==1" mat-menu-item fuseMatSidenavToggler="chat-right-sidenav"
+                        (click)="eliminarConversacion(chatID)">
+                        <mat-icon>delete</mat-icon> Eliminar Conversación
+                    </button>
+                </mat-menu>
+            </div>
+
+        </div>
+    </mat-toolbar>
+
+    <div id="chat-content" fxFlex fusePerfectScrollbar>
+
+        <div class="chat-messages">
+
+            <div fxLayout="row" *ngFor="let message of dialog; trackBy: trackDialog" class="message-row"
+                [ngClass]="{'user' :message.who === usuarioID}">
+
+                <div class="bubble">
+
+                    <div *ngIf="typeChat==1 && message.who !== usuarioID " class="time secondary-text">
+                        <strong style="font-size: 16px">
+                            <p [ngStyle]="{'color':message.color}"> {{message.name}}</p>
+                        </strong>
+                    </div>
+
+                    <div class="message">{{message.message}} </div>
+
+                    <span class="time ">{{message.time }}</span>
+                    <span *ngIf="message.who === usuarioID ">
+                        <p *ngIf="message.ckecked === 1 ">
+                            <mat-icon style="color: #11E4EA">done_all</mat-icon> <small class="leer"> Leido </small>
+                        </p>
+                        <p *ngIf="message.ckecked === 0 ">
+                            <mat-icon>done_all</mat-icon> <small class="leer"> Entregado </small>
+                        </p>
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="chat-footer" fxLayout="row" fxLayoutAlign="center center">
+
+        <form #replyForm="ngForm" (submit)="reply($event)" fxFlex class="reply-form" fxLayout="row"
+            fxLayoutAlign="start center">
+
+            <mat-form-field class="" fxFlex floatPlaceholder="never">
+                <input autocomplete="off" required matInput #replyInput
+                    placeholder="Escribe y luego Enter para enviar el mensaje" ngModel name="message" maxlength="100">
+            </mat-form-field>
+
+            <button 
+            style="
+            background-color: #66bb6a;
+            border-radius: 50%;
+
+            " mat-fab aria-label="Send message">
+                <mat-icon>send</mat-icon>
+            </button>
+
+        </form>
+    </div>
+</div>

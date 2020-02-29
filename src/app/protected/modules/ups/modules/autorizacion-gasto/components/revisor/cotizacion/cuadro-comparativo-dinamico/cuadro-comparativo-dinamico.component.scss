@@ -1,0 +1,382 @@
+
+/* :host ::ng-deep .mat-form-field-infix {
+  width: 50px !important;
+} */
+
+
+:host {
+
+  ::ng-deep .mat-form-field-infix{
+    width: 50px;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    padding-bottom: 0.15em;
+  }
+
+  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    margin: .1em 0;
+    padding: 5px 1px 5px 1px;
+  }
+
+  ::ng-deep .mat-mini-fab {
+   
+    width: 32px !important;
+    height: 32px !important;
+
+  }
+
+  ::ng-deep .mat-icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 28px;
+    width: 20px;
+  }
+
+  ::ng-deep .material-icons {
+
+    font-size: 20px;
+
+  }
+
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+
+    .contenido {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      > div.detalle {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        line-height: 20px;
+
+        .subtitulo {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .filtros {
+    mat-expansion-panel {
+      margin: 10px 0;
+      border-radius: 0;
+
+      mat-expansion-panel-header mat-panel-title {
+        display: flex;
+        align-content: center;
+      }
+
+      .inputs {
+        // display: flex;
+        // flex-direction: row;
+
+        mat-form-field {
+          margin-right: 2px;
+          width: 20%;
+
+          /deep/ .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+        }
+
+        .acciones {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-left: 10px;
+
+          button:first-of-type {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .bandeja {
+    position: relative;
+    margin-top: 10px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+
+    .nuevo-intrv {
+      position: absolute;
+      top: -28px;
+    }
+
+    table {
+      width: 100%;
+
+      td.mat-column-desde mat-icon {
+        font-size: 20px;
+      }
+
+      th.mat-header-cell, td.mat-cell {
+        text-align: center;
+        border: 1px solid #CCC;
+        padding: 0 !important;
+      }
+
+
+      tr.mat-header-row {
+        height: 20px !important;
+      }
+
+      .mat-header-cell {
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #010d13;
+      }
+      
+      
+
+      td.mat-column-modulos .contenido {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .dest-ori {
+          width: 21px;
+          text-align: center;
+        }
+
+        .contenido-modulos {
+          display: flex;
+          flex-direction: column;
+          padding: 0 10px;
+  
+          .modulo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+      }
+
+      td.mat-column-usuarioAtendido {
+        font-size: 25px;
+      }
+
+/*         th.mat-column-estado {
+        text-align: center;
+      }
+ */
+      td.mat-column-estado > .estado {
+        padding: 5px;
+        margin: 0 10px;
+        text-align: center;
+        width: 90px;
+        color: #FFFFFF !important;
+        font-weight: 500;
+        border-radius: 3px;
+        font-size: 11px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+
+        &.small {
+          width: 40px !important;
+        }
+
+        &.disabled {
+          pointer-events: none;
+        }
+      }
+
+      .mat-column-acciones, .mat-column-desde {
+        width: auto;
+
+        button {
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+
+
+    .search-form-field{
+      width: 15%;
+      height: 20px;
+      margin-left: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      }
+
+      tr.mat-row{
+          height: 10px !important;
+      }
+}
+
+.paginacion-right{
+  display: inline !important;
+}
+
+.mat-toolbar-fondo{
+  background: #fff;
+}
+
+.excel-icon-top{
+  margin-top: 15px !important;
+  width: 30px;
+   height: 30px;
+}
+
+.fondo-filtro{
+  background: #039be5;
+  color: white;
+}
+
+.mat-expansion-panel-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px;
+  border-radius: inherit;
+  background: #039be5 !important;
+  //height: 48px !important;
+}
+
+.mat-expansion-panel-header.mat-expanded:focus .mat-expansion-panel-header .mat-expanded:hover {
+background:  #039be5 !important;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+
+
+
+.mat-icon-button {
+  padding: 0;
+  min-width: 0;
+  width: 15px;
+  height: 30px;
+  flex-shrink: 0;
+  line-height: 10px;
+  border-radius: 50%;
+}
+
+.mat-row:hover {
+background-color:  #DFE5EF;
+.mat-cell, .mat-footer-cell {
+  font-weight: bold;
+  }
+}
+
+
+.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+font-size: inherit;
+line-height: 3em;
+height: 2em !important;
+}
+
+.tamanio-seleccionar{
+font-size: 12px;
+}
+
+.spinerTable {
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
+right: 0 !important;
+position: sticky;
+bottom: 0px;
+left: 0px;
+.mat-progress-spinner {
+  width: 50px !important;
+  height: 50px !important;
+  svg {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+}
+
+.empty {
+padding: 20px;
+text-align: center;
+position: sticky;
+bottom: 0px;
+left: 0px;
+font-size: 0.8em;
+font-weight: 500;
+color: #005e82;
+}
+
+
+.mat-expansion-panel-content {
+display: flex;
+flex-direction: column;
+overflow: visible;
+padding-top: 10px;
+}
+
+.background_row {
+  background: #efefef;
+  font-weight: 600;
+}
+
+.contenido-formulario {
+padding: 5px;
+display: flex;
+flex-direction: column;
+
+.columna {
+  display: flex;
+  flex-direction: row;
+
+  mat-form-field {
+    flex: 1;
+
+  }
+
+}
+}
+
+
+/* 
+.mat-form-field-infix {
+padding: 0.5em 0 0.5em 0 !important;
+border-top: 0.84375em solid transparent;
+width: 30% !important;
+} */
+
+.select-label{
+margin-top: 10px;
+}
+/* 
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  display: flex;
+  position: absolute;
+  top: .25em;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  width: 30%;
+} */
+
+.formulario-margin {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.boton-adjuntar-cotizacion{
+  margin-left: 15px;
+  float: left;
+  top: -4px;
+}
+
+.ruc_textfield{
+  width: 36%; 
+  margin-left: -65px;
+}

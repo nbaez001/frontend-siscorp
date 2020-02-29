@@ -1,0 +1,156 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Datos del Proveedor</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<div class="contenido-formulario" [formGroup]="proyectoForm">
+  <div class="bandeja">
+    <div class="container">
+      <div class="row">
+
+        <div class="columna">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo Proveedor</mat-label>
+            <mat-select [disabled]="true" formControlName="tipoProveedor" class="tamanio-seleccionar"
+              [(ngModel)]="proveedor.idTipoProveedor">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listTipoPersona" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo Documento</mat-label>
+            <mat-select [disabled]="true" formControlName="tipoDocumento" class="tamanio-seleccionar"
+              [(ngModel)]="proveedor.idTipoDocumento">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listTipoDocumento" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Nro. Documento</mat-label>
+            <input [readonly]="true" matInput formControlName="numeroDocumento" solonumero
+              [(ngModel)]="proveedor.numeroDocumento">
+          </mat-form-field>
+        </div>
+
+        <div class="columna">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre o Razón Social</mat-label>
+            <input [readonly]="true" matInput formControlName="nombreRazonSocial"
+              [(ngModel)]="proveedor.nombreRazonSocial">
+          </mat-form-field>
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <mat-select [disabled]="bloqueaCampo" formControlName="idEstado" class="tamanio-seleccionar"
+              [(ngModel)]="proveedor.idEstado">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listEstado" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+        </div>
+
+        <div class="columna">
+        <!--   <mat-form-field appearance="outline">
+            <mat-label>Rubro</mat-label>
+            <mat-select [disabled]="bloqueaCampo" formControlName="idTipoRubro" class="tamanio-seleccionar"
+              [(ngModel)]="proveedor.idTipoRubro">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listRubro" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+            </mat-select>
+          </mat-form-field> -->
+          <mat-form-field appearance="outline">
+            <mat-label>Estado</mat-label>
+            <input [readonly]="true" matInput formControlName="estado" [(ngModel)]="proveedor.estado">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Condición</mat-label>
+            <input [readonly]="true" matInput formControlName="condicion" [(ngModel)]="proveedor.condicion">
+          </mat-form-field>
+        </div>
+
+        <div class="columna">
+          <mat-form-field appearance="outline">
+            <mat-label>Departamento</mat-label>
+            <mat-select [disabled]="bloqueaCampo" formControlName="idDepartamento" class="tamanio-seleccionar"
+              [(ngModel)]="proveedor.idDepartamento">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listDepartamento" [value]="est.idCodigo"
+                (click)="buscarProvincia(est.idCodigo)">{{est.cidNombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Provincia</mat-label>
+            <mat-select [disabled]="bloqueaCampo" formControlName="idProvincia" class="tamanio-seleccionar"
+              [(ngModel)]="proveedor.idProvincia" [disabled]="enabledProvincia">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listProvincia" [value]="est.idCodigo"
+                (click)="buscarDistrito(est.idCodigo)">{{est.cidNombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Distrito</mat-label>
+            <mat-select [disabled]="bloqueaCampo" formControlName="idDistrito" class="tamanio-seleccionar"
+              [(ngModel)]="proveedor.idDistrito" [disabled]="enabledDistrito">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listDistrito" [value]="est.idCodigo">{{est.cidNombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="columna">
+          <mat-form-field appearance="outline">
+            <mat-label>Dirección</mat-label>
+            <input [readonly]="bloqueaCampo" matInput formControlName="domicilioFiscal"
+              [(ngModel)]="proveedor.domicilioFiscal">
+          </mat-form-field>
+        </div>
+
+    <!--     <div class="columna">
+          <mat-form-field appearance="outline">
+            <mat-label>Actividad(es) Económica(s)</mat-label>
+            <input [readonly]="bloqueaCampo" matInput formControlName="actividadEconomica"
+              [(ngModel)]="proveedor.actividadEconomica">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Comprobante de Pago c/aut. de impresión (F.806 u 816)</mat-label>
+            <input [readonly]="bloqueaCampo" matInput formControlName="comprobantePago"
+              [(ngModel)]="proveedor.comprobantePago">
+          </mat-form-field>
+        </div> -->
+
+        <div class="columna">
+          <mat-form-field appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input [readonly]="bloqueaCampo" matInput formControlName="telefono" [(ngModel)]="proveedor.telefono">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Correo Electrónico</mat-label>
+            <input [readonly]="bloqueaCampo" matInput formControlName="correoElectronico"
+              [(ngModel)]="proveedor.correoElectronico">
+          </mat-form-field>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+  <div align="center" class="example-button-row">
+    <button *ngIf="bloqueaCampo==false" color="primary" mat-raised-button (click)="guardarProveedor()">
+      <mat-icon>save</mat-icon>Guardar
+    </button>
+    <button *ngIf="bloqueaCampo==true" color="warn" mat-raised-button (click)="dialogRef.close()">
+      Cerrar
+    </button>
+  </div>
+
+</div>

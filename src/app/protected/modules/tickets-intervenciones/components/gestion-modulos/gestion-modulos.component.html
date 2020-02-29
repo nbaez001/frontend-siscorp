@@ -1,0 +1,64 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+
+  <div class="contenido">
+    <mat-icon>directions_boat</mat-icon>
+    <span>GESTIÓN MÓDULOS</span>
+  </div>
+  
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- BANDEJA -->
+<div class="mat-elevation-z2 mat-white-bg bandeja">
+  
+  <button mat-fab class="agregar mat-green-bg" (click)="registrar()"><mat-icon class="white-fg">add</mat-icon></button>
+  
+  <table mat-table [dataSource]="modulos">
+
+    <ng-container matColumnDef="idModulo">
+      <th mat-header-cell *matHeaderCellDef> COD </th>
+      <td mat-cell *matCellDef="let mod"> {{mod.idModulo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="entidad">
+      <th mat-header-cell *matHeaderCellDef> ENTIDAD </th>
+      <td mat-cell *matCellDef="let mod"> {{mod.entidad}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="encargado">
+      <th mat-header-cell *matHeaderCellDef> ENCARGADO </th>
+      <td mat-cell *matCellDef="let mod"> {{mod.encargado}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="activo">
+      <th mat-header-cell *matHeaderCellDef> ACTIVO </th>
+      <td mat-cell *matCellDef="let mod">
+        <mat-icon [ngClass]="mod.activo ? 'green-fg' : 'red-fg'">{{mod.activo ? 'check_circle' : 'not_interested'}}</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let mod">
+        <button mat-icon-button (click)="actualizar(mod)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button (click)="eliminar(mod.idModulo)"><mat-icon>delete</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="total"
+    [pageIndex]="pagina - 1"
+    [pageSize]="cantidad"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="[10, 50, 100]"
+    (page)="cambiarPagina($event)">
+  </mat-paginator>
+
+
+</div>
+<!-- BANDEJA -->

@@ -1,0 +1,38 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "idCodigo": 1,
+			"nro":1,
+            "nombreRazonSocial": "razon social 1 ",
+            "idTipoDocumento": "Perez Perez Abrahan",
+            "nombreTipoDocumento": "RUC",
+            "numeroDocumento": "43350785125",
+			"idTipoRubro":1,
+			"nombreTipoRubro":"Ferreteria"
+		}, 
+        {
+            "idCodigo":2,
+			"nro":2,
+            "nombreRazonSocial": "razon social 2 ",
+            "idTipoDocumento": "Abrahan",
+            "nombreTipoDocumento": "RUC",
+            "numeroDocumento": "54147854254",
+			"idTipoRubro":1,
+			"nombreTipoRubro":"Ferreteria"
+		}, 
+		{
+            "idCodigo": 3,
+			"nro":3,
+            "nombreRazonSocial": "nombreee ",
+            "idTipoDocumento": "Perez Perez",
+            "nombreTipoDocumento": "RUC",
+            "numeroDocumento": "56214575254",
+			"idTipoRubro":1,
+			"nombreTipoRubro":"Ferreteria"
+		}
+    ],
+	"idPerfil": 1
+}

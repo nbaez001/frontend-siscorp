@@ -1,0 +1,50 @@
+// @import "assets/styles/scss/views/table";
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.page-vehiculo {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 500px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    cidCodigo: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 6rem
+    ),
+    nomUsuarioRpble: (
+      width: 12rem
+    ),
+    cargoUsuarioRpble: (
+      width: 8rem
+    ),
+    nombreDependencia: (
+      width: 12rem
+    ),
+    nomRespTraslado: (
+      width: 12rem
+    ),
+    nomMotivoSalida: (
+      width: 8rem
+    ),
+    docReferencia:(
+      width: 10rem
+    ),
+    cantBienes: (
+      width: 4rem
+    ),
+    opt: (
+      width: 2.5rem
+    )
+  )
+);

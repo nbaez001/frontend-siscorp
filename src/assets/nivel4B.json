@@ -1,0 +1,19 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "TRAZO, NIVELES Y REPLANTEO PRELIMINAR"
+        },
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "REPLANTEO DURANTE EL PROCESO"
+        }
+       
+    ],
+	"idPerfil": null
+}

@@ -1,0 +1,111 @@
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>ANALISIS PRECIOS UNITARIOS </span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<br>
+
+<div mat-dialog-content class="contenido-formulario">
+  <div class="bandeja scrollPersonal">
+
+    <ng-container *ngFor="let presupuesto of excelPartida">
+
+      <div class="container">
+        <div class="left">
+          <b> Presupuesto</b>
+        </div>
+        <div class="center_div1">
+          <span>{{presupuesto.codigoPresupuesto}}</span>
+        </div>
+        <div class="right">
+          <span>{{presupuesto.nombrePresupuesto}}</span>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="left">
+          <b>SubPresupuesto</b>
+        </div>
+        <div class="center_div2">
+          <span>{{presupuesto.subCodigoPresupuesto}}</span>
+          <span style="margin-left: 10px;">{{presupuesto.nombreSubPresupuesto}}</span>
+        </div>
+        <div class="right">
+          <span style="padding-right: 20px;">Fecha :</span>
+          <span><b>{{presupuesto.fecha}}</b></span>
+        </div>
+      </div>
+      <br>
+
+      <ng-container *ngFor="let partida of presupuesto.precioUnitarioCabecera">
+
+        <div class="container">
+          <div class="left">
+            <b> Partida</b>
+          </div>
+          <div class="center_div1_partida">
+            <span>{{partida.codigoPartida}}</span>
+            <span style="margin-left: 100px;">{{partida.nombrePartida}}</span>
+          </div>
+
+        </div>
+
+        <div class="container">
+          <div class="left">
+            <b>Rendimiento</b>
+          </div>
+          <div class="center_div2_partida">
+            <span>{{partida.rendimiento}}</span>
+            <span style="margin-left: 30px;"><b>M.O :</b> {{partida.manoObra}}</span>
+            <span style="margin-left: 100px;"><b>EQ. :</b> {{partida.equipo}}</span>
+          </div>
+          <div class="right">
+            <span style="padding-right: 20px;">{{partida.costoUnitario}} :</span>
+            <span><b>{{partida.subTotalPartida}}</b></span>
+          </div>
+        </div>
+
+        <div class="mat-table-v">
+          <div class="mat-header-row-v">
+            <div class="mat-header-cell-v"><b>Código</b></div>
+            <div class="mat-header-cell-v"><b>Descripción Recurso</b></div>
+            <div class="mat-header-cell-v"><b>Unidad</b></div>
+            <div class="mat-header-cell-v"><b>Cuadrilla</b></div>
+            <div class="mat-header-cell-v"><b>Cantidad</b></div>
+            <div class="mat-header-cell-v"><b>Precio S/.</b> </div>
+            <div class="mat-header-cell-v"><b>Parcial S/.</b> </div>
+          </div>
+          <div class="mat-row-v" *ngFor="let partidaDet of partida.detallePrecioUnitario">
+            <div class="mat-cell-v">{{partidaDet.codigoPartida}}</div>
+            <div class="mat-cell-v">{{partidaDet.descripcionInsumo}}</div>
+            <div class="mat-cell-v">{{partidaDet.unidad}}</div>
+            <div class="mat-cell-v">{{partidaDet.cuadrilla}}</div>
+            <div class="mat-cell-v">{{partidaDet.cantidad}}</div>
+            <div class="mat-cell-v">{{partidaDet.precio}}</div>
+            <div class="mat-cell-v">{{partidaDet.parcial}}</div>
+          </div>
+          <br>
+        </div>
+
+
+      </ng-container>
+      <br>
+    </ng-container>
+  </div>
+</div>
+
+
+
+<div align="right" class="botones-margen-derecho">
+
+  <button color="primary" mat-raised-button class="margen-entre-botones" (click)="darConformidadExcelPartida()"
+    [disabled]="habilitarBtnConformidad">
+    <mat-icon> done_outline</mat-icon> Dar Conformidad
+  </button>
+
+  <button color="warn" mat-raised-button (click)="dialogRef.close()">
+    <mat-icon>highlight_off</mat-icon> Cerrar
+  </button>
+
+</div>

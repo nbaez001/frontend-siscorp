@@ -1,0 +1,34 @@
+<div id="lock" fxLayout="column">
+
+  <div id="lock-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+
+    <div id="lock-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+      <div class="lock-form-header" fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-xs="row"
+        fxLayoutAlign.gt-xs="start center">
+
+
+        <div>
+          <div class="title ">
+            <mat-icon>lock</mat-icon> SU SESION ESTÁ BLOQUEADA
+          </div>
+          <div class="subtitle">
+            <mat-icon>error</mat-icon> Se ha detectado que tiene una sesión abierta en otra máquina.
+          </div>
+        </div>
+
+      </div>
+
+      <form  novalidate>
+
+        <button type="button" mat-raised-button class="submit-button" color="primary" aria-label="UNLOCK" (click)="aceptar()">
+          <mat-icon>save_alt</mat-icon> ACEPTAR
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>

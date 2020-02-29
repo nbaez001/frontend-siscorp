@@ -1,0 +1,56 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z3">
+
+  <div class="titulo">
+    <mat-icon>airplay</mat-icon>
+    <span> PANTALLA DE ATENCIONES POR ENTIDAD</span>
+  </div>
+
+  <div class="tiempo">
+    <span *ngFor="let stick of tiempo"><strong>|</strong> </span>
+  </div>
+
+  <div class="total-atenciones">
+    {{pantalla.total}} ATENCIONES
+  </div>
+
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!--ENTIDADES-->
+<div class="pantalla">
+
+  <div class="modulo" *ngFor="let modulo of pantalla.modulos; let i = index">
+    <mat-card class="cabecera">
+      <div class="imagen-encargado">
+        <img class="mat-elevation-z3" [src]="'assets/images/' + modulo.logo" width="100" height="100">
+        <div class="encargado-atendidos">
+          <div class="encargado"><mat-icon>person</mat-icon> {{modulo.encargado}}</div>
+          <div class="mat-elevation-z3 mat-green-300-bg white-fg atendidos">{{modulo.cantidadAtendidos}} ATENDIDOS</div>
+        </div>
+      </div>
+      <br>
+      <div class="atendiendo">
+        <mat-icon
+          [style.visibility]="!!modulo.atendiendo ? 'visible' : 'hidden'"
+          class="amber-fg flecha">forward</mat-icon>
+        <div class="mat-elevation-z3 mat-amber-300-bg black-fg atendido">
+          <mat-icon>{{!!modulo.atendiendo ? 'person' : 'person_outline'}}</mat-icon>
+          <span>{{modulo.atendiendo | uppercase}}</span>
+        </div>
+      </div>
+    </mat-card>
+
+    <mat-card class="por-atender" *ngIf="modulo.listadoPorAtender.length > 0">
+      <div class="item" *ngFor="let persona of modulo.listadoPorAtender; let i = index">
+        <div class="cont mat-elevation-z3 mat-red-300-bg white-fg">{{1+i}}</div>
+        <div class="text mat-elevation-z3 mat-red-300-bg white-fg">{{persona | uppercase}}</div>
+      </div>
+      <div class="item" *ngIf="modulo.cantidadExtPorAtender > 0">
+        <div class="cont mat-elevation-z3 mat-grey-300-bg white-fg">{{modulo.cantidadExtPorAtender}}+</div>
+      </div>
+    </mat-card>
+  </div>
+  
+</div>
+<!--ENTIDADES-->
