@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UajService } from '../../services/uaj.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { CrearActividadComponent } from '../crear-actividad/crear-actividad.component';
@@ -25,6 +25,7 @@ export class PlanTrabajoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private matDialog: MatDialog,
     private matSnackBar: MatSnackBar,
+    private router: Router,
   ) {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.id_convenio = params['id_convenio'];
@@ -92,6 +93,10 @@ export class PlanTrabajoComponent implements OnInit {
         this.listaActividad();
       }
     });
+  }
+
+  bandeja() {
+    this.router.navigate([`/uaj/convenio-bandeja`]);
   }
 
 }

@@ -52,7 +52,6 @@ export class BandejaConvenioComponent implements OnInit {
     this.lista();
     if (Session.identity.lista_perfil_modulo[0].idArea != 14) {
       this.btnValidar = false;
-      this.filtrosForm.get('area').setValue(+Session.identity.lista_perfil_modulo[0].idArea);
       this.filtrosForm.get('area').disable();
     }
   }
@@ -63,7 +62,7 @@ export class BandejaConvenioComponent implements OnInit {
     this.filtrosForm = new FormGroup({
       denominacion: new FormControl(null),
       tipoConvenio: new FormControl(null),
-      area: new FormControl(null),
+      area: new FormControl((Session.identity.lista_perfil_modulo[0].idArea) != 14 ? (Session.identity.lista_perfil_modulo[0].idArea) : null),
     });
   }
 
@@ -113,10 +112,8 @@ export class BandejaConvenioComponent implements OnInit {
       data: id_convenio
     });
 
-    conveniotDialog.afterClosed().subscribe(result => {
-      if (result) {
-        this.lista();
-      }
+    conveniotDialog.afterClosed().subscribe(() => {
+      this.lista();
     });
   }
 
