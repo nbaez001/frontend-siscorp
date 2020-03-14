@@ -1,0 +1,34 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomBanco: (
+      width: 10rem
+    ),
+    nroCuenta: (
+      width: 7rem
+    ),
+    cciCuenta: (
+      width: 9rem
+    ),
+    nomEstado: (
+      width: 5rem
+    ),
+    opt: (
+      width: 2.5rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

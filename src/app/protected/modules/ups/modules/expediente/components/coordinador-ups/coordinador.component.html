@@ -1,0 +1,292 @@
+
+
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong style="color: white;">Filtros</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <br>
+    <!-- INPUTS -->
+    <div class="inputs" [formGroup]="filtrosForm" fxLayout.xl="row" fxLayout.lg="row">
+      <mat-form-field appearance="outline">
+        <mat-label>COD. DOCUMENTO</mat-label>
+        <input matInput formControlName="codDocFrmCtrl">
+      </mat-form-field>
+ 
+      <mat-form-field appearance="outline">
+        <mat-label>ESTADOS</mat-label>
+        <mat-select  formControlName="estadoFrmCtrl" class = "tamanio-seleccionar">
+          <mat-option  [value]="-1">--SELECCIONAR--</mat-option>
+          <mat-option *ngFor="let estado of dataItemEstado?.estados" [value]="estado.idCodigo">{{estado.cidNombre}}</mat-option>
+        </mat-select>                                         
+      </mat-form-field>
+   
+      <mat-form-field appearance="outline">
+        <mat-label>FECHA RECEPCIÓN INICIO</mat-label>
+        <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fechaRegDesdeFrmCtrl">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>FECHA RECEPCIÓN FIN</mat-label>
+        <input matInput [matDatepicker]="picker2" readonly (click)="picker2.open()" formControlName="fechaRegHastaFrmCtrl">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>ALERTAS</mat-label>
+        <mat-select  formControlName="alertaFrmCtrl" class = "tamanio-seleccionar">
+        <mat-option  [value]="-1">--SELECCIONAR--</mat-option>
+        <mat-option *ngFor="let alerta of dataItemAlerta?.alertas" [value]="alerta.idCodigo">{{alerta.cidNombre}}</mat-option>
+        </mat-select>                                               
+      </mat-form-field>
+  
+      <div class="acciones">
+        <button mat-mini-fab (click)="buscarPerfilPrefactibilidad($event)" [disabled]="disableBuscar"><mat-icon matTooltip="búsqueda">search</mat-icon></button>
+        <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()"   ><mat-icon matTooltip="Limpiar filtros de búsqueda">clear_all</mat-icon></button>
+      </div>
+    </div>
+    <!-- INPUTS -->
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- FILTROS -->
+
+<!-- BANDEJA -->
+<div class="bandeja">
+    <!-- <button mat-mini-fab (click)="mostrarOcultarColumnas($event)"><mat-icon matTooltip="Ocultar/mostrar Columnas">swap_horizontal_circle</mat-icon></button> -->
+
+  <table mat-table [dataSource]="dataSource">
+    
+
+    <ng-container matColumnDef="Nro">
+      <th mat-header-cell *matHeaderCellDef> Nro.</th>
+      <td mat-cell *matCellDef="let prefac">{{prefac.item}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaAsignada">
+      <th mat-header-cell *matHeaderCellDef> Fecha Asignada </th>
+      <td mat-cell *matCellDef="let prefac" >{{prefac.fecAsignacion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaRecepcionProyecto">
+      <th mat-header-cell *matHeaderCellDef> Fecha De Recepción<br>Del Proyecto </th>
+      <td mat-cell *matCellDef="let prefac"> {{prefac.fecRecepcion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="codProyecto">
+      <th mat-header-cell *matHeaderCellDef>Código </th>
+      <td mat-cell *matCellDef="let prefac" >{{prefac.codigo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="modalidadEjecucion">
+      <th mat-header-cell *matHeaderCellDef>Modalidad <br>De Ejecución</th>
+      <td mat-cell *matCellDef="let prefac" > {{prefac.modalidad}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="encargadoAsignado">
+      <th mat-header-cell *matHeaderCellDef> Encargado Asignado</th>
+      <td mat-cell *matCellDef="let prefac" > {{prefac.encargadoAsignado}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="fechaAsignadaEncargado">
+      <th mat-header-cell *matHeaderCellDef> Fecha Asignado <br>Encargado</th>
+      <td mat-cell *matCellDef="let prefac"> {{prefac.fecAsignacionEncargado}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="estado" >
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+    
+      <td mat-cell *matCellDef="let prefac" style="color: rgb(199, 0, 0) ; font-weight: 500px; font-family:Arial, Helvetica, sans-serif"> 
+        <span *ngIf="prefac.cidEstado == '006'">
+          {{prefac.estado}}
+        </span>
+        <span *ngIf="prefac.cidEstado == '008'" style="color: green; font-weight: 600px; font-family:Arial, Helvetica, sans-serif">
+            {{prefac.estado}} 
+        </span> 
+        <span *ngIf="prefac.cidEstado != '006' && prefac.cidEstado !='008'" style="color:black">
+            {{prefac.estado}} 
+        </span> 
+       </td>
+    </ng-container>
+
+    <ng-container  *ngIf = "columnaAusenciaNoMostrar == 'mostrar'" matColumnDef="ausencia">
+        <th mat-header-cell *matHeaderCellDef> AUSENCIA </th>
+        <td mat-cell *matCellDef="let prefac"> {{prefac.fidAusencia}} </td>
+      </ng-container>
+
+
+    <ng-container matColumnDef="plazo">
+      <th mat-header-cell *matHeaderCellDef>Plazo </th>
+      <td mat-cell *matCellDef="let prefac"> 
+        <span  *ngIf = "prefac.cidEstado == '006'  || prefac.cidEstado == '010'" class="color-grey "
+        matTooltip="días restantes de atención">{{prefac.numPlazo}}
+        </span>
+        <span  *ngIf = "prefac.numPlazo > 5 && prefac.cidEstado != '006' && prefac.numPlazo > 5 && prefac.cidEstado != '005' && prefac.cidEstado != '010'" class="color-orange"
+        matTooltip="días restantes de atención">{{prefac.numPlazo}}
+        </span>
+        <span  *ngIf = "prefac.numPlazo < 6 && prefac.cidEstado != '006' &&  prefac.numPlazo < 6 && prefac.cidEstado != '005' && prefac.cidEstado != '010'" class="color-red"
+        matTooltip="días restantes de atención">{{prefac.numPlazo}}
+        </span>
+      </td>
+      
+    </ng-container>
+
+  
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef >Acciones</th>
+      <td mat-cell *matCellDef="let prefac">
+  
+      <div *ngIf="prefac.cidEstado == '006'">
+         
+       
+        <button mat-icon-button color="primary"
+          (click)="asignarEncargado(prefac.idCodigo, prefac.cidEstado)" matTooltip="Asignar encargado">
+          <mat-icon> border_color</mat-icon>
+        </button>
+
+
+        <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+            <mat-icon>search</mat-icon>
+          </button>
+
+        <button  mat-icon-button color="primary"
+      (click)="observarProyectoCoordinador(prefac.idCodigo,prefac.cidEstado,prefac.codigo)" matTooltip="Observar y devolver">
+        <mat-icon> remove_red_eye</mat-icon>
+      </button>
+      </div>
+
+      <div *ngIf="prefac.cidEstado == '007'">
+
+      <button  mat-icon-button color="primary"
+        (click)="derivarEncargado(prefac.idCodigo, prefac.codigo)" matTooltip="Derivar encargado">
+        <mat-icon>call_made</mat-icon>
+      </button>
+
+          <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+              <mat-icon>search</mat-icon>
+          </button>
+    
+     </div>
+     <div *ngIf="prefac.cidEstado == '008'">
+      <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+          <mat-icon>search</mat-icon>
+        </button>
+    
+    </div>
+
+    <div *ngIf="prefac.cidEstado == '009' || prefac.cidEstado == '010'">
+        <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+            <mat-icon>search</mat-icon>
+          </button>
+      <button  mat-icon-button color="primary"
+      (click)="observarProyectoCoordinador(prefac.idCodigo,prefac.cidEstado,prefac.codigo)" matTooltip="Observar y devolver">
+      <mat-icon> remove_red_eye</mat-icon>
+    </button>
+    </div>
+
+    <div *ngIf="prefac.cidEstado == '016' || prefac.cidEstado == '018'">
+        <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+            <mat-icon>search</mat-icon>
+          </button>
+  
+          <button mat-icon-button color="primary" (click)="AprobarExpedienteOk(prefac.idCodigo, prefac.cidEstado)" matTooltip="Aprobar Expediente">
+            <mat-icon>check_circle</mat-icon>
+          </button>
+
+    </div>
+
+    <div *ngIf="prefac.cidEstado == '017' ">
+        <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+            <mat-icon>search</mat-icon>
+          </button>
+
+    </div>
+
+
+    <div *ngIf="prefac.cidEstado == '022'">
+      <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+          <mat-icon>search</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" (click)="AprobarExpedienteOk(prefac.idCodigo, prefac.cidEstado)" matTooltip="Aprobar Expediente">
+          <mat-icon>check_circle</mat-icon>
+        </button>
+
+        
+      <button  mat-icon-button color="primary" (click)="observarProyectoDevolverAEncargado(prefac.idCodigo,prefac.cidEstado,prefac.codigo)" matTooltip="Observar y devolver al encargado">
+        <mat-icon> remove_red_eye</mat-icon>
+      </button>
+    
+  </div>
+
+
+  
+  <div *ngIf="prefac.cidEstado == '028'">
+    <button mat-icon-button color="primary" (click)="verProyectoCoordinador(prefac.idCodigo)" matTooltip="Visualizar">
+        <mat-icon>search</mat-icon>
+      </button>
+
+      <button mat-icon-button color="primary" (click)="AprobarExpedienteOk(prefac.idCodigo, prefac.cidEstado)" matTooltip="Aprobar Expediente">
+        <mat-icon>check_circle</mat-icon>
+      </button>
+
+      
+    <button  mat-icon-button color="primary" (click)="observarProyectoDevolverAEncargado(prefac.idCodigo,prefac.cidEstado,prefac.codigo)" matTooltip="Observar y devolver al encargado">
+      <mat-icon> remove_red_eye</mat-icon>
+    </button>
+  
+</div>
+
+
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <!-- <tr mat-row [ngClass]="{'make-gold': row.fidAusencia > 0 }" *matRowDef="let row; columns: columnas"></tr> -->
+    <tr mat-row [ngClass]="{'background_row': row.cidEstado == '006'}" *matRowDef="let row; columns: columnas"></tr>
+
+  </table>
+
+    <div class="empty" *ngIf="!isLoading && dataSource === null">
+        No existe datos para mostrar en la tabla
+    </div>
+
+    <mat-card *ngIf="isLoading" class="spinerTable">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+    </mat-card>
+      
+    <mat-toolbar>
+      <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+        <div *ngIf="dataSource !== null" style="float: left !important;">
+            <img src="assets/images/logoexcel.png" width="30px" height="30px" (click)="descargarExcel($event)" class="excel-icon-top"
+            matTooltip="Descargar Excel">
+          <span class="example-spacer"></span>   
+        </div>
+        <div>
+            <mat-paginator 
+            [length]="total" 
+            [pageIndex]="pagina - 1" 
+            [pageSize]="cantidad" 
+            [showFirstLastButtons]="true"
+            [pageSizeOptions]="[15, 30, 50]" 
+            (page)="cambiarPagina($event)">
+            </mat-paginator>
+
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar> 
+ 
+</div>
+<!-- BANDEJA -->
+
+
+

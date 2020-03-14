@@ -1,0 +1,30 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "0241030001"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "0246070001"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "0246140001"
+        }, {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "0246240001"
+        },
+        {
+            "idCodigo": 5,
+            "cidCodigo": "005",
+            "cidNombre": "0247020003"
+        }
+    ],
+	"idPerfil": null
+}

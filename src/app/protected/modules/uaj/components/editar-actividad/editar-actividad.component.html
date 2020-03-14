@@ -1,0 +1,109 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Actividad</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="contenido-formulario" [formGroup]="planForm">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Objetivo</mat-label>
+    <textarea matInput formControlName="objetivo"></textarea>
+    <mat-error *ngIf="!planForm.get('objetivo').valid && planForm.get('objetivo').touched">
+      {{ planForm.get('objetivo').errors | errorMessage:"Ingrese Objetivo" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Actividad</mat-label>
+    <input matInput formControlName="actividad">
+    <mat-error *ngIf="!planForm.get('actividad').valid && planForm.get('actividad').touched">
+      {{ planForm.get('actividad').errors | errorMessage:"Ingrese Actividad" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Indicador</mat-label>
+    <input matInput formControlName="indicador">
+    <mat-error *ngIf="!planForm.get('indicador').valid && planForm.get('indicador').touched">
+      {{ planForm.get('indicador').errors | errorMessage:"Ingrese Indicador" }}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Programado</mat-label>
+      <input matInput formControlName="programado">
+      <mat-error *ngIf="!planForm.get('programado').valid && planForm.get('programado').touched">
+        {{ planForm.get('programado').errors | errorMessage:"Ingrese solo números" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Ejecutado</mat-label>
+      <input matInput formControlName="ejecutado">
+      <mat-error *ngIf="!planForm.get('ejecutado').valid && planForm.get('ejecutado').touched">
+        {{ planForm.get('ejecutado').errors | errorMessage:"Ingrese solo números" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field appearance="outline">
+      <mat-label>Año</mat-label>
+      <mat-select formControlName="anio" class="tamanio-seleccionar">
+        <mat-option *ngFor="let a of anios" [value]="a">
+          {{ a }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!planForm.get('anio').valid && planForm.get('anio').touched">
+        {{ planForm.get('anio').errors | errorMessage:"Ingrese Año" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mes Inicio</mat-label>
+      <mat-select formControlName="mesInicio" class="tamanio-seleccionar">
+        <mat-option *ngFor="let m of meses" [value]="m.id">
+          {{ m.mes }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!planForm.get('mesInicio').valid && planForm.get('mesInicio').touched">
+        {{ planForm.get('mesInicio').errors | errorMessage:"Ingrese Mes" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mes Fin</mat-label>
+      <mat-select formControlName="mesFin" class="tamanio-seleccionar">
+        <mat-option *ngFor="let m of meses" [value]="m.id">
+          {{ m.mes }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!planForm.get('mesFin').valid && planForm.get('mesFin').touched">
+        {{ planForm.get('mesFin').errors | errorMessage:"Ingrese Mes" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+</div>
+
+<div align="center" class="example-button-row acciones-margen-derecho">
+  <button color="primary" mat-raised-button (click)="actualizarPlan()">
+    <mat-icon>save</mat-icon>ACTUALIZAR
+  </button>
+  &nbsp;&nbsp;
+  <button color="warn" mat-raised-button (click)="eliminarActividad()">
+    <mat-icon>delete</mat-icon>ELIMINAR
+  </button>
+</div>
+
+<br>

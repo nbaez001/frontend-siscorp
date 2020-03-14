@@ -1,0 +1,25 @@
+{"codResultado":1,
+    "msgResultado":"OK",
+    "total":null,
+    "response":
+    [
+        {
+            "idCodigoArchivo":53284,
+            "nombreArchivo":"presupuestoclienteresumen quille.pdf",
+            "tipoArchivo":"Cronograma del avance del proyecto",
+            "fechaRegistro":"2019-11-27 11:32:47.253",
+            "descripcion":"is simply dummy text of the printing and typesetting industry.",
+            "fidProyecto":0,
+            "cidTipoArchivo":""
+        },
+        {
+            "idCodigoArchivo":53285,
+            "nombreArchivo":"Informe de Compatibilidad y Factibilidad de Ejecución.pdf",
+            "tipoArchivo":"Informe de Compatibilidad y Factibilidad",
+            "fechaRegistro":"2019-11-27 11:32:47.253",
+            "descripcion":"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+            "fidProyecto":0,
+            "cidTipoArchivo":""
+        }
+    ],"idPerfil":null
+}

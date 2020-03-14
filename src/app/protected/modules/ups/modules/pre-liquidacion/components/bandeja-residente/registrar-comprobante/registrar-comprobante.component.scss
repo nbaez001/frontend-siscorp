@@ -1,0 +1,146 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+:host {
+    
+/*-------- CELDA EDITABLE INICIO //para que las celdas ocupe todo el espacio --------*/
+    td{
+      mat-form-field {
+        margin:0 !important;
+      }
+    }
+
+    ::ng-deep  td mat-form-field  .mat-form-field-wrapper div div .mat-form-field-outline-start,
+    ::ng-deep  td mat-form-field  .mat-form-field-wrapper div div .mat-form-field-outline-end{
+      border-radius: 0 !important;
+    }
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-wrapper{
+      margin:0;
+    }
+    ::ng-deep .mat-form-field-wrapper{
+      padding-bottom: 0px;
+    }
+    ::ng-deep .tr.mat-footer-row, tr.mat-row{
+      height: 30px;
+    }
+
+    
+/*--------CELDA EDITABLE FIN--------*/
+
+  .mat-column-select {//DESBORADAMIENTO CHECK TABLA
+    overflow: initial;
+  }
+
+  .estilo-cabecera-tabla {
+    color: black;
+    font-weight: 600;
+    background-color: #d3e1ee;
+    text-align: center;
+  }
+
+  .table-container {
+    max-height: 560px;
+  }
+
+  .bandeja {
+    position: relative;
+    margin-top: 10px;
+    padding: 16px;
+  }
+
+      .mat-expansion-panel-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0 24px;
+        border-radius: inherit;
+        background: #039be5 !important;
+      }
+  
+      ::ng-deep .botonBusqueda{
+        overflow: initial;
+        .mat-figure{
+          justify-content:left;
+        }
+        .separar{
+          margin-left: 7px;
+        }        
+      } 
+      
+      th.mat-header-cell, td.mat-cell {
+        text-align: center;
+        border: 1px solid #CCC;
+        padding: 0 !important;
+    }
+
+    tr.mat-header-row{
+      height: 35px;
+    }
+    .mat-header-cell{
+      font-weight: bold;
+      color: #494949;
+    }
+   
+    @include mat-table-columns(
+    (
+      colCheck2: (
+        width: 3rem
+      ),
+      colNro2: (
+        width: 2rem
+      ),
+      colRecurso2: (
+        width: 6rem
+      ),
+      colAutorizacion: (
+        width: 28rem
+      ),
+      colRendido: (
+        width: 30rem
+      ),
+      colDiferencia: (
+        width: 12rem
+      ),
+      // colImporteAut: (
+      //   width: 4rem
+      // ),
+      // colProveedorAut: (
+      //   width: 5rem
+      // ),
+      // colNumAgAut: (
+      //   width: 4rem
+      // ),
+      // colCantidadRen: (
+      //   width: 10rem
+      // ),
+      // colPrecioUnitRen: (
+      //   width: 10rem
+      // ),
+      // colImporteRen: (
+      //   width: 1rem
+      // ),
+      // colComprobanteRen: (
+      //   width: 5rem
+      // ),
+      // colNumComprobanteRen: (
+      //   width: 6rem
+      // ),
+      // colCantidadDif: (
+      //   width: 5rem
+      // ),
+      // colPrecioUnitDif: (
+      //   width: 15rem
+      // ),
+      // colImporteDif: (
+      //   width: 15rem
+      // ),
+      colObservacion2: (
+        width: 15rem
+      )
+    )
+  );
+
+  }
+
+
+  

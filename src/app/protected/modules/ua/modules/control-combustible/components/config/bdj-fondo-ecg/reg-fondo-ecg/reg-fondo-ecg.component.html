@@ -1,0 +1,131 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Nro. Res. administracion</mat-label>
+            <input matInput formControlName="nroResAdministracion" type="text" placeholder="Nro. Res. administracion">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Monto fondo por encargo</mat-label>
+            <input matInput formControlName="monto" type="number" placeholder="Monto fondo por encargo">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha</mat-label>
+            <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="Fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Archivo Res. Administracion</mat-label>
+            <input matInput formControlName="archResAdministracion" type="text"
+              placeholder="Archivo Res. Administracion">
+            <button mat-icon-button matTooltip="Buscar Res. administracion" type="button" class="btn-icon-input"
+              color="primary" (click)="buscarResAdm($event)">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <input id="fileInput" class="none" type="file" accept="application/pdf" (change)="cargarResAdm($event)">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list cols="12" rowHeight="70px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field>
+            <mat-label>Observaciones</mat-label>
+            <textarea matInput formControlName="observacion" placeholder="Observaciones"></textarea>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Afectacion presupuestal</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="detFormularioGrp">
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>FfRb</mat-label>
+                  <input matInput formControlName="ffRb" placeholder="FfRb">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Meta/Mnemonico</mat-label>
+                  <input matInput formControlName="metaMnemonico" placeholder="Meta/Mnemonico">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Clasificador de gasto</mat-label>
+                  <input matInput formControlName="clasificadorGasto" placeholder="Clasificador de gasto">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Descripcion</mat-label>
+                  <input matInput formControlName="descripcion" placeholder="Descripcion">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Monto</mat-label>
+                  <input matInput formControlName="monto" type="number" placeholder="Monto">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}" class="dialog-form-actions">
+                <button mat-raised-button type="button" color="primary" (click)="agregar()">Agregar</button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </form>
+
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>N°</th>
+              <td mat-cell *matCellDef="let row; let i=index"> {{ i+1 }} </td>
+            </ng-container>
+
+            <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+              <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="opt" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef>OPT.</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button matTooltip="Quitar afectacion presupuestal"
+                  (click)="quitarAfectacionPres(element)">
+                  <mat-icon>delete_outline</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <div class="empty" *ngIf="dataSource === null">
+            No existe datos para mostrar en la tabla
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </form>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="button" (click)="guardar()">Guardar</button>
+    <button mat-button type="button" [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div>
+</div>

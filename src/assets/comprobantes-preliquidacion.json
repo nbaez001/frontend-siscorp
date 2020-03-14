@@ -1,0 +1,55 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "item": 1,
+            "idComprobante": 1,
+            "nroComprobante": "01",
+            "rubro": "Costo Directo",
+            "tipoDocumento": "Boleta",
+            "nroDocumento": "002-000132",
+            "fechaDocumento": "10/04/2019",
+            "proveedor": "Proveedor 01",
+            "rucDni": "1020021252",
+            "descripcion": "Varios",
+            "importe": "10 000.00",
+            "estado": "APROBADO",
+            "color": "color-grey",        
+            "fidProyecto": 27255
+        }, {
+            "item": 2,
+            "idComprobante": 2,
+            "nroComprobante": "02",
+            "rubro": "Costo Directo",
+            "tipoDocumento": "Factura",
+            "nroDocumento": "F001-0097854",
+            "fechaDocumento": "13/04/2019",
+            "proveedor": "Proveedor 02",
+            "rucDni": "1020021252",
+            "descripcion": "Varios",
+            "importe": "10 000.00",
+            "estado": "OBSERVADO",
+            "color": "color-grey",        
+            "fidProyecto": 27255
+        },
+        {
+            "item": 3,
+            "idComprobante": 3,
+            "nroComprobante": "03",
+            "rubro": "Gastos generales",
+            "tipoDocumento": "Boleta",
+            "nroDocumento": "002-000132",
+            "fechaDocumento": "10/04/2019",
+            "proveedor": "Proveedor 03",
+            "rucDni": "1020021252",
+            "descripcion": "Varios",
+            "importe": "10 000.00",
+            "estado": "RECHAZDO",
+            "color": "color-grey",        
+            "fidProyecto": 27255
+        }
+    ],
+	"idPerfil": 1
+}

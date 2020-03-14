@@ -1,0 +1,73 @@
+
+
+    <!-- CABECERA -->
+    <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+        <span>AUSENCIA</span>
+         <!--<button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+        </button> -->
+      </mat-toolbar>
+      <!-- CABECERA -->
+      <br>
+        <!-- FORMULARIO -->
+
+        <mat-card>
+        <div mat-dialog-content class="contenido-formulario" [formGroup]="ausenciaForm" >
+
+    
+            <div style="width: 900px" >
+
+
+               <mat-form-field appearance="outline" style="width: 320px">
+                    <mat-label>FECHA INICIO</mat-label>
+                    <input matInput [min]="minDate" [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fechaRegDesdeFrmCtrl"  [disabled]="disabledControl" 
+                    (dateChange)="validarFechaInicio()">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+
+       
+                <mat-form-field appearance="outline" style="width: 320px; padding-left: 10px;" >
+                    <mat-label>FECHA  FIN</mat-label>
+                    <input matInput [min]="minDate" [matDatepicker]="picker2" readonly (click)="picker2.open()" formControlName="fechaRegHastaFrmCtrl" [disabled]="disabledControl"
+                    (dateChange)="validarFechaFin()">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            
+            </div>
+
+          
+    
+            <div>
+                <mat-form-field appearance="outline" style="width: 650px" >
+                    <mat-label>Motivo de Ausencia</mat-label>
+                    <input matInput formControlName="observacionFrmCtrl"  [readonly]="disabledControl">
+                
+                  </mat-form-field>
+
+            </div>
+           
+    
+                
+    
+            <div align="left" class="example-button-row acciones-margen-derecho">
+    
+                <button color="primary" mat-raised-button (click)="registrarAusencia($event)"  [disabled]="disabledControl" >
+                  Registar Ausencia
+                </button>
+
+                <button color="primary" (click)="registrarRetorno()"  [disabled]="disabledControl" style="margin-left: 20px" class="btn-retornar">
+                    Retornar
+                </button>
+            </div>
+
+
+        </div>
+      </mat-card>
+          <!-- FORMULARIO -->
+      
+     
+       
+    
+    
+      

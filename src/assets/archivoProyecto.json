@@ -1,0 +1,45 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "nombreArchivo": "Expediente Técnico"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "nombreArchivo": "Convenio de Cooperación"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "nombreArchivo": "Acta Sesión de Orientación al NE"
+        }, {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "nombreArchivo": "Informe de Compatibilidad y Factibilidad de Ejecución"
+        },
+        {
+            "idCodigo": 5,
+            "cidCodigo": "005",
+            "nombreArchivo": "Acta de Entrega del Terreno"
+        },
+        {
+            "idCodigo": 6,
+            "cidCodigo": "006",
+            "nombreArchivo": "Autorizaciones de Gastos"
+        },
+        {
+            "idCodigo": 7,
+            "cidCodigo": "007",
+            "nombreArchivo": "Pre Liquidación"
+        },
+        {
+            "idCodigo": 8,
+            "cidCodigo": "008",
+            "nombreArchivo": "Liquidación"
+        }
+    ],
+	"idPerfil": null
+}

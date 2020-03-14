@@ -1,0 +1,144 @@
+<div class="page">
+  <ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+  </ngx-spinner>
+
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>N° Documento</mat-label>
+            <input matInput formControlName="nroDocumento" placeholder="N° documento" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha asignacion</mat-label>
+            <input matInput formControlName="fechaAsignacion" [matDatepicker]="picker" placeholder="Fecha asignacion">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Usuario responsable</mat-label>
+            <input matInput formControlName="nombres" placeholder="Usuario responsable" type="text" [appUpperCase]>
+            <button mat-icon-button matTooltip="Buscar trabajador contratado/ usuario responsable" type="button"
+              class="btn-icon-input" color="primary" (click)="buscarEmpleado($event)" *ngIf="!responsable && !data.objeto"
+              [ngClass]="{ 'mat-warn': validationService.validateButton(formularioGrp,responsable) }">
+              <mat-icon>person_add</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Quitar trabajador" type="button" class="btn-icon-input" color="primary"
+              (click)="quitarEmpleado($event)" *ngIf="responsable && !data.objeto">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Dni responsable</mat-label>
+            <input matInput formControlName="dniResponsable" placeholder="Dni responsable" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Cargo responsable</mat-label>
+            <input matInput formControlName="cargoResponsable" placeholder="Cargo responsable" type="text"
+              [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Modalidad contrato responsable</mat-label>
+            <input matInput formControlName="modContratoResponsable" placeholder="Modalidad contrato responsable"
+              type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Dependencia</mat-label>
+            <mat-select formControlName="dependencia" (selectionChange)="comboAreas()"
+              [matTooltip]="formularioGrp.get('dependencia').value?formularioGrp.get('dependencia').value.cidNombre:''">
+              <mat-option *ngFor="let dependencia of dependencias" [value]="dependencia">
+                {{dependencia.cidNombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Area</mat-label>
+            <mat-select formControlName="area"
+              [matTooltip]="formularioGrp.get('area').value?formularioGrp.get('area').value.cidNombre:''">
+              <mat-option *ngFor="let area of areas" [value]="area">
+                {{area.cidNombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Local</mat-label>
+            <input matInput formControlName="local" placeholder="Local" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Piso/Ambiente</mat-label>
+            <input matInput formControlName="pisoAmbiente" placeholder="Piso/Ambiente" type="text" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+    <h4 style="margin-bottom: 5px;">Lista de bienes asignados</h4>
+    <!-- <button mat-raised-button color="primary" type="button" (click)="buscarSolicitudesMant()" [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1"> -->
+    <button mat-raised-button color="primary" type="button" (click)="buscarBienes()" *ngIf="!data.objeto">
+      <mat-icon>search</mat-icon>
+      Agregar bienes
+    </button>
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+          <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="opt" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef>OPT.</th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button matTooltip="Quitar bien" (click)="quitarBien(element)" disabled="data.objeto">
+              <mat-icon>delete_outline</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <div class="empty" *ngIf="dataSource === null">
+        No existe datos para mostrar en la tabla
+      </div>
+
+      <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button (click)="vista()" *ngIf="!data.objeto">Vista previa</button>
+    <button mat-button (click)="vista()" *ngIf="data.objeto">Ver ficha</button>
+    <button mat-raised-button color="primary" (click)="guardar()" *ngIf="flgRegAsistente">Guardar</button>
+    <button mat-raised-button color="primary" (click)="conformidad()" *ngIf="flgConfPatrimonio"><mat-icon>gesture</mat-icon>Conformidad</button>
+    <button mat-raised-button color="primary" (click)="conformidadJefe()" *ngIf="flgConfJefe"><mat-icon>gesture</mat-icon>Conformidad</button>
+    <button mat-raised-button color="primary" (click)="conformidadAsistAdm()" *ngIf="flgConfAsistAdm"><mat-icon>done_all</mat-icon>Conformidad</button>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "Presidente"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "Tesorero"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "Secretario"
+        }
+        , {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "Fiscal"
+        }
+    ],
+	"idPerfil": null
+}

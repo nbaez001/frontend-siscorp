@@ -1,0 +1,28 @@
+<mat-toolbar mat-dialog-title class="mat-primary">
+  <span class="titulo"><mat-icon>account_circle</mat-icon> Agregar perfiles</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div mat-dialog-content>
+
+  <p>Seleccionar los perfiles que desea agregar:</p>
+
+  <mat-selection-list #seleccionados>
+    <mat-list-option *ngFor="let perfil of perfiles" [value]="perfil">
+      {{perfil.nombrePerfil}}
+    </mat-list-option>
+  </mat-selection-list>
+
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    [disabled]="seleccionados.selectedOptions.selected.length === 0"
+    (click)="agregar(seleccionados.selectedOptions.selected)"
+    color="primary">
+    <mat-icon>check</mat-icon> Agregar
+  </button>
+</div>

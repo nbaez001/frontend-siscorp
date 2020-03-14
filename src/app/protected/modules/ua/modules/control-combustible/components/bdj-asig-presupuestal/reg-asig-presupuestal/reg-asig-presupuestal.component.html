@@ -1,0 +1,71 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Meta</mat-label>
+            <mat-select disableOptionCentering formControlName="meta">
+              <mat-option *ngFor="let meta of metas" [value]="meta">
+                {{meta.codigo}} - {{meta.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Partida</mat-label>
+            <mat-select disableOptionCentering formControlName="partida">
+              <mat-option *ngFor="let partida of partidas" [value]="partida">
+                {{partida.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Descripcion partida</mat-label>
+            <input matInput placeholder="Descripcion partida"
+              value="{{this.formularioGrp.get('partida').value.descripcion}}" [disabled]="true">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>PIM</mat-label>
+            <input matInput formControlName="pim" placeholder="PIM" type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Certificado</mat-label>
+            <input matInput formControlName="certificado" placeholder="Certificado" type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Saldo</mat-label>
+            <input matInput formControlName="saldo" placeholder="Saldo" type="number">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha asignacion</mat-label>
+            <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="Fecha asignacion">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+    <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div>
+</div>

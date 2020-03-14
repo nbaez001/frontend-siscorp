@@ -1,0 +1,70 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <!-- <form [formGroup]="soatGrp" *ngIf="getUser.perfil.id != 3"> -->
+    <form [formGroup]="soatGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Empresa</mat-label>
+            <input matInput placeholder="Empresa">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Inicio vigencia SOAT</mat-label>
+            <input matInput [matDatepicker]="picker2" placeholder="Inicio vigencia SOAT">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fin vigencia SOAT</mat-label>
+            <input matInput [matDatepicker]="picker3" placeholder="Fin vigencia SOAT">
+            <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+            <mat-datepicker #picker3></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}" class="dialog-form-actions">
+          <button mat-raised-button color="primary" type="button" (click)="onNoClick()">Guardar</button>
+          <button mat-raised-button type="button" (click)="limpiar()">Limpiar</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="nro">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.nro}} </td>
+        </ng-container>
+        <ng-container matColumnDef="empresa">
+          <th mat-header-cell *matHeaderCellDef> Empresa </th>
+          <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fechaInicio">
+          <th mat-header-cell *matHeaderCellDef> Fecha inicio </th>
+          <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
+        </ng-container>
+        <ng-container matColumnDef="fechaFin">
+          <th mat-header-cell *matHeaderCellDef> Fecha fin </th>
+          <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <!-- <div mat-dialog-actions align="center">
+    <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div> -->
+</div>

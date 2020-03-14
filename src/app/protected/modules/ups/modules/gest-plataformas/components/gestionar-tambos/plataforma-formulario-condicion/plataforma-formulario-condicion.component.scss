@@ -1,0 +1,29 @@
+:host {
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  ::ng-deep mat-tab-body {
+    margin-top: 20px;
+  }
+  
+  .contenido-formulario {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .auditoria {
+      font-size: 11px;
+      font-weight: 500;
+      font-style: oblique;
+    }
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding: 20px;
+  }
+}

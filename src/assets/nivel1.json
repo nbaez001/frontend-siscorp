@@ -1,0 +1,43 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "OBRAS PROVISIONALES, TRABAJOS PRELIMINARES, SEGURIDAD Y SALUD"
+        }, 
+        {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "ESTRUCTURAS"
+        }, 
+        {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "ARQUITECTURA"
+        }, 
+        {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "INSTALACIONES SANITARIAS"
+        },
+        {
+            "idCodigo": 5,
+            "cidCodigo": "005",
+            "cidNombre": "INSTALACIONES ELECTRICAS Y MECANICAS"
+        }, 
+        {
+            "idCodigo": 6,
+            "cidCodigo": "006",
+            "cidNombre": "INSTALACIONES DE COMUNICACIONES"
+        }, 
+        {
+            "idCodigo": 7,
+            "cidCodigo": "007",
+            "cidNombre": "EQUIPAMIENTO"
+        }
+    ],
+	"idPerfil": null
+}

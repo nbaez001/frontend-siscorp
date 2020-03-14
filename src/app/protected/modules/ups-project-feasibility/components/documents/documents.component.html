@@ -1,0 +1,145 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <div class="titulo">
+    <mat-icon>ballot</mat-icon> BANDEJA DE PERFILES DE PREFACTIBILIDAD
+  </div>
+  <div class="perfil">
+    <mat-icon>how_to_reg</mat-icon>
+    <span *ngIf="rol === 'jefe'">JEFE UPS</span>
+    <span *ngIf="rol === 'esp'">ESPECIALISTA</span>
+    <span *ngIf="rol === 'enc'">ENCARGADO DE ESTUDIOS</span>
+    <span *ngIf="rol === 'prof'">PROFESIONALES</span>
+  </div>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Filtros</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- INPUTS -->
+    <div class="inputs">
+      <mat-form-field appearance="outline">
+        <mat-label>Documento</mat-label>
+        <input matInput>
+        <mat-icon matSuffix>insert_drive_file</mat-icon>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <mat-select>
+          <mat-option>Pend. Asignacion</mat-option>
+          <mat-option>Asig. Enc. Estudio</mat-option>
+          <mat-option>Pend. Asig. Profe.</mat-option>
+          <mat-option>Prof. Asignados</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Inicio</mat-label>
+        <input matInput [matDatepicker]="picker1">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Fin</mat-label>
+        <input matInput [matDatepicker]="picker2">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Alerta</mat-label>
+        <mat-select #alertaInput>
+          <mat-select-trigger>
+            {{ alertaInput.value?.text }}
+          </mat-select-trigger>
+          <mat-option [value]="alerta" *ngFor="let alerta of alertaOpciones"><mat-icon [ngClass]="alerta.class">brightness_1</mat-icon> {{alerta.text}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <div class="acciones">
+        <button mat-mini-fab><mat-icon>filter_list</mat-icon></button>
+        <button mat-mini-fab class="mat-grey-300-bg"><mat-icon>clear_all</mat-icon></button>
+      </div>
+    </div>
+    <!-- INPUTS -->
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- FILTROS -->
+
+<!-- BANDEJA -->
+<div class="datos mat-elevation-z4 mat-white-bg">
+  <button mat-fab class="mat-green-bg accion"><mat-icon class="white-fg">file_download</mat-icon></button>
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="nro_documento">
+      <th mat-header-cell *matHeaderCellDef> # </th>
+      <td mat-cell *matCellDef="let documento"> {{documento.nro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nro_documento_completo">
+      <th mat-header-cell *matHeaderCellDef> Nro. Doc. </th>
+      <td mat-cell *matCellDef="let documento"> {{documento.nro_documento_completo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="asunto">
+      <th mat-header-cell *matHeaderCellDef> Asunto </th>
+      <td mat-cell *matCellDef="let documento"> {{documento.asunto}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef> Fecha </th>
+      <td mat-cell *matCellDef="let documento"> {{documento.fecha | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef> Usuario Asignado </th>
+      <td mat-cell *matCellDef="let documento"> {{documento.usuario}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      <td mat-cell *matCellDef="let documento">
+        <div class="mat-elevation-z2 estado mat-grey-200-bg" *ngIf="documento.estado == 1">Pend. Asignación</div>
+        <div class="mat-elevation-z2 estado mat-grey-200-bg" *ngIf="documento.estado == 2">Asig. Enc. Estudio</div>
+        <div class="mat-elevation-z2 estado mat-grey-200-bg" *ngIf="documento.estado == 3" (click)="mostrarAsignados()">Prof. Asignados</div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plazo">
+      <th mat-header-cell *matHeaderCellDef> Plazo </th>
+      <td mat-cell *matCellDef="let documento">
+        <mat-chip-list>
+          <mat-chip [ngClass]="{'mat-yellow-bg': documento.plazo <= 15 && documento.plazo >= 6, 'mat-red-bg': documento.plazo <= 5 }">{{documento.plazo}}</mat-chip>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Acciones </th>
+      <td mat-cell *matCellDef="let documento">
+        <button mat-icon-button><mat-icon>search</mat-icon></button>
+        <button mat-icon-button (click)="asignar()"><mat-icon>person_add</mat-icon></button>
+        <button mat-icon-button (click)="eliminar()"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button><mat-icon>file_download</mat-icon></button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

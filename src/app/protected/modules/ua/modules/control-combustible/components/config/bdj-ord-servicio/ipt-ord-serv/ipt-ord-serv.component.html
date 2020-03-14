@@ -1,0 +1,31 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Nro Orden servicio</mat-label>
+            <input matInput formControlName="nroOrdenServicio" type="text" placeholder="Nro Orden servicio"
+              [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Año orden servicio</mat-label>
+            <input matInput formControlName="anioOrdenServicio" type="number" placeholder="Año orden servicio">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="guardar()">Importar</button>
+    <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div>
+</div>

@@ -1,0 +1,250 @@
+<div class="page">
+  
+    <mat-accordion class="filtros">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+          <mat-panel-title>
+            <img src="assets/images/busqueda.png" width="26px" height="26px"><strong style="color: white;">FILTROS DE
+              BÚSQUEDA</strong>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="mat-expansion-panel-cuerpo"  [formGroup]="frmFiltrosGrp">  
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>RECURSO</mat-label>
+                  <input matInput  formControlName="frmRecurso">
+                </mat-form-field>          
+              </mat-grid-tile>  
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>COMPROBANTE DE PAGO</mat-label>
+                        <mat-select formControlName="frmComprobante"  >
+                          <mat-option *ngFor="let comprobante of dataItemComprobante?.comprobantes" [value]="comprobante.idCodigo">{{comprobante.cidNombre}}</mat-option>
+                        </mat-select>
+                </mat-form-field>          
+              </mat-grid-tile>  
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 1, lg: 1, xl: 1}">
+                <mat-form-field appearance="outline">
+                  <mat-label>NÚMERO</mat-label>
+                  <input matInput  formControlName="frmNumero">
+                </mat-form-field>          
+              </mat-grid-tile>  
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 3, lg: 3, xl: 3}" class="botonBusqueda">
+                <button mat-mini-fab  class="separar"><mat-icon matTooltip="búsqueda">search</mat-icon></button>
+                <button mat-mini-fab class="separar" (click)="reiniciar()"   ><mat-icon matTooltip="Limpiar filtros de búsqueda">clear_all</mat-icon></button>
+              </mat-grid-tile>  
+            </mat-grid-list>  
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  <div class="table-container clear-both bandeja mat-elevation-z6">
+    <table mat-table [dataSource]="dataSource"> 
+        <!-- Cabeceras Primer nivel - INICIO-->
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="colCheck">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [ngStyle]="{'display': 'none'}"> check</th>
+          <td mat-cell *matCellDef="let fila">
+            <mat-checkbox [(ngModel)]="fila.checked" (click)="$event.stopPropagation()"
+                   (change)="$event ? seleccionarRegistro(fila) : null"
+                  [checked]="selectionRegistro.isSelected(fila)">
+                </mat-checkbox>
+            
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="colNro">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [ngStyle]="{'display': 'none'}"> N°</th>
+          <td mat-cell *matCellDef="let tabla">{{tabla.nro}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="colRecurso">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [ngStyle]="{'display': 'none'}"> RECURSO</th>
+          <td mat-cell *matCellDef="let tabla">{{tabla.recurso}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="colUnidadAut">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> UNIDAD</th>
+          <td mat-cell *matCellDef="let tabla">{{tabla.unidadAut}} </td>
+        </ng-container>
+   
+        <ng-container matColumnDef="colCantidadAut">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> CANTIDAD </th>
+          <td mat-cell *matCellDef="let tabla"> {{tabla.cantidadAut}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="colPreUniAut">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> PRECIO UNITARIO  </th>
+          <td mat-cell *matCellDef="let tabla"> {{tabla.preUniAut}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="colImporteAut">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> IMPORTE </th>
+          <td mat-cell *matCellDef="let tabla"> {{tabla.importeAut}} </td>
+        </ng-container>
+   
+        <ng-container matColumnDef="colProveedorAut">
+         <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> PROVEEDOR </th>
+         <td mat-cell *matCellDef="let tabla"> {{tabla.proveedorAut}} </td>
+        </ng-container>
+        
+        <ng-container matColumnDef="colNumAgAut">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> N° AG </th>
+            <td mat-cell *matCellDef="let tabla"> {{tabla.numAgAut}} </td>
+        </ng-container>
+   
+        <ng-container matColumnDef="colCantidadRen">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> CANTIDAD </th>
+          <!-- <td mat-cell *matCellDef="let tabla"> {{tabla.cantidadRen}} </td> -->
+          <td mat-cell *matCellDef="let tabla" class="td-align-center" >
+            <mat-form-field  appearance="outline" floatLabel="never" >
+               <input matInput [value]="tabla.cantidadRen" [(ngModel)]="tabla.cantidadRen"  (keyup.enter)="actualizarTabla(tabla)" ><!-- (blur)="actualizarTabla()" (focusout)="actualizarTabla()" -->
+            </mat-form-field>
+          </td> 
+         </ng-container>
+
+         <ng-container matColumnDef="colPrecioUnitRen">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> PRECIO UNITARIO S/ </th>
+          <!-- <td mat-cell *matCellDef="let tabla"> {{tabla.precioUnitRen}} </td> -->
+          <td mat-cell *matCellDef="let tabla" class="td-align-center" >
+            <mat-form-field  appearance="outline" floatLabel="never" >
+               <input matInput [value]="tabla.precioUnitRen" [(ngModel)]="tabla.precioUnitRen"  (keyup.enter)="actualizarTabla(tabla)" ><!-- (blur)="actualizarTabla()" (focusout)="actualizarTabla()" -->
+            </mat-form-field>
+          </td> 
+         </ng-container>
+
+         <ng-container matColumnDef="colImporteRen">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> IMPORTE </th>
+          <td mat-cell *matCellDef="let tabla"> {{tabla.importeRen}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="colComprobanteRen">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> COMPROBANTE PAGO </th>
+          <td mat-cell *matCellDef="let tabla" class="td-align-center" >
+            <mat-form-field  appearance="outline" floatLabel="never">
+              <!-- <mat-label>Comprobante</mat-label> -->
+               <mat-select> 
+                <mat-option *ngFor="let ru of dataItemComprobante?.comprobantes" [value]="ru.idCodigo">{{ru.cidNombre}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td> 
+
+         </ng-container>
+
+         <ng-container matColumnDef="colNumComprobanteRen">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> N° COMPROBANTE </th>
+          <td mat-cell *matCellDef="let tabla" class="td-align-center" >
+            <mat-form-field  appearance="outline" floatLabel="never" >
+               <input matInput [value]="tabla.numComprobanteRen" [(ngModel)]="tabla.numComprobanteRen"  (keyup.enter)="actualizarTabla(tabla)" ><!-- (blur)="actualizarTabla()" (focusout)="actualizarTabla()" -->
+            </mat-form-field>
+          </td> 
+         </ng-container>
+        
+         <ng-container matColumnDef="colCantidadDif">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> CANTIDAD </th>
+          <td mat-cell *matCellDef="let tabla"> {{tabla.cantidadDif}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="colPrecioUnitDif">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> PRECIO UNITARIO S/ </th>
+          <td mat-cell *matCellDef="let tabla"> {{tabla.precioUnitDif}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="colImporteDif">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> IMPORTE</th>
+          <td mat-cell *matCellDef="let tabla"> {{tabla.importeDif}} </td>
+         </ng-container>
+
+         <ng-container matColumnDef="colObservacion">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [ngStyle]="{'display': 'none'}"> OBSERVACIONES </th>
+          <!-- <td mat-cell *matCellDef="let tabla"> {{tabla.observacion}} </td> -->
+          <td mat-cell *matCellDef="let tabla" class="td-align-center" >
+            <mat-form-field  appearance="outline" floatLabel="never" >
+               <input matInput [value]="tabla.observacion" [(ngModel)]="tabla.observacion"  (keyup.enter)="actualizarTabla(tabla)" ><!-- (blur)="actualizarTabla()" (focusout)="actualizarTabla()" -->
+            </mat-form-field> 
+          </td>  
+         </ng-container>
+
+       <!-- Cabeceras Primer nivel- FIN-->
+   
+       <!-- Cabeceras Segundo nivel - INICIO-->
+       <ng-container matColumnDef="colCheck2" >
+        <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [attr.rowspan]="2">
+          <button matTooltip="Fraccionar insumo" mat-mini-fab class= "btn_agregar"  (click) = "fraccionarInsumo()" >
+            <mat-icon>add</mat-icon>
+          </button>
+        </th>
+       </ng-container>
+       
+        <ng-container matColumnDef="colNro2">
+         <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [attr.rowspan]="2">N°</th>
+        </ng-container>
+        <ng-container matColumnDef="colRecurso2">
+         <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [attr.rowspan]="2" >RECURSO</th>
+        </ng-container>
+        <ng-container matColumnDef="colAutorizacion">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [attr.colspan]="6" >AUTORIZACION </th>
+        </ng-container>
+        <ng-container matColumnDef="colRendido">
+         <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [attr.colspan]="5">RENDIDO </th>
+        </ng-container>
+        <ng-container matColumnDef="colDiferencia">
+         <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [attr.colspan]="3" > DIFERENCIA (RENDIDO - AG) </th>
+        </ng-container>
+        <ng-container matColumnDef="colObservacion2">
+         <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla" [attr.rowspan]="2">OBSERVACIONES  </th>
+        </ng-container>
+        
+       <!-- Cabeceras Segundo nivel - FIN--> 
+   
+   
+       <!-- columnas segundo nivel -->
+       <tr mat-header-row *matHeaderRowDef="['colCheck2','colNro2', 'colRecurso2','colAutorizacion','colRendido','colDiferencia','colObservacion2']"></tr>
+
+       <!-- columnas primer nivel -->
+       <tr mat-header-row *matHeaderRowDef="columnas;" class="encabezadoTabla"></tr>
+
+        <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+   
+      </table>
+   
+      <div class="empty" *ngIf=" dataSource === null">
+        No existe datos para mostrar en la tabla
+      </div>
+   
+</div>
+
+<!-- TABLA SUBTOTALES -->
+
+<table mat-table [dataSource]="dataSourceSubtotal"> 
+  <ng-container matColumnDef="colDescSub">
+    <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">  </th>
+    <td mat-cell *matCellDef="let tabla"> {{tabla.descSub}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="colImporteAutSub">
+    <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> IMPORTE AUTORIZACIÓN </th>
+    <td mat-cell *matCellDef="let tabla"> {{tabla.importeAutSub}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="colImporteRenSub">
+    <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> IMPORTE RENDIDO </th>
+    <td mat-cell *matCellDef="let tabla"> {{tabla.importeRenSub}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="colImporteDifSub">
+    <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> DIFERENCIA (RENDIDO - AG) </th>
+    <td mat-cell *matCellDef="let tabla"> {{tabla.importeDifSub}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="colObsSub">
+    <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> OBSERVACIONES </th>
+    <td mat-cell *matCellDef="let tabla"> {{tabla.obsSub}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnasSub;" class="encabezadoTabla"></tr>
+
+  <tr mat-row *matRowDef="let row; columns: columnasSub"></tr>
+</table>
+</div>

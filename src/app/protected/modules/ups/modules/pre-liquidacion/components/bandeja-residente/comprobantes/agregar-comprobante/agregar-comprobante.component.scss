@@ -1,0 +1,51 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+
+:host {
+  
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+  
+    }
+    #formularioComprobanteGrp,#formularioBienesGrp,#formularioServiciosGrp,#formularioViaticosGrp{
+      padding: 30px;
+    }
+    
+    .encabezadoTabla {
+      background-color: #e2f0f5;
+    }
+    
+  
+    /deep/  .alinear-boton .mat-figure{
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+    
+    
+  }
+ 
+  @include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    colGasto: (
+      width: 8rem
+    )
+    ,
+    colDetalle: (
+      width: 12rem
+    ),
+    colMonto: (
+      width: 5rem
+    ),
+    colFecha: (
+      width: 5rem
+    ),
+    acciones: (
+      width: 5rem
+    )
+  )
+  );

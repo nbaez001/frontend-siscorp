@@ -1,0 +1,28 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM"
+        }, 
+		{
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM"
+        }, 
+		{
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "18 HUECOS C:A 1:5; JUNTA 1.5 CM"
+        }, 
+		{
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "HUECOS C:A 1:5; JUNTA 1.5 CM"
+        }
+    ],
+	"idPerfil": null
+}

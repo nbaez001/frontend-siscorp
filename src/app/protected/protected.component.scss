@@ -1,0 +1,53 @@
+:host {
+    display: flex;
+    height: 100%;
+
+    mat-progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 3px;
+        z-index: 2;
+    }
+
+    mat-drawer-container {
+        flex: 1;
+
+        // TOOLBAR
+        mat-drawer {
+            box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+            width: 256px;
+            color: hsla(0,0%,100%,.87) !important;
+            background-color: #3c4252 !important;
+    
+            &:not(.has-sidenav-open) {
+                width: 60px;
+                visibility: inherit !important;
+                transform: inherit !important;
+            }
+
+            .icon-arrow {
+                margin-left: 8px;
+            }
+        }
+
+        // CONTENIDO
+        mat-drawer-content {
+            margin-left: 60px;
+
+            &:not(.has-sidenav-open) {
+                margin-left: 256px;
+            }
+
+            // PAGINAS
+            .content {
+                padding: 16px;
+                /*position: absolute;
+                top: 64px;
+                bottom: 0;
+                left: 0;
+                right: 0;*/
+            }
+        }
+    }
+}

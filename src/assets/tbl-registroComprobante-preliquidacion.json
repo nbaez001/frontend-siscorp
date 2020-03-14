@@ -1,0 +1,51 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 500,
+	"response": [
+        {
+            "checked": false,
+            "id": 1,
+            "nro": "01",
+            "recurso": "Cemento",
+            "unidadAut": "bol",
+            "cantidadAut": 10,
+            "preUniAut": 30,
+            "importeAut": 300,
+            "proveedorAut": "Proveedor x",
+            "numAgAut": "001",
+            "cantidadRen": "",
+            "precioUnitRen": "",
+            "importeRen": 288.00,
+            "comprobanteRen": "01",
+            "numComprobanteRen": "001-2019",
+            "cantidadDif": -1,
+            "precioUnitDif": 2,
+            "importeDif": -12,
+            "observacion": "Se compró 1 bolsa de cemento porque el precio unitario era mayora lo cotizado"
+
+        },{
+            "checked": false,
+            "id": 2,
+            "nro": "02",
+            "recurso": "Cemento",
+            "unidadAut": "bol",
+            "cantidadAut": 5,
+            "preUniAut": 32,
+            "importeAut": 160.00,
+            "proveedorAut": "Proveedor y",
+            "numAgAut": "002",
+            "cantidadRen": "",
+            "precioUnitRen": "",
+            "importeRen": 165.00,
+            "comprobanteRen": "02",
+            "numComprobanteRen": "005-2019",
+            "cantidadDif": 0.00,
+            "precioUnitDif": 1.00,
+            "importeDif": 5.00,
+            "observacion": ""
+        }
+       
+    ],
+	"idPerfil": 1
+}

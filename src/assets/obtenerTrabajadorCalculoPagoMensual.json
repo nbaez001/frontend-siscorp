@@ -1,0 +1,14 @@
+{
+    "codResultado": 1,
+    "msgResultado": "OK",
+    "total": 0,
+    "response": [
+        {
+            "idCodigo": 1,
+			"idTipo":1,
+			"nombreApellido":"Nombre del trabajador",
+			"autorizacionAnterior":"S/. 699.17"
+		}
+    ],
+    "idPerfil": 1
+}

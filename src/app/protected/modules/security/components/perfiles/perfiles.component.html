@@ -1,0 +1,125 @@
+<div class="mat-elevation-z1">
+  <mat-toolbar class="mat-primary"><mat-icon class="mr-12">account_box</mat-icon> Perfiles</mat-toolbar>
+
+  <div class="perfiles">
+
+    <div class="contenido">
+
+      <div class="botones">
+        <button
+          mat-icon-button
+          matTooltip="Crear perfil"
+          color="primary"><mat-icon>add_circle</mat-icon></button>
+      </div>
+
+      <br>
+
+      <div
+        class="item"
+        (click)="seleccionarPerfil(perfil)"
+        [class.seleccionado]="perfil.id === perfilSeleccionado?.id"
+        *ngFor="let perfil of perfiles"
+        matRipple>
+
+        <div class="icono">
+          <mat-icon *ngIf="perfil.id === perfilSeleccionado?.id">arrow_right</mat-icon>
+        </div>
+
+        <span>{{perfil.nombre}}</span>
+
+        <small>{{perfil.modulos}} modulos</small>
+
+        <div class="acciones">
+          <button mat-icon-button color="primary" matTooltip="Editar"><mat-icon>edit</mat-icon></button>
+          <button mat-icon-button color="error" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+        </div>
+
+      </div>
+
+      <br>
+
+      <mat-paginator
+        [length]="100"
+        [pageSize]="10"
+        showFirstLastButtons
+        [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+
+    </div>
+
+    <div class="modulos">
+      <div class="cabecera">
+        <span>
+          Módulos
+          <small *ngIf="perfilSeleccionado !== null"> - {{perfilSeleccionado.nombre}}</small>
+          <small *ngIf="perfilSeleccionado === null"> - perfil no seleccionado</small>
+        </span>
+
+        <button
+          mat-icon-button
+          *ngIf="perfilSeleccionado !== null"
+          matTooltip="Agregar módulo"
+          color="primary"><mat-icon>add_circle</mat-icon></button>
+      </div>
+
+      <div class="contenido">
+
+        <ng-template [ngIf]="perfilSeleccionado !== null">
+          <div
+            class="item"
+            *ngFor="let modulo of modulos">
+
+            <span>{{modulo.nombre}}</span>
+
+            <small>{{modulo.usuarios}} usuarios</small>
+
+            <div class="acciones">
+              <button mat-icon-button (click)="verUsuarios()" matTooltip="Usuarios"><mat-icon>group</mat-icon></button>
+              <button mat-icon-button (click)="verMenus()" matTooltip="Menu"><mat-icon>account_tree</mat-icon></button>
+              <button mat-icon-button color="primary" matTooltip="Editar"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="error" matTooltip="Eliminar"><mat-icon>delete</mat-icon></button>
+            </div>
+
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Symbol </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    showFirstLastButtons
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator> -->
+
+    
+</div>

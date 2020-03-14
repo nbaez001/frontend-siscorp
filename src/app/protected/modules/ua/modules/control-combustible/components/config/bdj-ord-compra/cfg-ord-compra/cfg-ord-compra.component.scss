@@ -1,0 +1,65 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    codigo: (
+      width: 8rem
+    ),
+    cantidad: (
+      width: 6rem
+    ),
+    unidadMedida: (
+      width: 6rem
+    ),
+    descripcion: (
+      width: 10rem
+    ),
+    precioUnitario: (
+      width: 5rem
+    ),
+    precioTotal: (
+      width: 5rem
+    ),
+    opt: (
+      width: 2.5rem
+    )
+  )
+);
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    metaMnemonico: (
+      width: 5rem
+    ),
+    cadenaFuncional: (
+      width: 14rem
+    ),
+    ffRb: (
+      width: 5rem
+    ),
+    clasificadorGasto: (
+      width: 6rem
+    ),
+    monto: (
+      width: 6rem
+    ),
+    opt: (
+      width: 2.5rem
+    )
+  )
+);
+
+.table-container {
+  max-height: 400px;
+}
+
+.mat-horizontal-content-container {
+  padding-bottom: 0px !important;
+}

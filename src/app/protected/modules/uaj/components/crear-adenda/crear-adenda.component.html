@@ -1,0 +1,74 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Nuevo Adenda</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="contenido-formulario" [formGroup]="adendaForm">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Número de adenda</mat-label>
+    <input matInput formControlName="numero">
+    <mat-error *ngIf="!adendaForm.get('numero').valid && adendaForm.get('numero').touched">
+      {{ adendaForm.get('numero').errors | errorMessage:"Ingrese número de adenda" }}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha </mat-label>
+      <input matInput placeholder="Fecha" formControlName="fecha" readonly [matDatepicker]="pickerSus"
+        (click)="pickerSus.open()">
+      <mat-error *ngIf="!adendaForm.get('fecha').valid && adendaForm.get('fecha').touched">
+        {{ adendaForm.get('fecha').errors | errorMessage:"Ingrese fecha" }}
+      </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="pickerSus"></mat-datepicker-toggle>
+      <mat-datepicker #pickerSus></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Plazo</mat-label>
+      <input matInput placeholder="Plazo" formControlName="plazo" readonly [matDatepicker]="pickerFin"
+        (click)="pickerFin.open()">
+      <mat-error *ngIf="!adendaForm.get('plazo').valid && adendaForm.get('plazo').touched">
+        {{ adendaForm.get('plazo').errors | errorMessage:"Ingrese plazo" }}
+      </mat-error>
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row">
+    <div class="attachment mat-elevation-z1" fxLayout="column" fxLayoutAlign="start center" *ngIf="flat_archivo">
+      <mat-icon fxFlex>description</mat-icon>
+      <span fxFlex class="text-truncate">{{ archivos.filename }}</span>
+      <button mat-icon-button type="button" class="remove" (click)="removerArchivo(archivos)">
+        <mat-icon class="mat-elevation-z1">cancel</mat-icon>
+      </button>
+    </div>
+    <div class="attachment mat-elevation-z1" fxLayout="column" fxLayoutAlign="start center"
+      (click)="uploadInput.click()" *ngIf="!flat_archivo">
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+      <mat-icon fxFlex>attachment</mat-icon>
+      <span fxFlex>Adjuntar archivo</span>
+    </div>
+
+  </div>
+
+  <input type="file" #uploadInput (change)="cargarArchivos($event.target.files)" multiple [fxHide]="true">
+
+</div>
+
+<div align="center" class="example-button-row acciones-margen-derecho">
+  <button color="primary" mat-raised-button (click)="crearAdenda()">
+    <mat-icon>save</mat-icon>CREAR ADENDA
+  </button>
+</div>
+
+<br>

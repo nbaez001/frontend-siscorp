@@ -1,0 +1,48 @@
+:host {
+
+  .mat-form-field-infix {
+    width: 90px;
+  }
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mat-dialog-content {
+    padding: 20px;
+
+    /deep/ .mat-tab-body {
+      padding-top: 20px;
+    }
+
+    /deep/ .mat-tab-body-content {
+      display: flex;
+      flex-direction: column;
+
+      .fila {
+        display: flex;
+        flex-direction: row;
+      }
+
+      mat-form-field {
+        flex: 1;
+
+        &.mr {
+          margin-right: 10px;
+        }
+
+        &.auto .mat-form-field-infix {
+          width: auto;
+          width: 1rem;
+        }
+      }
+    }
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding: 20px;
+  }
+}

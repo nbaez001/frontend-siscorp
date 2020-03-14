@@ -1,0 +1,362 @@
+:host {
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+
+    .contenido {
+      
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      > div.detalle {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        line-height: 20px;
+
+        .subtitulo {
+          font-size: 13px;
+        }
+      }
+    }
+
+    .contenido-formulario {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      // background-color: black;
+      
+      .columna {
+        display: flex;
+        flex-direction: row;
+  
+        mat-form-field {
+          flex: 1;
+  
+          &:first-of-type {
+            margin-right: 10px;
+          }
+          
+        }
+  
+        &.archivos {
+          flex-wrap: wrap;
+  
+          mat-card {
+            cursor: pointer;
+            margin: 0 10px 10px 0;
+  
+            mat-icon {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .datos-obra {
+    mat-expansion-panel {
+      margin: 0px 0;
+      border-radius: 0;
+
+      mat-expansion-panel-header mat-panel-title {
+        display: flex;
+        align-content: center;
+      }
+
+      .inputs {
+        // display: flex;
+        // flex-direction: row;
+
+        .mat-form-field-codigo {
+          margin-right: 10px;
+          width: 10%;
+          font-weight: 500;
+
+          /deep/ .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+        }
+
+        .mat-form-field-descripcion{
+          margin-right: 10px;
+          width: 50%;
+          font-weight: 500;
+         
+
+          /deep/ .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+        }
+
+        .mat-form-field-convenio {
+          width: 22%;
+          font-weight: 500;
+         
+
+
+          /deep/ .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+        }
+
+        .acciones {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-left: 10px;
+
+          button:first-of-type {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .bandeja {
+    position: relative;
+    margin-top: 10px;
+    padding: 16px;
+
+    .nuevo-intrv {
+      position: absolute;
+      top: -28px;
+    }
+
+  }
+
+  .bandeja2 {
+    position: relative;
+    margin-top: 4px;
+    padding: 1px;
+
+    .nuevo-intrv {
+      position: absolute;
+      top: -28px;
+    }
+
+  }
+
+}
+
+.mat-toolbar-fondo{
+  background: #fff;
+}
+
+.excel-icon-top{
+  margin-top: -10px !important;
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+}
+
+.fondo-filtro{
+  background: #039be5;
+  color: white;
+}
+
+.mat-expansion-panel-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px;
+  border-radius: inherit;
+  background: #039be5 !important;
+  //height: 48px !important;
+}
+
+.mat-expansion-panel-header.mat-expanded:focus .mat-expansion-panel-header .mat-expanded:hover {
+background:  #039be5 !important;
+}
+
+
+.formato-label_codigo{
+    margin: auto;
+}
+
+.formato-label_convenio{
+  margin: auto;
+  padding-left: 50px;
+}
+
+.radio-buton-padding-left{
+padding-left: 20px;
+}
+
+.btn-alinear_derecha{
+//margin-top: -10px;
+float: right;
+}
+
+
+div.btn_centrado {
+// width:100%;
+background-color: orange;
+}
+
+div.center {
+text-align: center;
+}
+
+
+/* Estilos de la tabla de cronograma INICIO */
+
+.celda-frozen{
+  border: 1px solid #bdbbbb;
+  background-color: #FFFFFF;
+  text-align: left;
+  font-size: 14px;
+}
+
+
+.celda{
+  border: 1px solid #bdbbbb;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+}
+
+.celda-painted{
+  border: 1px solid #bdbbbb;
+  background-color: #F4E7E4;
+  text-align: center;
+  font-size: 14px;
+}
+
+.row-hover{
+  cursor: pointer;
+  background: #DFE5EF !important;
+  color: #000000 !important;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.caja{
+    width: 80px;
+}
+
+.caja-large{
+  width: 130px;
+}
+
+.caja-presupuesto{
+  width: 105px;
+}
+
+.caja-presupuesto-colspan-cronograma{
+  width: 420px;
+}
+
+
+.caja-large-aux-fijo{
+  width: 100px;
+}
+
+.caja-item{
+  width: 200px;
+}
+
+.caja-descripcion{
+  width: 520px;
+}
+
+.caja-unidad{
+  width: 80px;
+}
+
+.caja-unidad-2{
+  width: 105px;
+}
+
+.caja-meses-colspan{
+  width: 300px;
+}
+
+.caja-porcentaje{
+  width: 50px;
+}
+
+
+
+/* Estilos de la tabla de cronograma FIN */
+
+
+
+.mat-tab-body-content {
+height: 100%;
+overflow: hidden !important;;
+}
+
+
+.formato_titulo{
+text-align: center;
+text-decoration: underline;
+font-size: 18px;
+font-weight: 600;
+}
+
+.nota_descripcion{
+color: red;
+font-weight: 580;
+font-size: 14px;
+}
+
+.nota_label{
+font-weight: 600;
+font-size: 14px;
+}
+
+
+#container {
+  width:100%;
+  text-align:center;
+}
+
+#left {
+  float:left;
+  width:100px;
+  margin-top: 8px;;
+}
+
+#center {
+  display: inline-block;
+  margin:0 auto;
+  width:100px;
+}
+
+#right {
+  float:right;
+  width:630px;
+}
+
+#mat-tab-label-0-0{
+  background-color: #039be5 !important;
+}
+
+.label-formato{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+
+.mat-tab-body-content {
+  height: 100%;
+  overflow: hidden !important;;
+  }
+  
+
+
+  .btn_closed{
+    background-color: #e41414;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .btn_alineacion_closed{
+    margin-top: -18px; 
+    float: right;
+    margin-right: 6px;
+  }

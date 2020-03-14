@@ -1,0 +1,23 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "idCodigo": 1,
+			"idTipoProveedor":1,
+			"idTipoDocumento":1,
+			"numeroDocumento":"44705433",
+			"idTipoRubro":1,
+			"idEstado":1,
+			"nombreRazonSocial":"razon social 1 ",
+			"telefono":"2474587",
+			"correoElectronico":"mail@hot.com",
+			"idDepartamento":1,
+			"idProvincia":2,
+			"idDistrito":1,
+			"direccion":"Av lima 123"
+		}
+    ],
+	"idPerfil": 1
+}

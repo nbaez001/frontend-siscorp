@@ -1,0 +1,26 @@
+:host {
+
+  mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding: 20px;
+  }
+
+  mat-paginator {
+    width: 100%;
+  }
+
+  /deep/ .mat-paginator-container {
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,43 @@
+<div id="chat" class="page-layout carded fullwidth">
+  <div class="center">
+    <div class="content-card">
+      <mat-sidenav-container>
+
+        <mat-sidenav class="sidenav" 
+        #sidenav 
+        [mode]="mode" [opened]="openSidenav" 
+        align="start" 
+        >
+          <app-left (toggleLeftSidenav)="toggleLeftSidenav($event)" ></app-left>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+          <app-chat-start (mostrandoSidenav)='mostrarSidenav($event)'
+           *ngIf="!selectedChat"></app-chat-start>
+          <app-chat-view (mostrandoSidenav2)='mostrarSidenav2($event)'
+          *ngIf="selectedChat"></app-chat-view>
+        </mat-sidenav-content>
+
+      </mat-sidenav-container>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <div id="chat" class="page-layout carded fullwidth">
+  <div class="center">
+    <div class="content-card">
+      <mat-sidenav-container>
+        <mat-sidenav class="sidenav" align="start" opened="{{mostrarSidebar}}" mode="side"
+          fuseMatSidenavHelper="chat-left-sidenav" mat-is-locked-open="gt-md">
+          <app-left></app-left>
+        </mat-sidenav>
+        <mat-sidenav-content>
+          <app-chat-start *ngIf="!selectedChat"></app-chat-start>
+          <app-chat-view *ngIf="selectedChat"></app-chat-view>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    </div>
+  </div>
+</div> -->

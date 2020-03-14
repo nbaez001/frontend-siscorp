@@ -1,0 +1,28 @@
+<!-- PAGE CHANGE LOADING -->
+<mat-progress-bar
+    mode="indeterminate"
+    *ngIf="loading">
+</mat-progress-bar>
+
+<mat-drawer-container [hasBackdrop]="false">
+
+    <!-- TOOLBAR -->
+    <mat-drawer #drawer mode="side" [ngClass]="{'has-sidenav-open': drawer.opened}">
+        <protected-toolbar [ngClass]="{'has-sidenav-open': drawer.opened}" [drawer]="drawer"></protected-toolbar>
+    </mat-drawer>
+    <!-- END TOOLBAR -->
+
+    <!-- CONTENIDO -->
+    <mat-drawer-content [ngClass]="{'has-sidenav-open': !drawer.opened}">
+
+        <!-- NAVBAR -->
+        <protected-navbar></protected-navbar>
+        <!-- END NAVBAR -->
+
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+    </mat-drawer-content>
+    <!-- END CONTENIDO -->
+</mat-drawer-container>

@@ -1,0 +1,166 @@
+<div class="page">
+
+
+ 
+ 
+    <mat-toolbar class="mat-primary mat-dialog-header">
+      <span style="font-size: 18px !important; font-weight: bold;">{{data.title}}</span>
+      <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <div mat-dialog-content>
+    <div class="contenido-formulario" [formGroup]="proyectoForm">
+
+
+
+      <mat-grid-list cols="12" rowHeight="50px">
+
+
+
+
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre del proyecto</mat-label>
+            <input matInput formControlName="nombreProyecto" solonumero>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre del tambo</mat-label>
+            <input matInput formControlName="nombreTambo" solonumero>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>SNIP</mat-label>
+            <input matInput formControlName="snip" solonumero>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field appearance="outline">
+            <mat-label>Motivo de priorización</mat-label>
+            <input matInput   formControlName="motivoPriorizacion" solonumero>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>N° centros poblados beneficiados</mat-label>
+            <input matInput  solonumero formControlName="nroCPBeneficiados">
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Adjuntar centros poblados</mat-label>
+            <input matInput   formControlName="adjuntarCP">
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>N° población beneficiada</mat-label>
+            <input matInput  solonumero formControlName="nroPoblacionBeneficiada">
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+       
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3 }">
+          <mat-form-field appearance="outline">
+            <mat-label>Monto viable S/.</mat-label>
+            <input matInput formControlName="montoViable" solonumero>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Ubigeo</mat-label>
+            <input matInput formControlName="ubigeo" solonumero  (blur)="generarLugar()">
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+          <mat-form-field appearance="outline">
+            <mat-label>Departamento-Provincia-Distrito</mat-label>
+            <input matInput formControlName="lugar" solonumero>
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Longitud</mat-label>
+            <input matInput  solonumero formControlName="longitud">
+          </mat-form-field>
+
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Latitud</mat-label>
+            <input matInput  solonumero formControlName="latitud">
+          </mat-form-field>
+
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Altitud</mat-label>
+            <input matInput  solonumero formControlName="altitud">
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>CRP</mat-label>
+            <mat-select formControlName="crp">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let crp of dataItemCRP?.crpS" [value]="crp.codigo" >{{crp.nombre}}&nbsp;{{crp.apellidoPaterno}}&nbsp;{{crp.apellidoMaterno}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>CGP</mat-label>
+            <mat-select formControlName="cgp">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let cgp of dataItemCGP?.cgpS" [value]="cgp.codigo">{{cgp.nombre}}&nbsp;{{cgp.apellidoPaterno}}&nbsp;{{cgp.apellidoMaterno}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}" class="mat-dialog-actions" align="center">
+          <button color="primary" mat-raised-button (click)="registrarProyecto()">
+            <mat-icon>save</mat-icon>Guardar sin enviar
+          </button>
+      
+          <button color="primary" mat-raised-button (click)="enviarProyecto()">
+            <mat-icon>call_made</mat-icon>Enviar
+          </button>
+      
+   </mat-grid-tile>
+
+      </mat-grid-list>
+
+    </div>
+   
+ 
+</div>
+
+</div>

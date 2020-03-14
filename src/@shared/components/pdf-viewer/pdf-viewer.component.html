@@ -1,0 +1,12 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header ">
+    <span>{{datos.titulo?datos.titulo:''}}</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div class="viewer-body">
+    <ngx-extended-pdf-viewer [src]="currentPdf" useBrowserLocale="true" height="100vh" width="100vw">
+    </ngx-extended-pdf-viewer>
+  </div>
+</div>

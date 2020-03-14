@@ -1,0 +1,80 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "codigo": "AUTO-001",
+            "item": 1,
+            "fecPresentacion": "02/02/2019",
+            "fecAprobacion": "20/02/2019",
+            "montoSolicitado": "127057.21",
+            "montoAutorizado": "12745571",
+            "saldoDisponible": "550255.50",
+            "estado": "APROBADO",
+            "cidEstado": "005",
+            "numPlazo": 0,
+            "color": "red",
+            "fidProyecto": 12345,
+            "idCodigo": 1
+        }, {
+            "codigo": "AUTO-002",
+            "item": 2,
+            "fecPresentacion": "07/02/2019",
+            "fecAprobacion": "21/02/2019",
+            "montoSolicitado": "40325.54",
+            "montoAutorizado": "",
+            "saldoDisponible": "650255.50",
+            "estado": "DEVUELTO",
+            "cidEstado": "004",
+            "numPlazo": 0,
+            "color": "red",
+            "fidProyecto": 12346,
+            "idCodigo": 2
+        }, {
+            "codigo": "AUTO-003",
+            "item": 3,
+            "fecPresentacion": "04/03/2019",
+            "fecAprobacion": "",
+            "montoSolicitado": "65527.84",
+            "montoAutorizado": "",
+            "saldoDisponible": "750255.50",
+            "estado": "EN TRÁMITE",
+            "cidEstado": "003",
+            "numPlazo": 0,
+            "color": "red",
+            "fidProyecto": 12347,
+            "idCodigo": 3
+        }, {
+            "codigo": "AUTO-004",
+            "item": 4,
+            "fecPresentacion": "15/03/2019",
+            "fecAprobacion": "",
+            "montoSolicitado": "5527.84",
+            "montoAutorizado": "",
+            "saldoDisponible": "850255.50",
+            "estado": "DERIVADO",
+            "cidEstado": "002",
+            "numPlazo": 0,
+            "color": "red",
+            "fidProyecto": 12348,
+            "idCodigo": 4
+        },
+        {
+            "codigo": "AUTO-005",
+            "item": 5,
+            "fecPresentacion": "10/04/2019",
+            "fecAprobacion": "",
+            "montoSolicitado": "21324.45",
+            "montoAutorizado": "",
+            "saldoDisponible": "950255.50",
+            "estado": "PENDIENTE DERIVACIÓN",
+            "cidEstado": "001",
+            "numPlazo": 0,
+            "color": "red",
+            "fidProyecto": 12349,
+            "idCodigo": 5
+        }
+    ],
+	"idPerfil": 1
+}

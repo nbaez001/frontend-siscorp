@@ -1,0 +1,381 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span style="font-size: 20px !important; font-weight: bold;">
+      CRONOGRAMAS - {{nombreTambo}}
+    </span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div mat-dialog-content style="overflow: hidden;">
+
+    <div class="contenido-formulario" [formGroup]="obraForm">
+      <mat-tab-group selectedIndex="{{selectedIndexTab}}" (selectedIndexChange)="tab_click($event)">
+
+        <mat-tab label="CRONOGRAMA DE EJECUCIÓN" class="mat-tab-body-content" id="mat-tab-label-0-0">
+          <mat-grid-list cols="6" rowHeight="70px">
+            <mat-grid-tile [responsiveRows]="{xs: 6, sm: 6, md: 6, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline" class="historico-formato" style="top:10px;">
+                <mat-label>Histórico cronograma</mat-label>
+                <mat-select formControlName="estadoFrmCtrl">
+                  <mat-option *ngFor="let est of dataItemGronogramafecha?.estados" [value]="est.idCodigo">
+                    {{est.cidNombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 6, sm: 6, md: 6, lg: 4, xl: 4}" class="dialog-form-actions">
+              <button style="left: 5px;right: 5px;" color="primary" mat-raised-button (click)="rdbHabilitar()"
+                matTooltip="Ingresar Nuevo Cronograma" matTooltipClass="formato-tooltip">
+                <mat-icon>filter_none</mat-icon> Nuevo Cronograma
+              </button>
+              <button class="btn-alinear_derecha" style="right: 5px;" color="primary" mat-raised-button
+                (click)="verModificacion()">
+                <mat-icon>call_made</mat-icon> Enviar Cronograma
+              </button>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+          <div  >
+            <br>
+            <p-treeTable [value]="dataCronogramaEjecucion" [scrollable]="true" scrollHeight="470px"
+              [columns]="scrollableColsCronogramaEjecucion" [frozenColumns]="frozenCols" frozenWidth="630px"
+              (onEditComplete)="editar($event)" (onEditInit)="onEditInit($event)" [paginator]="true" [rows]="1">
+
+              <ng-template pTemplate="frozencolgroup" let-columns>
+                <colgroup>
+                  <col style="width:250px">
+                  <col style="width:380px">
+                </colgroup>
+              </ng-template>
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <ng-container *ngFor="let col of columns; let i = index">
+                    <col *ngIf="i==0" class='caja-unidad'>
+                    <col *ngIf="i==1 || i==2 || i==3 " class='caja-presupuesto'>
+                    <col *ngIf=" i>=4 " class='caja-large-aux-fijo'>
+                  </ng-container>
+                </colgroup>
+              </ng-template>
+
+              <ng-template pTemplate="frozenheader" let-columns>
+                <tr>
+                  <th class="caja-presupuesto-colspan-cronograma" style="height: 68px !important;font-size: 12px !important">CÓDIGO</th>
+                  <th class="caja-presupuesto-colspan-cronograma" style="height: 68px !important;font-size: 12px !important">RECURSO</th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <ng-container *ngFor="let col of columns; let i = index">
+                    <th *ngIf="i==0" [attr.colspan]="4" style="font-size: 12px !important;"> PRESUPUESTO </th>
+                    <th *ngIf="i==4 || i==10 || i==16 || i==22 || i==28 || i==34" [attr.colspan]="3"
+                      style="background-color: #9CD7F1;font-size: 12px !important;">
+                      MES
+                      <span *ngIf="i==4">1</span> <span *ngIf="i==10">3</span> <span *ngIf="i==16">5</span>
+                      <span *ngIf="i==22">7</span> <span *ngIf="i==28">9</span> <span *ngIf="i==34">11</span>
+                    </th>
+
+                    <th *ngIf="i==7 || i==13 || i==19 || i==25 || i==31 || i==37" [attr.colspan]="3"
+                      style="background-color: #C8E4F0;font-size: 12px !important;">
+                      MES
+                      <span *ngIf="i==7">2</span> <span *ngIf="i==13">4</span> <span *ngIf="i==19">6</span>
+                      <span *ngIf="i==25">8</span> <span *ngIf="i==31">10</span> <span *ngIf="i==37">12</span>
+                    </th>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns" style="font-size: 12px;"> {{col.header}} </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                <tr style="font-size: 13px !important;" (mouseenter)="onMouseEnter(rowData)"
+                  (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover">
+
+                  <ng-container *ngFor="let col of columns; let i = index">
+                    <td *ngIf="i==0"> {{rowData[col.field]}}</td>
+
+                    <td
+                      *ngIf="ocultarNota == true && (i==6 || i==9 || i==12 || i==15 || i==18 || i==21 || i==24 || i==27 || i==30 || i==33 || i==36 || i==39)">
+                      {{rowData[col.field] | number : '1.2-2' :'en-US'}}
+                    </td>
+                    <td
+                      *ngIf="ocultarNota == false && (i==6 || i==9 || i==12 || i==15 || i==18 || i==21 || i==24 || i==27 || i==30 || i==33 || i==36 || i==39)"
+                      [ttEditableColumn]="rowData" [ttEditableColumnField]="rowData[col.field]"
+                      [ngClass]="{'ui-toggler-column': true}" style="background-color: #cfe5f1; color: black">
+
+                      <p-treeTableCellEditor>
+                        <ng-template pTemplate="input">
+                          <input pInputText type="text" [(ngModel)]="rowData[col.field]"
+                            [ngModelOptions]="{standalone: true}" [ngStyle]="{
+                                    'width':'100%'
+                                  }">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{rowData[col.field] | number : '1.2-2' :'en-US'}}
+                        </ng-template>
+                      </p-treeTableCellEditor>
+
+                    </td>
+                    <td
+                      *ngIf="i!=0 && i!=6 && i!=9 && i!=12 && i!=15 && i!=18 && i!=21 && i!=24 && i!=27 && i!=30 && i!=33 && i!=36 && i!=39">
+                      {{rowData[col.field]  | number : '1.2-2' :'en-US'}}
+                    </td>
+                  </ng-container>
+
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="frozenbody" let-rowNode let-rowData="rowData" let-columns="columns">
+                <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)"
+                  style="font-size: 13px !important;" [class.row-hover]="rowData.hover">
+                  <ng-container *ngFor="let col of columns; let i = index">
+                    <td *ngIf="i==0" (click)="verInsumo(rowData)">
+                      <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>{{rowData[col.field]}}
+                    </td>
+                    <td *ngIf=" i==1 && (rowData[col.field]).length >= cantidadPalabra"
+                      matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-tabla"
+                      (click)="verInsumo(rowData)">
+                      {{rowData[col.field]  | slice:0:cantidadPalabra}} ...
+                    </td>
+                    <td *ngIf="i==1 && (rowData[col.field]).length < cantidadPalabra" (click)="verInsumo(rowData)"
+                      class="caja-descripcion">
+                      {{rowData[col.field]}}
+                    </td>
+                  </ng-container>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="frozenfooter" let-rowNode let-rowData="rowData">
+              </ng-template>
+              <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+                <tr style="font-size: 12px !important;" *ngFor="let dataCronograma of dataCronogramaEjecucionTotal">
+                  <td colspan="3">{{dataCronograma.titulo}}</td>
+                  <td>{{dataCronograma.total}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_1"></td>
+                  <td *ngIf="dataCronograma.MONEDA_1">{{dataCronograma.MONEDA_1}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_1">{{dataCronograma.PORCENTAJE_1}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_2"></td>
+                  <td *ngIf="dataCronograma.MONEDA_2">{{dataCronograma.MONEDA_2}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_2">{{dataCronograma.PORCENTAJE_2}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_3"></td>
+                  <td *ngIf="dataCronograma.MONEDA_3">{{dataCronograma.MONEDA_3}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_3">{{dataCronograma.PORCENTAJE_3}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_4"></td>
+                  <td *ngIf="dataCronograma.MONEDA_4">{{dataCronograma.MONEDA_4}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_4">{{dataCronograma.PORCENTAJE_4}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_5"></td>
+                  <td *ngIf="dataCronograma.MONEDA_5">{{dataCronograma.MONEDA_5}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_5">{{dataCronograma.PORCENTAJE_5}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_6"></td>
+                  <td *ngIf="dataCronograma.MONEDA_6">{{dataCronograma.MONEDA_6}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_6">{{dataCronograma.PORCENTAJE_6}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_7"></td>
+                  <td *ngIf="dataCronograma.MONEDA_7">{{dataCronograma.MONEDA_7}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_7">{{dataCronograma.PORCENTAJE_7}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_8"></td>
+                  <td *ngIf="dataCronograma.MONEDA_8">{{dataCronograma.MONEDA_8}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_8">{{dataCronograma.PORCENTAJE_8}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_9"></td>
+                  <td *ngIf="dataCronograma.MONEDA_9">{{dataCronograma.MONEDA_9}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_9">{{dataCronograma.PORCENTAJE_9}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_10"></td>
+                  <td *ngIf="dataCronograma.MONEDA_10">{{dataCronograma.MONEDA_10}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_10">{{dataCronograma.PORCENTAJE_10}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_11"></td>
+                  <td *ngIf="dataCronograma.MONEDA_11">{{dataCronograma.MONEDA_11}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_11">{{dataCronograma.PORCENTAJE_11}}</td>
+
+                  <td *ngIf="dataCronograma.MONEDA_12"></td>
+                  <td *ngIf="dataCronograma.MONEDA_12">{{dataCronograma.MONEDA_12}}</td>
+                  <td *ngIf="dataCronograma.PORCENTAJE_12">{{dataCronograma.PORCENTAJE_12}}</td>
+
+                </tr>
+              </ng-template>
+
+            </p-treeTable>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="CRONOGRAMA DE INSUMOS">
+          <mat-grid-list cols="6" rowHeight="70px">
+            <mat-grid-tile [responsiveRows]="{xs: 6, sm: 6, md: 6, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline" class="historico-formato" style="top:10px;">
+                <mat-label>Histórico insumos</mat-label>
+                <mat-select formControlName="estadoFrmCtrl">
+                  <mat-option *ngFor="let est of dataItemGronogramafecha?.estados" [value]="est.idCodigo">
+                    {{est.cidNombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+          <div >
+            <br>
+            <p-treeTable [value]="dataCronogramaInsumo" [scrollable]="true" scrollHeight="470px"
+              [columns]="scrollableColsCronogramaInsumo">
+              <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                  <ng-container *ngFor="let col of columns; let i = index">
+                    <col *ngIf="i==0" class='caja-item-insumo'>
+                    <col *ngIf="i==1" class='caja-descripcion'>
+                    <col *ngIf="i==2" class='caja-unidad'>
+                    <col *ngIf="i==3 || i==4 || i==5" class='caja-presupuesto'>
+                    <col *ngIf="i>=6" class='caja-large'>
+                  </ng-container>
+                </colgroup>
+              </ng-template>
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <ng-container *ngFor="let col of columns; let i = index">
+                    <th *ngIf="i==0" class="caja-item-insumo" style="font-size: 12px;" [attr.rowspan]="2" > </th>
+                    <th *ngIf="i==1" class="caja-descripcion" style="font-size: 12px;"  [attr.rowspan]="2"> </th>
+                    <th *ngIf="i==2" class="caja-presupuesto-colspan-cronograma" colspan="4" style="font-size: 12px !important;"  [attr.rowspan]="2">PROGRAMACIÓN TOTAL </th>
+                    <th *ngIf="i>=6" class="caja-presupuesto-colspan-cronograma" [attr.colspan]="cantidadMesesCronogramaInsumo*2" style="font-size: 12px !important;">PROGRAMACIÓN MENSUAL </th>
+                  </ng-container>
+                </tr>
+
+
+                <tr>
+                  <ng-container *ngFor="let col of columns; let i = index">
+                    <!-- <th *ngIf="i==0" class="caja-item-insumo"> </th> -->
+                    <!-- <th *ngIf="i==1" class="caja-descripcion"> </th> -->
+                    <!-- <th *ngIf="i==2" class="caja-presupuesto-colspan-cronograma" colspan="4"
+                      style="font-size: 12px !important;">PRESUPUESTO </th> -->
+                    <th *ngIf="i==6 || i==10 || i==14 || i==18 || i==22 || i==26" class="caja-meses-colspan-insumo"
+                      style="background-color: #9CD7F1;font-size: 12px !important;" colspan="2">
+                      MES
+                      <span *ngIf="i==6">1</span> <span *ngIf="i==10">3</span> <span *ngIf="i==14">5</span>
+                      <span *ngIf="i==18">7</span> <span *ngIf="i==22">9</span> <span *ngIf="i==26">11</span>
+                    </th>
+                    <th *ngIf="i==8 || i==12 || i==16 || i==20 || i==24 || i==28 " class="caja-meses-colspan-insumo"
+                      style="background-color: #C8E4F0;font-size: 12px !important;" colspan="2">
+                      MES
+                      <span *ngIf="i==8">2</span> <span *ngIf="i==12">4</span> <span *ngIf="i==16">6</span>
+                      <span *ngIf="i==20">8</span> <span *ngIf="i==24">10</span> <span *ngIf="i==28">12</span>
+                    </th>
+                  </ng-container>
+                </tr>
+                <tr>
+                  <th *ngFor="let col of columns" style="font-size: 12px !important;"> {{col.header}} </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+                <tr style="font-size: 12px !important;" (mouseenter)="onMouseEnter(rowData)"
+                  (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover">
+                  <ng-container *ngFor="let col of columns; let i = index">
+
+                    <td *ngIf="i==0">
+                      <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                      <span *ngIf="rowData.ID_PADRE == 0 ">
+                        {{rowData.ITEM}}
+                      </span>
+                      <span *ngIf="rowData.ID_PADRE != 0 ">
+                        {{rowData.ITEM}}
+                      </span>
+                    </td>
+
+                    <td *ngIf="i==1">
+                      <span *ngIf="rowData.ID_PADRE == 0 " style="font-weight: 600; font-size: 12px;">
+                        {{rowData.INSUMO}}
+                      </span>
+                      <span *ngIf="rowData.ID_PADRE != 0 ">
+                        {{rowData.INSUMO}}
+                      </span>
+                    </td>
+
+                    <td *ngIf="i==2">
+                      {{rowData[col.field]}}
+                    </td>
+                    <td *ngIf="i>=3">
+                      {{rowData[col.field] | number : '1.2-2' :'en-US'}}
+                    </td>
+
+                  </ng-container>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="footer" let-columns>
+                <tr *ngFor="let dataInsumo of dataCronogramaInsumoTotal" style="font-size: 12px;">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>TOTAL</td>
+                  <td>{{dataInsumo.total}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_1"></td>
+                  <td *ngIf="dataInsumo.COSTO_1">{{dataInsumo.COSTO_1}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_2"></td>
+                  <td *ngIf="dataInsumo.COSTO_2">{{dataInsumo.COSTO_2}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_3"></td>
+                  <td *ngIf="dataInsumo.COSTO_3">{{dataInsumo.COSTO_3}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_4"></td>
+                  <td *ngIf="dataInsumo.COSTO_4">{{dataInsumo.COSTO_4}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_5"></td>
+                  <td *ngIf="dataInsumo.COSTO_5">{{dataInsumo.COSTO_5}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_6"></td>
+                  <td *ngIf="dataInsumo.COSTO_6">{{dataInsumo.COSTO_6}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_7"></td>
+                  <td *ngIf="dataInsumo.COSTO_7">{{dataInsumo.COSTO_7}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_8"></td>
+                  <td *ngIf="dataInsumo.COSTO_8">{{dataInsumo.COSTO_8}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_9"></td>
+                  <td *ngIf="dataInsumo.COSTO_9">{{dataInsumo.COSTO_9}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_10"></td>
+                  <td *ngIf="dataInsumo.COSTO_10">{{dataInsumo.COSTO_10}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_11"></td>
+                  <td *ngIf="dataInsumo.COSTO_11">{{dataInsumo.COSTO_11}}</td>
+
+                  <td *ngIf="dataInsumo.COSTO_12"></td>
+                  <td *ngIf="dataInsumo.COSTO_12">{{dataInsumo.COSTO_12}}</td>
+
+                </tr>
+              </ng-template>
+
+            </p-treeTable>
+          </div>
+        </mat-tab>
+
+      </mat-tab-group>
+
+      <div *ngIf="ocultarCamposTabInsumo == true">
+      </div>
+
+      <div *ngIf="ocultarCamposTabInsumo == false">
+        <div id="right">
+          <label [hidden]="ocultarNota">
+            <span class="nota_label">Nota: </span>
+            <span class="nota_descripcion">Los cambios se guardarán de manera automática en cada cambio de %
+              mensual.</span>
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

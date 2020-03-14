@@ -1,0 +1,230 @@
+:host {
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .contenido-formulario {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+  
+      .columna {
+        display: flex;
+        flex-direction: row;
+  
+        mat-form-field {
+          flex: 1;
+  
+          &:first-of-type {
+            margin-right: 10px;
+          }
+        }
+  
+        &.archivos {
+          flex-wrap: wrap;
+  
+          mat-card {
+            cursor: pointer;
+            margin: 0 10px 10px 0;
+  
+            mat-icon {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  
+    .mat-dialog-actions {
+      margin-bottom: 0;
+      padding: 20px;
+    }
+  
+    input[type="file"] {
+      display: none;
+    }
+
+    
+
+
+  .btn-success, .btn-success:active, .btn-success:focus {
+    background-color: #4CAF50;
+    border: 1px solid #4CAF50;
+  }
+
+  .fileinput-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+
+  }
+  .btn-success {
+    color: #fff;
+    background-color: #299629; 
+     border-color: #299629 !important; 
+  }
+  .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+   line-height: 1.42857143; 
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.material-icons-add {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  /* -webkit-font-feature-settings: 'liga'; */
+  -webkit-font-smoothing: antialiased;
+}
+.empty {
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  bottom: 0px;
+  left: 0px;
+  font-size: 0.8em;
+  font-weight: 500;
+  color: #005e82;
+}
+
+.bandeja {
+  position: relative;
+  margin-top: 10px;
+  padding: 16px;
+
+  .nuevo-intrv {
+    position: absolute;
+    top: -28px;
+  }
+
+  table {
+    width: 100%;
+
+    td.mat-column-desde mat-icon {
+      font-size: 20px;
+    }
+
+    td.mat-column-modulos .contenido {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .dest-ori {
+        width: 21px;
+        text-align: center;
+      }
+
+      .contenido-modulos {
+        display: flex;
+        flex-direction: column;
+        padding: 0 10px;
+
+        .modulo {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    }
+
+    td.mat-column-usuarioAtendido {
+      font-size: 25px;
+    }
+
+    th.mat-column-estado {
+      text-align: center;
+    }
+
+    td.mat-column-estado > .estado {
+      padding: 5px;
+      margin: 0 10px;
+      text-align: center;
+      width: 90px;
+      color: #FFFFFF !important;
+      font-weight: 500;
+      border-radius: 3px;
+      font-size: 11px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+
+      &.small {
+        width: 40px !important;
+      }
+
+      &.disabled {
+        pointer-events: none;
+      }
+    }
+
+    .mat-column-acciones, .mat-column-desde {
+      width: auto;
+
+      button {
+        margin: 0 10px;
+      }
+    }
+
+    
+  }
+}
+
+  .padding-caja{
+    margin-left: 50px !important;
+  }
+
+
+
+  .btn-retornar {
+    background-color: #6aa2be!important;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 4px;
+    overflow: visible;
+    transform: translate3d(0,0,0);
+    transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
+}
+
+  }

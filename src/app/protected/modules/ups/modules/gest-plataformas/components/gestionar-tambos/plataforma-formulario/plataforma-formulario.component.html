@@ -1,0 +1,209 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>{{registro ? 'REGISTRAR' : 'ACTUALIZAR'}} TAMBO</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon class="white-fg">clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FORMULARIO -->
+<div mat-dialog-content class="contenido-formulario" [formGroup]="formulario">
+
+  <mat-tab-group #tabPasos mat-stretch-tabs (selectedIndexChange)="tabPasosIndex = $event">
+    <mat-tab label="DETALLE DEL TAMBO (paso 1)" formGroupName="detalle">
+
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>NOMBRE</mat-label>
+          <input matInput formControlName="nombre" (keyup)="$event.target.value = $event.target.value.toUpperCase()">
+          <mat-error *ngIf="formDetalle.get('nombre').invalid && formDetalle.get('nombre').touched">
+            {{ formDetalle.get('nombre').errors | errorMessage:"NOMBRE" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>SNIP</mat-label>
+          <input matInput formControlName="snip">
+          <mat-error *ngIf="formDetalle.get('snip').invalid && formDetalle.get('snip').touched">
+            {{ formDetalle.get('snip').errors | errorMessage:"SNIP" }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>COD. ÚNICO</mat-label>
+          <input matInput formControlName="codUnico">
+          <mat-error *ngIf="formDetalle.get('codUnico').invalid && formDetalle.get('codUnico').touched">
+            {{ formDetalle.get('codUnico').errors | errorMessage:"COD ÚNICO" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    
+      <h4>Ubicación</h4>
+
+      <div class="columna">
+
+        <mat-form-field appearance="outline">
+          <mat-label>DEPARTAMENTO - PROVINCIA - DISTRITO - CENTRO POBLADO</mat-label>
+          <input
+            matInput
+            [readonly]="formDetalle.get('idCentroPoblado').valid"
+            formControlName="centroPoblado"
+            [matAutocomplete]="auto">
+          <button
+            (click)="quitarCcpp()"
+            mat-icon-button
+            matSuffix
+            *ngIf="formDetalle.get('idCentroPoblado').valid">
+            <mat-icon>clear</mat-icon>
+          </button>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let ccpp of ccpps" (onSelectionChange)="ccppSeleccionado(ccpp)" [value]="ccpp.nombre">{{ccpp.nombre}}</mat-option>
+          </mat-autocomplete>
+          <mat-error *ngIf="formDetalle.get('centroPoblado').invalid && formDetalle.get('centroPoblado').touched">
+            {{ formDetalle.get('centroPoblado').errors | errorMessage:"CENTRO POBLADO" }}
+          </mat-error>
+        </mat-form-field>
+        
+      </div>
+
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>UNIDAD TERRITORIAL</mat-label>
+          <input matInput formControlName="unidadTerritorial" readonly>
+          <mat-error *ngIf="formDetalle.get('unidadTerritorial').invalid && formDetalle.get('unidadTerritorial').touched">
+            {{ formDetalle.get('unidadTerritorial').errors | errorMessage:"UNIDAD TERRITORIAL" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>LONGITUD</mat-label>
+          <input matInput formControlName="latitud" (keyup.enter)="buscarCCPP()">
+          <mat-error *ngIf="formDetalle.get('latitud').invalid && formDetalle.get('latitud').touched">
+            {{ formDetalle.get('latitud').errors | errorMessage:"LONGITUD" }}
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>LATITUD</mat-label>
+          <input matInput formControlName="longitud" (keyup.enter)="buscarCCPP()">
+          <mat-error *ngIf="formDetalle.get('longitud').invalid && formDetalle.get('longitud').touched">
+            {{ formDetalle.get('longitud').errors | errorMessage:"LATITUD" }}
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>ALTITUD</mat-label>
+          <input matInput formControlName="altitud" (keyup.enter)="buscarCCPP()">
+          <mat-error *ngIf="formDetalle.get('altitud').invalid && formDetalle.get('altitud').touched">
+            {{ formDetalle.get('altitud').errors | errorMessage:"ALTITUD" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <span class="auditoria" *ngIf="!registro">{{plataforma.pFecAct ? 'ÚLTIMA ACTUALIZACIÓN' : 'REGISTRADO EL'}}: {{ (plataforma.pFecAct || plataforma.pFecReg) | date:'d/M/y, h:mm a' }}</span>
+
+    </mat-tab>
+    <mat-tab label="CONDICIÓN DEL TAMBO (paso 2)" [disabled]="formDetalle.invalid" formGroupName="condicion">
+
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>SITUACIÓN</mat-label>
+          <mat-select formControlName="situacion" (selectionChange)="cargarEstados($event.value)">
+            <mat-option *ngFor="let s of situaciones" [value]="s.id">{{s.nombre}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="formCondicion.get('situacion').invalid && formCondicion.get('situacion').touched">
+            {{ formCondicion.get('situacion').errors | errorMessage:"SITUACIÓN" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>ESTADO</mat-label>
+          <mat-select formControlName="estado" (selectionChange)="cargarSubEstados($event.value)">
+            <mat-option *ngFor="let e of estados" [value]="e.id">{{e.nombre}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="formCondicion.get('estado').invalid && formCondicion.get('estado').touched">
+            {{ formCondicion.get('estado').errors | errorMessage:"ESTADO" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>SUB ESTADO</mat-label>
+          <mat-select formControlName="subEstado" (selectionChange)="cargarSSubEstados($event.value)">
+            <mat-option *ngFor="let se of subEstados" [value]="se.id">{{se.nombre}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="formCondicion.get('subEstado').invalid && formCondicion.get('subEstado').touched">
+            {{ formCondicion.get('subEstado').errors | errorMessage:"SUB ESTADO" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>DET. SUB ESTADO</mat-label>
+          <mat-select formControlName="ssubEstado">
+            <mat-option *ngFor="let ss of ssubEstados" [value]="ss.id">{{ss.nombre}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="formCondicion.get('ssubEstado').invalid && formCondicion.get('ssubEstado').touched">
+            {{ formCondicion.get('ssubEstado').errors | errorMessage:"DET. SUB ESTADO" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="columna">
+        <mat-form-field appearance="outline">
+          <mat-label>FECHA EJECUCIÓN</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fecEjecucion" readonly (click)="picker.open()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="formCondicion.get('fecEjecucion').invalid && formCondicion.get('fecEjecucion').touched">
+            {{ formCondicion.get('fecEjecucion').errors | errorMessage:"FECHA EJECUCIÓN" }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <span class="auditoria" *ngIf="!registro">{{plataforma.rFecAct ? 'ÚLTIMA ACTUALIZACIÓN' : 'REGISTRADO EL'}}: {{ (plataforma.rFecAct || plataforma.rFecReg) | date:'d/M/y, h:mm a' }}</span>
+
+    </mat-tab>
+  </mat-tab-group>
+
+</div>
+<!-- FORMULARIO -->
+
+<!-- ACCIONES -->
+<div mat-dialog-actions>
+
+  <button
+    color="primary"
+    *ngIf="tabPasosIndex === 0"
+    (click)="siguiente()"
+    mat-raised-button>
+      SIGUIENTE >
+  </button>
+
+  <button
+    color="primary"
+    *ngIf="tabPasosIndex === 1"
+    (click)="tabPasos.selectedIndex = 0"
+    mat-raised-button>
+      < ANTERIOR
+  </button>
+
+  <button
+    class="mat-green-bg white-fg"
+    *ngIf="tabPasosIndex === 1 || (formDetalle.valid && formCondicion.valid)"
+    (click)="finalizar()"
+    mat-raised-button>
+      FINALIZAR {{registro ? 'REGISTRO' : 'ACTUALIZACIÓN'}}
+  </button>
+
+</div>
+<!-- ACCIONES -->

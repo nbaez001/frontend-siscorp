@@ -1,0 +1,189 @@
+
+<div class="page">
+
+ <mat-accordion class="filtros">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+          <mat-panel-title>
+            <img src="assets/images/busqueda.png" width="26px" height="26px"><strong style="color: white;">FILTROS DE
+              BÚSQUEDA</strong>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="mat-expansion-panel-cuerpo">
+          <div [formGroup]="proyectoGestionFiltroForm">
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 2, lg: 2, xl: 2}">
+                <mat-form-field appearance="outline">
+                  <mat-label>NOMBRE DE TAMBO</mat-label>
+                  <input matInput formControlName="tamboFrmCtrl">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 2, lg: 2, xl: 2}">
+                <mat-form-field appearance="outline">
+                  <mat-label>SNIP</mat-label>
+                  <input matInput formControlName="snipFrmCtrl">
+                </mat-form-field>
+              </mat-grid-tile>
+
+
+
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>CRP</mat-label>
+                  <mat-select formControlName="crpFrmCtrl">
+                    <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+                    <mat-option *ngFor="let crp of dataItemCRP?.crpS" [value]="crp.codigo" >{{crp.nombre}}&nbsp;{{crp.apellidoPaterno}}&nbsp;{{crp.apellidoMaterno}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+      
+      
+      
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>CGP</mat-label>
+                  <mat-select formControlName="cgpFrmCtrl">
+                    <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+                    <mat-option *ngFor="let cgp of dataItemCGP?.cgpS" [value]="cgp.codigo">{{cgp.nombre}}&nbsp;{{cgp.apellidoPaterno}}&nbsp;{{cgp.apellidoMaterno}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+              <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 2, lg: 2, xl: 2}">
+                <mat-form-field appearance="outline">
+                  <mat-label>CRP</mat-label>
+                  <input matInput formControlName="convenioFrmCtrl">
+                </mat-form-field>
+              </mat-grid-tile> -->
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 2, lg: 2, xl: 2}" class="dialog-form-actions">
+                <button mat-mini-fab (click)="buscarProyectoGestion($event)" >
+                  <mat-icon matTooltip="Buscar proyecto" matTooltipClass="formato-tooltip">search</mat-icon>
+                </button>
+                <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()">
+                  <mat-icon matTooltip="Limpiar filtros de búsqueda" matTooltipClass="formato-tooltip">clear_all
+                  </mat-icon>
+                </button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="btn_agregar_position">
+      <button matTooltip="Registrar nuevo proyecto" matTooltipClass="formato-tooltip" mat-mini-fab
+        class="btn_agregar" (click)="modalDatosProyectoGestion()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <div class="bandeja mat-elevation-z6 ">
+      <div class="table-container clear-both">
+
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ITEM</th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla" style="height: 40px !important;"> {{coti.codigo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombreTambo">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> NOMBRE DE TAMBO </th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.nombreTambo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="snip">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">SNIP</th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.snip}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nroCentrosPoblados">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">N° DE CENTROS  <br>POBLADOS</th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.nroCP}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nroPoblacionBeneficiada">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">N° DE POBLACIÓN  <br>BENEFICIADA</th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">
+              {{coti.nroPB}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cgp">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">CGP</th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">
+              {{coti.cgp }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="crp">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> CRP </th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.crp}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ESTADO </th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla" style="cursor:pointer;" > {{coti.estado}} </td>
+          </ng-container>
+<!-- 
+          <ng-container matColumnDef="fechaAprobacionAutorizacion">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> FECHA APROBACIÓN <br>AUTORIZACIÓN </th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.fechaAprobacionAutorizacion}}
+            </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="acciones" >
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">ACCIONES</th>
+            <td mat-cell *matCellDef="let coti" >
+
+              <!-- <div *ngIf="coti.boolPuesto"> -->
+                <div *ngIf="coti.estado == 'ELABORACION'">
+                <button (click)="editarProyecto(coti)" mat-icon-button color="primary"
+                  matTooltip="Editar proyecto" matTooltipClass="formato-tooltip">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button (click)="eliminarProyecto(coti.idProyecto)" mat-icon-button color="primary"
+                  matTooltip="Eliminar proyecto" matTooltipClass="formato-tooltip">
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+               
+
+              </div>
+
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+        </table>
+<!-- 
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+
+        <div *ngIf="isLoading" class="spinerTable">
+          <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div> -->
+
+        <mat-toolbar>
+          <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+            <!-- <div *ngIf="dataSource !== null" style="float: left !important;">
+              <mat-icon svgIcon="excel-pais" (click)="descargarExcel($event)" class="excel-icon-top"
+                matTooltip="Descargar Excel"></mat-icon>
+              <span class="example-spacer"></span>
+            </div> -->
+            <div>
+              <!-- <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad"
+                [showFirstLastButtons]="true" [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+              </mat-paginator> -->
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar>
+
+      </div>
+    </div>
+</div>

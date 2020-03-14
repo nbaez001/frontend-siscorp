@@ -1,0 +1,15 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "total": "135.0",
+			"COSTO_1": "150",
+			"COSTO_2": "250",
+			"COSTO_3": "350",
+			"COSTO_4": "450"
+		}
+    ],
+	"idPerfil": 1
+}

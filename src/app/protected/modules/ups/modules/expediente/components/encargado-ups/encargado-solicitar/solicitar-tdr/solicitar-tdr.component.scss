@@ -1,0 +1,336 @@
+:host {
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+
+    .contenido {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      > div.detalle {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        line-height: 20px;
+
+        .subtitulo {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .filtros {
+    mat-expansion-panel {
+      margin: 10px 0;
+      border-radius: 0;
+
+      mat-expansion-panel-header mat-panel-title {
+        display: flex;
+        align-content: center;
+      }
+
+      .inputs {
+        // display: flex;
+        // flex-direction: row;
+
+        mat-form-field {
+          margin-right: 10px;
+          width: 100%;
+
+          /deep/ .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+        }
+
+        .acciones {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-left: 10px;
+
+          button:first-of-type {
+            margin-right: 10px;
+          }
+
+          button:nth-of-type(2) {
+            margin-right: 10px;
+          }
+
+
+        }
+      }
+    }
+  }
+
+  .bandeja {
+    position: relative;
+    margin-top: 10px;
+    padding: 16px;
+
+    .nuevo-intrv {
+      position: absolute;
+      top: -28px;
+    }
+
+    table {
+      width: 100%;
+
+      td.mat-column-desde mat-icon {
+        font-size: 20px;
+      }
+
+      td.mat-column-modulos .contenido {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .dest-ori {
+          width: 21px;
+          text-align: center;
+        }
+
+        .contenido-modulos {
+          display: flex;
+          flex-direction: column;
+          padding: 0 10px;
+  
+          .modulo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+      }
+
+      td.mat-column-usuarioAtendido {
+        font-size: 25px;
+      }
+
+      th.mat-column-estado {
+        text-align: center;
+      }
+
+      td.mat-column-estado > .estado {
+        padding: 5px;
+        margin: 0 10px;
+        text-align: center;
+        width: 90px;
+        color: #FFFFFF !important;
+        font-weight: 500;
+        border-radius: 3px;
+        font-size: 11px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+
+        &.small {
+          width: 40px !important;
+        }
+
+        &.disabled {
+          pointer-events: none;
+        }
+      }
+
+      .mat-column-acciones, .mat-column-desde {
+        width: auto;
+
+        button {
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+
+
+   /* Círculos de colores numerados */
+   .color-red {
+      background: red;
+       border-radius: 0.8em;
+      -moz-border-radius: 0.8em;
+      -webkit-border-radius: 0.8em;
+      color: #ffffff;
+      display: inline-block;
+      font-weight: bold;
+      line-height: 1.6em;
+      margin-right: 15px;
+      text-align: center;
+      width: 1.6em; 
+    }
+    
+    .color-grey {
+      background: #cccccc;
+      border-radius: 0.8em;
+      -moz-border-radius: 0.8em;
+      -webkit-border-radius: 0.8em;
+      color: #fff;
+      display: inline-block;
+      font-weight: bold;
+      line-height: 1.6em;
+      margin-right: 15px;
+      text-align: center;
+      width: 1.6em; 
+    }
+    
+    .color-green {
+      background: #5EA226;
+      border-radius: 0.8em;
+      -moz-border-radius: 0.8em;
+      -webkit-border-radius: 0.8em;
+      color: #ffffff;
+      display: inline-block;
+      font-weight: bold;
+      line-height: 1.6em;
+      margin-right: 15px;
+      text-align: center;
+      width: 1.6em; 
+    }
+    
+    .color-blue {
+      background: #5178D0;
+      border-radius: 0.8em;
+      -moz-border-radius: 0.8em;
+      -webkit-border-radius: 0.8em;
+      color: #ffffff;
+      display: inline-block;
+      font-weight: bold;
+      line-height: 1.6em;
+      margin-right: 15px;
+      text-align: center;
+      width: 1.6em; 
+    }
+    
+    .color-orange {
+      background: rgb(245, 165, 45);
+      border-radius: 0.8em;
+      -moz-border-radius: 0.8em;
+      -webkit-border-radius: 0.8em;
+      color: #ffffff;
+      display: inline-block;
+      font-weight: bold;
+      line-height: 1.6em;
+      margin-right: 15px;
+      text-align: center;
+      width: 1.6em; 
+    }
+
+
+    .search-form-field{
+      width: 15%;
+      height: 20px;
+      margin-left: 10px;
+      padding: 10px;
+      border-radius: 5px;
+      }
+
+      tr.mat-row{
+          height: 10px !important;
+      }
+}
+
+.paginacion-right{
+  display: inline !important;
+}
+
+.mat-toolbar-fondo{
+  background: #fff;
+}
+
+.excel-icon-top{
+  margin-top: 15px !important;
+}
+
+.fondo-filtro{
+  background: #039be5;
+  color: white;
+}
+
+.mat-expansion-panel-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 24px;
+  border-radius: inherit;
+  background: #039be5 !important;
+  //height: 48px !important;
+}
+
+.mat-expansion-panel-header.mat-expanded:focus .mat-expansion-panel-header .mat-expanded:hover {
+background:  #039be5 !important;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+  padding: 0;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+}
+
+
+
+
+.mat-icon-button {
+  padding: 0;
+  min-width: 0;
+  width: 15px;
+  height: 30px;
+  flex-shrink: 0;
+  line-height: 10px;
+  border-radius: 50%;
+}
+
+.mat-row:hover {
+background-color:  #DFE5EF;
+.mat-cell, .mat-footer-cell {
+  font-weight: bold;
+  }
+}
+
+
+.mat-select-panel .mat-optgroup-label, .mat-select-panel .mat-option {
+font-size: inherit;
+line-height: 3em;
+height: 2em !important;
+}
+
+.tamanio-seleccionar{
+font-size: 12px;
+}
+
+.spinerTable {
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
+right: 0 !important;
+position: sticky;
+bottom: 0px;
+left: 0px;
+.mat-progress-spinner {
+  width: 50px !important;
+  height: 50px !important;
+  svg {
+    width: 50px !important;
+    height: 50px !important;
+  }
+}
+}
+
+.empty {
+padding: 20px;
+text-align: center;
+position: sticky;
+bottom: 0px;
+left: 0px;
+font-size: 0.8em;
+font-weight: 500;
+color: #005e82;
+}
+
+
+.mat-expansion-panel-content {
+display: flex;
+flex-direction: column;
+overflow: visible;
+padding-top: 10px;
+}
+

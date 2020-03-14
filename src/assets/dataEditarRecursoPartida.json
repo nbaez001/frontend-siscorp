@@ -1,0 +1,43 @@
+{
+    "codResultado": 1,
+    "msgResultado": "OK",
+    "total": 3,
+    "response": [
+        {
+            "idCodigo": 1,
+            "nro": 1,
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "cantidad": "5",
+            "nroPartida":"01.01.01.01",
+            "avanceFisico":"50%",
+            "flagAvance":0
+        },
+        {
+            "idCodigo": 2,
+            "nro": 2,
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "cantidad": "20",
+            "nroPartida":"01.02.01.02",
+            "avanceFisico":"50%",
+            "flagAvance":0
+        },
+        {
+            "idCodigo": 3,
+            "nro": 3,
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "cantidad": "10",
+            "nroPartida":"01.03.01.03",
+            "avanceFisico":"100%",
+            "flagAvance":1
+        },
+        {
+            "idCodigo": 3,
+            "nro": 4,
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "cantidad": "5",
+            "nroPartida":"01.04.01.04",
+            "avanceFisico":"20%",
+            "flagAvance":0
+        }
+    ]
+}

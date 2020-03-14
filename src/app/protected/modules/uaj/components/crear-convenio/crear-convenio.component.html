@@ -1,0 +1,199 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Nuevo Convenio</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="contenido-formulario" [formGroup]="convenioForm">
+
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field appearance="outline">
+      <mat-label>Denominación</mat-label>
+      <mat-select formControlName="denominacion" class="tamanio-seleccionar" placeholder="Denominación">
+        <mat-option *ngFor="let d of denominacion" [value]="d.idCodigo">
+          {{ d.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!convenioForm.get('denominacion').valid && convenioForm.get('denominacion').touched">
+        {{ convenioForm.get('denominacion').errors | errorMessage:"Seleccione denominacion" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tipos Convenio</mat-label>
+      <mat-select formControlName="tipoConvenio" class="tamanio-seleccionar" placeholder="Tipos Convenio">
+        <mat-option *ngFor="let tc of tipoConvenio" [value]="tc.idCodigo">
+          {{ tc.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!convenioForm.get('tipoConvenio').valid && convenioForm.get('tipoConvenio').touched">
+        {{ convenioForm.get('tipoConvenio').errors | errorMessage:"Seleccione tipo convenio" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <label><strong>Convenio</strong></label>
+  <mat-form-field appearance="outline">
+    <!-- <mat-label>Entidad</mat-label> -->
+    <textarea matInput formControlName="convenio"></textarea>
+    <mat-error *ngIf="!convenioForm.get('convenio').valid && convenioForm.get('convenio').touched">
+      {{ convenioForm.get('convenio').errors | errorMessage:"Ingrese convenio" }}
+    </mat-error>
+  </mat-form-field>
+
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field appearance="outline">
+      <mat-label>Gobierno</mat-label>
+      <mat-select formControlName="gobierno" class="tamanio-seleccionar" placeholder="Gobierno">
+        <mat-option *ngFor="let tg of tGobierno" [value]="tg.idCodigo" (onSelectionChange)="changetg($event)">
+          {{ tg.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!convenioForm.get('gobierno').valid && convenioForm.get('gobierno').touched">
+        {{ convenioForm.get('gobierno').errors | errorMessage:"Seleccione tipo convenio" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Sector</mat-label>
+      <mat-select formControlName="sector" class="tamanio-seleccionar" placeholder="Sector">
+        <mat-option *ngFor="let s of sectores" [value]="s.idCodigo" (onSelectionChange)="changes($event)">
+          {{ s.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!convenioForm.get('sector').valid && convenioForm.get('sector').touched">
+        {{ convenioForm.get('sector').errors | errorMessage:"Seleccione tipo sector" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Entidad</mat-label>
+      <mat-select formControlName="entidad" class="tamanio-seleccionar" placeholder="Entidad">
+        <mat-option *ngFor="let p of programas" [value]="p.idCodigo" (onSelectionChange)="changeco($event)">
+          {{ p.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="!convenioForm.get('entidad').valid && convenioForm.get('entidad').touched">
+        {{ convenioForm.get('entidad').errors | errorMessage:"Seleccione tipo sector" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <label><strong>Vigencia del Convenio</strong></label>
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha Suscripciòn</mat-label>
+      <input matInput placeholder="Fecha Suscripciòn" formControlName="fecha_suscripcion" readonly
+        [matDatepicker]="pickerSus" (click)="pickerSus.open()">
+      <mat-datepicker-toggle matSuffix [for]="pickerSus"></mat-datepicker-toggle>
+      <mat-datepicker #pickerSus></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha Fin Convenio</mat-label>
+      <input matInput placeholder="Fecha Fin Convenio" formControlName="fecha_fin_convenio" readonly
+        [matDatepicker]="pickerFin" (click)="pickerFin.open()">
+      <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+      <mat-datepicker #pickerFin></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <label><strong>Objeto del Convenio</strong></label>
+  <mat-form-field appearance="outline">
+    <!-- <mat-label>Entidad</mat-label> -->
+    <textarea matInput formControlName="objeto"></textarea>
+    <mat-error *ngIf="!convenioForm.get('objeto').valid && convenioForm.get('objeto').touched">
+      {{ convenioForm.get('objeto').errors | errorMessage:"Ingrese objeto" }}
+    </mat-error>
+  </mat-form-field>
+
+  <label><strong>Coordinadores</strong></label>
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+    <mat-form-field appearance="outline">
+      <mat-label>Coordinador PAIS</mat-label>
+      <input matInput placeholder="Coordinador PAIS" formControlName="coordinadorPais" [matAutocomplete]="empleado">
+      <mat-autocomplete #empleado="matAutocomplete">
+        <mat-option *ngFor="let empleado of empleados" [value]="empleado.nombre"
+          (onSelectionChange)="selectEmpledo(empleado.idCodigo)">
+          {{ empleado.nombre }}
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="!convenioForm.get('coordinadorPais').valid && convenioForm.get('coordinadorPais').touched">
+        {{ convenioForm.get('coordinadorPais').errors | errorMessage:"Ingrese" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Coordinador Contraparte</mat-label>
+      <mat-select formControlName="coordinadorContraparte" class="tamanio-seleccionar"
+        placeholder="Coordinador Contraparte">
+        <mat-option *ngFor="let p of coordinadorContraparte" [value]="p.idCodigo">
+          {{ p.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="!convenioForm.get('coordinadorContraparte').valid && convenioForm.get('coordinadorContraparte').touched">
+        {{ convenioForm.get('coordinadorContraparte').errors | errorMessage:"Ingrese coordinador
+                      contraparte" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <label><strong>Compromisos</strong></label>
+  <div class="mb-16" fxLayout="row" fxLayoutGap="15px">
+
+    <mat-form-field appearance="outline">
+      <mat-label>PAIS</mat-label>
+      <textarea matInput placeholder="PAIS" formControlName="pais" matTextareaAutosize matAutosizeMinRows=1
+        matAutosizeMaxRows=7></textarea>
+      <mat-error *ngIf="!convenioForm.get('pais').valid && convenioForm.get('pais').touched">
+        {{ convenioForm.get('pais').errors | errorMessage:"Ingrese compromiso" }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Contraparte</mat-label>
+      <textarea matInput placeholder="Contraparte" formControlName="contraparte" matTextareaAutosize
+        matAutosizeMinRows=1 matAutosizeMaxRows=7></textarea>
+      <mat-error *ngIf="!convenioForm.get('contraparte').valid && convenioForm.get('contraparte').touched">
+        {{ convenioForm.get('contraparte').errors | errorMessage:"Ingrese compromiso" }}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <label><strong>Archivo</strong></label>
+  <div fxLayout="row">
+    <div class="attachment mat-elevation-z1" fxLayout="column" fxLayoutAlign="start center" *ngIf="flat_archivo">
+      <mat-icon fxFlex>description</mat-icon>
+      <span fxFlex class="text-truncate">{{ archivos.filename }}</span>
+      <button mat-icon-button type="button" class="remove" (click)="removerArchivo(archivos)">
+        <mat-icon class="mat-elevation-z1">cancel</mat-icon>
+      </button>
+    </div>
+    <div class="attachment mat-elevation-z1" fxLayout="column" fxLayoutAlign="start center"
+      (click)="uploadInput.click()" *ngIf="!flat_archivo">
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+      <mat-icon fxFlex>attachment</mat-icon>
+      <span fxFlex>Adjuntar archivo</span>
+    </div>
+
+  </div>
+
+  <input type="file" #uploadInput (change)="cargarArchivos($event.target.files)"  [fxHide]="true">
+
+</div>
+
+<div align="center" class="example-button-row acciones-margen-derecho">
+  <button color="primary" mat-raised-button (click)="Crearconvenio()">
+    <mat-icon>save</mat-icon>CREAR CONVENIO
+  </button>
+</div>
+
+<br>

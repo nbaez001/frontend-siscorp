@@ -1,0 +1,178 @@
+<div [formGroup]="proyectoForm" class="estilo">
+
+  <div class="sidenav-header">
+    <mat-toolbar>
+      <br>
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="avatar-wrapper">
+          <img src="assets/images/avatars/profile.jpg" class="mat-avatar avatar" alt="" />
+        </div>
+        <div>
+          <button mat-button class="mat-icon-button" [matMenuTriggerFor]="userMenu" aria-label="more">
+            <mat-icon style="color: rgb(14, 133, 14)">add_circle</mat-icon>
+          </button>
+          <mat-menu #userMenu="matMenu">
+            <button mat-menu-item (click)="crearChatGrupal()">
+              &nbsp; <small> Crear chat grupal</small>
+            </button>
+          </mat-menu>
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon style="color: rgb(224, 30, 30)">home</mat-icon>
+            <input autocomplete="off" [(ngModel)]="searchTambo" formControlName="tambos" type="text"
+              placeholder="Busca a tus contactos por tambos" fxFlex (keyup)="onKeybusquedaContacto($event)" matInput
+              [matAutocomplete]="auto">
+
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)='busquedaContacto($event.option.value)'
+              [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptionsplataforma | async" [value]="option">
+                {{option.cidNombre}}
+              </mat-option>
+            </mat-autocomplete>
+
+          </div>
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon style="color: rgb(11, 119, 25)">supervised_user_circle</mat-icon>
+            <input autocomplete="off" [(ngModel)]="searchPuesto" formControlName="puesto" type="text"
+              placeholder="Busca a tus contactos por puesto" fxFlex (keyup)="onKeybusquedaContacto($event)" matInput
+              [matAutocomplete]="auto2">
+
+            <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='busquedaContacto($event.option.value)'
+              [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptionspuesto | async" [value]="option">
+                {{option.cidNombre}}
+              </mat-option>
+            </mat-autocomplete>
+
+          </div>
+        </div>
+      </mat-toolbar-row>
+      <mat-toolbar-row>
+        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon style="color: rgb(20, 156, 235)">search</mat-icon>
+            <input autocomplete="off" [(ngModel)]="searchNombre" formControlName="nombre" type="text"
+              placeholder="Busca a tus contactos por nombre" fxFlex (keyup)="onKeybusquedaContacto($event)"
+              (keydown.enter)="busquedaContacto($event)">
+          </div>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+</div>
+
+<mat-tab-group class="demo-tab-group" animationDuration="0ms" mat-align-tabs="center" style="background-color: #c8e6c9">
+
+  <mat-tab label="Conversaciones">
+    <ng-template mat-tab-label>
+      <mat-icon>chat</mat-icon>&nbsp; Conversaciones
+    </ng-template>
+    <div class="sidenav-content" fusePerfectScrollbar fxFlex>
+      <div [@animateStagger]="{value:'50'}">
+        <div style="height: 490px;" class="chat-list" fxLayout="column">
+          <div class="example-button-row" *ngFor="let chat of chatList; trackBy: trackChatList">
+            <button style="width: 100%;background-color: white" mat-button class="contact"
+              (click)="obtenerChatDesdeConversaciones(chat.id,chat.contactid,chat.typeChat)"
+              ngClass="{'unread':contact.unread}" [@animate]="{value:'*',params:{y:'100%'}}"
+              (click)="toggleClass(chat)">
+              <div fxLayoutAlign="start center ">
+                <div *ngIf="chat.typeChat==0" class="avatar-wrapper" fxFlex="0 1 auto" fxLayoutAlign="center center">
+                  <img [src]="chat.avatar" class="avatar" alt="{{chat.avatar}}" />
+
+                  <mat-icon class="s-16 status" [ngClass]="chat.status">
+                  </mat-icon>
+
+                </div>
+
+                <div *ngIf="chat.typeChat==1" class="avatar-wrapper" fxFlex="0 1 auto" fxLayoutAlign="center center">
+                  <img src="assets/images/avatars/group.png" class="avatar" alt="" />
+                </div>
+
+                <div fxLayout="row" fxFlex>
+
+                  <div class="" fxFlex fxLayout="column" fxLayoutAlign="center start">
+                    <div *ngIf="chat.typeChat==0" class="contact-name">
+                      {{chat.contactName}}
+                    </div>
+                    <div *ngIf="chat.typeChat==1" class="contact-name">
+                      {{chat.chatName}}
+                    </div>
+                    <em *ngIf="chat.typeChat==0"><small>
+                        {{chat.lasMessage}}
+                      </small></em>
+                    <em *ngIf="chat.typeChat==1"><small>
+                        {{chat.contactName}}: {{chat.lasMessage}}
+                      </small></em>
+                  </div>
+
+                  <div fxLayout="column" fxLayoutAlign="center end">
+                    <!-- <div class="contact-last-message-time">
+                        {{chat.dateLastMessage }}
+                      </div> -->
+                    <!-- [ngStyle]="{background: estilo}" -->
+                    <!-- <div *ngIf="chat.status" class="unread-message-count">{{chat.countMessagePending}}</div> -->
+                    <div [ngClass]="{'read-message-count': chat.flag}"
+                      *ngIf="chat.notification===1 && chat.countMessagePending!==0" class="unread-message-count">
+                      {{chat.countMessagePending}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="chatList && chatList.length === 0" class="no-results-message">
+          No ha iniciado una conversación...
+        </div>
+        <div *ngIf="chatList &&  chatList.length !== 0 && (chatList| filter: searchText).length === 0"
+          class="no-results-message">
+          No hay resultados...
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Contactos">
+    <ng-template mat-tab-label >
+      <mat-icon>people</mat-icon>&nbsp; Contactos
+    </ng-template>
+    <div class="sidenav-content" fusePerfectScrollbar fxFlex >
+      <div [@animateStagger]="{value:'50'}">
+        <div style="height: 490px;" style="background-color: white" >
+
+          <cdk-virtual-scroll-viewport  itemSize="30" class="example-viewport" >
+            <div class="contact-list" fxLayout="column" >
+              <button mat-button class="example-item contact"
+                *cdkVirtualFor="let contact of contacts; trackBy: trackContacts"
+                (click)="obtenerChatDesdeContacto(contact.id)" [@animate]="{value:'*',params:{y:'100%'}}">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div class="avatar-wrapper" fxFlex="0 1 auto">
+                    <img src="{{contact.avatar}}" class="mat-avatar avatar" alt="{{contact.name}}" />
+                    <mat-icon class="s-16 status" [ngClass]="contact.status">
+                    </mat-icon>
+                  </div>
+                  <div class="" fxLayout="column" fxLayoutAlign="center start">
+                    <div class="contact-name">{{contact.name}}</div>
+                  </div>
+                </div>
+              </button>
+            </div>
+          </cdk-virtual-scroll-viewport>
+
+          <div *ngIf="(contacts| filter: searchText).length === 0" class="no-results-message">
+            No hay resultados...
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>

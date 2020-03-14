@@ -1,0 +1,147 @@
+:host {
+  mat-toolbar mat-icon {
+    margin-right: 10px;
+  }
+
+  button.mat-icon-button {
+    background-color: #e2e2e2;
+  }
+
+  /deep/ .mat-tab-label button.gestionar {
+    display: none;
+  }
+
+  /deep/ .mat-tab-label:hover button.gestionar {
+    display: block;
+  }
+
+  .contenedor {
+    padding: 12px;
+    display: flex;
+    flex-direction: row;
+
+    .modulos, .perfiles {
+      flex: 1;
+    }
+
+    .modulos {
+      margin-right: 20px;
+
+      .cabecera {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 30px 15px 20px;
+        font-size: 30px;
+      }
+
+      .contenido {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        .item {
+          padding: 10px;
+          cursor: pointer;
+          border-bottom: solid 0.5px #e6e6e6;
+          height: 40px;
+          position: relative;
+  
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+  
+          .icono {
+            width: 30px;
+          }
+
+          .modulo, .perfiles {
+            flex: 1;
+          }
+
+          .acciones {
+            display: flex;
+            flex-direction: row;
+
+            button {
+              margin-right: 10px;
+            }
+          }
+        }
+  
+        .item.seleccionado {
+          background-color: #f5f4f4;
+          border-left: solid 1px grey;
+        }
+
+        .item:hover {
+          background-color: #f9f9f9;
+        }
+        
+        .item:last-of-type {
+          border-bottom: none;
+        }
+      }
+
+    }
+
+    > .perfiles {
+      // background-color: #f5f4f4;
+
+      .cabecera {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 30px 15px 20px;
+        font-size: 30px;
+        min-height: 70px;
+      }
+
+      .cabecera small {
+        font-size: 15px;
+      }
+
+      .contenido {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        .item {
+          padding: 10px;
+          border-bottom: solid 0.5px #e6e6e6;
+          height: 25px;
+  
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          small {
+            color: grey;
+          }
+
+          .perfil, .usuarios {
+            flex: 1;
+          }
+
+          .acciones {
+            display: flex;
+            flex-direction: row;
+
+            button {
+              margin-right: 10px;
+            }
+          }
+
+        }
+
+        .item:last-of-type {
+          border-bottom: none;
+        }
+
+      }
+    }
+
+  }
+}

@@ -1,0 +1,21 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "Aprobado"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "Observado"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "Rechazado"
+        }
+    ],
+	"idPerfil": null
+}

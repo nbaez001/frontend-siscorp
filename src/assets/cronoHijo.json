@@ -1,0 +1,60 @@
+{
+    "data":
+    [  
+        {  
+            "data": {
+                "item": "01.01",
+                "descripcion": "xxxxxx",
+                "und": "",
+                "cuadrilla": "2",
+                "cantidad": "3",
+                "preciounitario": "4",
+                "parcialunitario": "4",
+                "metrado": "",
+                "precio": "",
+                "parcial": "69898.8",
+                "metrado1": "",
+                "soles1": "",
+                "porcentaje1": "",
+                "metrado2": "",
+                "soles2": "",
+                "porcentaje2": "",
+                "metrado3": "",
+                "soles3": "",
+                "porcentaje3": "",
+                "metrado4": "",
+                "soles4": "",
+                "porcentaje4": ""
+            },
+            "leaf": false
+        },
+        {  
+            "data": {
+                "item": "01.02",
+                "descripcion": "xxxxxx",
+                "und": "",
+                "cuadrilla": "2",
+                "cantidad": "3",
+                "preciounitario": "4",
+                "parcialunitario": "4",
+                "metrado": "",
+                "precio": "",
+                "parcial": "69898.8",
+                "metrado1": "",
+                "soles1": "",
+                "porcentaje1": "",
+                "metrado2": "",
+                "soles2": "",
+                "porcentaje2": "",
+                "metrado3": "",
+                "soles3": "",
+                "porcentaje3": "",
+                "metrado4": "",
+                "soles4": "",
+                "porcentaje4": ""
+            },
+            "leaf": true
+        }
+        
+    ]
+}

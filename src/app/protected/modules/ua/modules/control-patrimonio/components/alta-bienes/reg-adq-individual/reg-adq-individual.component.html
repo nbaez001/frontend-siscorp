@@ -1,0 +1,633 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="formularioGrp0">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>Forma adquisicion</mat-label>
+            <mat-select formControlName="formaAdquisicion">
+              <mat-option *ngFor="let formaAdquisicion of formasAdquisicion" [value]="formaAdquisicion">
+                {{formaAdquisicion.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>N° Documento sustentatorio</mat-label>
+            <input matInput formControlName="nroDocSustentatorio" placeholder="N° documento sustentatorio" type="text"
+              [appUpperCase] (focusout)="setListaNroDoc()">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha adquisicion</mat-label>
+            <input matInput formControlName="fechaAdquisicion" [matDatepicker]="picker" placeholder="Fecha adquisicion">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>Unidad</mat-label>
+            <mat-select formControlName="unidad" (selectionChange)="comboTambos()">
+              <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+                {{unidad.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>Tambo</mat-label>
+            <mat-select formControlName="tambo">
+              <mat-option *ngFor="let tambo of tambos" [value]="tambo">
+                {{tambo.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Detalle adquisicion</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="formularioGrp">
+          <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 1, xl: 1}">
+              <mat-form-field appearance="outline">
+                <mat-label>Codigo</mat-label>
+                <input matInput formControlName="codigoBienPatrimonio" placeholder="Codigo">
+                <button mat-icon-button matTooltip="Buscar" type="button" class="btn-icon-input" color="primary"
+                  (click)="buscarCatalogo()">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="outline">
+                <mat-label>Denominacion bien</mat-label>
+                <input matInput formControlName="denominacion" placeholder="Denominacion bien" type="text"
+                  [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                  (optionSelected)="seleccionDenominacion($event)">
+                  <mat-option *ngFor="let denominacion of listaDenominacion | async" [value]="denominacion">
+                    {{denominacion.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>Marca</mat-label>
+                <input matInput formControlName="marca" placeholder="Marca" type="text" [matAutocomplete]="auto2"
+                  [appUpperCase]>
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn"
+                  (optionSelected)="seleccionado($event)">
+                  <mat-option *ngFor="let marca of listaMarcas | async" [value]="marca">
+                    {{marca.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>Modelo</mat-label>
+                <input matInput formControlName="modelo" placeholder="Modelo" type="text" [matAutocomplete]="auto3"
+                  [appUpperCase]>
+                <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn"
+                  (optionSelected)="seleccionado($event)">
+                  <mat-option *ngFor="let modelo of listaModelos | async" [value]="modelo">
+                    {{modelo.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>Serie</mat-label>
+                <input matInput formControlName="serie" placeholder="Serie" type="text" [appUpperCase]>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>Medidas</mat-label>
+                <input matInput formControlName="medida" placeholder="Medidas" type="text" [appUpperCase]>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+              <mat-form-field appearance="outline">
+                <mat-label>Color</mat-label>
+                <mat-chip-list #chipList aria-label="Seleccion de color">
+                  <mat-chip *ngFor="let color of colores" [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(color)">
+                    {{color.cidNombre}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Color del bien" #colorInput formControlName="color" [matAutocomplete]="auto4"
+                    [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" [appUpperCase]>
+                </mat-chip-list>
+                <mat-autocomplete #auto4="matAutocomplete" (optionSelected)="seleccionColor($event)">
+                  <mat-option *ngFor="let color of listaColor | async" [value]="color">
+                    {{color.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+              <mat-form-field appearance="outline">
+                <mat-label>Caracteristicas</mat-label>
+                <input matInput formControlName="caracteristica" placeholder="Caracteristicas" [appUpperCase]>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>Cuenta</mat-label>
+                <mat-select formControlName="cuenta">
+                  <mat-option *ngFor="let cuenta of cuentas" [value]="cuenta">
+                    {{cuenta.codigo}} - {{cuenta.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>Valor adquisicion</mat-label>
+                <input matInput formControlName="valorAdquisicion" type="number" placeholder="Valor adquisicion">
+              </mat-form-field>
+            </mat-grid-tile>
+
+
+
+          </mat-grid-list>
+          <mat-grid-list cols="12" rowHeight="75px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+              <mat-form-field appearance="outline">
+                <mat-label>Observaciones</mat-label>
+                <textarea matInput formControlName="observacion" placeholder="Observaciones" [appUpperCase]></textarea>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 8, sm: 6, md: 4, lg: 2, xl: 1}">
+              <mat-form-field appearance="outline">
+                <mat-label>Cantidad</mat-label>
+                <input matInput formControlName="cantidad" placeholder="Cantidad" type="number">
+                <button mat-icon-button matTooltip="Agregar bienes" type="button" class="btn-icon-input" color="primary"
+                  (click)="agregarDetalle()">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </form>
+        <form [formGroup]="detFormularioGrp">
+          <div class="table-container" style="margin-top: 5px;">
+            <table mat-table [dataSource]="dataSource">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> N° </th>
+                <td mat-cell *matCellDef="let row; let i = index">
+                  {{i+1}}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="codPatrimonio">
+                <th mat-header-cell *matHeaderCellDef> Codigo patrimonial </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.codPatrimonio }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="denominacion">
+                <th mat-header-cell *matHeaderCellDef> Descripcion bien </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.denominacion.cidNombre }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="marca">
+                <th mat-header-cell *matHeaderCellDef> Marca </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][3], 'unselected': !selectedCellsState[i][3]}">
+                  <input matInput [formControlName]="'m'+row.id" placeholder="Marca" type="text"
+                    [matAutocomplete]="autoM" (focus)="enfocado(i, 3)" (keyup)="filtrarMarcasTabla(row.id)"
+                    [appUpperCase]>
+                  <mat-autocomplete #autoM="matAutocomplete" [displayWith]="displayFn"
+                    (optionSelected)="seleccionado($event)">
+                    <mat-option *ngFor="let marca of listaMarcasTabla | async" [value]="marca">
+                      {{marca.cidNombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="modelo">
+                <th mat-header-cell *matHeaderCellDef> Modelo </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][4], 'unselected': !selectedCellsState[i][4]}">
+                  <input matInput [formControlName]="'mo'+row.id" placeholder="Modelo" type="text"
+                    [matAutocomplete]="autoMo" (focus)="enfocado(i, 4)" (keyup)="filtrarModelosTabla(row.id)"
+                    [appUpperCase]>
+                  <mat-autocomplete #autoMo="matAutocomplete" [displayWith]="displayFn"
+                    (optionSelected)="seleccionado($event)">
+                    <mat-option *ngFor="let modelo of listaModelosTabla | async" [value]="modelo">
+                      {{modelo.cidNombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="serie">
+                <th mat-header-cell *matHeaderCellDef> Serie </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][5], 'unselected': !selectedCellsState[i][5]}">
+                  <input matInput [formControlName]="'s'+row.id" placeholder="Serie" type="text"
+                    (focus)="enfocado(i, 5)" [appUpperCase]>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="medida">
+                <th mat-header-cell *matHeaderCellDef> Medida </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][6], 'unselected': !selectedCellsState[i][6]}">
+                  <input matInput [formControlName]="'me'+row.id" placeholder="Medida" type="text"
+                    (focus)="enfocado(i, 6)" [appUpperCase]>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="color">
+                <th mat-header-cell *matHeaderCellDef> Color </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][7], 'unselected': !selectedCellsState[i][7]}">
+                  <mat-chip-list #chipListC>
+                    <mat-chip *ngFor="let color of row.coloresTabla" [selectable]="selectableTabla"
+                      [removable]="removableTabla" (removed)="removeColorTabla(row, color)">
+                      {{color.cidNombre}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Color del bien" #colorInputTabla [formControlName]="'co'+row.id"
+                      [matAutocomplete]="autoCo" [matChipInputFor]="chipListC"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodesTabla" [matChipInputAddOnBlur]="addOnBlurTabla"
+                      (matChipInputTokenEnd)="addColorTabla($event, row.id, row)" (focus)="enfocado(i, 7)"
+                      (keyup)="filtrarModelosTabla(row.id)">
+                  </mat-chip-list>
+                  <mat-autocomplete #autoCo="matAutocomplete"
+                    (optionSelected)="selectedColorTabla($event, row.id, row)">
+                    <mat-option *ngFor="let color of listaColorTabla | async" [value]="color">
+                      {{color.cidNombre}}
+                    </mat-option>
+                  </mat-autocomplete>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="caracteristica">
+                <th mat-header-cell *matHeaderCellDef> Caracteristicas </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][8], 'unselected': !selectedCellsState[i][8]}">
+                  <textarea matInput [formControlName]="'ca'+row.id" placeholder="Caracteristicas"
+                    (focus)="enfocado(i, 8)" [appUpperCase]></textarea>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="cuenta">
+                <th mat-header-cell *matHeaderCellDef> Cuenta </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][9], 'unselected': !selectedCellsState[i][9]}">
+                  <mat-select [formControlName]="'cc'+row.id">
+                    <mat-option *ngFor="let cuenta of row.cuentasTabla" [value]="cuenta" (focus)="enfocado(i, 9)">
+                      {{cuenta.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="valorAdquisicion">
+                <th mat-header-cell *matHeaderCellDef> Valor adquisicion </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][10], 'unselected': !selectedCellsState[i][10]}">
+                  <input matInput [formControlName]="'va'+row.id" placeholder="Valor adquisicion"
+                    (focus)="enfocado(i, 10)" type="number">
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="unidad">
+                <th mat-header-cell *matHeaderCellDef> Unidad </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][12], 'unselected': !selectedCellsState[i][12]}">
+                  <mat-select [formControlName]="'ut'+row.id" (selectionChange)="comboTambosTabla(row)">
+                    <mat-option *ngFor="let unidad of row.unidadesTabla" [value]="unidad" (focus)="enfocado(i, 12)">
+                      {{unidad.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="tambo">
+                <th mat-header-cell *matHeaderCellDef> Tambo </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][13], 'unselected': !selectedCellsState[i][13]}">
+                  <mat-select [formControlName]="'tb'+row.id">
+                    <mat-option *ngFor="let tambo of row.tambosTabla" [value]="tambo" (focus)="enfocado(i, 13)">
+                      {{tambo.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="observacion">
+                <th mat-header-cell *matHeaderCellDef> Observaciones </th>
+                <td mat-cell *matCellDef="let row; let i = index"
+                  [ngClass]="{'selected': selectedCellsState[i][11], 'unselected': !selectedCellsState[i][11]}">
+                  <textarea matInput [formControlName]="'ob'+row.id" placeholder="Observaciones"
+                    (focus)="enfocado(i, 10)" [appUpperCase]></textarea>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <div class="empty" *ngIf="dataSource === null">
+              Agregue registros de bienes sobrantes mediante el formulario de la parte superior
+            </div>
+            <!-- <p-table [value]="listaBienes">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 40px;">N°</th>
+                  <th style="width: 150px;">CODIGO PATRIMONIAL</th>
+                  <th style="width: 300px;">DESCRIPCION DEL BIEN</th>
+                  <th style="width: 100px;">MARCA</th>
+                  <th style="width: 100px;">MODELO</th>
+                  <th style="width: 100px;">TIPO</th>
+                  <th style="width: 100px;">COLOR</th>
+                  <th style="width: 100px;">SERIE</th>
+                  <th style="width: 100px;">MEDIDA</th>
+                  <th style="width: 100px;">AÑO</th>
+                  <th style="width: 200px;">PLACA</th>
+                  <th style="width: 200px;">CHASIS</th>
+                  <th style="width: 200px;">MOTOR</th>
+                  <th style="width: 200px;">ESTADO</th>
+                  <th style="width: 200px;">COMENTARIOS</th>
+                  <th style="width: 200px;">CUENTA</th>
+                  <th style="width: 200px;">DESCRIPCION CUENTA</th>
+                  <th style="width: 200px;">FECHA REGISTRO</th>
+                  <th style="width: 200px;">FECHA CONTABILIDAD</th>
+                  <th style="width: 200px;">DOC. ADQUISICION</th>
+                  <th style="width: 200px;">VALOR ADQUISICION</th>
+                  <th style="width: 200px;">UNIDAD</th>
+                  <th style="width: 200px;">TAMBO</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowData let-i="rowIndex">
+                <tr>
+                  <td style="width: 40px;">
+                    <p-cellEditor>
+                      <ng-template pTemplate="output">
+                        {{i+1}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 150px;">
+                    <p-cellEditor>
+                      <ng-template pTemplate="output">
+                        {{rowData.codPatrimonio}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 300px;">
+                    <p-cellEditor>
+                      <ng-template pTemplate="output">
+                        {{rowData.descripcionBien}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-autoComplete [(ngModel)]="rowData.marca.nombre" [suggestions]="marcasTabla"
+                          (completeMethod)="buscarMarcas($event, rowData.marca.nombre)" field="nombre" [minLength]="2"
+                          (onSelect)="evaluarMarca($event, rowData)">
+                        </p-autoComplete>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.marca.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 100px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-autoComplete [(ngModel)]="rowData.modelo.nombre" [suggestions]="modelosTabla"
+                          (completeMethod)="buscarModelos($event, rowData.modelo.nombre)" field="nombre" [minLength]="2"
+                          (onSelect)="evaluarModelo($event, rowData)">
+                        </p-autoComplete>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.modelo.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 100px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.tipo" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.tipo}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 100px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-autoComplete [(ngModel)]="rowData.color" [suggestions]="coloresTabla"
+                          (completeMethod)="buscarColores($event,rowData.color)" field="nombre" [minLength]="2"
+                          [multiple]="true" (onSelect)="evaluarColor($event, rowData)">
+                        </p-autoComplete>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{mostrarChips(rowData.color)}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 100px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.serie" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.serie}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 100px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.medida" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.medida}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 100px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.anio" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.anio}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.placa" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.placa}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.chasis" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.chasis}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.motor" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.motor}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="estados" [(ngModel)]="rowData.estado" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.estado.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData.comentarios" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.comentarios}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="cuentasTabla" [(ngModel)]="rowData.cuenta" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.cuenta.codigo}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="cuentasTabla2" [(ngModel)]="rowData.cuenta" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.cuenta.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor style="width: 100%;">
+                      <ng-template pTemplate="input">
+                        <p-calendar [(ngModel)]="rowData.fechaRegistro" dateFormat="dd/mm/yy"></p-calendar>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.fechaRegistro | date: 'dd/MM/yyyy'}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-calendar [(ngModel)]="rowData.fechaContabilidad" dateFormat="dd/mm/yy"></p-calendar>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.fechaContabilidad | date: 'dd/MM/yyyy'}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;">
+                    <p-cellEditor>
+                      <ng-template pTemplate="output">
+                        {{rowData.nroDocAdquisicion}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input pInputText type="number" [(ngModel)]="rowData.valorAdquisicion" required>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.valorAdquisicion}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="unidadesTabla" [(ngModel)]="rowData.unidad" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.unidad.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td style="width: 200px;" pEditableColumn>
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown [options]="tambosTabla" [(ngModel)]="rowData.tambo" [style]="{'width':'100%'}">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{rowData.tambo.nombre}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="footer" let-columns>
+                <tr *ngIf="listaBienes.length<=0">
+                  <td style="text-align: center; font-weight: initial;" colspan="12">
+                    Agregue el detalle de adquisicion de bienes de alta aqui, mediante el formulario...
+                  </td>
+                  <td style="text-align: center; font-weight: initial;" colspan="11">
+                    Agregue el detalle de adquisicion de bienes de alta aqui, mediante el formulario...
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table> -->
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="button" (click)="guardar()">Guardar</button>
+    <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div>
+</div>

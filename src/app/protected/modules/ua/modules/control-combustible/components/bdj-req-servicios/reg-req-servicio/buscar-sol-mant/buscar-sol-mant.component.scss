@@ -1,0 +1,35 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    select: (
+      width: 2rem
+    ),
+    id: (
+      width: 2rem
+    ),
+    nomTambo: (
+      width: 12rem
+    ),
+    nomTipoMantenimiento: (
+      width: 8rem
+    ),
+    nomTipoVehiculo: (
+      width: 12rem
+    ),
+    nomProveedor: (
+      width: 12rem
+    ),
+    monto: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 6rem
+    )
+  )
+);

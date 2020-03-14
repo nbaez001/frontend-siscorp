@@ -1,0 +1,132 @@
+<div class="page">
+
+
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span style=" font-weight: bold;"> 
+      <small>
+        Partida:  {{datosPartida.nombrePartida}}
+      </small> 
+    </span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div mat-dialog-content>
+    <div class="container">
+      <div class="row" style="padding: 12px;">
+
+        <!-- <p-treeTable 
+    [value]="files" 
+    [scrollable]="true" 
+    [scrollHeight]="scrollHeightConfig"
+    (onEditComplete)="editarInsumoPorFila($event)" 
+    selectionMode="single" 
+   (onNodeSelect)="seleccionaNode($event)"
+    [(selection)]="selectedNodes"
+    [style]="{width:'600px;'}"
+    > -->
+
+        <p-treeTable [value]="files" selectionMode="single" [(selection)]="selectedNodes" [style]="{width:'600px;'}">
+          <ng-template pTemplate="header" let-columns>
+            <!--<tr>
+          <th class="caja-item"> </th>
+          <th class="caja-descripcion"> </th>
+          <th class="caja-large"> </th>
+          <th class="caja-large"> </th>
+          <th class="caja-large"> </th>
+          <th class="caja-large"> </th>
+          <th class="caja-large"> </th>
+          <th class="caja-large"> </th>
+        </tr> -->
+            <tr>
+              <th class="caja-item">CÓDIGO</th>
+              <th class="caja-descripcion">DESCRIPCIÓN DEL RECURSO</th>
+              <th class="caja-unidad">UNID.</th>
+              <!--   <th class="caja-large">CUADRILLA</th> -->
+              <th class="caja-large">CANTIDAD</th>
+              <th class="caja-large">PRECIO (S/.)</th>
+              <th class="caja-large">PARCIAL (S/.)</th>
+              <!-- <th class="caja-acciones">ACCIÓN</th> -->
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+            <!--  <tr [ttRow]="rowNode" [ttRow]="rowNode" [ttSelectableRow]="rowNode">  -->
+            <tr style="font-size: 13px !important;">
+              <td class="caja-item">
+                <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                {{rowData.ITEM}}
+              </td>
+              <td class="caja-descripcion">{{rowData.DESCRIP_UND}}</td>
+              <td class="caja-unidad td-align-center">{{rowData.TXT_UNIDAD}}</td>
+
+              <!--  <td class="caja-large td-align-center">{{rowData.DEC_CUADRILLA}}</td> -->
+              <td class="caja-large td-align-center">{{rowData.DEC_CANTIDAD}}</td>
+              <td class="caja-large td-align-center">{{rowData.DEC_PRECIO_UNIT}}</td>
+
+              <!-- <td class="caja-large" [ttEditableColumn]="rowData" [ttEditableColumnField]="rowData.DEC_CUADRILLA"
+            [ngClass]="{'ui-toggler-column': true}" style="background-color: #cfe5f1;
+          color: rgba(0, 0, 0, 0.87);
+          font-weight: 600;">
+            <p-treeTableCellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="rowData.DEC_CUADRILLA" [ngModelOptions]="{standalone: true}"
+                  [ngStyle]="{'width':'100%'}">
+              </ng-template>
+              <ng-template pTemplate="output">{{rowData.DEC_CUADRILLA}}</ng-template>
+            </p-treeTableCellEditor>
+          </td> -->
+
+              <!--  <td class="caja-large" [ttEditableColumn]="rowData" [ttEditableColumnField]="rowData.DEC_CANTIDAD"
+            [ngClass]="{'ui-toggler-column': true}" style="background-color: #cfe5f1;
+          color: rgba(0, 0, 0, 0.87);
+          font-weight: 600;">
+            <p-treeTableCellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="rowData.DEC_CANTIDAD" [ngModelOptions]="{standalone: true}"
+                  [ngStyle]="{'width':'100%'}">
+              </ng-template>
+              <ng-template pTemplate="output">{{rowData.DEC_CANTIDAD}}</ng-template>
+            </p-treeTableCellEditor>
+          </td> -->
+
+              <!--  <td class="caja-large" [ttEditableColumn]="rowData" [ttEditableColumnField]="rowData.DEC_PRECIO_UNIT"
+            [ngClass]="{'ui-toggler-column': true}" style="background-color: #cfe5f1;
+          color: rgba(0, 0, 0, 0.87);
+          font-weight: 600;">
+            <p-treeTableCellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="rowData.DEC_PRECIO_UNIT"
+                  [ngModelOptions]="{standalone: true}" [ngStyle]="{'width':'100%'}">
+              </ng-template>
+              <ng-template pTemplate="output">{{rowData.DEC_PRECIO_UNIT}}</ng-template>
+            </p-treeTableCellEditor>
+          </td> -->
+
+              <td class="caja-large">{{rowData.DEC_PRECIO_EXP}}</td>
+
+              <!-- <td  class="caja-acciones" style="padding: 0.271em 0.857em !important;
+          padding-bottom: 5px !important;text-align: center;">
+       
+              <button mat-icon-button color="primary" (click)="editarInsumo()"  matTooltip="Editar Insumo">
+                  <mat-icon>edit</mat-icon>
+              </button>
+        
+              <button mat-icon-button color="primary" (click)="eliminarInsumo(coti)" matTooltip="Eliminar Insumo">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+          </td> -->
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="footer" let-rowNode let-rowData="rowData" let-columns="columns">
+            <tr>
+              <td colspan="5"></td>
+              <td style="font-size: 12px;">{{20201  | number : '1.2-2' :'en-US'}} </td>
+            </tr>
+          </ng-template>
+        </p-treeTable>
+
+      </div>
+    </div>
+  </div>
+</div>

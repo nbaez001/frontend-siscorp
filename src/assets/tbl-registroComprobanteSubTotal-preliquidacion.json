@@ -1,0 +1,24 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 500,
+	"response": [
+        {
+            "id": 1,
+            "descSub": "BUS TOTAL CD AUTORIZACIÓN DE GASTO N° 1",
+            "importeAutSub": 123.55,
+            "importeRenSub": 155.66,
+            "importeDifSub": 56.55,
+            "obsSub": "obs 01"
+        },{
+            "id": 2,
+            "descSub": "BUS TOTAL CD AUTORIZACIÓN DE GASTO N° 2",
+            "importeAutSub": 33.55,
+            "importeRenSub": 45.66,
+            "importeDifSub": 66.55,
+            "obsSub": "obs 02"
+        }
+       
+    ],
+	"idPerfil": 1
+}

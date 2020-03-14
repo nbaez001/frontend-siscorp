@@ -1,0 +1,70 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.page {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 500px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    select: (
+      width: 2rem
+    ),
+    id: (
+      width: 2rem
+    ),
+    unidad: (
+      width: 12rem
+    ),
+    tambo: (
+      width: 6rem
+    ),
+    codigo:(
+      width: 5rem
+    ),
+    denominacion: (
+      width: 6rem
+    ),
+    marca: (
+      width: 6rem
+    ),
+    modelo: (
+      width: 6rem
+    ),
+    color: (
+      width: 6rem
+    ),
+    serie: (
+      width: 6rem
+    ),
+    medida: (
+      width: 6rem
+    ),
+    anio: (
+      width: 6rem
+    ),
+    placa: (
+      width: 6rem
+    ),
+    chasis: (
+      width: 6rem
+    ),
+    motor: (
+      width: 6rem
+    ),
+    nomEstado: (
+      width: 6rem
+    ),
+    comentarios: (
+      width: 20rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);

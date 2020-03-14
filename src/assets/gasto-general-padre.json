@@ -1,0 +1,89 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "01",
+                "descripcion": "MATERIALES",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": "",
+                "flagPadre":"1"  
+            },
+            "leaf": false
+        },
+        {
+            "data": {
+                "item": "02",
+                "descripcion": "MANO DE OBRA",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": "",
+                "flagPadre":"1"    
+            },
+            "leaf": false
+        },
+        {
+            "data": {
+                "item": "03",
+                "descripcion": "MATERIALES",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": "",
+                "flagPadre":"1"     
+            },
+            "leaf": true
+        },
+        {
+            "data": {
+                "item": "400",
+                "descripcion": "SERVICIOS BASICOS PARA EL PERIODO DE EJECUCION DE OBRA",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": "",
+                "flagPadre":"1"   
+            },
+            "leaf": true 
+        },
+        {
+            "data": {
+                "item": "500",
+                "descripcion": "PRUEBAS DE CONTROL DE CALIDAD",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": "",
+                "flagPadre":"1"   
+            },
+            "leaf": true
+        }
+    ]
+}

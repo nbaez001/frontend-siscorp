@@ -1,0 +1,40 @@
+// .mat-radio-button ~ .mat-radio-button {
+//     margin-left: 0px;
+//   }
+
+// mat-grid-tile {
+//     display: block !important;
+// }
+@import "../src/@shared/scss/style_ua";
+@import "../src/@shared/scss/style_ua/views/table";
+
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+::ng-deep mat-grid-tile {
+  text-align: left;
+}
+
+::ng-deep .mat-grid-tile {
+  padding-left: 0px;
+}
+
+.mat-grid-tile > .mat-label {
+  font-weight: bold;
+}
+
+.input-date-grid {
+  padding-top: 20px;
+}
+
+.grid-text-bold {
+  font-weight: bold;
+}

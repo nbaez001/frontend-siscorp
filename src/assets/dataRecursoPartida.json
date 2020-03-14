@@ -1,0 +1,28 @@
+{
+    "codResultado": 1,
+    "msgResultado": "OK",
+    "total": 3,
+    "response": [
+        {
+            "idCodigo": 1,
+            "nro": 1,
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "cantidad": "10",
+            "nombreRecurso": "OBRAS PROVISIONALES TRABAJOS PRELIMINARES SEGURIDAD Y SALUD"
+        },
+        {
+            "idCodigo": 2,
+            "nro": 2,
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "cantidad": "20",
+            "nombreRecurso": "OBRAS PROVISIONALES TRABAJOS PRELIMINARES SEGURIDAD Y SALUD"
+        },
+        {
+            "idCodigo": 3,
+            "nro": 3,
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "cantidad": "30",
+            "nombreRecurso": "OBRAS PROVISIONALES TRABAJOS PRELIMINARES SEGURIDAD Y SALUD"
+        }
+    ]
+}

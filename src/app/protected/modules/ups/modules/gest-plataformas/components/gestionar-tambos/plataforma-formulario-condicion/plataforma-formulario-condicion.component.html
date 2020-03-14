@@ -1,0 +1,76 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>ACTUALIZAR CONDICIÓN DEL TAMBO</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon class="white-fg">clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FORMULARIO -->
+<div mat-dialog-content class="contenido-formulario" [formGroup]="formCondicion">
+
+  <mat-card class="mat-grey-200-bg">
+
+    <mat-card-subtitle><strong>Condición actual del tambo</strong></mat-card-subtitle>
+
+    <p><small><strong>SITUACIÓN:</strong> {{plataforma.situacion}}</small></p>
+    <hr>
+    <p><small><strong>ESTADO:</strong> {{plataforma.estado}}</small></p>
+    <hr>
+    <p><small><strong>SUB ESTADO:</strong> {{plataforma.subEstado}}</small></p>
+    <hr>
+    <p><small><strong>DET. SUB ESTADO:</strong> {{plataforma.ssubEstado}}</small></p>
+    <hr>
+    <p><small><strong>FEC. EJECUCIÓN:</strong> {{plataforma.fecEjecucion | date:'d/M/y'}}</small></p>
+
+  </mat-card>
+
+  <br>
+
+  <mat-form-field appearance="outline">
+    <mat-label>SUB ESTADO</mat-label>
+    <mat-select formControlName="subEstado" (selectionChange)="cargarSSubEstados($event.value)">
+      <mat-option *ngFor="let se of subEstados" [value]="se.id">{{se.nombre}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="formCondicion.get('subEstado').invalid && formCondicion.get('subEstado').touched">
+      {{ formCondicion.get('subEstado').errors | errorMessage:"SUB ESTADO" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>DET. SUB ESTADO</mat-label>
+    <mat-select formControlName="ssubEstado">
+      <mat-option *ngFor="let ss of ssubEstados" [value]="ss.id">{{ss.nombre}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="formCondicion.get('ssubEstado').invalid && formCondicion.get('ssubEstado').touched">
+      {{ formCondicion.get('ssubEstado').errors | errorMessage:"DET. SUB ESTADO" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>FECHA EJECUCIÓN</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="fecEjecucion" readonly (click)="picker.open()">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="formCondicion.get('fecEjecucion').invalid && formCondicion.get('fecEjecucion').touched">
+      {{ formCondicion.get('fecEjecucion').errors | errorMessage:"FECHA EJECUCIÓN" }}
+    </mat-error>
+    <mat-hint>Fecha actual por defecto</mat-hint>
+  </mat-form-field>
+
+</div>
+<!-- FORMULARIO -->
+
+<!-- ACCIONES -->
+<div mat-dialog-actions>
+
+  <button
+    class="mat-green-bg white-fg"
+    (click)="actualizar()"
+    mat-raised-button>
+      ACTUALIZAR
+  </button>
+
+</div>
+<!-- ACCIONES -->

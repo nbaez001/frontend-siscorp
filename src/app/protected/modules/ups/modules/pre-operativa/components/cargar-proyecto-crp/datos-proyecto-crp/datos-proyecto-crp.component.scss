@@ -1,0 +1,45 @@
+:host {
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+@import "../src/@shared/scss/style_util.scss";
+
+  
+  
+.mat-input-element {
+  font: caption;
+
+}
+
+.mat-row:hover {
+  background-color:  #DFE5EF;
+  .mat-cell, .mat-footer-cell {
+    font-weight: bold;
+    }
+  }
+
+
+::ng-deep .mat-form-field-infix {
+ 
+  width: 0 !important;
+}
+
+.contenido-formulario {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    .columna {
+      display: flex;
+      flex-direction: row;
+
+      mat-form-field {
+        flex: 1;
+
+        &:first-of-type {
+          margin-right: 10px;
+        }
+      }
+
+    }
+  }
+}

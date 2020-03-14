@@ -1,0 +1,42 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nombres: (
+      width: 8rem
+    ),
+    apellidos: (
+      width: 10rem
+    ),
+    nroBrevete: (
+      width: 7rem
+    ),
+    iniVigenciaBrevete: (
+      width: 6rem
+    ),
+    finVigenciaBrevete: (
+      width: 6rem
+    ),
+    opt: (
+      width: 5rem,//auto,
+      // max-width: 5rem,
+      text-align: center
+    )
+  )
+);
+
+// .display-tabla {
+//   display: flex;
+//   // width: auto !important;
+// }
+// .display-tabla > button {
+//   flex: none;
+// }

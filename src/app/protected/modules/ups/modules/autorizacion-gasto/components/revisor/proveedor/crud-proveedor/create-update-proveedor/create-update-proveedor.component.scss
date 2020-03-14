@@ -1,0 +1,48 @@
+
+@import '../src/@shared/scss/style_ua.scss';
+@import '../src/@shared/scss/style_util.scss';
+:host {
+
+  
+.contenido-formulario {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .columna {
+    display: flex;
+    flex-direction: row;
+
+    mat-form-field {
+      flex: 1;
+
+      &:first-of-type {
+        margin-right: 10px;
+      }
+    }
+
+  }
+}
+.mat-input-element {
+  font: caption;
+
+}
+
+.example-card {
+  max-width: 800px;
+  text-align: center;
+}
+
+::ng-deep .mat-card[_ngcontent-egx-c12] {
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: block;
+  position: unset;
+  margin: auto;
+  border-radius: 10px;
+}
+
+::ng-deep .mat-form-field-infix {
+ 
+  width: 0 !important;
+}
+}

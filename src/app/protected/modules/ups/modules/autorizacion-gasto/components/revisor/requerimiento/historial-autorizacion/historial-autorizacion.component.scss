@@ -1,0 +1,99 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+:host {
+  .page {
+    .table-resultados {
+      .table-container {
+        max-height: 560px;
+      }
+    }
+
+    table {
+      th.mat-header-cell {
+        border: 1px solid #ccc;
+        padding: 0 !important;
+      }
+    }
+
+    .spinerTable {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      right: 0 !important;
+      position: sticky;
+      bottom: 0px;
+      left: 0px;
+      .mat-progress-spinner {
+        width: 50px !important;
+        height: 50px !important;
+        svg {
+          width: 50px !important;
+          height: 50px !important;
+        }
+      }
+    }
+
+    .empty {
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      bottom: 0px;
+      left: 0px;
+      font-size: 0.8em;
+      font-weight: 500;
+      color: #005e82;
+    }
+
+    .bandeja {
+      position: relative;
+      margin-top: 10px;
+      padding: 16px;
+    }
+
+    .mat-row:hover {
+      background-color: #dfe5ef;
+      .mat-cell, .mat-footer-cell {
+        font-weight: bold;
+        }
+    }
+
+    .estilo-cabecera-tabla {
+      color: black;
+      font-weight: 600;
+      background-color: #d3e1ee;
+      text-align: center;
+    }
+
+    .estilo-center-cuerpo-tabla {
+      text-align: center;
+    }
+
+    .paginacion-right{
+      display: inline !important;
+    }
+
+  }
+
+  @include mat-table-columns(
+    (
+      item: (
+        width: 2rem
+      ),
+      origen: (
+        width: 15rem
+      ),
+      destino: (
+        width: 15rem
+      ),
+      fechEnvio: (
+        width: 6rem
+      ),
+      nombreEstado: (
+        width: 6rem
+      )
+    )
+  );
+}
+
+

@@ -1,0 +1,18 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "LIMA"
+        }, 
+		{
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "AREQUIPA"
+        }
+    ],
+	"idPerfil": null
+}

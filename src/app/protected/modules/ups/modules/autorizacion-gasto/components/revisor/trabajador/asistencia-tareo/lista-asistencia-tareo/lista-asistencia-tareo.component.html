@@ -1,0 +1,64 @@
+<div class="page">
+<mat-toolbar class="mat-primary mat-dialog-header">
+  <span style="font-size: 20px !important; font-weight: bold;">ASISTENCIA DÍA:  {{this.datos.dataListaTareoTrabajadorFecha | date: 'dd/MM/yyyy'}}</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- BANDEJA -->
+<div mat-dialog-content > 
+<div class="bandeja">
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
+      <td mat-cell *matCellDef="let trabajador">{{trabajador.nro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre" class="formato_header_table">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table">APELLIDOS Y NOMBRES</th>
+      <td mat-cell *matCellDef="let trabajador"> {{trabajador.nombre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numeroDocumento" class="formato_header_table">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> DNI </th>
+      <td mat-cell *matCellDef="let trabajador"> {{trabajador.numeroDocumento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> TIPO </th>
+      <td mat-cell *matCellDef="let trabajador"> {{trabajador.tipo}} </td>  
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"  class="mat-header-row-formato"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+    
+  </table>
+
+  <div class="empty" *ngIf="!isLoading && dataSource === null">
+    No existe datos para mostrar en la tabla
+  </div>
+
+  <mat-toolbar>
+    <mat-toolbar-row class="paginacion-right mat-toolbar-fondo" class="mat-dialog-actions" align="center">
+    
+        <button color="primary" mat-raised-button (click)="solicitarActivacion()" matTooltip="Solicitar activacion de asistencia diaria" matTooltipClass="formato-tooltip">
+         <mat-icon>call_made</mat-icon>Solicitar activacion
+       </button>
+
+
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  
+  
+
+</div>
+<!-- BANDEJA -->
+
+</div>
+</div>

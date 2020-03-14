@@ -1,0 +1,120 @@
+<div class="mat-elevation-z1">
+
+  <mat-toolbar class="mat-primary"><mat-icon class="mr-12">apps</mat-icon> Aplicaciones</mat-toolbar>
+
+  <mat-tab-group
+    (selectedTabChange)="seleccionarAplicacion($event)"
+    #tabGroup>
+
+    <mat-tab
+      *ngFor="let app of aplicaciones">
+
+      <ng-template matTabLabel>
+        {{app.nombreAplicacion}}
+
+        <button
+          mat-icon-button
+          matTooltip="Configurar"
+          class="gestionar"
+          (click)="configurarAplicacion($event, app)"><mat-icon>settings</mat-icon></button>
+      </ng-template>
+
+    </mat-tab>
+
+    <mat-tab disabled>
+      <ng-template mat-tab-label>
+        <button
+          mat-icon-button
+          matTooltip="Crear aplicación"
+          (click)="configurarAplicacion($event)"
+          color="primary"><mat-icon>add_circle</mat-icon></button>
+      </ng-template>
+    </mat-tab>
+
+  </mat-tab-group>
+
+  <div class="contenedor">
+
+    <div class="modulos mat-elevation-z1">
+      <div class="cabecera">
+        Módulos
+
+        <button
+          mat-icon-button
+          matTooltip="Crear módulo"
+          (click)="configurarModulo($event)"
+          color="primary"><mat-icon>add_circle</mat-icon></button>
+      </div>
+
+      <div class="contenido">
+
+        <div
+          class="item"
+          *ngFor="let modulo of modulos"
+          (click)="seleccionarModulo(modulo)"
+          [class.seleccionado]="modulo.codigoModulo === moduloSeleccionado?.codigoModulo"
+          matRipple>
+
+          <div class="icono">
+            <mat-icon *ngIf="modulo.codigoModulo === moduloSeleccionado?.codigoModulo">arrow_right</mat-icon>
+          </div>
+
+          <div class="modulo">
+            {{modulo.nombreModulo}} <br>
+            <small>{{modulo.nombreUnidad}}</small>
+          </div>
+
+          <small class="perfiles">{{modulo.perfiles}} perfiles</small>
+
+          <div class="acciones">
+            <button mat-icon-button (click)="configurarModulo($event, modulo)" matTooltip="Configurar"><mat-icon>settings</mat-icon></button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="perfiles mat-elevation-z1">
+      <div class="cabecera">
+        <span>
+          Perfiles
+          <small *ngIf="moduloSeleccionado !== null"> - {{moduloSeleccionado.nombreModulo}}</small>
+          <small *ngIf="moduloSeleccionado === null"> - módulo no seleccionado</small>
+        </span>
+
+        <button
+          mat-icon-button
+          *ngIf="moduloSeleccionado !== null"
+          matTooltip="Agregar perfil"
+          (click)="agregarPerfil()"
+          color="primary"><mat-icon>add_circle</mat-icon></button>
+      </div>
+
+      <div class="contenido">
+
+        <ng-template [ngIf]="moduloSeleccionado !== null">
+          <div
+            class="item"
+            *ngFor="let perfil of perfiles">
+
+            <span class="perfil">{{perfil.nombrePerfil}}</span>
+
+            <small class="usuarios">{{perfil.numeroUsuarios}} usuarios</small>
+
+            <div class="acciones">
+              <button mat-icon-button (click)="verUsuarios(perfil.codigoPerfilModulo)" matTooltip="Usuarios"><mat-icon>group</mat-icon></button>
+              <button mat-icon-button (click)="verMenus(perfil.codigoPerfilModulo)" matTooltip="Menu"><mat-icon>account_tree</mat-icon></button>
+              <button mat-icon-button (click)="quitarPerfil(perfil.codigoUsuarioPerfilModulo)" color="error" matTooltip="Quitar"><mat-icon>remove_circle</mat-icon></button>
+            </div>
+
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+
+  </div>
+  
+</div>

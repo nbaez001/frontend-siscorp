@@ -1,0 +1,165 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Adjuntar Cotización del Proveedor</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="contenido-formulario" [formGroup]="proyectoForm">
+  <div class="bandeja">
+    <div class="columna">
+      <mat-form-field appearance="outline">
+        <mat-label>Nro. Ruc</mat-label>
+        <input solonumero maxlength="11" (blur)="wsSunat()" matInput formControlName="numeroDocumento"
+          [(ngModel)]="cotizacion.numeroDocumento">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input readonly matInput formControlName="activo" [(ngModel)]="cotizacion.estado">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Condición</mat-label>
+        <input readonly matInput formControlName="condicion" [(ngModel)]="cotizacion.condicion">
+      </mat-form-field>
+    </div>
+
+    <div class="columna">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Cotización</mat-label>
+        <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fechaCotizacion">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Vigencia Cotización</mat-label>
+        <input matInput formControlName="vigenciaCotizacion" [(ngModel)]="cotizacion.vigenciaCotizacion">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Plazo Entrega</mat-label>
+        <input matInput formControlName="plazoEntrega" [(ngModel)]="cotizacion.plazoEntrega">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <mat-form-field appearance="outline" style="width: 30%; top: -30px;">
+        <mat-label>Forma Pago</mat-label>
+        <mat-select formControlName="formaPago" class="tamanio-seleccionar"
+          [(ngModel)]="cotizacion.formaPago">
+          <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+          <mat-option *ngFor="let est of listFormaPago" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 56%; padding-left: 5px;">
+        <mat-label>Sustento</mat-label>
+        <textarea rows="1" matInput formControlName="sustento" maxlength="300" value="" style="height: 50px !important;"
+          [(ngModel)]="cotizacion.sustento"></textarea>
+      </mat-form-field>
+
+    <button matTooltip="Adjuntar cotización" mat-mini-fab class="btn_agregar" (click)="guardarCotizacion()"
+      style="margin-left: 5px;  top: -30px;">
+      <mat-icon>attach_file</mat-icon>
+    </button>
+
+    <button matTooltip="Agregar a bnadeja" mat-mini-fab class="btn_agregar" (click)="guardarCotizacion()"
+      style="margin-left: 5px;  top: -30px;">
+      <mat-icon>add</mat-icon>
+    </button>
+    </div>
+
+
+    <!--     <mat-label> <img src="assets/images/accesorio.png" width="46px" height="46px"></mat-label> -->
+    <!--    <mat-label>
+            <span class="mat-raised-button btn-file">
+              Examinar...<input #myInput type="file" (change)="seleccionaCotizacion($event)">
+            </span>
+          </mat-label>
+          <mat-label *ngIf="fileUploadResCotizacion.status !=='progress'" style="margin-left: 10px;">
+            {{archivoCotizacion}}
+          </mat-label> -->
+
+
+
+
+    <br>
+
+  </div>
+
+  <br>
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="nro">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
+      <td mat-cell *matCellDef="let dataCotizacion">{{dataCotizacion.nro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaCotizacion">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table" style="text-align: center;"> FECHA </th>
+      <td mat-cell *matCellDef="let dataCotizacion" style="text-align: center;"> {{dataCotizacion.fechaCotizacion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vigenciaCotizacion">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> VIGENCIA </th>
+      <td mat-cell *matCellDef="let dataCotizacion"> {{dataCotizacion.vigenciaCotizacion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plazoEntrega">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> P. ENTREGA </th>
+      <td mat-cell *matCellDef="let dataCotizacion"> {{dataCotizacion.plazoEntrega}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="formaPago">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table"> F. PAGO </th>
+      <td mat-cell *matCellDef="let dataCotizacion"> {{dataCotizacion.formaPago}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombreArchivo">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table" style="text-align: center;"> COTIZACIÓN </th>
+      <td mat-cell *matCellDef="let dataCotizacion" style="text-align: center;"> {{dataCotizacion.nombreArchivo}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef class="formato_header_table">ACCIÓN</th>
+      <td mat-cell *matCellDef="let dataCotizacion">
+
+        <button mat-icon-button color="primary"
+          (click)="verCotizacion(dataCotizacion.idCodigoArchivo,dataCotizacion.nombreArchivo)"
+          matTooltip="Ver Cotización">
+          <mat-icon>picture_as_pdf</mat-icon>
+        </button> 
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas" class="mat-header-row-formato"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+  <div class="empty" *ngIf="!isLoading && dataSource === null">
+    No existe datos para mostrar en la tabla
+  </div>
+
+  <mat-toolbar>
+    <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+      <div>
+        <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+          [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+        </mat-paginator>
+
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+
+</div>

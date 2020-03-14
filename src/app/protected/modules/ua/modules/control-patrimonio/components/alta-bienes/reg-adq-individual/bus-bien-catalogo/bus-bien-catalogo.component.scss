@@ -1,0 +1,28 @@
+@import '../src/@shared/scss/style_ua/views/table';
+@import '../src/@shared/scss/style_ua';
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    codigo: (
+      width: 4rem
+    ),
+    denominacion: (
+      width: 10rem
+    ),
+    nomGrupo: (
+      width: 8rem
+    ),
+    nomClase: (
+      width: 8rem
+    )
+  )
+);
+
+@include mat-table-columns-hover();

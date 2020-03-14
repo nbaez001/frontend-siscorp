@@ -1,0 +1,25 @@
+{
+    "codResultado": 1,
+	"msgResultado": "OK",
+	"total": 9,
+    
+    "response": [
+        {
+            "fidProyecto": "1111",
+            "tambo": "QUILLE",
+            "nombreProyecto": "4 meses",
+            "coordinadorGeneralPlataforma": "XXXXXX",
+            "coordinadorRegionalPlataforma": "XXXXXX",
+            "supervisor": "XXXXXX",
+            "residente": "XXXXXX",
+            "nucleoEjecutor": "",
+            "presidente": "XXXXXX",
+            "tesorero": "XXXXXX",
+            "secretario": "XXXXXX",
+            "fiscal": "XXXXXX",
+            "avanceFisico": "20",
+            "avanceFinanciero": "40"
+        }
+    ]
+}
+

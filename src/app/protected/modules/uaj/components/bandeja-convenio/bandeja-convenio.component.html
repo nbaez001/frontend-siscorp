@@ -1,0 +1,147 @@
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <img src="assets/images/busqueda.png" width="26px" height="26px">&nbsp;
+        <strong class="white">FILTROS DE BÚSQUEDA</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <br>
+    <!-- INPUTS -->
+    <div class="inputs" [formGroup]="filtrosForm" fxLayout.xl="row" fxLayout.lg="row">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Denominación</mat-label>
+        <mat-select formControlName="denominacion" class="tamanio-seleccionar">
+          <mat-option *ngFor="let d of denominacion" [value]="d.idCodigo">
+            {{ d.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo Convenio</mat-label>
+        <mat-select formControlName="tipoConvenio" class="tamanio-seleccionar">
+          <mat-option value="">Seleccione</mat-option>
+          <mat-option *ngFor="let tc of tipoConvenio" [value]="tc.idCodigo">
+            {{ tc.nombre }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Area</mat-label>
+        <mat-select formControlName="area" class="tamanio-seleccionar">
+          <mat-option value="">Seleccione</mat-option>
+          <mat-option *ngFor="let a of area" [value]="a.idArea">
+            {{ a.area }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="acciones">
+        <button mat-mini-fab matTooltip="Buscar proyecto" matTooltipClass="formato-tooltip" (click)="lista()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-mini-fab class="mat-grey-300-bg" matTooltip="Limpiar filtros de búsqueda"
+          matTooltipClass="formato-tooltip" (click)="clearForm()">
+          <mat-icon>clear_all</mat-icon>
+        </button>
+      </div>
+    </div>
+    <!-- INPUTS -->
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- FILTROS -->
+
+<div class="content m-24 mat-elevation-z6">
+  <button mat-fab class="action mat-accent-bg white" matTooltip="Nuevo Convenio" matTooltipClass="formato-tooltip"
+    (click)="nuevoConvenio()" *ngIf="btnValidar">
+    <mat-icon class="white">add</mat-icon>
+  </button>
+
+  <table mat-table [dataSource]="convenios">
+
+    <ng-container matColumnDef="row">
+      <th mat-header-cell *matHeaderCellDef># </th>
+      <td mat-cell *matCellDef="let convenios">
+        {{ convenios.row }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="denominacion_convenios">
+      <th mat-header-cell *matHeaderCellDef> Denominación </th>
+      <td mat-cell *matCellDef="let convenios">
+        {{ convenios.denominacionConvenios }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="tipo_convenios">
+      <th mat-header-cell *matHeaderCellDef> Tipo </th>
+      <td mat-cell *matCellDef="let convenios">
+        {{ convenios.tipoConvenios }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="entidad_contraparte_convenios">
+      <th mat-header-cell *matHeaderCellDef> Entidad Contraparte </th>
+      <td mat-cell *matCellDef="let convenios">
+        {{ convenios.entidadContraparteConvenios }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_suscripcion">
+      <th mat-header-cell *matHeaderCellDef> F. Suscripción</th>
+      <td mat-cell *matCellDef="let convenios">
+        {{ convenios.fechaSuscripcion | date:'dd/MM/yyyy'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_fin_convenio">
+      <th mat-header-cell *matHeaderCellDef> F. Fin Convenio</th>
+      <td mat-cell *matCellDef="let convenios">
+        {{ convenios.fechaFinConvenio | date:'dd/MM/yyyy'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="coordinadores_convenios">
+      <th mat-header-cell *matHeaderCellDef> Coordinadores</th>
+      <td mat-cell *matCellDef="let convenios" fxLayout="column">
+        <div><b>&#187;</b> {{ convenios.coordinadorPais }}</div>
+        <div><b>&#187;</b> {{ convenios.coordinadorContraparte }}</div>
+      </td>
+    </ng-container>
+
+    <!-- -------------botones-------------- -->
+    <ng-container matColumnDef="buttons">
+      <th mat-header-cell *matHeaderCellDef fxHide.sm="true"> </th>
+      <td mat-cell *matCellDef="let convenios" style="text-align:right">
+        <button mat-icon-button (click)="detalleConvenio(convenios.idConvenio)" matTooltip="Detalle convenio"
+          matTooltipClass="formato-tooltip">
+          <mat-icon style="color: #039BE5;">assignment</mat-icon>
+        </button>
+        <button mat-icon-button (click)="openFile(convenios.pathArchivo)" matTooltip="Ver documento"
+          matTooltipClass="formato-tooltip">
+          <mat-icon style="color: red;">description</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Ver plan de trabajo" (click)="openPlanTrabajo(convenios.idConvenio)"
+          matTooltipClass="formato-tooltip" *ngIf="convenios.flgPlanTrabajo == '1'">
+          <mat-icon style="color: slateblue;">all_inbox</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="detalleConvenio(row.idConvenio)"></tr> -->
+
+  </table>
+
+  <mat-paginator [length]="pageTotal" [pageIndex]="pageIndex - 1" [pageSize]="pageSize" [showFirstLastButtons]="true"
+    (page)="cambiarPagina($event)">
+  </mat-paginator>
+
+</div>

@@ -1,0 +1,95 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="consumoDeslizadorGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Unidad</mat-label>
+            <mat-select formControlName="unidad">
+              <mat-option *ngFor="let unid of unidades" [value]="unid">
+                {{unid.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Tambo</mat-label>
+            <mat-select formControlName="tambo">
+              <mat-option *ngFor="let tamb of tambos" [value]="tamb">
+                {{tamb.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field appearance="outline">
+            <mat-label>Generador</mat-label>
+            <mat-select formControlName="deslizador">
+              <mat-option *ngFor="let des of deslizadores" [value]="des">
+                DESLIZADOR {{des.potencia}}HP
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Hora inicio</mat-label>
+            <input formControlName="horaInicio" matInput type="time" placeholder="Hora inicio" (keyup)="calcular()">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Hora fin</mat-label>
+            <input formControlName="horaFin" matInput type="time" placeholder="Hora fin" (keyup)="calcular()">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Total horas</mat-label>
+            <input formControlName="totalHoras" matInput type="number" placeholder="Total horas">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha</mat-label>
+            <input formControlName="fecha" matInput [matDatepicker]="picker2" placeholder="Fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Lugar destino</mat-label>
+            <input formControlName="lugarDestino" matInput type="text" placeholder="Lugar destino" [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+          <mat-form-field appearance="outline">
+            <mat-label>Codigo comision SISMONITOR</mat-label>
+            <input formControlName="codSismonitor" matInput type="text" placeholder="Codigo comision SISMONITOR">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list cols="12" rowHeight="70px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field appearance="outline">
+            <mat-label>Observaciones comision</mat-label>
+            <textarea formControlName="observacion" matInput placeholder="Observaciones comision"
+              [appUpperCase]></textarea>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+    <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div>
+</div>

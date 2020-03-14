@@ -1,0 +1,24 @@
+mat-form-field {
+  font-size: 12px;
+  width: 100%;
+}
+
+:host {
+
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .contenido-formulario {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+}
+
+::ng-deep .red-snackbar {
+  color: #ffffff !important;
+  background-color: #af4448 !important;
+}

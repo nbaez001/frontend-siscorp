@@ -1,0 +1,33 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "CONSTRUCCIONES PROVISIONALES"
+        }, 
+        {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "INSTALACIONES PROVISIONALES"
+        }, 
+        {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "TRABAJOS PRELIMINARES"
+        }, 
+        {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "MOVILIZACION DE MATERIALES, EQUIPOS Y HERRAMIENTAS"
+        },
+        {
+            "idCodigo": 5,
+            "cidCodigo": "005",
+            "cidNombre": "TRAZOS, NIVELES Y REPLANTEO"
+        }
+    ],
+	"idPerfil": null
+}

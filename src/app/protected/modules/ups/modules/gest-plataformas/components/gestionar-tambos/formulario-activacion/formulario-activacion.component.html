@@ -1,0 +1,36 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-warn mat-elevation-z2 cabecera">
+  <span>OBSERVAR</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon class="white-fg">clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FORMULARIO -->
+<div mat-dialog-content class="contenido-formulario">
+
+  <mat-form-field appearance="outline">
+    <mat-label>OBSERVACIÓN</mat-label>
+    <textarea matInput [formControl]="observacion"></textarea>
+    <mat-error *ngIf="observacion.invalid && observacion.touched">
+      {{ observacion.errors | errorMessage:"OBSERVACIÓN" }}
+    </mat-error>
+  </mat-form-field>
+
+</div>
+<!-- FORMULARIO -->
+
+<!-- ACCIONES -->
+<div mat-dialog-actions>
+
+  <button
+    color="warn"
+    (click)="observar()"
+    [disabled]="observacion.invalid"
+    mat-raised-button>
+      OBSERVAR
+  </button>
+
+</div>
+<!-- ACCIONES -->

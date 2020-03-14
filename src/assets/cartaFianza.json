@@ -1,0 +1,53 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+           
+            "item": 1,
+            "codigo": "CART-001",
+            "nroContrato" : "00001",
+            "descripcion": "Carta Fianza 01",
+            "fecInicioEmision": "01-01-2019",
+            "fecFinEmision": "01-03-2019",
+            "contratista": "Carlos Alberto Becerra Laguna",
+            "estado": "VIGENTE",
+            "cidEstado": "001"
+        }, {
+             
+            "item": 2,
+            "codigo": "CART-002",
+            "nroContrato" : "00002",
+            "descripcion": "Carta Fianza 02",
+            "fecInicioEmision": "02-02-2019",
+            "fecFinEmision": "02-04-2019",
+            "contratista": "Josué Enríquez Marín",
+            "estado": "RENOVADO",
+            "cidEstado": "002"
+        }, {
+           
+            "item": 3,
+            "codigo": "CART-003",
+            "nroContrato" : "00003",
+            "descripcion": "Carta Fianza 03",
+            "fecInicioEmision": "03-04-2019",
+            "fecFinEmision": "03-07-2019",
+            "contratista": "Nain Maldonado Guzmán",
+            "estado": "EJECUTADO",
+            "cidEstado": "003"
+        }, {
+            
+            "item": 4,
+            "codigo": "CART-004",
+            "nroContrato" : "00004",
+            "descripcion": "Carta Fianza 04",
+            "fecInicioEmision": "04-05-2019",
+            "fecFinEmision": "04-09-2019",
+            "contratista": "Marco Antonio Altamirano Cruz",
+            "estado": "VENCIDO",
+            "cidEstado": "004"
+        }
+    ],
+	"idPerfil": 1
+}

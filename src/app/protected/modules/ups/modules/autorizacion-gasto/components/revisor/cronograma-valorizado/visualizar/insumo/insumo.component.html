@@ -1,0 +1,135 @@
+<br>
+<div class="formato_titulo">
+  <label>INSUMOS MENSUALIZADOS - INICIAL</label>
+  <button class="btn_alineacion_closed" tabindex="-1" mat-icon-button (click)="dialogRef.close()" matTooltip="Cerrar Ventana">
+      <mat-icon class="btn_closed">clear</mat-icon>
+  </button> 
+</div>
+
+<!--   <mat-card class="mat-tab-body-content"> -->
+
+
+      <div style="padding: 10px;">
+
+<!--           <p-treeTable [value]="filesInsumo"  [scrollable]="true" [scrollHeight]="scrollHeightConfigInsumo" [style]="{width:'600px;'}"> 
+              <ng-template pTemplate="header" let-columns>
+             
+                   <tr>       
+                          <th class="caja-item"> </th>
+                          <th class="caja-descripcion"> </th>
+                          <th class="caja-unidad"> </th>
+                          <th class="caja-large"> </th>
+                          <th class="caja-large"> </th>
+                          <th class="caja-large"> </th>
+    
+                          <th class="caja-meses-colspan-insumo" colspan="2" >MES 1 </th>
+                          <th class="caja-meses-colspan-insumo"  colspan="2"> MES 2</th>
+                          <th class="caja-meses-colspan-insumo"  colspan="2"> MES 3</th>
+                          <th class="caja-meses-colspan-insumo"  colspan="2"> MES 4</th>
+                  </tr> 
+                  <tr>
+                      <th class="caja-item">ITEM</th>
+                      <th class="caja-descripcion">DESCRIPCIÓN</th>
+                      <th class="caja-unidad">UNID.</th>
+                      <th class="caja-large">CANTIDAD</th>
+                      <th class="caja-large">PRECIO</th>
+                      <th class="caja-large">PARCIAL</th>
+                      <th class="caja-large">METRADO</th> 
+                      <th class="caja-large">COSTO</th>
+                      <th class="caja-large">METRADO</th> 
+                      <th class="caja-large">COSTO</th>
+                      <th class="caja-large">METRADO</th> 
+                      <th class="caja-large">COSTO</th>
+                      <th class="caja-large">METRADO</th> 
+                      <th class="caja-large">COSTO</th>
+  
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                  <tr>
+                      <td class="caja-item">
+                          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                          {{rowData.item}}
+                      </td>
+                      <td class="caja-descripcion">{{rowData.recurso}}</td>
+                      <td class="caja-unidad">{{rowData.unidad}}</td>
+                      <td class="caja-large">{{rowData.cantidad}}</td>
+                      <td class="caja-large">{{rowData.precio}}</td>
+                      <td class="caja-large">{{rowData.parcial}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.metrado1}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.costo1}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.metrado2}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.costo2}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.metrado3}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.costo3}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.metrado4}}</td>
+                      <td class="caja-large-aux-fijo">{{rowData.costo4}}</td>
+              
+                  </tr>
+              </ng-template>
+          </p-treeTable> -->
+          <p-treeTable [value]="files" [scrollable]="true" [scrollHeight]="scrollHeightConfigInsumo" [style]="{width:'600px;'}">
+              <ng-template pTemplate="header" let-columns>
+             
+                  <tr>       
+                         <th class="caja-item"> </th>
+                         <th class="caja-descripcion"> </th>
+                         <th class="caja-unidad"> </th>
+                         <th class="caja-large"> </th>
+                         <th class="caja-large"> </th>
+                         <th class="caja-large"> </th>
+   
+                         <th class="caja-meses-colspan-insumo" colspan="2" >MES 1 </th>
+                         <th class="caja-meses-colspan-insumo"  colspan="2"> MES 2</th>
+                         <th class="caja-meses-colspan-insumo"  colspan="2"> MES 3</th>
+                         <th class="caja-meses-colspan-insumo"  colspan="2"> MES 4</th>
+                 </tr> 
+                 <tr>
+                     <th class="caja-item">ITEM</th>
+                     <th class="caja-descripcion">DESCRIPCIÓN</th>
+                     <th class="caja-unidad">UNID.</th>
+                     <th class="caja-large">CANTIDAD</th>
+                     <th class="caja-large">PRECIO</th>
+                     <th class="caja-large">PARCIAL</th>
+                     <th class="caja-large-aux-fijo">METRADO</th> 
+                     <th class="caja-large-aux-fijo">COSTO</th>
+                     <th class="caja-large-aux-fijo">METRADO</th> 
+                     <th class="caja-large-aux-fijo">COSTO</th>
+                     <th class="caja-large-aux-fijo">METRADO</th> 
+                     <th class="caja-large-aux-fijo">COSTO</th>
+                     <th class="caja-large-aux-fijo">METRADO</th> 
+                     <th class="caja-large-aux-fijo">COSTO</th>
+ 
+                 </tr>
+             </ng-template>
+             <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+                 <tr>
+                     <td class="caja-item">
+                         <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                         {{rowData.item}}
+                     </td>
+                     <td class="caja-descripcion">{{rowData.recurso}}</td>
+                     <td class="caja-unidad">{{rowData.unidad}}</td>
+                     <td class="caja-large">{{rowData.cantidad}}</td>
+                     <td class="caja-large">{{rowData.precio}}</td>
+                     <td class="caja-large">{{rowData.parcial}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.metrado1}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.costo1}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.metrado2}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.costo2}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.metrado3}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.costo3}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.metrado4}}</td>
+                     <td class="caja-large-aux-fijo">{{rowData.costo4}}</td>
+             
+                 </tr>
+             </ng-template>
+          </p-treeTable>
+      </div>
+
+
+
+<!--   </mat-card> -->
+
+  <br>
+

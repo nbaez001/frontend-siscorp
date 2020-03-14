@@ -1,0 +1,202 @@
+<div class="page">
+
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span style="font-size: 18px !important; font-weight: bold;">{{ titulo }}</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div mat-dialog-content>
+    <div class="bandeja">
+
+      <!-- <div mat-dialog-content class="contenido-formulario"> -->
+
+      <mat-grid-list cols="12" rowHeight="70px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field>
+            <input [(ngModel)]="insumo.descripcionSelecion" [readonly]="true" matInput
+              [ngClass]="datos.dataInsumoSelected? 'bloque-input' : ''">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="12" rowHeight="70px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Unidad</mat-label>
+            <input id="focus_unidad" [(ngModel)]="insumo.unidad" [readonly]="deshabilitadoUnidad" matInput
+              [ngClass]="datos.dataInsumoSelected? 'bloque-input' : ''">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Cantidad</mat-label>
+            <input [(ngModel)]="insumo.cantidad" [readonly]="true" matInput
+              [ngClass]="datos.dataInsumoSelected? 'bloque-input' : ''">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Precio(S/.)</mat-label>
+            <input [(ngModel)]="insumo.precio" [readonly]="deshabilitadoPrecio" matInput
+              [ngClass]="datos.dataInsumoSelected? 'bloque-input' : ''">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Parcial(S/.)</mat-label>
+            <input [(ngModel)]="insumo.parcial" [readonly]="deshabilitadoParcial" matInput style="font-weight: 600;"
+              [ngClass]="datos.dataInsumoSelected? 'bloque-input' : ''">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+
+      <div [formGroup]="insumoForm">
+        <mat-grid-list cols="12" rowHeight="70px">
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 10, xl: 10}">
+            <mat-form-field>
+              <input placeholder="Ingresar descripción de la partida" matInput formControlName="partidaFrmCtrl"
+                [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="obtenerDatosRecurso($event)"
+                [displayWith]="displayFnPartida">
+                <mat-option *ngFor="let option of filteredOptionsPartida | async" [value]="option">
+                  {{option.cidNombre}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 2, xl: 2}">
+            <button (click)="crearRecursoPartidaTemporal()" mat-raised-button color="primary">
+              <mat-icon style="color: white;">add</mat-icon> Agregar
+            </button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+
+
+      <div class="scroll-container-table">
+        <p-table [value]="dataRecursoPartida" [scrollable]="true" scrollHeight="150px" [resizableColumns]="true"
+          [columns]="scrollableColsdataRecursoPartida" [frozenColumns]="frozenColsdataRecursoPartida"
+          frozenWidth="100px" (onEditInit)="onEditInitRecursoPartida($event)"
+          (onEditComplete)="onEditCompleteRecursoPartida($event)">
+
+          <ng-template pTemplate="frozencolgroup" let-columns>
+            <colgroup>
+              <col style="text-align:  center !important; width:30px !important">
+              <col style="text-align:  center !important; width:70px !important">
+            </colgroup>
+          </ng-template>
+
+          <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+              <ng-container *ngFor="let col of columns; let i = index">
+                <col *ngIf="i==0" style="width: 150px !important;text-align:  center;">
+                <col *ngIf="i==1" style="width: auto !important;text-align:  center;">
+                <col *ngIf="i==2" style="width: 110px !important;text-align:  center;">
+              </ng-container>
+            </colgroup>
+          </ng-template>
+
+          <ng-template pTemplate="frozenheader" let-columns>
+            <tr style="font-size: 11px;">
+              <th class="titulo-recurso-partida">
+                Nro
+              </th>
+              <th class="titulo-recurso-partida">
+                CANTIDAD
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="header" let-columns>
+            <tr style="font-size: 11px;">
+              <ng-container *ngFor="let col of columns; let i = index">
+                <th class="titulo-recurso-partida">
+                  {{col.header}}
+                </th>
+              </ng-container>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="frozenbody" let-rowData let-rowData="rowData" let-columns="columns">
+            <tr style="font-size: 12px;height: 37px !important;" (mouseenter)="onMouseEnterTabla(rowData)"
+              (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+              <ng-container *ngFor="let col of columns;let i=index">
+                <td *ngIf="i==0" style="text-align: center;">
+                  {{rowData[col.field]}}
+                </td>
+                <td *ngIf="i==1 && rowData.flagAvance==0" style="text-align: center;" [pEditableColumn]="rowData"
+                  [pEditableColumnField]="rowData[col.field]">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" style="width: 80% !important;font-weight: bold;"
+                        [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      <input type="text" style="width: 90%;" [(ngModel)]="rowData[col.field]">
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td *ngIf="i==1 && rowData.flagAvance==1" style="text-align: center;height: 38px">
+                  {{rowData[col.field]}}
+                </td>
+              </ng-container>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-rowData="rowData" let-columns="columns">
+            <tr style="font-size: 12px;height: 38px" (mouseenter)="onMouseEnterTabla(rowData)"
+              (mouseleave)="onMouseLeaveTabla(rowData)" [class.row-hover]="rowData.hover">
+              <ng-container *ngFor="let col of columns;let i = index">
+                <td *ngIf="i==0 || i==2" style="text-align: center;">
+                  {{rowData[col.field]}}
+                </td>
+
+                <td *ngIf="i==1 && (rowData[col.field]).length >= cantidadPalabraRecurso"
+                  matTooltip="{{rowData[col.field]}}" matTooltipClass="formato-tooltip-recurso">
+                  {{rowData[col.field]  | slice:0:cantidadPalabraRecurso}} ...
+                </td>
+                <td *ngIf="i==1 && (rowData[col.field]).length < cantidadPalabraRecurso">
+                  {{rowData[col.field]}}
+                </td>
+              </ng-container>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+      <br>
+      <br>
+
+      <mat-grid-list cols="12" rowHeight="90px">
+        <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo Incidencia</mat-label>
+            <mat-select [(ngModel)]="insumo.tipoincidencia">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option value=1>xxxx</mat-option>
+              <mat-option value=2>yyyy</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile> -->
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+          <mat-form-field appearance="outline">
+            <mat-label>Sustento</mat-label>
+            <textarea rows="3" [(ngModel)]="insumo.sustento" matInput maxlength="200"></textarea>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <br>
+      <br>
+      <div align="center">
+        <button mat-raised-button color="primary" (click)="agregarInsumo()">
+          <mat-icon style="color: white;">save</mat-icon> Guardar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,204 @@
+
+
+<!-- FILTROS -->
+  <mat-accordion class="filtros">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <strong style="color: white;">Búsqueda de Autorizaciones</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+  
+      <br>
+      <!-- INPUTS -->
+      <div class="inputs" [formGroup]="autorizacionFiltroForm" fxLayout.xl="row" fxLayout.lg="row">
+
+     
+        <mat-form-field appearance="outline">
+          <mat-label>FECHA PRESENTACIÓN RESIDENTE</mat-label>
+          <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fechaPresentacionFrmCtrl">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+    
+        <mat-form-field appearance="outline">
+          <mat-label>FECHA APROBACIÓN</mat-label>
+          <input matInput [matDatepicker]="picker2" readonly (click)="picker2.open()" formControlName="fechaAprobacionFrmCtrl">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>ESTADO</mat-label>
+          <mat-select  formControlName="estadoFrmCtrl" class = "tamanio-seleccionar">
+          <mat-option  [value]="-1">--SELECCIONAR--</mat-option>
+          <mat-option *ngFor="let est of dataItemEstado?.estados" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+          </mat-select>                                               
+        </mat-form-field>
+    
+        <div class="acciones">
+          <button mat-mini-fab (click)="buscarAutorizacion($event)" [disabled]="disableBuscar"><mat-icon matTooltip="búsqueda">search</mat-icon></button>
+          <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()" matTooltip="Limpiar filtros de búsqueda"  ><mat-icon >clear_all</mat-icon></button>
+        </div>
+      </div>
+      <!-- INPUTS -->
+  
+    </mat-expansion-panel>
+  </mat-accordion>
+<!-- FILTROS -->
+
+<div class="bandeja">
+  <button matTooltip="Registrar Partida" mat-mini-fab class= "btn_agregar"  (click) = "agregarAutorizacion()" >
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<!-- BANDEJA -->
+<div class="bandeja">
+
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="Nro">
+        <th mat-header-cell *matHeaderCellDef> Nro</th>
+        <td mat-cell *matCellDef="let auto; let i = index">{{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="codigoAutorizacion">
+      <th mat-header-cell *matHeaderCellDef> Código<br>Autorización </th>
+      <td mat-cell *matCellDef="let auto"> {{auto.codigo}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="fechaPresentacion">
+      <th mat-header-cell *matHeaderCellDef>Fecha Presentación <br>Residente - Supervisor </th>
+      <td mat-cell *matCellDef="let auto">{{auto.fecPresentacion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaAprobacion">
+      <th mat-header-cell *matHeaderCellDef>Fecha Aprobación <br>Autorización</th>
+      <td mat-cell *matCellDef="let auto"> {{auto.fecAprobacion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="montoSolicitado">
+      <th mat-header-cell *matHeaderCellDef>Monto Solicitado <br> S/.</th>
+      <td mat-cell *matCellDef="let auto"> {{auto.montoSolicitado}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="montoAutorizado">
+      <th mat-header-cell *matHeaderCellDef>Monto Autorizado <br>S/.</th>
+      <td mat-cell *matCellDef="let auto"> {{auto.montoAutorizado}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="saldoDisponible">
+      <th mat-header-cell *matHeaderCellDef>Saldo Disponible <br>S/.</th>
+      <td mat-cell *matCellDef="let auto"> {{auto.saldoDisponible}} </td>
+    </ng-container>
+    
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> Estado </th>
+      
+      <td mat-cell *matCellDef="let auto" > 
+        <span *ngIf="auto.cidEstado == '001'" style="color: rgb(199, 0, 0); font-weight: 600px; font-family:Arial, Helvetica, sans-serif">
+            {{auto.estado}} 
+        </span> 
+        <span *ngIf="auto.cidEstado != '001'" style="color:black">
+            {{auto.estado}} 
+        </span> 
+       </td>
+    </ng-container>
+
+    <ng-container matColumnDef="plazo">
+      <th mat-header-cell *matHeaderCellDef> Plazo </th>
+      <td mat-cell *matCellDef="let auto" > {{auto.numPlazo}} </td>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef >Acciones</th>
+      <td mat-cell *matCellDef="let auto">
+
+       <div *ngIf = "auto.cidEstado == '001'">
+
+          <button mat-icon-button color="primary" (click)="generarInformeTecnico(auto.idCodigo)" matTooltip="Generar Informe Técnico">
+              <mat-icon>add_to_home_screen</mat-icon>
+            </button>
+
+          <button mat-icon-button color="primary" (click)="editarAutorizacion(auto.idCodigo)" matTooltip="Editar Autorización">
+              <mat-icon>edit</mat-icon>
+          </button>
+    
+          <button mat-icon-button color="primary" (click)="eliminarAutorizacion(auto)" matTooltip="Eliminar Autorización">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+         
+       </div> 
+
+       <div *ngIf = "auto.cidEstado == '002'">
+          <button mat-icon-button color="primary" (click)="verAutorizacion(auto.idCodigo)" matTooltip="Ver Autorización">
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+       </div> 
+
+       <div *ngIf = "auto.cidEstado == '003'">
+          <button mat-icon-button color="primary" (click)="verAutorizacion(auto.idCodigo)" matTooltip="Ver Autorización">
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+       </div> 
+
+       <div *ngIf = "auto.cidEstado == '004'">
+        
+          <button mat-icon-button color="primary" (click)="verAutorizacion(auto.idCodigo)" matTooltip="Ver Autorización">
+              <mat-icon>picture_as_pdf</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="editarAutorizacion(auto.idCodigo)" matTooltip="Editar Autorización">
+              <mat-icon>edit</mat-icon>
+          </button>
+       </div> 
+       <div *ngIf = "auto.cidEstado == '005'">
+          <button mat-icon-button color="primary" (click)="verAutorizacion(auto.idCodigo)" matTooltip="Ver Autorización">
+              <mat-icon>picture_as_pdf</mat-icon>
+            </button>
+       </div> 
+     
+          
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row [ngClass]="{'background_row': row.cidEstado == '001'}" *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+    <div class="empty" *ngIf="!isLoading && dataSource === null">
+        No existe autorizaciones para mostrar
+    </div>
+      
+    <mat-toolbar>
+      <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+        <div *ngIf="dataSource !== null" style="float: left !important;">
+          <mat-icon svgIcon="excel-pais" (click)="descargarExcel($event)" class="excel-icon-top"  matTooltip="Descargar Excel"></mat-icon>
+          <span class="example-spacer"></span>   
+        </div>
+        <div>
+            <mat-paginator 
+            [length]="total" 
+            [pageIndex]="pagina - 1" 
+            [pageSize]="cantidad" 
+            [showFirstLastButtons]="true"
+            [pageSizeOptions]="[15, 30, 50]" 
+            (page)="cambiarPagina($event)">
+            </mat-paginator>
+
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar> 
+ 
+</div>
+<!-- BANDEJA -->
+
+
+
+
+
+
+

@@ -1,0 +1,56 @@
+<div class="page">
+
+
+
+<!-- CABECERA -->
+
+<mat-toolbar class="mat-primary mat-dialog-header">
+  <span style="font-size: 20px !important; font-weight: bold;">ASISTENCIA DE TRABAJADORES</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<mat-toolbar>
+
+  <button mat-raised-button color="primary" style="margin-right: 10px;" mwlCalendarPreviousView [view]="view"
+    [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+    <mat-icon>keyboard_arrow_left</mat-icon> Anterior
+  </button>
+
+  <button mat-raised-button color="primary" style="margin-right: 10px;" mwlCalendarToday [(viewDate)]="viewDate">
+    <mat-icon>keyboard_arrow_down</mat-icon> Presente
+  </button>
+
+  <!-- <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+    (viewDateChange)="closeOpenMonthViewDay()">
+    siguiente
+  </div> -->
+</mat-toolbar>
+
+<div align="center">
+  <h2>{{ viewDate | calendarDate:(view + 'ViewTitle'):'es'  | titlecase }}</h2>
+</div>
+
+<!-- FORMULARIO -->
+<div mat-dialog-content class="contenido-formulario">
+
+  <div class="columna">
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [refresh]="refresh"
+        [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)">
+      </mwl-calendar-month-view>
+    </div>
+  </div>
+  <br>
+  <!-- <div align="center" class="example-button-row acciones-margen-derecho">
+    <button color="warn" mat-raised-button (click)="dialogRef.close()">
+      Cerrar
+    </button>
+  </div> -->
+  <br>
+</div>
+<!-- FORMULARIO -->
+
+</div>

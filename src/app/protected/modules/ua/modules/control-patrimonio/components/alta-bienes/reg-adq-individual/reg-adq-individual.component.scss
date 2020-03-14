@@ -1,0 +1,103 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 740px;
+  // max-width: 500px;
+  // overflow-x: scroll;
+  overflow: auto;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    codPatrimonio: (
+      width: 6rem
+    ),
+    denominacion: (
+      width: 20rem
+    ),
+    marca: (
+      width: 8rem
+    ),
+    modelo: (
+      width: 8rem
+    ),
+    serie: (
+      width: 8rem
+    ),
+    medida: (
+      width: 8rem
+    ),
+    color: (
+      width: 20rem
+    ),
+    caracteristica: (
+      width: 15rem
+    ),
+    cuenta: (
+      width: 12rem
+    ),
+    valorAdquisicion: (
+      width: 6rem
+    ),
+    unidad: (
+      width: 15rem
+    ),
+    tambo: (
+      width: 15rem
+    ),
+    observacion: (
+      width: 15rem
+    )
+  )
+);
+
+::ng-deep .mat-dialog-content {
+  max-height: 80vh !important;
+}
+
+table {
+  width: 100%;
+}
+
+/*--------  Editable Cells  --------*/
+.selected {
+  border: 1px solid #698ad8;
+}
+.unselected {
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+.selected,
+.unselected {
+  -webkit-user-select: none; /* Webkit  */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE 10   */
+  -o-user-select: none; /* Currently not supported in Opera but will be soon */
+  user-select: none;
+}
+
+::ng-deep .mat-chip-list-wrapper {
+  margin-top: -13px !important;
+  margin-bottom: -10px !important;
+  max-height: 45px !important;
+
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  /*ADICIONAL*/
+  // display: flex !important;
+}
+
+::ng-deep .mat-chip-input {
+  height: 30px;
+  // flex: 0 0 20% !important;
+  //FLEXIBLE WIDTH OF INPUT (FLEX: flex-grow  flex-shrink  flex-basis)
+  // width: 100% !important;
+  // max-width: 100% !important;
+  // min-width: 50px !important;
+}

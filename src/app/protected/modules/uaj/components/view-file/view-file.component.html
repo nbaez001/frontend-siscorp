@@ -1,0 +1,12 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span></span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<div class="contenido-formulario">
+  <ngx-extended-pdf-viewer [src]="pdfSrc" useBrowserLocale="true" height="100%"></ngx-extended-pdf-viewer>
+</div>

@@ -1,0 +1,39 @@
+.perfil-menus {
+
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+
+    .mat-dialog-title {
+      min-height: initial;
+      display: flex;
+      align-content: center;
+      place-content: center space-between;
+      margin: 0;
+
+      span.titulo {
+        display: flex;
+        align-items: center;
+      }
+
+      span.titulo mat-icon {
+        margin-right: 5px;
+      }
+    }
+
+    .mat-dialog-content {
+      padding: 24px;
+      margin: 0;
+
+      table {
+        width: 100%;
+      }
+    }
+
+    .mat-dialog-actions {
+      padding: 24px;
+      margin: 0;
+    }
+
+  }
+}

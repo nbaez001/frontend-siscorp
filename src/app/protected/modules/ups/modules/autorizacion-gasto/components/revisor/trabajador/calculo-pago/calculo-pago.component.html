@@ -1,0 +1,310 @@
+<div class="page">
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary  mat-dialog-header">
+  <span>CÁLCULO PAGO MENSUAL</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<div mat-dialog-content [formGroup]="proyectoForm">
+
+  <p-fieldset legend="Personal Auxiliar">
+  <mat-grid-list cols="12" rowHeight="50px">
+    
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo</mat-label>
+            <mat-select [disabled]="true" formControlName="idTipo" class="tamanio-seleccionar"
+              [(ngModel)]="trabajadorPagoMensual.idTipo">
+              <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+              <mat-option *ngFor="let est of listTipo" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile> 
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 8, xl: 8}">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombres y Apellidos</mat-label>
+            <input readonly matInput formControlName="nombreApellido"
+              [(ngModel)]="trabajadorPagoMensual.nombreApellido">
+          </mat-form-field>
+        </mat-grid-tile> 
+
+    </mat-grid-list>
+  </p-fieldset>
+
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+      <mat-form-field appearance="outline">
+        <mat-label>Mes</mat-label>
+        <mat-select formControlName="periodoMes" class="tamanio-seleccionar"
+          [(ngModel)]="trabajadorPagoMensual.periodoMes">
+          <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+          <mat-option *ngFor="let est of listPeriodoMes" [value]="est.idCodigo">{{est.cidNombre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+        <mat-form-field appearance="outline">
+          <mat-label>Año</mat-label>
+          <mat-select formControlName="periodoAnio" class="tamanio-seleccionar"
+            [(ngModel)]="trabajadorPagoMensual.periodoAnio">
+            <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+            <mat-option *ngFor="let est of listPeriodoAnio" [value]="est.idCodigo">{{est.cidCodigo}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+       
+      </mat-grid-tile> 
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo Pago</mat-label>
+          <mat-select formControlName="tipoPago" class="tamanio-seleccionar"
+            [(ngModel)]="trabajadorPagoMensual.periodoAnio">
+            <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+            <mat-option *ngFor="let est of listPeriodoAnio" [value]="est.idCodigo">{{est.cidCodigo}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile> 
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+        <mat-form-field appearance="outline">
+          <mat-label>Acum. Autoz. Anterior</mat-label>
+          <input  style="width: 80px !important;"  matInput formControlName="autorizacionAnterior"
+            [(ngModel)]="trabajadorPagoMensual.autorizacionAnterior">
+        </mat-form-field>
+      </mat-grid-tile> 
+  
+    </mat-grid-list>
+
+    <!-- ///////////////////////Uyu// -->
+    <p-fieldset legend="Cálculo Factor">
+    <mat-grid-list cols="12" rowHeight="50px">
+
+       
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+              <mat-form-field appearance="outline">
+                <mat-label>Dias del mes (G)</mat-label>
+                <input matInput formControlName="diasDelMes" [(ngModel)]="trabajadorPagoMensual.diasDelMes">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+              <mat-form-field appearance="outline">
+                <mat-label>Dias asistidos*(H)</mat-label>
+                <input matInput formControlName="diasAsistidos" [(ngModel)]="trabajadorPagoMensual.diasAsistidos">
+      
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="outline">
+              <mat-label>Factor (C) = H/G</mat-label>
+              <input matInput formControlName="factor" [(ngModel)]="trabajadorPagoMensual.factor">
+            </mat-form-field>
+            </mat-grid-tile>
+          
+      
+
+    </mat-grid-list>
+
+  </p-fieldset>
+
+  <p-fieldset legend="Penalidades">
+    <mat-grid-list cols="12" rowHeight="50px">
+
+       
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+        <mat-form-field appearance="outline" >
+          <mat-label>Penalidades (n)</mat-label>
+          <input matInput formControlName="penalidad" [(ngModel)]="trabajadorPagoMensual.penalidad">
+        </mat-form-field>
+      
+      </mat-grid-tile>
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+        <mat-form-field appearance="outline" >
+          <mat-label>Días retraso, faltas, otros (n')</mat-label>
+          <input matInput formControlName="diasDeRetraso" [(ngModel)]="trabajadorPagoMensual.diasDeRetraso">
+        </mat-form-field>
+      </mat-grid-tile>
+    
+
+
+</mat-grid-list>
+
+</p-fieldset>
+
+
+
+<p-fieldset legend="Pago a Autorizar">
+<mat-grid-list cols="12" rowHeight="50px">
+
+       
+ 
+
+  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+    <mat-form-field appearance="outline" >
+      <mat-label>Monto Ejecución (A)</mat-label>
+      <input matInput formControlName="montoEjecucion" [(ngModel)]="trabajadorPagoMensual.montoEjecucion">
+    </mat-form-field>
+    
+  </mat-grid-tile>
+
+  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 1, md: 1, lg: 1, xl: 1}">
+    <mat-form-field appearance="outline" >
+      <mat-label>% Avance del Mes (B)</mat-label>
+      <input matInput formControlName="avanceDelMes" [(ngModel)]="trabajadorPagoMensual.avanceDelMes">
+    </mat-form-field>
+
+    
+  
+  </mat-grid-tile>
+
+  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 5, md: 5, lg: 5, xl: 5}">
+    <mat-form-field appearance="outline">
+      <mat-label>Monto Bruto (D)= AxB/100xC</mat-label>
+      <input matInput formControlName="montoBruto" [(ngModel)]="trabajadorPagoMensual.montoBruto">
+    </mat-form-field>
+
+   
+  
+  
+  </mat-grid-tile>
+  
+  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+    <mat-form-field appearance="outline">
+      <mat-label>Penalidad (E)= Ax1/800x(n+n')</mat-label>
+      <input matInput formControlName="penalidadFormula" [(ngModel)]="trabajadorPagoMensual.penalidadFormula">
+    </mat-form-field>
+
+  </mat-grid-tile>
+
+
+  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 5, md: 5, lg: 5, xl: 5}">
+    <mat-form-field appearance="outline">
+      <mat-label>Monto Neto (D-E)</mat-label>
+      <input matInput formControlName="montoNeto" [(ngModel)]="trabajadorPagoMensual.montoNeto">
+    </mat-form-field>
+  
+  </mat-grid-tile>
+
+  
+
+
+</mat-grid-list>
+</p-fieldset>
+
+
+<mat-grid-list cols="12" rowHeight="50px">
+
+       
+  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+    <mat-form-field appearance="outline">
+      <mat-label>Nota</mat-label>
+      <input matInput formControlName="observacion" [(ngModel)]="trabajadorPagoMensual.observacion">
+    </mat-form-field>
+
+   
+  
+  
+  </mat-grid-tile>
+  </mat-grid-list>
+      
+  <div align="center" class="example-button-row">
+    <button color="primary" mat-raised-button (click)="guardarCalculoPagoMensual()">
+      <mat-icon>save</mat-icon> Guardar
+    </button>
+  </div>
+     
+  
+   
+    
+ 
+ 
+  
+    <div class="bandeja">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="nro">
+        <th mat-header-cell *matHeaderCellDef  class="formato_header_table"> N°</th>
+        <td mat-cell *matCellDef="let dataTrabajadorPagoMensual">{{dataTrabajadorPagoMensual.nro}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="concepto">
+        <th mat-header-cell *matHeaderCellDef  class="formato_header_table"> PERIODO   </th>
+        <td mat-cell *matCellDef="let dataTrabajadorPagoMensual"> {{dataTrabajadorPagoMensual.periodo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="montoBruto">
+        <th mat-header-cell *matHeaderCellDef  class="formato_header_table"> MONTO BRUTO </th>
+        <td mat-cell *matCellDef="let dataTrabajadorPagoMensual"> {{dataTrabajadorPagoMensual.montoBruto}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="penalidadFormula">
+        <th mat-header-cell *matHeaderCellDef  class="formato_header_table"> PENALIDAD </th>
+        <td mat-cell *matCellDef="let dataTrabajadorPagoMensual"> {{dataTrabajadorPagoMensual.penalidad}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="montoNeto">
+        <th mat-header-cell *matHeaderCellDef  class="formato_header_table"> MONTO NETO </th>
+        <td mat-cell *matCellDef="let dataTrabajadorPagoMensual">{{dataTrabajadorPagoMensual.montoNeto}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="avanceDelMes">
+        <th mat-header-cell *matHeaderCellDef  class="formato_header_table"> AVANCE </th>
+        <td mat-cell *matCellDef="let dataTrabajadorPagoMensual"> {{dataTrabajadorPagoMensual.avanceDelMes}} </td>
+      </ng-container>
+
+      <!-- <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef  class="formato_header_table">ACCIONES</th>
+        <td mat-cell *matCellDef="let dataTrabajadorPagoMensual">
+
+          <button mat-icon-button color="primary"
+            (click)="verCalculoPagoMensual(dataTrabajadorPagoMensual.idCodigoPagoMensual)"
+            matTooltip="Ver Pago Mensual">
+            <mat-icon>library_books</mat-icon>
+          </button>
+
+          <button mat-icon-button color="primary"
+            (click)="obtenerCalculoPagoMensual(dataTrabajadorPagoMensual.idCodigoPagoMensual)"
+            matTooltip="Editar Trabajador">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button mat-icon-button color="primary"
+            (click)="eliminarCalculoPagoMensual(dataTrabajadorPagoMensual.idCodigoPagoMensual,dataTrabajadorPagoMensual.concepto)"
+            matTooltip="Eliminar Trabajador">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+
+        </td>
+      </ng-container> -->
+
+      <tr mat-header-row *matHeaderRowDef="columnas" class="mat-header-row-formato"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+
+    <div class="empty" *ngIf="!isLoading && dataSource === null">
+      No existe datos para mostrar en la tabla
+    </div>
+
+    <mat-toolbar>
+      <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+        <div>
+          <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+            [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+          </mat-paginator>
+
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+</div>
+
+</div>

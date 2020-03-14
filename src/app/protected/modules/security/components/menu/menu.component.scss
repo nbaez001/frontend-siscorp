@@ -1,0 +1,22 @@
+:host {
+    mat-toolbar {
+
+        mat-icon {
+            margin-right: 10px;
+        }
+    }
+
+    .content {
+        padding: 20px;
+        background: white;
+
+        mat-tree-node .tree-node-item {
+            border-bottom: 0.3px solid;
+            width: 100%;
+
+            .separator {
+                padding: 0 20px;
+            }
+        }
+    }
+}

@@ -1,0 +1,139 @@
+:host {
+
+  mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    .titulo {
+      display: flex;
+      align-items: center;
+    }
+
+    .tiempo {
+      width: 50px;
+      display: flex;
+      align-items: center;
+    }
+
+    .total-atenciones {
+      text-shadow: 1.1px 1.1px #000;
+    }
+  }
+
+  .pantalla {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+
+    .modulo {
+      flex: 1;
+      margin-right: 20px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      mat-card {
+        margin-bottom: 10px;
+
+        &.cabecera {
+          display: flex;
+          flex-direction: column;
+
+          .imagen-encargado {
+            display: flex;
+            justify-content: space-between;
+
+            img {
+              border-radius: 5px;
+            }
+
+            .encargado-atendidos {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              justify-content: space-between;
+
+              .encargado {
+                display: flex;
+                align-items: center;
+              }
+
+              .atendidos {
+                padding: 10px;
+                border-radius: 5px;
+              }
+            }
+          }
+
+          .atendiendo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            @-webkit-keyframes blinker {
+              from {opacity: 1.0;};
+              to {opacity: 0.0;}
+            }
+
+            mat-icon.flecha {
+              // blink
+              text-decoration: blink;
+              -webkit-animation-name: blinker;
+              -webkit-animation-duration: 1s;
+              -webkit-animation-iteration-count: infinite;
+              -webkit-animation-timing-function: ease-in-out;
+              -webkit-animation-direction: alternate;
+
+              font-size: 40px;
+              height: 40px;
+              width: 40px;
+            }
+
+            .atendido {
+              flex: 1;
+              height: 65px;
+              display: flex;
+              align-items: center;
+              border-radius: 5px;
+
+              mat-icon {
+                margin: 10px;
+              }
+
+              span {
+                font-size: 20px;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+
+        &.por-atender {
+          display: flex;
+          flex-direction: column;
+
+          .item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 10px;
+
+            .cont, .text {
+              padding: 10px;
+              border-radius: 5px;
+            }
+
+            .cont {
+              margin-right: 10px;
+            }
+
+            .text {
+              flex: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+<div [formGroup]="proyectoForm">
+  <div class="sidenav-header">
+    <mat-toolbar>
+
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        Nuevo chat grupal
+        <div>
+          <button mat-button class="mat-icon-button" aria-label="more" (click)="dialogRef.close()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon>group</mat-icon>
+            <input autocomplete="off" (keyup)="onKeyup($event)" formControlName="nombreGrupo" [(ngModel)]="nombreGrupo" type="text"
+              placeholder="Ingrese nombre del grupo" fxFlex>
+          </div>
+        </div>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row>
+        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon style="color: rgb(224, 30, 30)">home</mat-icon>
+            <input  autocomplete="off" [(ngModel)]="searchTambo" formControlName="tambos" type="text"
+              placeholder="Busca a tus contactos por tambos" fxFlex (keyup)="onKeybusquedaContacto2($event)" matInput
+              [matAutocomplete]="auto">
+
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)='busquedaContacto2($event.option.value)'
+              [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptionsdataPlataforma | async" [value]="option">
+                {{option.cidNombre}}
+              </mat-option>
+            </mat-autocomplete>
+
+          </div>
+        </div>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row>
+        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon style="color: rgb(11, 119, 25)">supervised_user_circle</mat-icon>
+            <input autocomplete="off"  [(ngModel)]="searchPuesto" formControlName="puesto" type="text"
+              placeholder="Busca a tus contactos por puesto" fxFlex (keyup)="onKeybusquedaContacto2($event)" matInput
+              [matAutocomplete]="auto2">
+
+            <mat-autocomplete #auto2="matAutocomplete" (optionSelected)='busquedaContacto2($event.option.value)'
+              [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptionsdataPuesto | async" [value]="option">
+                {{option.cidNombre}}
+              </mat-option>
+            </mat-autocomplete>
+
+          </div>
+        </div>
+      </mat-toolbar-row>
+
+      <mat-toolbar-row>
+        <div class="search-wrapper" fxFlex fxLayout="row" fxLayoutAlign="start center">
+          <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <mat-icon style="color: rgb(20, 156, 235)">search</mat-icon>
+            <input autocomplete="off" [(ngModel)]="searchNombre" formControlName="nombre" type="text"
+              placeholder="Busca a tus contactos por nombre" fxFlex (keyup)="onKeybusquedaContacto2($event)"
+              (keydown.enter)="busquedaContacto2($event)">
+          </div>
+        </div>
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+  </div>
+</div>
+
+<div [formGroup]="proyectoForm">
+  <div class="sidenav-header">
+    <mat-toolbar>
+      <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        <mat-form-field class="demo-chip-list" aria-orientation="vertical">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let integrante of integrantes" matTooltip="{{integrante.name}}" [selectable]="selectable"
+              [removable]="removable" (click)="remove(integrante)">
+              <small>{{integrante.nombre}}</small>
+              <mat-icon matChipRemove (click)="remove(integrante)" *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur" />
+          </mat-chip-list>
+        </mat-form-field>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+</div>
+
+
+<div animationDuration="0ms" mat-align-tabs="center">
+  <div class="sidenav-content" fusePerfectScrollbar fxFlex>
+    <div [@animateStagger]="{value:'50'}">
+      <div style="height: 400px;">
+
+        <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport">
+          <div class="contact-list" fxLayout="column">
+            <mat-selection-list #contactos>
+              <mat-list-option class="example-item contact" *cdkVirtualFor="let contact of contacts" [value]='contact'
+                [@animate]="{value:'*',params:{y:'100%'}}">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                  <div class="avatar-wrapper" fxFlex="0 1 auto">
+                    <img src="{{contact.avatar}}" class="mat-avatar avatar" alt="{{contact.name}}" />
+                  </div>
+                  <div class="" fxLayout="column" fxLayoutAlign="center start">
+                    <div class="contact-name">{{contact.name}}</div>
+                  </div>
+                </div>
+
+              </mat-list-option>
+            </mat-selection-list>
+          </div>
+        </cdk-virtual-scroll-viewport>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="sidenav-header">
+  <mat-toolbar>
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+      &nbsp;
+      <div>
+        <button mat-fab style="border-radius: 50%;background-color: #66bb6a;" (click)="crearGrupo()" [disabled]="grabar">
+          <mat-icon >save_alt</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

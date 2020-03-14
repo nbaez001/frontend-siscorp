@@ -1,0 +1,67 @@
+:host {
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .contenido-formulario {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+  
+      .columna {
+        display: flex;
+        flex-direction: row;
+  
+        mat-form-field {
+          flex: 1;
+  
+          &:first-of-type {
+            margin-right: 10px;
+          }
+        }
+  
+        &.archivos {
+          flex-wrap: wrap;
+  
+          mat-card {
+            cursor: pointer;
+            margin: 0 10px 10px 0;
+  
+            mat-icon {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  
+    .mat-dialog-actions {
+      margin-bottom: 0;
+      padding: 20px;
+    }
+  
+    input[type="file"] {
+      display: none;
+    }
+  }
+
+  .example-button-row button,
+  .example-button-row a {
+    margin-right: 8px;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .tamanio-padding{
+    width: 520px; 
+    padding-right: 10px;
+  }

@@ -1,0 +1,28 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "codigoUnico": "1111",
+            "codigo": "01-2019/PNPAIS-UPP",
+            "item": 1,
+            "descripcion": "Quille ",
+            "planEjecucion":"120 días",
+            "ampliacionPlazo": "60 dias",
+            "diasRetraso": "30 dias",
+            "fecInicioEjecucion": "01-01-2019",
+            "fecFinEjecucion": "01-08-2019",
+            "crp": "Carlos Alberto Becerra Laguna",
+            "estado": "EN EJECUCIÓN",
+            "cidEstado": "001",
+            "numPlazo": "10 días",
+            "color": "color-grey",        
+            "fidProyecto": 27255,
+            "avanceFisicoProgramado":"10%",
+            "avanceFisicoEjecutado":"5%",
+            "prestandoServicio":"No"
+        }
+    ],
+	"idPerfil": 1
+}

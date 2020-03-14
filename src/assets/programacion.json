@@ -1,0 +1,25 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {          
+            "item": 1,
+            "mes": "Primero",
+            "metrado": "2.00",
+            "precio": "20.00",
+            "porcentaje": "50%",
+            "fidPartida": 110
+
+        }, {
+            "item": 2,
+            "mes": "Segundo",
+            "metrado": "2.00",
+            "precio": "20.00",
+            "porcentaje": "50%",
+            "fidPartida": 110
+
+        }
+    ],
+	"idPerfil": 1
+}

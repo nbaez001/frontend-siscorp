@@ -1,0 +1,41 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "idCodigo": 1,
+            "nro": "01",
+			"fechaCotizacion":"10/11/2019",
+			"vigenciaCotizacion":"30 dias",
+			"plazoEntrega":"Inmediata",
+			"formaPago":"Efectivo",
+			"sustento":"sustento",
+			"idCodigoArchivo":100,
+			"nombreArchivo":"cotizacion-pdf.pdf"
+		},
+		{
+            "idCodigo": 2,
+            "nro": "02",
+			"fechaCotizacion":"10/11/2019",
+			"vigenciaCotizacion":"20 dias",
+			"plazoEntrega":"Inmediata",
+			"formaPago":"Efectivo",
+			"sustento":"sustento",
+			"idCodigoArchivo":200,
+			"nombreArchivo":"cotizacion-pdf.pdf"
+		},
+		{
+            "idCodigo": 3,
+            "nro": "03",
+			"fechaCotizacion":"10/11/2019",
+			"vigenciaCotizacion":"10 dias",
+			"plazoEntrega":"Inmediata",
+			"formaPago":"Efectivo",
+			"sustento":"sustento",
+			"idCodigoArchivo":300,
+			"nombreArchivo":"cotizacion-pdf.pdf"
+		}
+    ],
+	"idPerfil": 1
+}

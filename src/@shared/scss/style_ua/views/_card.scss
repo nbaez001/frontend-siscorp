@@ -1,0 +1,109 @@
+.page {
+  mat-card {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-right:auto;
+    margin-left: auto;
+  }
+
+  .button-separate {
+    margin-left: 10px !important;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  mat-form-field {
+    width: 100%;
+    margin: auto 6px !important; //TOP-BOTTOM    RIGHT-LEFT
+    textarea {
+      height: 100%;
+    }
+  }
+
+  mat-dialog-content > * {
+    font-size: 12px !important;
+  }
+
+  .icono {
+    height: 25px;
+    width: auto;
+  }
+
+  // .btnRigth {
+  //   margin-top: 10px;
+  //   direction: initial; //PARA ALINEAR LOS BOTONES A LA DERECHA
+  //   display: flex; //PARA ALINEAR LOS BOTONES A LA DERECHA --> REDUCE EL TAMAÑO DE BOTONES AL MINIMO
+  //   justify-content: flex-end; //PARA ALINEAR LOS BOTONES A LA DERECHA
+  //   button {
+  //     margin-right: 6px;
+  //     min-width: 64px !important;
+  //   }
+  // }
+
+  mat-expansion-panel {
+    mat-expansion-panel-header {
+      font-weight: bolder;
+      background-color: #039be5;
+      .mat-expansion-panel-header-title {
+        color: white !important;
+      }
+      /deep/ .mat-expansion-indicator::after {
+        color: white !important;
+      }
+    }
+    .mat-expansion-panel-cuerpo {
+      padding-top: 10px;
+    }
+  }
+  
+  mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled="true"]):hover {
+    background: #039be5 !important;
+  }
+
+  .table-resultados {
+    mat-card-title {
+      font-size: 15px;
+      font-weight: bolder;
+    }
+  }
+}
+
+.mat-form-field {
+  //REDUCE TAMAÑO DE IMPUT
+  line-height: 16px !important;
+}
+
+::ng-deep .mat-form-field-label {
+  top: 1.79em !important; //UBICA EL LABEL DEL FIELD SET MAS ARRIBA EN CUANTO MENOR VALOR
+}
+
+//INICIO - ESTILOS PARA LA BOTONES INFERIORES DE ACUERDO A TAMAÑO
+@media screen and (min-width: 600px) {
+  .btnRigth {
+    margin-top: 10px;
+    direction: initial; //PARA ALINEAR LOS BOTONES A LA DERECHA
+    display: flex; //PARA ALINEAR LOS BOTONES A LA DERECHA --> REDUCE EL TAMAÑO DE BOTONES AL MINIMO
+    justify-content: flex-end; //PARA ALINEAR LOS BOTONES A LA DERECHA
+    button {
+      margin-right: 6px;
+      min-width: 64px !important;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .btnRigth {
+    margin-top: 10px;
+    button {
+      display: block;
+      margin-bottom: 8px;
+      width: 100% !important;
+    }
+    button:nth-last-of-type(1) {//LAST-OF-TYPE(1) --> ULTIMO
+      margin-bottom: 0px;
+    }
+  }
+}
+//FIN - ESTILOS PARA LA BOTONES INFERIORES DE ACUERDO A TAMAÑO

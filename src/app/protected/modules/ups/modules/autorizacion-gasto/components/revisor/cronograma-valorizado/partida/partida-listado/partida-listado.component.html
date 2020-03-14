@@ -1,0 +1,144 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Insumo</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+
+
+    <div class="bandeja">
+     
+            <div class="contenido-formulario" [formGroup]="insumoForm">
+
+
+                <div>       
+                    <mat-form-field appearance="outline" style="width: 28%;">
+                        <mat-label>Código</mat-label>
+                        <input matInput formControlName="codInsumoFrmCtrl">
+                    </mat-form-field>
+        
+                    
+                    <mat-form-field appearance="outline"  style="padding-left: 10px; width: 70%;">
+                      <mat-label>Descripción del Recurso</mat-label>
+                      <input matInput formControlName="descripcionInsumoFrmCtrl">
+                    </mat-form-field>
+                  </div>
+
+
+
+              <div class="columna">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Unidad</mat-label>
+                    <input matInput formControlName="unidadInsumoFrmCtrl">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding-left: 10px;">
+                  <mat-label>Cantidad</mat-label>
+                  <input matInput formControlName="cantidadFrmCtrl" (keyup.enter)="onMouseEnterCantidad($event)">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding-left: 10px;">
+                  <mat-label>Precio(S/.)</mat-label>
+                  <input matInput formControlName="precioInsumoFrmCtrl" (keyup.enter)="onMouseEnterPrecio($event)">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding-left: 10px; padding-right: 10px;">
+                  <mat-label>Parcial(S/.)</mat-label>
+                  <input matInput formControlName="parcialInsumoFrmCtrl" style="font-weight: 600;">
+                </mat-form-field>
+              </div>
+           
+
+
+      <div style="padding: 6px; padding-top: 4px;">
+    <table mat-table [dataSource]="dataSource"  class="mat-elevation-z8" style="width: 100% !important; ">
+
+        <!-- Checkbox Column -->
+<!--   <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container> -->
+
+      <ng-container matColumnDef="nro">
+        <th mat-header-cell *matHeaderCellDef style="padding-left: 20px;"> Nro.</th>
+        <td mat-cell *matCellDef="let insumo; let i = index" style="padding-left: 20px;">{{insumo.item}} </td>
+
+      </ng-container>
+
+      <ng-container matColumnDef="cantidadInsumo">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center;" >Cant. insumo</th>
+          <td mat-cell *matCellDef="let insumo" style="text-align: center;"> 
+
+              <mat-form-field  appearance="outline" floatLabel="never">
+                  <input matInput  [value]="insumo.cantidadInsumo" [(ngModel)]="insumo.cantidadInsumo" (keyup.enter)="onMouseEnterCantidad($event , insumo)"  (blur) = "eventoBlur($event, insumo)">
+              </mat-form-field>
+          </td>
+        </ng-container>
+  
+
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Código </th>
+        <td mat-cell *matCellDef="let insumo" style="padding-left: 20px;">{{insumo.cidCodigo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion" >
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;" > Descripción de la Partida </th>
+        <td mat-cell *matCellDef="let insumo" style="padding-left: 20px;">{{insumo.descripcion}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnasInsumo"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnasInsumo" ></tr>
+    </table>
+
+    </div>
+    <div class="empty" *ngIf="dataSource === null">
+      No existe insumos a mostrar
+    </div>
+
+   <!--  <mat-toolbar>
+      <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+        <div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 15]">
+          </mat-paginator>
+
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar> -->
+   
+  
+    <mat-form-field appearance="outline">
+        <mat-label>Ingresar Sutento</mat-label>
+        <textarea  rows="2" matInput formControlName="sustentoFrmCtrl" maxlength="300" value=""></textarea>
+      </mat-form-field>
+        </div>
+    </div>
+
+  <div align="right" class="example-button-row acciones-margen-derecho">
+
+    <button color="primary" mat-raised-button (click)="actualizarInsumo()">
+      Actualizar&nbsp;&nbsp;&nbsp; <mat-icon>check</mat-icon>
+    </button>
+
+    <button color="primary" mat-raised-button (click)="deleteInsumo()">
+        Eliminar&nbsp;&nbsp;&nbsp; <mat-icon>delete</mat-icon>
+      </button>
+  </div>
+  <br>
+

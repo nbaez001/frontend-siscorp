@@ -1,0 +1,48 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "item": 1,
+            "idTipoDocumento": 1,
+			"nombreTipoDocumento": "Cronograma Acelerado",
+			"nroDocumento": "001",
+			"fechaRecepcion": "10/04/2019",
+			"idEstado": 1,
+			"nombreEstado": "EN REVISIÓN",
+            "fidProyecto": 27255
+        },
+		{
+            "item": 2,
+            "idTipoDocumento": 2,
+			"nombreTipoDocumento": "Cambio Monto Jornal",
+			"nroDocumento": "",
+			"fechaRecepcion": "15/04/2019",
+			"idEstado": 1,
+			"nombreEstado": "EN REVISIÓN",
+            "fidProyecto": 27255
+        },
+		{
+            "item": 3,
+            "idTipoDocumento": 3,
+			"nombreTipoDocumento": "AUTORIZACIÓN DE GASTO",
+			"nroDocumento": "006",
+			"fechaRecepcion": "15/04/2019",
+			"idEstado": 1,
+			"nombreEstado": "EN REVISIÓN",
+            "fidProyecto": 27255
+        },
+		{
+            "item": 4,
+            "idTipoDocumento": 4,
+			"nombreTipoDocumento": "PRE LIQUIDACIÓN",
+			"nroDocumento": "001",
+			"fechaRecepcion": "04/04/2019",
+			"idEstado": 1,
+			"nombreEstado": "APROBADO",
+            "fidProyecto": 27255
+        }
+    ],
+	"idPerfil": 1
+}

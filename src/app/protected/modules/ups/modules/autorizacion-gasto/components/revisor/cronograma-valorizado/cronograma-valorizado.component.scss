@@ -1,0 +1,349 @@
+:host {
+
+ // @import '../node_modules/primeicons/primeicons';
+ // @import '../node_modules/primeng/resources/themes/nova-light/theme';
+ // @import '../node_modules/primeng/resources/primeng.min';
+
+  // /deep/ {
+    // @import './assets/primeng/theme';
+    // @import './assets/primeng/primeng.min';
+    
+  // }
+
+  @import '../src/@shared/scss/style_util.scss';
+
+  /*  /deep/ {
+      @import './assets/scss/style_util';
+    } */
+
+
+  /* active tab */
+  ::ng-deep .mat-tab-list .mat-tab-labels {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  ::ng-deep .mat-tab-body.mat-tab-body-active {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 1;
+    flex-grow: 1;
+    height: 800px;
+}
+  
+  ::ng-deep .mat-tab-label-active {
+    background-color: #0aa4f1;
+    font-weight: 600;
+  }
+
+  ::ng-deep .ui-paginator-bottom{
+    // background-color: red;
+    padding-top: 160px;
+  }
+
+
+
+  ::ng-deep .mat-icon-button {
+    padding: 0;
+    min-width: 0;
+    width: 40px;
+    height: 10px;
+    flex-shrink: 0;
+    line-height: 10px;
+    border-radius: 50%;
+  }
+
+  .mat-tooltip {
+    // background-color: darkblue;
+    font-size: 20px !important;
+  }
+
+/* ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+    */
+  /* ink bar */
+  ::ng-deep .mat-ink-bar {
+    font-size: 16px;
+    font-weight: 600;
+    background-color:  #0aa4f1;
+    background-color: var(--primary-color,rgb(212, 192, 12)) !important;
+  }
+
+
+  .contenido-formulario {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    height: 50px !important;
+     
+  }
+ 
+  .bandeja {
+    position: relative;
+    margin-top: 0px;
+    /* padding: 1px 0px 16px 4px; */
+  }
+
+  .bandeja2 {
+    position: relative;
+    margin-top: 4px;
+    padding: 1px;
+  }
+
+}
+
+/* .mat-toolbar-fondo{
+  background: #fff;
+} */
+
+.excel-icon-top{
+  margin-top: -10px !important;
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+}
+
+.fondo-filtro{
+  background: #039be5;
+  color: white;
+}
+
+
+.formato-label_codigo{
+    margin: auto;
+}
+
+.formato-label_convenio{
+  margin: auto;
+  padding-left: 50px;
+}
+
+.radio-buton-padding-left{
+padding-left: 5px;
+}
+
+.btn-alinear_derecha{
+float: right !important;
+margin-left: 15px !important;
+}
+
+
+div.center {
+text-align: center;
+}
+
+
+/* Estilos de la tabla de cronograma INICIO */
+
+.celda-frozen{
+  border: 1px solid #bdbbbb;
+  background-color: #FFFFFF;
+  text-align: left;
+  font-size: 14px;
+}
+
+
+.row-hover{
+  cursor: pointer;
+  background: #DFE5EF !important;
+  color: #000000 !important;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.caja{
+    width: 110px;
+}
+
+.caja-large{
+  width: 90px;
+}
+
+.caja-presupuesto{
+  width: 95px;
+}
+
+.caja-presupuesto-titulo{
+  width: 135px;
+}
+
+.caja-large-aux-fijo{
+  width: 100px;
+}
+
+.caja-item{
+  width: 200px;
+}
+
+.caja-descripcion{
+  width: 520px;
+}
+
+.caja-unidad{
+  width: 55px;
+}
+
+.caja-unidad-2{
+  width: 105px;
+}
+
+.caja-item-insumo{
+  width: 120px;
+}
+
+
+.caja-meses-colspan-cronograma{
+  width: 300px;
+}
+
+.caja-presupuesto-colspan-cronograma{
+  width: 420px;
+}
+
+.caja-meses-colspan-insumo{
+  width: 200px;
+}
+
+.caja-porcentaje{
+  width: 50px;
+}
+
+
+
+/* Estilos de la tabla de cronograma FIN */
+
+.mat-tab-body-content {
+height: 100%;
+overflow: hidden !important;;
+}
+
+.formato_titulo{
+text-align: center;
+text-decoration: underline;
+font-size: 18px;
+font-weight: 600;
+}
+
+.nota_descripcion{
+color: red;
+font-weight: 580;
+font-size: 16px;
+}
+
+.nota_label{
+font-weight: 600;
+font-size: 16px;
+}
+
+
+#container {
+  width:100%;
+  text-align:center;
+}
+
+#left {
+  float:left;
+  width:100px;
+  margin-top: 8px;;
+}
+
+#center {
+  display: inline-block;
+  margin:0 auto;
+  width:100px;
+}
+
+#right {
+  float:right;
+  width:630px;
+}
+
+#mat-tab-label-0-0{
+  background-color: #039be5 !important;
+}
+
+
+.celda{
+  border: 1px solid #bdbbbb;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+}
+
+.celda-painted{
+  border: 1px solid #bdbbbb;
+  background-color: #F4E7E4;
+  text-align: center;
+  font-size: 14px;
+}
+
+.label-formato{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.historico-formato{
+  margin-left: 10px;
+  width: 17%;
+}
+
+.insumo-buscar-formato{
+  margin-left: 10px;
+  width: 26%;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0;
+  margin-top: -15px;
+}
+
+.contenido{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.icono-editar{
+  height: 40px;
+  width: 35px;
+  margin-top: -18px;
+}
+
+.header-table-mes01{
+  background-color: #e8cbdb !important;
+}
+
+.header-table-mes02{
+  background-color: #d2e8ca;
+}
+
+.header-table-mes03{
+  background-color: #d8e9f5;
+}
+
+.header-table-mes04{
+  background-color: #f3d7ba;
+}
+
+::ng-deep .formato-tooltip-tabla {
+  color: rgb(255, 255, 255) !important;
+  font-size: 16px;
+  width: 900em;
+}
+
+::ng-deep .formato-tooltip {
+  background-color: black !important;
+  color: white;
+  font-size: 18px;
+  width: auto !important;
+}
+
+
+
+

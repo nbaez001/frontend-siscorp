@@ -1,0 +1,83 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 400px;
+}
+@include mat-table-columns(
+  (
+    select: (
+      width: 2rem
+    ),
+    id: (
+      width: 2rem
+    ),
+    unidad: (
+      width: 11rem
+    ),
+    tambo: (
+      width: 9rem
+    ),
+    codPatrimonio: (
+      width: 8rem
+    ),
+    denominacion: (
+      width: 16rem
+    ),
+    marca: (
+      width: 5rem
+    ),
+    modelo: (
+      width: 6rem
+    ),
+    color: (
+      width: 6rem
+    ),
+    serie: (
+      width: 6rem
+    ),
+    medida: (
+      width: 6rem
+    ),
+    anio: (
+      width: 6rem
+    ),
+    placa: (
+      width: 6rem
+    ),
+    chasis: (
+      width: 6rem
+    ),
+    motor: (
+      width: 6rem
+    ),
+    nomEstado: (
+      width: 6rem
+    ),
+    codigoCuenta: (
+      width: 6rem
+    ),
+    nombreCuenta: (
+      width: 10rem
+    ),
+    fechaRegistro: (
+      width: 6rem
+    ),
+    fechaContabilidad: (
+      width: 6rem
+    ),
+    nroDocAdquisicion: (
+      width: 6rem
+    ),
+    valorAdquisicion: (
+      width: 6rem
+    ),
+    caracteristica: (
+      width: 20rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);
+

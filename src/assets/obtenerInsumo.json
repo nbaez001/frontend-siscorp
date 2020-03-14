@@ -1,0 +1,19 @@
+{
+	"codResultado": null,
+	"msgResultado": null,
+	"total": null,
+	"response":[
+		{
+			"ID_CODIGO":1,	
+			"ID_TIPO_INSUMO":"002",
+			"ID_NUMERO_CODIGO":"001",
+			"DESCRIP_UND": "OBRAS PROVISIONALES TRABAJOS PRELIMINARES SEGURIDAD Y SALUD",
+			"DEC_UNIDAD": 1,
+			"DEC_CUADRILLA": 0.00,
+			"DEC_CANTIDAD": 4.00,
+			"DEC_PRECIO": 5.00,
+			"DEC_PARCIAL": 20.00,
+			"SUSTENTO":""
+		}
+	] 
+}

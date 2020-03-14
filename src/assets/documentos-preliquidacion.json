@@ -1,0 +1,91 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "Valorización de Avance del Proyecto"
+        }, {
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "Cronograma de Avance del Proyecto Valorizado"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "Resumen del Estado Financiero"
+        }
+        , {
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "Manifiesto de Gastos"
+        }
+        , {
+            "idCodigo": 5,
+            "cidCodigo": "005",
+            "cidNombre": "Declaraciones juradas de compra de bienes y/o \r contratación de servicios de proveedores no habituales"
+        }
+        , {
+            "idCodigo": 6,
+            "cidCodigo": "006",
+            "cidNombre": "Declaraciones Juradas de Gastos por viáticos del NE "
+        }
+        , {
+            "idCodigo": 7,
+            "cidCodigo": "007",
+            "cidNombre": "Relación de material en cancha e insumos en almacén"
+        }
+        , {
+            "idCodigo": 8,
+            "cidCodigo": "008",
+            "cidNombre": "Cuadro resumen del Movimiento de Almacén Entradas- Salidas "
+        }
+        , {
+            "idCodigo": 9,
+            "cidCodigo": "009",
+            "cidNombre": "Extracto bancario mensual correspondiente \r al mes de la Pre Liquidación"
+        }
+        , {
+            "idCodigo": 10,
+            "cidCodigo": "010",
+            "cidNombre": "Voucher de los retiros y/o devoluciones de la \r cuenta bancaria mancomunada del NE"
+        }
+        , {
+            "idCodigo": 11,
+            "cidCodigo": "011",
+            "cidNombre": "Resultados de los Ensayos de Control de Calidad"
+        }
+        , {
+            "idCodigo": 12,
+            "cidCodigo": "012",
+            "cidNombre": "Fotografías de la secuencia del avance del Proyecto"
+        }
+        , {
+            "idCodigo": 13,
+            "cidCodigo": "013",
+            "cidNombre": "Acta de Rendición Mensual de Cuentas a la \r población beneficiaría"
+        }
+        , {
+            "idCodigo": 14,
+            "cidCodigo": "014",
+            "cidNombre": "Ejemplar del Cuaderno de Obra del mes que corresponda"
+        }
+        , {
+            "idCodigo": 15,
+            "cidCodigo": "015",
+            "cidNombre": "Contrato en original del Personal Auxiliar,"
+        }
+        , {
+            "idCodigo": 16,
+            "cidCodigo": "016",
+            "cidNombre": "Cuadro detallado de equipamiento (Anexo N° 31"
+        }
+        , {
+            "idCodigo": 17,
+            "cidCodigo": "017",
+            "cidNombre": "Otros (Contratos por servicios, etc)"
+        }
+    ],
+	"idPerfil": null
+}

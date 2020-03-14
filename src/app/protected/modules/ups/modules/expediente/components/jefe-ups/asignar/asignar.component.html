@@ -1,0 +1,68 @@
+
+    <!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+    <span>Asignación de Coordinador de Plataforma Fija</span>
+     <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    </button> 
+  </mat-toolbar>
+  <!-- CABECERA -->
+  <br>
+    <!-- FORMULARIO -->
+    <div mat-dialog-content class="contenido-formulario">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre Persona</mat-label>
+          <!--<input matInput  [formControl]="filter">-->
+          <input matInput [(ngModel)] = "nombre" placeholder="ingrese nombre" (input) = 'search()'>
+        </mat-form-field>
+
+      </div>
+      <!-- FORMULARIO -->
+
+    <div mat-dialog-content>
+      <div class="columna">
+          <div class="columna">
+              Personal Disponible:
+        
+              <div class="bandeja mat-elevation-z2" [perfectScrollbar]>
+                <span (click)="agregar(ix)" *ngFor="let p of personalDisponible; let ix = index" class="item"><mat-icon>person</mat-icon> {{p.nombre}}</span>
+              </div>
+            </div>
+
+      </div>
+    <!--
+      <div fxFlex="40px" class="flecha-direccional-top">
+          <button mat-mini-fab (click)="agregar(ix)">></button><br><br>
+          <button mat-mini-fab><</button>
+      </div>-->
+
+      <div class="columna centro">
+          <mat-icon>swap_horiz</mat-icon>
+        </div>
+  
+   
+      <div class="columna">
+              Personal Seleccionado:
+        
+              <div class="bandeja mat-elevation-z2" [perfectScrollbar]>
+                <span (click)="quitar(ix)" *ngFor="let p of personalAsignado; let ix = index" class="item"><mat-icon>person</mat-icon>  {{p.nombre}}</span>
+              </div>
+      </div>
+
+
+    </div>
+  
+
+    <div align="right" class="example-button-row acciones-margen-derecho">
+
+        <button  color="primary" mat-raised-button (click)="registrarAsignacion()" style="margin-right: 10px;">
+          <mat-icon>save_alt</mat-icon> Grabar  
+        </button>
+        <button color="warn" mat-raised-button (click)="dialogRef.close()">
+          <mat-icon>highlight_off</mat-icon> Cerrar
+        </button>
+      </div>
+      <br><br>
+
+
+  

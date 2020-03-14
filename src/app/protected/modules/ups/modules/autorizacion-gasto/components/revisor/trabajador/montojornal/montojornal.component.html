@@ -1,0 +1,98 @@
+<div class="page">
+  <!-- CABECERA -->
+  <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+    <span>MODIFICAR MONTO JORNAL</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+  <!-- CABECERA -->
+
+  <div mat-dialog-content  class="contenido-formulario">
+
+
+    <form  [formGroup]="formularioGrp">
+
+
+
+      <mat-grid-list cols="12" rowHeight="65px">
+        
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 6, lg: 6, xl: 6}">
+          <div class="flex-container">
+            <div class="label-datos" >Monto jornal propuesto:</div>
+            
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+         
+
+          <mat-form-field appearance="outline">
+
+
+            <mat-label> </mat-label>
+            <input matInput formControlName="monto"  >
+            <span matPrefix>S/.&nbsp;</span>
+            
+          </mat-form-field>
+
+      
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 4, md: 4, lg: 4, xl: 4}">
+          <div class="flex-container">
+            <div class="label-datos" >Ingresar sustento:</div>
+            
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label></mat-label>
+            <textarea matInput ></textarea>
+          </mat-form-field>
+
+          
+
+        </mat-grid-tile>
+
+
+
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+          <div class="flex-container">
+            <div class="label-datos" >Adjuntar sustentación</div>
+            
+          </div>
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+
+
+          <mat-form-field appearance="outline">
+            <mat-label></mat-label>
+
+            <input matInput formControlName="docSustentacion" type="text">
+            <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-icon-input" color="primary"
+              (click)="buscarSustentacion($event)">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <input class="none" type="file" id="fileSustentacion" (change)="cargarSustentacion($event)">
+          </mat-form-field>
+
+        </mat-grid-tile>
+
+      </mat-grid-list>
+    </form>
+
+    <div align="center" class="example-button-row acciones-margen-derecho">
+      <button color="primary" mat-raised-button (click)="enviarMonto()">
+        <mat-icon>call_made</mat-icon>Enviar
+      </button>
+    </div>
+
+  </div>
+
+</div>

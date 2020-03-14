@@ -1,0 +1,157 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+:host {
+  .page {
+    .table-resultados {
+      .table-container {
+        max-height: 560px;
+      }
+    }
+
+    table {
+      th.mat-header-cell {
+        border: 1px solid #ccc;
+        padding: 0 !important;
+      }
+    }
+
+    .filtros {
+      mat-expansion-panel {
+        margin: 10px 0;
+        border-radius: 0;
+
+        mat-expansion-panel-header mat-panel-title {
+          display: flex;
+          align-content: center;
+        }
+      }
+    }
+
+    .spinerTable {
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      right: 0 !important;
+      position: sticky;
+      bottom: 0px;
+      left: 0px;
+      .mat-progress-spinner {
+        width: 50px !important;
+        height: 50px !important;
+        svg {
+          width: 50px !important;
+          height: 50px !important;
+        }
+      }
+    }
+
+    .empty {
+      padding: 20px;
+      text-align: center;
+      position: sticky;
+      bottom: 0px;
+      left: 0px;
+      font-size: 0.8em;
+      font-weight: 500;
+      color: #005e82;
+    }
+
+    .bandeja {
+      position: relative;
+      margin-top: 10px;
+      padding: 16px;
+    }
+
+    .mat-row:hover {
+      background-color: #dfe5ef;
+      .mat-cell, .mat-footer-cell {
+        font-weight: bold;
+        }
+    }
+
+    .paginacion-right{
+      display: inline !important;
+    }
+
+    button:hover mat-icon {
+      font-size: 36px !important;
+    }
+
+    .mat-icon {
+      font-size: 30px !important;
+    }
+
+    .estilo-cabecera-tabla {
+      color: black;
+      font-weight: 600;
+      background-color: #d3e1ee;
+      text-align: center;
+    }
+
+    .estilo-center-cuerpo-tabla {
+      text-align: center;
+    }
+
+    .btn_agregar {
+      float: right;
+    }
+
+    .btn_agregar_position {
+      position: relative;
+      margin-top: -10px;
+      padding: 5px;
+      padding-bottom: 18px;
+
+      button {
+        margin: 0 10px;
+      }
+    }
+  }
+
+  @include mat-table-columns(
+    (
+      item: (
+        width: 2rem
+      ),
+      numeroHojaTramite: (
+        width: 6rem
+      ),
+      numeroAutorizacionGasto: (
+        width: 6rem
+      ),
+      fechaPresentacionPrograma: (
+        width: 6rem
+      ),
+      montoSolicitado: (
+        width: 6rem
+      ),
+      montoAutorizado: (
+        width: 6rem
+      ),
+      estado: (
+        width: 6rem
+      ),
+      puestoActual: (
+        width: 6rem
+      ),
+      fechaAprobacionAutorizacion: (
+        width: 6rem
+      ),
+      acciones: (
+        width: 9rem
+      )
+    )
+  );
+}
+
+::ng-deep .formato-tooltip {
+  background-color: black !important;
+  color: white;
+  font-size: 18px;
+  width: auto !important;
+}
+
+::ng-deep .mat-dialog-container {
+  overflow: hidden !important;
+}

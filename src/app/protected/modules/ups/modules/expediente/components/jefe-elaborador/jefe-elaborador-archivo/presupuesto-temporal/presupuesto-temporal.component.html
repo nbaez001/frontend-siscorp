@@ -1,0 +1,121 @@
+<!-- <app-header></app-header> -->
+
+
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>PRESUPUESTO </span>
+   <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon> 
+  </button> 
+</mat-toolbar>
+<br>
+
+<div class="container">
+<div class="left">
+    Presupuesto
+</div>  
+<div class="center_div1">
+    <span><b>{{codPresupuesto}}</b></span> 
+</div>
+<div class="right">
+    <span><b>{{descPresupuesto}}</b></span>
+</div>
+</div>
+
+<div class="container">
+<div class="left">
+    Cliente
+</div>  
+<div class="center_div2">
+    <span><b>{{cliente}}</b></span> 
+</div>
+<div class="right">
+    <span style="padding-right: 20px;">Costo al :</span>  
+    <span><b>{{fechaPresupuesto}}</b></span>
+</div>
+</div>
+
+<div class="container">
+<div class="left">
+    Lugar
+</div>  
+<div class="center_div3">
+    <span><b>{{lugar}}</b></span> 
+</div>
+</div>
+
+<div mat-dialog-content class="contenido-formulario" >
+<div class="bandeja scrollPersonal">
+
+  <!-- BANDEJA -->
+    <table mat-table [dataSource]="dataSource" >
+    
+      <ng-container matColumnDef="Item">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>Item</b></th>
+          <td mat-cell *matCellDef="let item">{{item.codigoItem}}</td>    
+      </ng-container>
+
+      <ng-container matColumnDef="Descripcion">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> <b>Descripción</b> </th>
+        <td mat-cell *matCellDef="let item">{{item.descripcion}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Und">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b> Und. </b></th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.unidad}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Metrado">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>Metrado</b> </th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.metrado}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Precio">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>Precio S/.</b> </th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.precio}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Parcial">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"><b>Parcial S/.</b> </th>
+          <td mat-cell *matCellDef="let item" style="text-align: center">{{item.parcial}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+    </table>
+
+
+      <div class="empty" *ngIf="dataSource === null">
+          No existe archivos adjuntos a mostrar
+      </div>   
+
+<!-- 
+      <mat-card *ngIf="isLoading" class="spinerTable">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+    </mat-card> -->
+      
+  </div>  
+
+</div>
+
+<!--   <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+  <mat-progress-spinner 
+    color="primary" 
+    mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card> -->
+
+
+<div align="right" class="botones-margen-derecho">
+
+  <button color="primary"  mat-raised-button class="margen-entre-botones"  (click) = "darConformidadExcelPresupuesto()"  [disabled] = "habilitarBtnConformidad">
+     <mat-icon> done_outline</mat-icon>  Dar Conformidad
+  </button>
+
+  <button color="warn" mat-raised-button (click)="dialogRef.close()">
+      <mat-icon>highlight_off</mat-icon> Cerrar
+  </button>
+
+</div>
+<br><br>

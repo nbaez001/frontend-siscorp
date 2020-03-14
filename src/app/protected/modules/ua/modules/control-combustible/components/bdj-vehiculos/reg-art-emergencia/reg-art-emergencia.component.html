@@ -1,0 +1,70 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <div *ngIf="isLoading" class="spinerTable">
+      <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+    <form [formGroup]="artEmergenciaGrp" *ngIf="artEmergenciaGrp">
+      <mat-grid-list class="grid-text-bold" cols="12" rowHeight="40px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+          <mat-label>Articulos</mat-label>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 2, md: 2, lg: 1, xl: 1}">
+          <mat-label>¿Tiene?</mat-label>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 2, md: 2, lg: 2, xl: 2}">
+          <mat-label>¿Esta operativo?</mat-label>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 6, sm: 2, md: 2, lg: 2, xl: 2}">
+          <mat-label>¿Fecha vigencia?</mat-label>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 4, xl: 4}">
+          <mat-label>Observaciones</mat-label>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="12" rowHeight="65px" *ngFor="let art of listaArtEmergencia">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+          <label style="width: 100%;">{{art.nombreAtcloEmgcia}}</label>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 2, md: 2, lg: 1, xl: 1}">
+          <mat-slide-toggle class="example-margin" [color]="accent"
+            [formControlName]="'t'+art.idAtcloEmgciaDenominacion" (change)="actualizarControles(art)">
+            {{artEmergenciaGrp.get('t'+art.idAtcloEmgciaDenominacion).value==true?'SI':'NO'}}
+          </mat-slide-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 2, md: 2, lg: 2, xl: 2}">
+          <mat-slide-toggle class="example-margin" [color]="accent"
+            [formControlName]="'op'+art.idAtcloEmgciaDenominacion">
+            {{artEmergenciaGrp.get('op'+art.idAtcloEmgciaDenominacion).value==true?'SI':'NO'}}
+          </mat-slide-toggle>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 6, sm: 2, md: 2, lg: 2, xl: 2}" class="input-date-grid">
+          <mat-form-field appearance="outline" *ngIf="(art.flgVigenteAdm == 1 ? true : false)">
+            <mat-label>Vigencia</mat-label>
+            <input [formControlName]="'v'+art.idAtcloEmgciaDenominacion" matInput [matDatepicker]="picker"
+              placeholder="Vigencia">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Observaciones</mat-label>
+            <textarea matInput [formControlName]="'o'+art.idAtcloEmgciaDenominacion" placeholder="Observaciones"
+              [appUpperCase]></textarea>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  </div>
+</div>

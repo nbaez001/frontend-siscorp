@@ -1,0 +1,81 @@
+:host {
+  .cabecera {
+    display: flex;
+    place-content: center space-between;
+
+    .titulo, .perfil {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .filtros {
+    mat-expansion-panel {
+      margin: 10px 0;
+      border-radius: 0;
+
+      mat-expansion-panel-header mat-panel-title {
+        display: flex;
+        align-content: center;
+      }
+
+      .inputs {
+        display: flex;
+        flex-direction: row;
+
+        mat-form-field {
+          margin-right: 10px;
+          width: 100%;
+
+          /deep/ .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+        }
+
+        .acciones {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-left: 10px;
+
+          button:first-of-type {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .datos {
+    position: relative;
+    margin-top: 40px;
+
+    table {
+      width: 100%;
+      padding-top: 20px;
+      padding-left: 20px;
+
+      .mat-column-estado {
+        .estado {
+          padding: 10px;
+          width: 140px;
+          cursor: pointer;
+        }
+      }
+
+      .mat-column-acciones {
+        width: 170px;
+      }
+    }
+
+    .accion {
+      position: absolute;
+      top: -28px;
+      left: 10px;
+    }
+  }
+}

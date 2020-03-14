@@ -1,0 +1,49 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomUnidad: (
+      width: 8rem
+    ),
+    asuntoRequerimiento: (
+      width: 20rem
+    ),
+    nomTipoAsigPresupuesto: (
+      width: 12rem
+    ),
+    nroHojatramiteReq: (
+      width: 6rem
+    ),
+    nroInformeReq: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 7rem
+    ),
+    codAsigPresupuesto: (
+      width: 7rem
+    ),
+    marcimporteAsigPresupuestoa: (
+      width: 7rem
+    ),
+    nomEstadoRequerimiento: (
+      width: 8rem
+    ),
+    opt: (
+      width: 2.5rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

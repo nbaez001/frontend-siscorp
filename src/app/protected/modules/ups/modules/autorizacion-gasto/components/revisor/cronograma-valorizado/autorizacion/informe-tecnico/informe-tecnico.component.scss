@@ -1,0 +1,457 @@
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 200px;
+  border: 1px solid #312e2e
+}
+
+
+:host ::ng-deep .ck.ck-toolbar {
+  background: var(--ck-color-toolbar-background);
+  padding: 0 var(--ck-spacing-small);
+  border: 1px solid #044171;
+  background-color: #039be5;
+
+}
+
+:host {
+    .cabecera {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .filtros {
+      mat-expansion-panel {
+        border-radius: 0;
+        margin: 10px;
+  
+        mat-expansion-panel-header mat-panel-title {
+          display: flex;
+          align-content: center;
+      
+        }
+       
+  
+        .inputs {
+          // display: flex;
+          // flex-direction: row;
+  
+          mat-form-field {
+            margin-right: 10px;
+            width: 100%;
+  
+            /deep/ .mat-form-field-wrapper {
+              padding-bottom: 0;
+            }
+          }
+  
+          .acciones {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 10px;
+  
+            button:first-of-type {
+              margin-right: 10px;
+            }
+          }
+        }
+
+        .mat-expansion-panel-body {
+          padding: 0 2px 4px !important;
+        }
+      }
+    }
+
+
+    .contenido-formulario {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+  
+      .columna {
+        display: flex;
+        flex-direction: row;
+  
+        mat-form-field {
+          flex: 1;
+  
+          &:first-of-type {
+            margin-right: 10px;
+          }
+        }
+  
+      }
+    }
+
+
+
+  
+    .mat-dialog-actions {
+      margin-bottom: 0;
+      padding: 20px;
+    }
+  
+    input[type="file"] {
+      display: none;
+    }
+
+    .bandeja {
+      position: relative;
+      margin-top: 10px;
+      padding: 16px;
+  
+      .nuevo-intrv {
+        position: absolute;
+        top: -28px;
+      }
+  
+      table {
+        width: 100%;
+  
+        td.mat-column-desde mat-icon {
+          font-size: 20px;
+        }
+
+/*         th.mat-header-cell {
+          text-align: center;
+        } */
+
+        .mat-header-cell {
+          font-size: 12px;
+          font-weight: 600;
+        }
+        tbody{
+              text-align: center;
+        }
+
+     /*    body .ui-treetable .ui-treetable-thead > tr > th {
+  padding: 0.571em 0.857em !important;
+  border: 1px solid #c8c8c8 !important;
+  font-weight: 700 !important;
+  color: #333333 !important;
+  background-color: #cfd0d6 !important;
+} */
+
+  
+        td.mat-column-modulos .contenido {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+  
+          .dest-ori {
+            width: 21px;
+            text-align: center;
+          }
+  
+          .contenido-modulos {
+            display: flex;
+            flex-direction: column;
+            padding: 0 10px;
+    
+            .modulo {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+            }
+          }
+        }
+  
+        td.mat-column-usuarioAtendido {
+          font-size: 25px;
+        }
+  
+        th.mat-column-estado {
+          text-align: center;
+        }
+  
+        td.mat-column-estado > .estado {
+          padding: 5px;
+          margin: 0 10px;
+          text-align: center;
+          width: 90px;
+          color: #FFFFFF !important;
+          font-weight: 500;
+          border-radius: 3px;
+          font-size: 11px;
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+          cursor: pointer;
+  
+          &.small {
+            width: 40px !important;
+          }
+  
+          &.disabled {
+            pointer-events: none;
+          }
+        }
+  
+        .mat-column-acciones, .mat-column-desde {
+          text-align: center;
+          width: auto;
+  
+          button {
+            margin: 0 2px;
+          }
+        }
+      }
+    }
+  }
+
+
+  .example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 40px;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 12px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+}
+
+
+.formulario-margin {
+  margin-top: 10px;
+  padding: 10px;
+}
+
+.paginacion-right{
+  display: inline !important;
+}
+
+.div-tabla-programacion{
+  position: relative; 
+  margin-top: 10px;
+}
+
+.div-tabla-insumo{
+  position: relative; 
+  margin-top: 4px;
+}
+
+.empty {
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  bottom: 0px;
+  left: 0px;
+  font-size: 0.8em;
+  font-weight: 500;
+  color: #005e82;
+  }
+
+
+  .mat-expansion-panel-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 24px;
+    border-radius: inherit;
+    height: 40px !important;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0 2px 4px !important;
+  }
+
+  /* Estilos de la tabla de cronograma INICIO */
+
+.celda-frozen{
+  border: 1px solid #bdbbbb;
+  background-color: #FFFFFF;
+  text-align: left;
+  font-size: 14px;
+}
+
+
+.celda{
+  border: 1px solid #bdbbbb;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+}
+
+.celda-painted{
+  border: 1px solid #8d1c1c;
+  background-color: rgb(102, 23, 6);
+  text-align: center;
+  font-size: 14px;
+}
+
+.row-hover{
+  cursor: pointer;
+  background: #DFE5EF !important;
+  color: #000000 !important;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.caja{
+    width: 80px;
+}
+
+.caja-large{
+  width: 130px;
+}
+
+.caja-unid{
+  width: 80px;
+}
+
+
+.caja-cant{
+  width: 60px;
+}
+
+
+.caja-item{
+  width: 140px;
+}
+
+.caja-precio{
+  width: 100px;
+}
+
+.caja-importe{
+  width: 100px;
+}
+
+
+.caja-descripcion{
+  width: 500px;
+}
+
+.caja-razon-social{
+  width: 420px;
+}
+
+
+.caja-sustento{
+  width: 220px;
+}
+
+.caja-observaciones{
+  width: 700px;
+}
+
+.header-colum{
+  font-size: 13px;  
+  height: 50px;  
+  background-color: #cfd0d6 !important;
+  font-weight: 600;
+}
+
+/* .mat-tab-body-content {
+  height: 100% !important;
+  overflow-y: hidden !important;
+} */
+
+/* .ui-treetable-scrollable-header, .ui-treetable-scrollable-footer {
+  overflow-y: overlay !important;
+  border: 0 none;
+}
+ */
+
+/* Estilos de la tabla de cronograma FIN */
+
+
+.mat-tab-body-content {
+  height: 100%;
+  /* overflow: auto; */
+  overflow-y: hidden !important;
+}
+
+.mat-card-formato{  
+        transition: box-shadow 280ms cubic-bezier(.4,0,.2,1);
+        display: block;
+        position: relative;
+        padding: 1px;
+        margin: 16px;
+        border-radius: 4px;
+        border: 1px solid #d8d8d8;
+    
+}
+
+
+.btn-file {
+    background: #02699b !important;
+    margin-left: 10px;
+    position: relative;
+    overflow: hidden;
+    color: white;
+
+    height: 24px;
+    width: 80px;
+    text-align: center;
+    padding-top: 5px;
+    border-radius: 4px;
+    padding: 10px;
+  }
+
+
+  .btn-file input[type=file] {
+    padding-left: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: #0a3064 !important;
+    cursor: inherit;
+    display: block;
+  }
+
+  
+  .convertir-label-link {
+    cursor:pointer;
+    color:blue;
+    text-decoration:underline;
+  }
+
+  .convertir-label-link:hover {
+    text-decoration:none;
+    text-shadow: 1px 1px 1px #555;
+  }
+
+  .botones-margen-derecho{
+    margin-right: 20px;
+  }
+
+  
+  .scrollPersonal {
+   /*  background-color: #e3e7f3; */
+    height: 200px;
+    overflow: auto;
+  }
+
+  .mat-icon-btn-style {
+    padding: 0;
+    min-width: 0;
+    width: 20px !important;
+    height: 20px !important;
+    flex-shrink: 0;
+    line-height: 20px !important;
+    border-radius: 50%;
+  }
+
+  .btn_agregar{
+    float: right;
+  }
+  
+
+  .file-select-button, .file-name {
+    display: inline-block;
+    margin: 8px;
+  }

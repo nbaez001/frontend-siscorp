@@ -1,0 +1,353 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>Forma adquisicion</mat-label>
+            <mat-select formControlName="formaAdquisicion">
+              <mat-option *ngFor="let formaAdquisicion of formasAdquisicion" [value]="formaAdquisicion">
+                {{formaAdquisicion.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>N° Documento sustentatorio</mat-label>
+            <input matInput formControlName="nroDocSustentatorio" placeholder="N° documento sustentatorio" type="text"
+              [appUpperCase]>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fecha adquisicion</mat-label>
+            <input matInput formControlName="fechaAdquisicion" [matDatepicker]="picker" placeholder="Fecha adquisicion">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Detalle bienes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="table-container" style="margin-top: 15px;">
+          <p-table [value]="listaBienes">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 40px;">N°</th>
+                <th style="width: 150px;">CODIGO PATRIMONIAL</th>
+                <th style="width: 300px;">DESCRIPCION DEL BIEN</th>
+                <th style="width: 100px;">MARCA</th>
+                <th style="width: 100px;">MODELO</th>
+                <th style="width: 100px;">TIPO</th>
+                <th style="width: 100px;">COLOR</th>
+                <th style="width: 100px;">SERIE</th>
+                <th style="width: 100px;">MEDIDA</th>
+                <th style="width: 100px;">AÑO</th>
+                <th style="width: 200px;">PLACA</th>
+                <th style="width: 200px;">CHASIS</th>
+                <th style="width: 200px;">MOTOR</th>
+                <th style="width: 200px;">ESTADO</th>
+                <th style="width: 200px;">COMENTARIOS</th>
+                <th style="width: 200px;">CUENTA</th>
+                <th style="width: 200px;">DESCRIPCION CUENTA</th>
+                <th style="width: 200px;">FECHA REGISTRO</th>
+                <th style="width: 200px;">FECHA CONTABILIDAD</th>
+                <th style="width: 200px;">DOC. ADQUISICION</th>
+                <th style="width: 200px;">VALOR ADQUISICION</th>
+                <th style="width: 200px;">UNIDAD</th>
+                <th style="width: 200px;">TAMBO</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-i="rowIndex">
+              <tr>
+                <td style="width: 40px;">
+                  <p-cellEditor>
+                    <ng-template pTemplate="output">
+                      {{i+1}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 150px;">
+                  <p-cellEditor>
+                    <ng-template pTemplate="output">
+                      {{rowData.codPatrimonio}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 300px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-autoComplete [(ngModel)]="groupSearchText" [suggestions]="groupResults"
+                        (completeMethod)="search($event)" field="groupName" [minLength]="3">
+                        <!--[size]="30" > -->
+
+                        <!-- <ng-template let-group pTemplate="item">
+                          <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                            <div style="font-size:18px;margin:10px 10px 0 0">{{group.groupName}}</div>
+                            <div style="font-size:10px;margin:10px 10px 0 0">{{group.groupDescription}}</div>
+                          </div>
+                        </ng-template> -->
+
+                      </p-autoComplete>
+
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.descripcionBien}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 100px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.marca" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.marca}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 100px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.modelo" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.modelo}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 100px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.tipo" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.tipo}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 100px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.color" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.color}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 100px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.serie" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.serie}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 100px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.medida" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.medida}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 100px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.anio" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.anio}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.placa" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.placa}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.chasis" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.chasis}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.motor" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.motor}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-dropdown [options]="estados" [(ngModel)]="rowData.estado" [style]="{'width':'100%'}">
+                      </p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.estado.nombre}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.comentarios" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.comentarios}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <!-- <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.codCuenta" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.codCuenta}}
+                    </ng-template>
+                  </p-cellEditor> -->
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-dropdown [options]="cuentasTabla" [(ngModel)]="rowData.cuenta" [style]="{'width':'100%'}">
+                      </p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.cuenta.codigo}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <!-- <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.nomCuenta" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.nomCuenta}}
+                    </ng-template>
+                  </p-cellEditor> -->
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-dropdown [options]="cuentasTabla2" [(ngModel)]="rowData.cuenta" [style]="{'width':'100%'}">
+                      </p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.cuenta.nombre}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor style="width: 100%;">
+                    <ng-template pTemplate="input">
+                      <!-- <p-calendar [(ngModel)]="rowData.fechaRegistro" dateFormat="dd/MM/yyyy" required></p-calendar> -->
+                      <p-calendar [(ngModel)]="rowData.fechaRegistro" dateFormat="dd/mm/yy"></p-calendar>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.fechaRegistro | date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.fechaContabilidad" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.fechaContabilidad| date: 'dd/MM/yyyy'}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" [(ngModel)]="rowData.nroDocAdquisicion" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.nroDocAdquisicion}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="number" [(ngModel)]="rowData.valorAdquisicion" required>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.valorAdquisicion}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-dropdown [options]="unidadesTabla" [(ngModel)]="rowData.unidad" [style]="{'width':'100%'}">
+                      </p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.unidad.nombre}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+                <td style="width: 200px;" pEditableColumn>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-dropdown [options]="tambosTabla" [(ngModel)]="rowData.tambo" [style]="{'width':'100%'}">
+                      </p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      {{rowData.tambo.nombre}}
+                    </ng-template>
+                  </p-cellEditor>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="footer" let-columns>
+              <tr *ngIf="listaBienes.length<=0">
+                <td style="text-align: center; font-weight: initial;" colspan="12">
+                  Agregue el detalle de adquisicion de bienes de alta aqui, mediante el formulario...
+                </td>
+                <td style="text-align: center; font-weight: initial;" colspan="11">
+                  Agregue el detalle de adquisicion de bienes de alta aqui, mediante el formulario...
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="button" (click)="guardar()">Guardar</button>
+    <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div>
+</div>

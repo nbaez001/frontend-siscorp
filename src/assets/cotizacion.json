@@ -1,0 +1,53 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "codigo": "Coti-001-2019",
+            "item": 1,
+            "fechaCreacion": "02/02/2019",
+            "rubro": "COSTO DIRECTO",
+            "proveedor": "",
+            "nroRuc": "",
+            "estado": "GENERADO",
+            "cidEstado": "001",
+            "fidProyecto": 12345,
+            "idCodigo": 1
+        }, {
+            "codigo": "Coti-002-2019",
+            "item": 2,
+            "fechaCreacion": "02/02/2019",
+            "rubro": "COSTO DIRECTO",
+            "proveedor": "Ferreteria 1234",
+            "nroRuc": "123456789001",
+            "estado": "COTIZADO",
+            "cidEstado": "002",
+            "fidProyecto": 12346,
+            "idCodigo": 2
+        }, {
+            "codigo": "Coti-003-2019",
+            "item": 3,
+            "fechaCreacion": "02/02/2019",
+            "rubro": "COSTO DIRECTO",
+            "proveedor": "Ferreteria 12345",
+            "nroRuc": "123456789002",
+            "estado": "CUADRO COMPARATIVO",
+            "cidEstado": "004",
+            "fidProyecto": 12347,
+            "idCodigo": 3
+        }, {
+            "codigo": "Coti-004-2019",
+            "item": 4,
+            "fechaCreacion": "02/02/2019",
+            "rubro": "COSTO DIRECTO",
+            "proveedor": "Ferreteria 123456",
+            "nroRuc": "123456789003",
+            "estado": "CUADRO COMPARATIVO",
+            "cidEstado": "003",
+            "fidProyecto": 12348,
+            "idCodigo": 4
+        }
+    ],
+	"idPerfil": 1
+}

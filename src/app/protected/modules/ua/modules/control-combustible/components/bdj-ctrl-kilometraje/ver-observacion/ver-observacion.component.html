@@ -1,0 +1,18 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form [formGroup]="observacionGrp">
+      <mat-form-field style="width: 100%;">
+        <textarea formControlName="observacion" matInput placeholder="{{data.objeto.titulo}}"></textarea>
+      </mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salir</button>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.mat-input-element:disabled,
+.mat-form-field-type-mat-native-select.mat-form-field-disabled .mat-form-field-infix::after {
+  color: rgb(23, 21, 21);
+}
+
+::ng-deep .mat-select-disabled .mat-select-value {
+  color: rgb(23, 21, 21);
+}
+
+::ng-deep .mat-form-field-infix {
+  width: 0;
+}
+
+.img-responsive-joel {
+  max-height: 100%;
+  height: auto;
+}

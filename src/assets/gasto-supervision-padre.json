@@ -1,0 +1,38 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "100",
+                "descripcion": "PERSONAL PROFESIONAL",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": "",
+                "flagPadre":"1"  
+            },
+            "leaf": false
+        },
+        {
+            "data": {
+                "item": "200",
+                "descripcion": "MOVILIDAD Y VIATICOS",
+                "unidad": "",
+                "saldo": "",
+                "cantidad": "",
+                "precioUnitario": "",
+                "importe": "",
+                "razonSocial": "",
+                "formaPago": "",
+                "sustento": "",
+                "observacion": "",
+                "flagPadre":"1"  
+            },
+            "leaf": false
+        }
+    ]
+}

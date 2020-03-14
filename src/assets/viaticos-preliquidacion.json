@@ -1,0 +1,23 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {
+            "id": 1,
+            "idGasto": "01",
+            "nomGasto": "Pasaje",
+            "detalle": "Pampas del Carmen- Huánuco",
+            "monto": "40",
+            "fecha": "10/04/2019"
+        }, {
+            "id": 2,
+            "idGasto": "02",
+            "nomGasto": "Alimentación",
+            "detalle": "Desayuno",
+            "monto": "10",
+            "fecha": "24/04/2020"
+        }
+    ],
+	"idPerfil": 1
+}

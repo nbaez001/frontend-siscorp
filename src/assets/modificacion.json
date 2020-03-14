@@ -1,0 +1,15 @@
+{
+    "codResultado": 1,
+    "msgResultado": "OK",
+    "total": 4,
+    "response": [
+        {
+            "codigo": "01.02.01.01 - ELABORACION, IMPLEMENTACION Y ADMINISTRACION DEL PLAN DE SEGURIDAD SALUD AL 50% EN EL PRIMER MES"
+        },
+        {
+            "codigo": "01.02.01.04 - SEÑALIZACION TEMPORAL DE SEGURIDAD AL 100% EN EL PRIMER MES"
+        }
+        
+    ],
+    "idPerfil": 1
+}

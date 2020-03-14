@@ -1,0 +1,30 @@
+
+:host {
+  @import "../src/@shared/scss/style_ua/views/table";
+  @import "../src/@shared/scss/style_ua";
+  @import "../src/@shared/scss/style_util.scss";
+  /deep/ {
+    @import './assets/calendar/angular-calendar';
+  }
+
+  /*
+  /deep/ {
+    @import './node_modules/angular-calendar/css/angular-calendar';
+  }
+  */
+  .cabecera {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  h3 {
+    margin: 0 0 10px;
+  }
+  
+  pre {
+    background-color: #f5f5f5;
+    padding: 15px;
+  }
+
+  
+}

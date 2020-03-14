@@ -1,0 +1,32 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "LIMA",
+			"fidDepartamento":1
+        }, 
+		{
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "ICA",
+			"fidDepartamento":1
+        },
+		{
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "PROV AQP",
+			"fidDepartamento":2
+        }, 
+		{
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "PROV AQP 2",
+			"fidDepartamento":2
+        }
+    ],
+	"idPerfil": null
+}

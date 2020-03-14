@@ -1,0 +1,73 @@
+<h2>Plan de trabajo</h2>
+
+<form>
+  <mat-form-field appearance="outline" style="width: 50%;">
+    <mat-label>Gestionador</mat-label>
+    <input matInput readonly value="{{planTrabajo.gestionador}}">
+  </mat-form-field>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Objetivo General</mat-label>
+    <textarea matInput rows="3" readonly [value]="planTrabajo.objetivo"></textarea>
+  </mat-form-field>
+</form>
+
+<div class="content">
+  <button mat-mini-fab class="action-exportar white" matTooltip="Descargar Excel" matTooltipClass="formato-tooltip"
+    (click)="descargarExcel()">
+    <mat-icon class="white">cloud_download</mat-icon>
+  </button>
+  <button mat-mini-fab class="action mat-accent-bg white" matTooltip="Nueva Actividad" matTooltipClass="formato-tooltip"
+    (click)="nuevoActividad()">
+    <mat-icon class="white">add</mat-icon>
+  </button>
+
+
+  <p-table [value]="actividades" selectionMode="single" (onRowSelect)="onRowSelect($event)">
+    <ng-template pTemplate="header">
+      <tr>
+        <th rowspan="2">Objetivo</th>
+        <th rowspan="3">Actividad</th>
+        <th rowspan="3">Indicador</th>
+        <th colspan="2" width="7%">Metas</th>
+        <th colspan="12" width="40%">CRONOGRAMA {{anio}}</th>
+      </tr>
+      <tr>
+        <th>Prog</th>
+        <th>Ejec</th>
+        <th>ENE</th>
+        <th>FEB</th>
+        <th>MAR</th>
+        <th>ABR</th>
+        <th>MAY</th>
+        <th>JUN</th>
+        <th>JUL</th>
+        <th>AGO</th>
+        <th>SET</th>
+        <th>OCT</th>
+        <th>NOV</th>
+        <th>DIC</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-actividades>
+      <tr [pSelectableRow]="actividades">
+        <td>{{actividades.objetivo}}</td>
+        <td>{{actividades.actividad}}</td>
+        <td>{{actividades.indicador}}</td>
+        <td>{{actividades.programado}}</td>
+        <td>{{actividades.ejecutado}}</td>
+        <td [ngClass]="actividades.ene == 'x' ? 'color-td' : null">{{actividades.ene}}</td>
+        <td [ngClass]="actividades.feb == 'x' ? 'color-td' : null">{{actividades.feb}}</td>
+        <td [ngClass]="actividades.mar == 'x' ? 'color-td' : null">{{actividades.mar}}</td>
+        <td [ngClass]="actividades.abr == 'x' ? 'color-td' : null">{{actividades.abr}}</td>
+        <td [ngClass]="actividades.may == 'x' ? 'color-td' : null">{{actividades.may}}</td>
+        <td [ngClass]="actividades.jun == 'x' ? 'color-td' : null">{{actividades.jun}}</td>
+        <td [ngClass]="actividades.jul == 'x' ? 'color-td' : null">{{actividades.jul}}</td>
+        <td [ngClass]="actividades.ago == 'x' ? 'color-td' : null">{{actividades.ago}}</td>
+        <td [ngClass]="actividades.set == 'x' ? 'color-td' : null">{{actividades.set}}</td>
+        <td [ngClass]="actividades.oct == 'x' ? 'color-td' : null">{{actividades.oct}}</td>
+        <td [ngClass]="actividades.nov == 'x' ? 'color-td' : null">{{actividades.nov}}</td>
+        <td [ngClass]="actividades.dic == 'x' ? 'color-td' : null">{{actividades.dic}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

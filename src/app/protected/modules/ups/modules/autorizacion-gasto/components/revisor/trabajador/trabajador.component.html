@@ -1,0 +1,458 @@
+
+
+<div class="page">
+
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span style="font-size: 20px !important; font-weight: bold;">TRABAJADOR</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+  </ngx-spinner>
+
+  <!-- 
+<div class="btn_agregar_position">
+  <button mat-mini-fab class="btn_agregar" (click)="modalTrabajador(null)" matTooltip="Agregar Trabajador">
+    <mat-icon>add</mat-icon>
+  </button>
+</div> -->
+
+  <!-- BANDEJA -->
+  <div mat-dialog-content > 
+    <div class="bandeja">
+
+      <div class="btn_agregar_position">
+
+
+        <button mat-raised-button class="btn_agregar" color="primary" (click)="verAsistencia()">
+          <mat-icon>description</mat-icon> &nbsp;&nbsp;Ver Asistencia
+        </button>
+        <button mat-raised-button class="btn_agregar" color="primary" (click)="registraAsistenciaDiaria()">
+          <mat-icon>description</mat-icon> &nbsp;&nbsp;Registrar Asistencia Diaria
+        </button>
+
+
+      </div>
+
+      <div class="titulo-proyecto">MANO DE OBRA NO CALIFICADA</div>
+      <!-- TABLA 1 INICIO -->
+
+
+      <div class="mat-elevation-z6">
+        <div class="btn_agregar_position">
+
+          <button mat-mini-fab class="btn_agregar" class="btn_agregar" (click)="modalTrabajador(null,1)"
+            matTooltip="Registrar Trabajador" matTooltipClass="formato-tooltip">
+            <mat-icon>add</mat-icon> 
+          </button>
+        </div>
+
+        <mat-card class="example-card">
+          <table mat-table [dataSource]="dataSourceManoObraNoCal">
+
+
+            <ng-container matColumnDef="nro">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
+               <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> NOMBRE </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.nombreCompleto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="genero">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> GÉNERO </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.genero}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="numeroDocumento">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">DNI </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.numDocumento}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="rubro">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">RUBRO </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)">{{trabajador.rubro}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="categoria">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">CATEGORÍA</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.categoria}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">TIPO</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.tipo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="contrato">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">CONTRATO</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.contrato}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montoJornal">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">JORNAL</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.montoJornal}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="diasTrabajado">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">DÍAS TRABAJADOS</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;" style="text-align: left;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.diasTrabajado}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">ACCIONES</th>
+              <td mat-cell *matCellDef="let trabajador">
+
+                <button mat-icon-button color="primary" (click)="modalTrabajador(trabajador.idCodigo)"
+                  matTooltip="Editar Trabajador" matTooltipClass="formato-tooltip">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary"
+                  (click)="eliminarTrabajador(trabajador.idCodigo,trabajador.nombre)" matTooltip="Eliminar Trabajador"
+                  matTooltipClass="formato-tooltip">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnas" class="mat-header-row-formato"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+          </table>
+        </mat-card>
+
+        <div class="page">
+          <div>
+            <mat-grid-list cols="12" rowHeight="100px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+
+                <div class="flex-container">
+                  <div style=" background-color: white;" class="label-datos">JORNAL PEÓN:</div>
+                </div>
+
+                <div class="flex-container">
+                  <div class="label-datos">{{jornalPeon}}</div>
+                </div>
+                <div><button mat-raised-button (click)="modificarJornal()">Cambiar monto de jornal</button></div>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </div>
+        </div>
+
+
+
+      </div>
+
+<!-- TABLA 1 FIN -->
+
+      <div class="titulo-proyecto">MANO DE OBRA CALIFICADA</div>
+      <!-- TABLA 2 INICIO -->
+      <div class="mat-elevation-z6">
+        <div class="btn_agregar_position">
+          <button mat-mini-fab class="btn_agregar" class="btn_agregar" (click)="modalTrabajador(null,2)"
+            matTooltip="Registrar trabajador" matTooltipClass="formato-tooltip">
+            <mat-icon>add</mat-icon> 
+          </button>
+        </div>
+        <mat-card class="example-card">
+          <table mat-table [dataSource]="dataSourceManoObraCal">
+            
+            <ng-container matColumnDef="nro">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
+               <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">NOMBRE</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.nombreCompleto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="genero">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> GÉNERO </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.genero}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="numeroDocumento">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> DNI </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.numDocumento}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="rubro">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">RUBRO </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)">{{trabajador.rubro}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="categoria">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">CATEGORÍA</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.categoria}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">TIPO</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.tipoTrabajador}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">ACCIONES</th>
+              <td mat-cell *matCellDef="let trabajador">
+
+                <button mat-icon-button color="primary" (click)="modalTrabajador(trabajador.idCodigo)"
+                  matTooltip="Editar Trabajador" matTooltipClass="formato-tooltip">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary"
+                  (click)="eliminarTrabajador(trabajador.idCodigo,trabajador.nombre)" matTooltip="Eliminar Trabajador"
+                  matTooltipClass="formato-tooltip">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+
+
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnas2" class="mat-header-row-formato"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas2"></tr>
+
+          </table>
+        </mat-card>
+
+        <div class="page">
+          <div>
+            <mat-grid-list cols="12" rowHeight="100px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+
+                <div class="flex-container">
+                  <div style=" background-color: white;" class="label-datos">JORNAL OFICIAL:</div>
+                </div>
+
+                <div class="flex-container">
+                  <div class="label-datos">{{jornalOficial}}</div>
+                </div>
+                <div><button mat-raised-button (click)="modificarJornal()">Cambiar monto de jornal</button></div>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
+
+                <div class="flex-container">
+                  <div style=" background-color: white;" class="label-datos">JORNAL OPERARIO:</div>
+                </div>
+
+                <div class="flex-container">
+                  <div class="label-datos">{{jornalOperario}}</div>
+                </div>
+                <div><button mat-raised-button (click)="modificarJornal()">Cambiar monto de jornal</button></div>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+
+          </div>
+        </div>
+
+      </div>
+      <!-- TABLA 2 FIN -->
+
+      <div class="titulo-proyecto">PERSONAL AUXILIAR</div>
+      <!-- TABLA 3 INICIO -->
+      <div class="mat-elevation-z6">
+        <div class="btn_agregar_position">
+          <button mat-mini-fab class="btn_agregar" class="btn_agregar" (click)="modalTrabajador(null,3)"
+            matTooltip="Registrar Trabajador Trabajador" matTooltipClass="formato-tooltip">
+            <mat-icon>add</mat-icon> 
+          </button>
+        </div>
+        <mat-card class="example-card">
+          <table mat-table [dataSource]="dataSourcePerAux">
+            <ng-container matColumnDef="nro">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
+               <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> NOMBRE </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.nombreCompleto}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="genero">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table"> GÉNERO </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.genero}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="numeroDocumento">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">DNI </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.numDocumento}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="rubro">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">RUBRO </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)">{{trabajador.rubro}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="categoria">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">CATEGORÍA</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.categoria}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="tipo">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">TIPO</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.tipoTrabajador}} </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="contrato">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">CONTRATO</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.contrato}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="montoJornal">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">JORNAL</th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.montoJornal}} </td>
+            </ng-container> -->
+
+            <ng-container matColumnDef="fechaInicioTbjo">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">FECHA INICIO TRABAJO </th>
+              <td mat-cell *matCellDef="let trabajador" style="cursor:pointer;"
+                (click)="verTrabajador(trabajador.idCodigo)"> {{trabajador.fechaIniTrabajo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef class="formato_header_table">ACCIONES</th>
+              <td mat-cell *matCellDef="let trabajador">
+
+
+
+
+                <!-- <button mat-raised-button color="primary" (click)="modalTrabajador(trabajador.idCodigo)"
+              >
+              <mat-icon>edit</mat-icon>Editar
+            </button>
+    
+            <button mat-raised-button color="primary" (click)="eliminarTrabajador(trabajador.idCodigo,trabajador.nombre)"
+              >
+              <mat-icon>delete_forever</mat-icon>Eliminar
+            </button> -->
+
+                <button mat-icon-button color="primary" (click)="modalTrabajador(trabajador.idCodigo)"
+                  matTooltip="Editar Trabajador" matTooltipClass="formato-tooltip">
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="primary"
+                  (click)="eliminarTrabajador(trabajador.idCodigo,trabajador.nombre)" matTooltip="Eliminar Trabajador"
+                  matTooltipClass="formato-tooltip">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+
+
+
+              </td>
+            </ng-container>
+
+            <!-- <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let trabajador">
+  
+          <button mat-icon-button color="primary" (click)="verTrabajador(trabajador.idCodigo)"
+            matTooltip="Ver Trabajador">
+            <mat-icon>library_books</mat-icon>
+          </button>
+  
+          <button mat-icon-button color="primary" (click)="modalTrabajador(trabajador.idCodigo,4)"
+            matTooltip="Editar Trabajador">
+            <mat-icon>edit</mat-icon>
+          </button>
+  
+          <button mat-icon-button color="primary" (click)="eliminarTrabajador(trabajador.idCodigo,trabajador.nombre)"
+            matTooltip="Eliminar Trabajador">
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+  
+          
+   
+        </td>
+      </ng-container> -->
+
+            <!-- <button *ngIf="trabajador.idCategoria=='002'" mat-icon-button color="primary"
+            (click)="calculoPagoMensual(trabajador.idCodigo)" matTooltip="Cálculo Pago Mensual">
+            <mat-icon>payment</mat-icon>
+          </button> -->
+
+            <tr mat-header-row *matHeaderRowDef="columnas3" class="mat-header-row-formato"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas3"></tr>
+          </table>
+        </mat-card>
+      </div>
+      <!-- TABLA 3 FIN -->
+      <div class="empty" *ngIf="!isLoading && dataSourcePerAux === null">
+        No existe datos para mostrar en la tabla
+      </div>
+      <!-- 
+  <mat-toolbar>
+    <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+      <div>
+        <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+          [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+        </mat-paginator>
+
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar> -->
+
+    </div>
+    <!-- BANDEJA -->
+
+    <!-- <div class="contenido-formulario">
+  <div class="columna">
+    <mat-toolbar>
+      <mat-toolbar-row class=" mat-toolbar-fondo">
+
+        <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="registraTareo()">
+          <mat-icon>description</mat-icon>Asistencia Diaria
+        </button>
+
+        
+        
+        <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="registrarAsistenciaTareo()">
+          <mat-icon>description</mat-icon> Ver Asistencia        </button>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+  </div>
+</div> -->
+
+  </div>
+
+</div>

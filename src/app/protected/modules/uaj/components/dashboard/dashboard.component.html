@@ -1,0 +1,116 @@
+<div fxLayout="row" fxLayoutGap="15px">
+
+  <mat-card>
+    <br>
+    <mat-chip-list>
+      <mat-chip class="text-convenio-pais">CONVENIOS PAIS</mat-chip>
+    </mat-chip-list>
+
+    <br>
+    <br>
+
+    <div class="example-image">
+      <span class="text-image">43</span>
+      <img src="assets/images/uaj-dashboard/iconitos-01.png" width="150">
+    </div>
+
+     <ngx-charts-bar-horizontal-normalized
+      [view]="[400, 50]"
+      [scheme]="colorConvenioPais"
+      [results]="multi"
+      (select)="onSelect($event)" >
+    </ngx-charts-bar-horizontal-normalized> 
+
+    <div>
+      <button mat-button>
+        <mat-icon style="color: #6D599B;">stop</mat-icon>activos
+      </button>
+      <button mat-button>
+        <mat-icon style="color: #A7C1DE;">stop</mat-icon>finalizados
+      </button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <ngx-charts-bar-vertical [view]="[400, 400]" [scheme]="colorBarraConvenioPais" [results]="single1" [xAxis]="true" [tooltipDisabled]="true"
+      [showDataLabel]="true" (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </mat-card>
+
+  <mat-card>
+    <br>
+    <mat-chip-list>
+      <mat-chip class="text-convenio-activo">CONVENIOS ACTIVOS</mat-chip>
+    </mat-chip-list>
+
+    <br>
+    <br>
+
+    <div class="example-image">
+      <span class="text-image">40</span>
+      <img src="assets/images/uaj-dashboard/iconitos-02.png" width="150">
+    </div>
+
+    <ngx-charts-bar-horizontal-normalized [view]="[550, 50]" [scheme]="colorConvenioActivos" [results]="multi1"
+      (select)="onSelect($event)">
+    </ngx-charts-bar-horizontal-normalized>
+
+    <div>
+      <button mat-button>
+        <mat-icon style="color: #A7C1DE;">stop</mat-icon>con plan de trabajo
+      </button>
+      <button mat-button>
+        <mat-icon style="color: #7C7C7C;">stop</mat-icon>sin plan de trabajo
+      </button>
+      <button mat-button>
+        <mat-icon style="color: #E1AB96;">stop</mat-icon>pendiente carga PT
+      </button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <ngx-charts-bar-vertical [view]="[550, 400]" [scheme]="colorBarraConvenioActivos" [results]="single2" [xAxis]="true" [tooltipDisabled]="true"
+      [showDataLabel]="true" (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </mat-card>
+
+  <mat-card>
+    <br>
+    <mat-chip-list >
+      <mat-chip class="text-convenio-finalizado">CONVENIOS FINALIZADOS</mat-chip>
+    </mat-chip-list>
+
+    <br>
+    <br>
+
+    <div class="example-image">
+      <span class="text-image">40</span>
+      <img src="assets/images/uaj-dashboard/iconitos-03.png" width="150">
+    </div>
+
+    <ngx-charts-bar-horizontal-normalized [view]="[550, 50]" [scheme]="colorConvenioFinalizados" [results]="multi"
+      (select)="onSelect($event)">
+    </ngx-charts-bar-horizontal-normalized>
+
+    <div>
+      <button mat-button>
+        <mat-icon style="color: #7C7C7C;">stop</mat-icon>vigencia
+      </button>
+      <button mat-button>
+        <mat-icon style="color: #C85D97;">stop</mat-icon>resolución
+      </button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <ngx-charts-bar-vertical [view]="[550, 400]" [scheme]="colorBarraConvenioFinalizados" [results]="single3" [tooltipDisabled]="true"
+      [xAxis]="true" [showDataLabel]="true" (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </mat-card>
+</div>

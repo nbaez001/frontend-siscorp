@@ -1,0 +1,30 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nombres: (
+      width: 12rem
+    ),
+    apPaterno: (
+      width: 8rem
+    ),
+    apMaterno: (
+      width: 8rem
+    ),
+    nomPuesto: (
+      width: 6rem
+    )
+  )
+);
+
+.mat-row:hover {
+  cursor: pointer;
+}

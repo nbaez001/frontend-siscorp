@@ -1,0 +1,102 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <!-- <form [formGroup]="formularioGrp" *ngIf="getUser.perfil.id!=3"> -->
+    <form [formGroup]="formularioGrp">
+      <mat-grid-list cols="12" rowHeight="50px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Unidad</mat-label>
+            <mat-select formControlName="unidad">
+              <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+                {{unidad.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Tambo</mat-label>
+            <mat-select formControlName="tambo">
+              <mat-option *ngFor="let tambo of tambos" [value]="tambo">
+                {{tambo.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo mantenimiento</mat-label>
+            <mat-select formControlName="tipoMantenimiento">
+              <mat-option *ngFor="let tipoMantenimiento of tiposMantenimiento" [value]="tipoMantenimiento">
+                {{tipoMantenimiento.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Inicio fecha</mat-label>
+            <input matInput formControlName="inicioFecha" [matDatepicker]="picker2" placeholder="Inicio fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+          <mat-form-field appearance="outline">
+            <mat-label>Fin fecha</mat-label>
+            <input matInput formControlName="finFecha" [matDatepicker]="picker" placeholder="Fin fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}" class="dialog-form-actions">
+          <button mat-raised-button color="primary" type="button" (click)="buscar()">buscar</button>
+          <button mat-raised-button type="button" (click)="limpiar()">Limpiar</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+
+    <div class="table-container">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+              [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+              [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+        <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+          <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></tr>
+      </table>
+
+      <div class="empty" *ngIf="dataSource === null">
+        No existe datos para mostrar en la tabla
+      </div>
+
+      <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+  <div mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" type="button" (click)="agregar()">Agregar</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salir</button>
+  </div>
+</div>

@@ -1,0 +1,113 @@
+
+    <!-- CABECERA -->
+    <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+      <span>ADJUNTAR ARCHIVOS AL EXPEDIENTE TÉCNICO </span>
+       <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+          <mat-icon>clear</mat-icon> 
+      </button> 
+    </mat-toolbar>
+    <!-- CABECERA -->
+
+        <div mat-dialog-content class="contenido-formulario" [formGroup]="archivoForm">
+            <div class="columna">
+                    <div>
+                        <mat-form-field appearance="outline" style="width: 300px; margin-right: 10px;">
+                             <mat-label>Tipo Documento:</mat-label>
+                             <mat-select   formControlName="tipoDocArchivoFrmCtrl" [value] = "selectedDefault">
+                                <mat-option  *ngFor="let tipoDoc of tipoDocArchivo" [value]="tipoDoc.idCodigo">{{tipoDoc.cidNombre}}
+                                </mat-option>
+                              </mat-select>                
+                        </mat-form-field>
+
+                    <mat-label  >
+                     <span class="mat-raised-button btn-file">
+                        Examinar...<input type="file" (change)="selectFile($event)" id="idFile"  [disabled]="examinarFiles">
+                      </span>
+                    </mat-label>
+                  
+                    <mat-label *ngIf="fileUploadRes.status !=='progress'" style="margin-left: 10px;">
+                         {{archivo}}
+                    </mat-label>
+            
+                 <div *ngIf="fileUploadRes.status==='progress'">
+                      <div class="progress">
+                        <div class="progress-bar" [style.width.%]= "fileUploadRes.message" [style.padding-left.%]= "fileUploadRes.message"
+                        role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{fileUploadRes.messageAux}}%</div>
+                    </div>
+                   </div>
+
+                   
+                </div>
+                        
+          </div>
+     
+          <div class="columna">
+                  <mat-form-field appearance="outline" >                                  
+                      <mat-label>Descripción</mat-label>
+                      <input matInput formControlName="descArchivoFrmCtrl"  maxlength="100" >
+                  </mat-form-field>
+                 
+               
+                 <button color="primary" mat-raised-button [disabled]="!selectedFiles" (click)="validarSubidaArchivo($event)" type="button"  style="height: 65px;margin-right:10px;">
+                   <mat-icon>file_upload</mat-icon>
+                   <mat-label  style="margin-right:35px;">CARGAR ARCHIVO</mat-label>
+                </button> 
+           
+          </div>
+
+    <div class="bandeja scrollPersonal">
+
+  <!-- BANDEJA -->
+    <table mat-table [dataSource]="dataSource">
+    
+
+      <ng-container matColumnDef="nro">
+          <th mat-header-cell *matHeaderCellDef> NRO</th>
+          <td mat-cell *matCellDef="let archivo; let i = index">{{i + 1}}</td>    
+      </ng-container>
+
+      <ng-container matColumnDef="archivo">
+        <th mat-header-cell *matHeaderCellDef> ARCHIVO </th>
+        <td mat-cell *matCellDef="let archivo" class= "convertir-label-link" matTooltip="Descargar Archivo" (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">{{archivo.nombreArchivo}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="tipoDoc">
+          <th mat-header-cell *matHeaderCellDef> TIPO DOC. </th>
+          <td mat-cell *matCellDef="let archivo">{{archivo.tipoArchivo}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef> DESCRIPCION </th>
+          <td mat-cell *matCellDef="let archivo">{{archivo.descripcion}} </td>
+      </ng-container>
+
+    <ng-container matColumnDef="accion" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>ELIMINAR</th>
+        <td mat-cell *matCellDef="let archivo">
+          <button class="tableIconButton mat-icon-btn-style"  [disabled]="btnEliminar" mat-icon-button matTooltip="Eliminar Archivo"
+            (click)="eliminarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">
+            <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;"
+            >close</mat-icon>
+      
+          </button>
+          <!--class="tableIconButton mat-icon-btn-style" mat-icon-button matTooltip="Eliminar Archivo"-->
+        </td>
+    </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+
+      <div class="empty" *ngIf="dataSource === null">
+          No existe archivos adjuntos a mostrar
+      </div>   
+      
+  </div>  
+</div>
+
+
+     
+
+    

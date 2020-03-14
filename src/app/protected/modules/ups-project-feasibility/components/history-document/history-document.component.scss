@@ -1,0 +1,246 @@
+:host {
+    mat-toolbar {
+        mat-icon {
+            margin-right: 10px;
+        }
+    }
+
+    .content {
+        padding: 20px;
+
+        .subtitle-doc, .subtitle-history {
+            display: flex;
+            flex-direction: row;
+            font-size: 20px;
+            font-weight: 400;
+            color: #000000c9;
+            margin-top: 40px;
+
+            &.none {
+                color: #0000006b;
+            }
+        }
+
+        .subtitle-history {
+            align-items: center;
+            justify-content: space-between;
+
+            div {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .doc-link {
+            display: flex;
+            align-items: center;
+
+            mat-icon {
+                margin-left: 10px;
+                cursor: pointer;
+            }
+        }
+
+        .proceso {
+            display: flex;
+            flex-direction: column;
+
+            .consultores-os {
+                width: 500px;
+
+                mat-card-header mat-card-title {
+                    display: flex;
+                }
+
+                mat-card-content {
+                    margin: 0 16px;
+
+                    .consultor-form {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+
+                        mat-form-field {
+                            margin-right: 15px;
+                        }
+
+                        button {
+                            margin-bottom: 1.34375em;
+                        }
+                    }
+
+                    .consultor-item {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 20px 0;
+
+                        .consultor {
+                            display: flex;
+                            flex-direction: row;
+
+                            mat-icon {
+                                margin-right: 10px;
+                            }
+
+                            div {
+                                display: flex;
+                                flex-direction: column;
+                            }
+                        }
+                    }
+                }
+
+                mat-card-actions  {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin: 16px;
+                }
+            }
+
+            .validacion-especialistas {
+                width: 500px;
+                margin-left: 100px;
+
+                mat-card-header mat-card-title {
+                    display: flex;
+                }
+
+                mat-card-content {
+                    margin: 0 16px;
+
+                    .especialista-item {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 20px 0;
+
+                        .especialista {
+                            display: flex;
+                            flex-direction: row;
+
+                            mat-icon {
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .informe-culminacion {
+                width: 500px;
+                margin-left: 200px;
+
+                mat-card-header mat-card-title {
+                    display: flex;
+                }
+
+                mat-card-content {
+                    margin: 0 16px;
+
+                    .archivo {
+                        display: flex;
+                        align-items: center;
+                        padding: 20px;
+                        border: dashed #000000 0.5px;
+                        border-radius: 10px;
+                        margin-top: 20px;
+                        background: rgba(0, 0, 0, 0.04);
+                        cursor: pointer;
+                        position: relative;
+
+                        mat-icon {
+                            margin-right: 10px;
+
+                            &.descargar {
+                                position: absolute;
+                                display: none;
+                                top: 10px;
+                                left: 210px;
+                                font-size: 40px;
+                            }
+                        }
+
+                        &.has:hover {
+                            background: rgba(0, 0, 0, 0.20);
+                            color: rgba(0, 0, 0, 0.25);
+
+                            mat-icon.descargar {
+                                display: block;
+                                color: #000000;
+                            }
+
+                            mat-icon:not(.descargar) {
+                                color: rgba(0, 0, 0, 0.25);
+                            }
+                        }
+                    }
+                }
+
+                mat-card-actions  {
+                    display: flex;
+                    justify-content: flex-end;
+                    margin: 16px;
+                }
+            }
+
+            .resolucion-directorial {
+                width: 500px;
+                margin-left: 300px;
+                padding-bottom: 40px;
+
+                mat-card-header mat-card-title {
+                    display: flex;
+                }
+
+                mat-card-content {
+                    margin: 0 16px;
+
+                    .archivo {
+                        display: flex;
+                        align-items: center;
+                        padding: 20px;
+                        border: dashed #000000 0.5px;
+                        border-radius: 10px;
+                        margin-top: 20px;
+                        background: rgba(0, 0, 0, 0.04);
+                        cursor: pointer;
+                        position: relative;
+
+                        mat-icon {
+                            margin-right: 10px;
+
+                            &.descargar {
+                                position: absolute;
+                                display: none;
+                                top: 10px;
+                                left: 210px;
+                                font-size: 40px;
+                            }
+                        }
+
+                        &.has:hover {
+                            background: rgba(0, 0, 0, 0.20);
+                            color: rgba(0, 0, 0, 0.25);
+
+                            mat-icon.descargar {
+                                display: block;
+                                color: #000000;
+                            }
+
+                            mat-icon:not(.descargar) {
+                                color: rgba(0, 0, 0, 0.25);
+                            }
+                        }
+                    }
+                }
+            }
+
+            mat-card {
+                margin-bottom: 10px;
+            }
+        }
+    }
+}

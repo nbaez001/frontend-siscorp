@@ -1,0 +1,115 @@
+<div class="page">
+  <!-- <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner> -->
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+      <mat-panel-title>
+        FILTROS CUADRO DE CONTROL GENERAL
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="mat-expansion-panel-cuerpo">
+      <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
+        <mat-grid-list cols="12" rowHeight="50px">
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Unidad</mat-label>
+              <mat-select formControlName="unidad">
+                <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+                  {{unidad.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Año</mat-label>
+              <mat-select formControlName="anio">
+                <mat-option *ngFor="let anio of anios" [value]="anio">
+                  {{anio.valor}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <div class="btnRigth">
+        <button mat-raised-button color="primary" (click)="buscar()">
+          <mat-icon>search</mat-icon>
+          <strong> BUSCAR</strong>
+        </button>
+        <button mat-raised-button (click)="exportarExcel()">
+          <mat-icon><img class="icono" src="assets/images/ua/excel.png"></mat-icon>
+          <strong> EXPORTAR A EXCEL</strong>
+        </button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-card class="table-resultados">
+    <mat-card-header>
+      <mat-card-title> CUADRO DE CONTROL GENERAL - POR PARTIDAS </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="card-container">
+      <div class="table-container">
+        <table class="mat-table">
+          <thead>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell" rowspan="2" style="width: 3rem;"> MNEMONICO</th>
+              <th class="mat-header-cell" rowspan="2" style="width: 12rem;"> UNIDAD TERRITORIAL</th>
+              <th class="mat-header-cell" rowspan="2" style="width: 4rem;">PARTIDA</th>
+              <th class="mat-header-cell" colspan="3" style="width: 24rem;"> CONTROL PRESUPUESTAL</th>
+              <th class="mat-header-cell" colspan="3" style="width: 24rem;"> EJECUCION PRESUPUESTAL</th>
+            </tr>
+            <tr class="mat-header-row">
+              <th class="mat-header-cell"> ASIGNACION PRESUPUESTAL</th>
+              <th class="mat-header-cell"> AVANCE PRESUPUESTAL</th>
+              <th class="mat-header-cell"> SALDO PRESUPUESTAL</th>
+              <th class="mat-header-cell"> AVANCE PRESUPUESTAL (INICIO)</th>
+              <th class="mat-header-cell"> EJECUCION PRESUPUESTAL (CONSUMO DIARIO)</th>
+              <th class="mat-header-cell"> SALDO POR EJECUCTAR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="mat-row" *ngFor="let con of listaControl; let i=index">
+              <td class="mat-cell celda-center">
+                <ng-container *ngIf="con.idPartida==1">
+                  {{con.secFun}}
+                </ng-container>
+              </td>
+              <td class="mat-cell">
+                <ng-container *ngIf="con.idPartida==1">
+                  {{con.nomUnidad}}
+                </ng-container>
+              </td>
+              <td class="mat-cell celda-right">
+                {{con.nomPartida}}
+              </td>
+              <td class="mat-cell celda-right">
+                {{con.totalAsignacionPresupuestal | number:'1.2-2'}}
+              </td>
+              <td class="mat-cell celda-right">
+                {{con.totalEjecucionPresupuestal | number:'1.2-2'}}
+              </td>
+              <td class="mat-cell celda-right">
+                {{(con.totalAsignacionPresupuestal - con.totalEjecucionPresupuestal) | number:'1.2-2'}}
+              </td>
+              <td class="mat-cell celda-right">
+                {{con.totalEjecucionPresupuestal | number:'1.2-2'}}
+              </td>
+              <td class="mat-cell celda-right">
+                {{con.totalConsumo | number:'1.2-2'}}
+              </td>
+              <td class="mat-cell celda-right">
+                {{(con.totalEjecucionPresupuestal - con.totalConsumo) | number:'1.2-2'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="empty" *ngIf="listaControl.length == 0">
+          No existe datos para mostrar en la tabla
+        </div>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

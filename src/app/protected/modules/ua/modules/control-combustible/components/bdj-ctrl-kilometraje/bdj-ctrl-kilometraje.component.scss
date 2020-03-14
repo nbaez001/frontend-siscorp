@@ -1,0 +1,69 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    unidad: (
+      width: 12rem
+    ),
+    tambo: (
+      width: 12rem
+    ),
+    tipo: (
+      width: 9rem
+    ),
+    marca: (
+      width: 9rem
+    ),
+    placa: (
+      width: 6rem
+    ),
+    horaSalida: (
+      width: 6rem
+    ),
+    horaLlegada: (
+      width: 8rem
+    ),
+    kilometrajeSalida: (
+      width: 7rem
+    ),
+    kilometrajeLlegada: (
+      width: 7rem
+    ),
+    kilometrosRecorrido: (
+      width: 6rem
+    ),
+    lugarPartida: (
+      width: 6rem
+    ),
+    lugarDestino: (
+      width: 7rem
+    ),
+    codComisionSISMONITOR: (
+      width: 7rem
+    ),
+    fechaComision:(
+      width: 6rem
+    ),
+    opt: (
+      width: 6rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}
+  
+.sobresaltarUltimo {
+	// color: rgb(66, 54, 241);
+	background-color: rgb(157, 176, 228) !important;
+}

@@ -1,0 +1,92 @@
+.perfil-usuarios {
+
+  .mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+
+    .mat-dialog-title {
+      min-height: initial;
+      display: flex;
+      align-content: center;
+      place-content: center space-between;
+      margin: 0;
+
+      span.titulo {
+        display: flex;
+        align-items: center;
+      }
+
+      span.titulo mat-icon {
+        margin-right: 5px;
+      }
+    }
+
+    .mat-dialog-content {
+      padding: 24px;
+      margin: 0;
+
+      .agregar {
+        padding: 10px;
+        display: flex;
+        align-items: baseline;
+        flex-direction: column;
+
+        mat-form-field {
+          flex: 1;
+          width: 100%;
+          margin-right: 10px;
+        }
+
+        .mat-option-text {
+          display: flex;
+          flex-direction: column;
+          line-height: 15px;
+        }
+
+        .indicador  mat-icon {
+          transform: rotate(90deg);
+          color: #039be5;
+          font-size: 40px;
+          width: 40px;
+          height: 40px;
+        }
+
+        .usuarioBuscado {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+
+          .datos {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .acciones {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+          }
+        }
+
+      }
+
+      .mat-option-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 15px;
+      }
+
+      table {
+        width: 100%;
+      }
+    }
+
+    .mat-dialog-actions {
+      padding: 24px;
+      margin: 0;
+    }
+
+  }
+}

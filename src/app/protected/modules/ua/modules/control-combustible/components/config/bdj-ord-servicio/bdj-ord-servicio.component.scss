@@ -1,0 +1,45 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nroOrdenServicio: (
+      width: 7rem
+    ),
+    nroExpSIAF: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 6rem
+    ),
+    nomTipoDocumento: (
+      width: 7rem
+    ),
+    nroDocumento: (
+      width: 6rem
+    ),
+    nomProveedor: (
+      width: 12rem
+    ),
+    monto: (
+      width: 6rem
+    ),
+    nomEstado: (
+      width: 6rem
+    ),
+    opt: (
+      width: 6rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

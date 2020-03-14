@@ -1,0 +1,20 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 580px;
+  // max-width: 500px;
+  // overflow-x: scroll;
+  overflow: auto;
+}
+
+::ng-deep .mat-dialog-content {
+  max-height: 80vh !important;
+}
+// .p-table-ng {
+//   min-width: 1200px !important;
+// }
+
+// /deep/.mat-dialog-content {
+//   max-height: 80vh !important;
+// }

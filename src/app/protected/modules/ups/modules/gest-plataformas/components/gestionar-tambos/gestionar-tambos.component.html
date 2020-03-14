@@ -1,0 +1,393 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <div>
+    <mat-icon inline>settings</mat-icon> <span>GESTIONAR PLATAFORMAS FIJAS</span>
+  </div>
+  <div>
+    <button
+      (click)="verJerarquia()"
+      mat-icon-button
+      matTooltip="Jerarquía de condición de Tambos">
+      <mat-icon class="white-fg">playlist_add_check</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<mat-accordion class="filtros">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h4>FILTROS</h4>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div [formGroup]="formulario" id="formulario">
+      <div class="inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>NRO. SNIP</mat-label>
+          <input matInput formControlName="snip">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>COD. ÚNICO</mat-label>
+          <input matInput formControlName="codUnico">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>PLATAFORMA</mat-label>
+          <input matInput formControlName="nombre">
+        </mat-form-field>
+      </div>
+  
+      <div class="inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>SITUACIÓN</mat-label>
+          <mat-select formControlName="situacion" (selectionChange)="cargarEstados($event.value)">
+            <mat-option *ngFor="let s of situaciones" [value]="s.id">{{s.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>ESTADO</mat-label>
+          <mat-select formControlName="estado" (selectionChange)="cargarSubEstados($event.value)">
+            <mat-option *ngFor="let e of estados" [value]="e.id">{{e.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>SUB ESTADO</mat-label>
+          <mat-select formControlName="subEstado" (selectionChange)="cargarSSubEstados($event.value)">
+            <mat-option *ngFor="let se of subEstados" [value]="se.id">{{se.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>DET. SUB ESTADO</mat-label>
+          <mat-select formControlName="ssubEstado" class="no-padding">
+            <mat-option *ngFor="let ss of ssubEstados" [value]="ss.id">{{ss.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="filtrar">
+        <button mat-raised-button (click)="cargarTambos()" color="primary"><mat-icon>filter_list</mat-icon> FILTRAR</button>
+        <button mat-raised-button (click)="crearForm(); cargarTambos()"><mat-icon>clear_all</mat-icon> LIMPIAR</button>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-card class="contenido">
+
+  <button
+    (click)="abrirFormulario()"
+    *ngIf="registrar"
+    id="nuevo"
+    mat-fab
+    class="mat-green-bg"
+    matTooltip="Registrar">
+    <mat-icon class="white-fg">add</mat-icon>
+  </button>
+
+  <table mat-table [dataSource]="plataformas">
+
+    <ng-container matColumnDef="verTodo">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let plat">
+        <button mat-icon-button matTooltip="Mostrar más detalles" (click)="verMasDetalles(plat)">
+          <mat-icon>{{ idPlatExp === plat.idPlataforma && verDetal ? 'expand_more' : 'chevron_right'}}</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="snip">
+      <th mat-header-cell *matHeaderCellDef> <strong>SNIP</strong> </th>
+      <td mat-cell *matCellDef="let plat">
+        {{plat.numSNIP}} <br>
+        <small *ngIf="!!plat.codUnico">C.U.: {{plat.codUnico}}</small>
+      </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> <strong>PLATAFORMA</strong> </th>
+      <td mat-cell *matCellDef="let plat" (mouseover)="plat.mostrarCCPP = true" (mouseout)="plat.mostrarCCPP = false">
+        {{plat.plataforma}}
+        <br>
+        <small><strong>{{plat.unidadTerritorial}}</strong></small>
+
+        <!--<ng-template [ngIf]="plat.mostrarCCPP">
+          <br> <small>{{plat.centroPoblado}}</small>
+        </ng-template>-->
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="situacion">
+      <th mat-header-cell *matHeaderCellDef class="mat-green-200-bg"> <strong>SITUACIÓN</strong> </th>
+      <td mat-cell *matCellDef="let plat" class="mat-green-200-bg">
+
+        <span
+          *ngIf="plat.idPlataforma !== platCambCond.idPlataforma"
+          (dblclick)="actualizarCondiciones(plat)">
+          {{plat.situacion}}
+        </span>
+
+        <button
+          *ngIf="plat.idPlataforma === platCambCond.idPlataforma"
+          mat-button
+          [matMenuTriggerFor]="situacionMenu"
+          [matMenuTriggerData]="{plat: platCambCond}">
+          <small>{{platCambCond.situacion}}</small>
+          <mat-icon inline>arrow_drop_down</mat-icon>
+        </button>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef class="mat-green-200-bg"> <strong>ESTADO</strong> </th>
+      <td mat-cell *matCellDef="let plat" class="mat-green-200-bg">
+
+        <span
+          *ngIf="plat.idPlataforma !== platCambCond.idPlataforma"
+          (dblclick)="actualizarCondiciones(plat)">
+          {{plat.estado}} <br>
+          <span *ngIf="!!plat.fecEntrega" class="fecha"><mat-icon inline>event</mat-icon> {{ plat.fecEntrega | date }}</span>
+        </span>
+
+        <button
+          *ngIf="plat.idPlataforma === platCambCond.idPlataforma"
+          mat-button
+          [class.no-existe]="noExisteEstado"
+          [matMenuTriggerFor]="estadoMenu">
+          <small>{{platCambCond.estado}}</small>
+          <mat-icon inline>arrow_drop_down</mat-icon>
+        </button>
+        
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subestado">
+      <th mat-header-cell *matHeaderCellDef class="mat-green-200-bg"> <strong>SUB ESTADO</strong> </th>
+      <td mat-cell *matCellDef="let plat" class="mat-green-200-bg">
+        
+        <span
+          *ngIf="plat.idPlataforma !== platCambCond.idPlataforma"
+          (dblclick)="actualizarCondiciones(plat)">
+          {{plat.subEstado}} <br>
+          <span *ngIf="!!plat.fecPrestServ" class="fecha"><mat-icon inline>event</mat-icon> {{ plat.fecPrestServ | date }}</span>
+        </span>
+        
+        <button
+          *ngIf="plat.idPlataforma === platCambCond.idPlataforma"
+          mat-button
+          [class.no-existe]="noExisteSubEstado"
+          [matMenuTriggerFor]="subEstadoMenu">
+          <small>{{platCambCond.subEstado}}</small>
+          <mat-icon inline>arrow_drop_down</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ssubestado">
+      <th mat-header-cell *matHeaderCellDef class="mat-green-200-bg"> <strong>DET. SUB ESTADO</strong> </th>
+      <td mat-cell *matCellDef="let plat" class="mat-green-200-bg">
+
+        <span
+          *ngIf="plat.idPlataforma !== platCambCond.idPlataforma"
+          (dblclick)="actualizarCondiciones(plat)">
+          {{plat.ssubEstado}}
+        </span>
+
+        <button
+          *ngIf="plat.idPlataforma === platCambCond.idPlataforma"
+          mat-button
+          [class.no-existe]="noExisteSsubEstado"
+          [matMenuTriggerFor]="ssubEstadoMenu">
+          <small>{{platCambCond.ssubEstado}}</small>
+          <mat-icon inline>arrow_drop_down</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="prestServ">
+      <th mat-header-cell *matHeaderCellDef> <strong>PRESTA SERV.</strong> </th>
+      <td mat-cell [ngClass]="!!plat.fecPrestServ ? 'green-fg' : 'red-fg'" *matCellDef="let plat"> <strong>{{!!plat.fecPrestServ ? 'SI' : 'NO'}}</strong> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let plat">
+
+        <ng-template [ngIf]="plat.idPlataforma !== platCambCond.idPlataforma">
+
+          <button
+            mat-icon-button
+            *ngIf="actualizarCond"
+            (click)="actualizarCondicion(plat)"
+            matTooltip="Actualizar">
+            <mat-icon color="accent">ballot</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            *ngIf="actualizar"
+            (click)="abrirFormulario(plat)"
+            matTooltip="Actualizar">
+            <mat-icon color="accent">edit</mat-icon>
+          </button>
+  
+          <button
+            mat-icon-button
+            (click)="verHistorial(plat)"
+            matTooltip="Ver historial">
+            <mat-icon color="accent">history</mat-icon>
+          </button>
+
+        </ng-template>
+        
+        <ng-template [ngIf]="plat.idPlataforma === platCambCond.idPlataforma">
+
+          <button
+            mat-icon-button
+            (click)="guardarCondicion(plat)"
+            matTooltip="Guardar cambios">
+            <mat-icon class="green-fg">check_circle</mat-icon>
+          </button>
+  
+          <button
+            mat-icon-button
+            (click)="platCambCond = {}"
+            matTooltip="Cancelar cambios">
+            <mat-icon class="red-fg">cancel</mat-icon>
+          </button>
+
+        </ng-template>
+
+        <!--<button mat-icon-button (click)="eliminar(plat)" matTooltip="Eliminar"><mat-icon color="warn">delete</mat-icon></button>-->
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="detalle">
+      <td mat-cell *matCellDef="let plat" colspan="9">
+        <table *ngIf="verHist" class="historial">
+          <thead>
+            <tr>
+              <th>SITUACIÓN</th>
+              <th>ESTADO</th>
+              <th>SUB ESTADO</th>
+              <th>DET. SUB ESTADO</th>
+              <th class="mat-green-bg">FECHA EJEC.</th>
+              <th>ACTIVO</th>
+              <th>ACTUAL</th>
+              <th>FECHA INICIO</th>
+              <th>FECHA FIN</th>
+              <!--<th>OBSERVACIÓN</th>-->
+              <!--<th></th>-->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of historial" [class.mat-red-200-bg]="!h.activo">
+              <td><span>SITUACIÓN</span> {{h.situacion}}</td>
+              <td><span>ESTADO</span> {{h.estado}}</td>
+              <td><span>SUB ESTADO</span> {{h.subEstado}}</td>
+              <td><span>DET. SUB ESTADO</span> {{h.ssubEstado}}</td>
+              <td class="mat-green-bg"><span>FECHA EJEC.</span> {{ h.fecEjecucion ? h.fecEjecucion.slice(0, 10) :''}}</td>
+              <td><span>ACTIVO</span> {{h.activo ? 'SI' : 'NO'}}</td>
+              <td><span>ACTUAL</span> {{h.actual ? 'SI' : 'NO'}}</td>
+              <td><span>FECHA INICIO</span> {{h.fecInicio.slice(0, 10)}}</td>
+              <td><span>FECHA FIN</span> {{h.fecFin.slice(0, 10)}}</td>
+              <!--<td>{{h.observacion}}</td>-->
+              <!--<td>
+                <button *ngIf="h.activo" mat-icon-button matTooltip="Desactivar" (click)="observar(h)"><mat-icon class="red-fg">remove_circle</mat-icon></button>
+                <button *ngIf="!h.activo" mat-icon-button matTooltip="Revertir Desactivación" (click)="observar(h)"><mat-icon class="green-fg">remove_circle_outline</mat-icon></button>
+              </td>-->
+            </tr>
+          </tbody>
+        </table>
+
+        <table *ngIf="verDetal">
+          <thead>
+            <tr>
+              <th>SITUACIÓN</th>
+              <th>ESTADO</th>
+              <th>SUB ESTADO</th>
+              <th>DET. SUB ESTADO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{plat.situacion}}</td>
+              <td>
+                {{plat.estado}} <br>
+                <span *ngIf="!!plat.fecEntrega" class="fecha"><mat-icon inline>event</mat-icon> {{ plat.fecEntrega | date }}</span>
+              </td>
+              <td>
+                {{plat.subEstado}} <br>
+                <span *ngIf="!!plat.fecPrestServ" class="fecha"><mat-icon inline>event</mat-icon> {{ plat.fecPrestServ | date }}</span>
+              </td>
+              <td>{{plat.ssubEstado}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr
+      mat-row
+      [class.editando]="plat.idPlataforma === platCambCond.idPlataforma"
+      *matRowDef="let plat; columns: columnas"></tr>
+    <tr
+      mat-row
+      *matRowDef="let plat; columns: ['detalle']; when: estaExpandido"
+      class="colapso"
+      [ngClass]="{'mostrar': (verDetal || verHist) && idPlatExp === plat.idPlataforma}"></tr>
+  </table>
+  <mat-paginator
+    [length]="total"
+    [pageSize]="cantidad"
+    showFirstLastButtons
+    (page)="cambiarPagina($event)"
+    [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+  
+</mat-card>
+
+<mat-menu #situacionMenu="matMenu">
+  <ng-template matMenuContent let-plat="plat">
+    <button
+      [title]="s.nombre"
+      mat-menu-item
+      [disabled]="plat.idSituacion === s.id"
+      (click)="actualizarSituacion(s)"
+      *ngFor="let s of situaciones">{{s.nombre}}</button>
+  </ng-template>
+</mat-menu>
+
+<mat-menu #estadoMenu="matMenu">
+  <button
+    [title]="e.nombre"
+    mat-menu-item
+    [disabled]="platCambCond.idEstado === e.id"
+    (click)="actualizarEstado(e)"
+    *ngFor="let e of aEstados">{{e.nombre}}
+  </button>
+</mat-menu>
+
+<mat-menu #subEstadoMenu="matMenu">
+  <button
+    [title]="s.nombre"
+    mat-menu-item
+    [disabled]="platCambCond.idSubEstado === s.id"
+    (click)="actualizarSubEstado(s)"
+    *ngFor="let s of aSubEstados">{{s.nombre}}
+  </button>
+</mat-menu>
+
+<mat-menu #ssubEstadoMenu="matMenu">
+  <button
+    [title]="ss.nombre"
+    mat-menu-item
+    [disabled]="platCambCond.idSSubEstado === ss.id"
+    (click)="actualizarSsubEstado(ss)"
+    *ngFor="let ss of aSsubEstados">{{ss.nombre}}
+  </button>
+</mat-menu>

@@ -1,0 +1,37 @@
+<mat-toolbar mat-dialog-title class="mat-primary">
+  <span class="titulo"><mat-icon>apps</mat-icon> {{ titulo }}</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div mat-dialog-content>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input matInput [formControl]="nombreAplicacion">
+    <mat-error *ngIf="nombreAplicacion.invalid && nombreAplicacion.touched">
+      {{ nombreAplicacion.errors | errorMessage:"Nombre" }}
+    </mat-error>
+  </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-raised-button
+    (click)="guardar()"
+    color="primary">
+    <mat-icon>save</mat-icon> Guardar
+  </button>
+
+  <button
+    *ngIf="!nuevaAplicacion"
+    type="button"
+    color="error"
+    (click)="eliminar()"
+    matTooltip="Eliminar"
+    mat-icon-button>
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

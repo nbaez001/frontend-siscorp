@@ -1,0 +1,49 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    unidad: (
+      width: 12rem
+    ),
+    tambo: (
+      width: 12rem
+    ),
+    descripcionBien: (
+      width: 8rem
+    ),
+    marca: (
+      width: 9rem
+    ),
+    serie: (
+      width: 10rem
+    ),
+    horaInicio: (
+      width: 6rem
+    ),
+    horaFin: (
+      width: 8rem
+    ),
+    horas: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 6rem
+    ),
+    opt: (
+      width: 6rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "SURCO",
+			"fidProvincia":1
+        }, 
+		{
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "SJL",
+			"fidProvincia":1
+        },
+		{
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "DIST AQP",
+			"fidProvincia":2
+        }, 
+		{
+            "idCodigo": 4,
+            "cidCodigo": "004",
+            "cidNombre": "DIST AQP 2",
+			"fidProvincia":2
+        }
+    ],
+	"idPerfil": null
+}

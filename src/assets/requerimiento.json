@@ -1,0 +1,68 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 5,
+	"response": [
+        {
+            "id":1,
+            "numeroHojaTramite":"1241545-14",
+            "numeroAutorizacionGasto":"001",
+            "fechaPresentacionPrograma":"01/01/2020",
+            "montoSolicitado":"1245.45",
+            "montoAutorizado":"",
+            "cidEstado": "001",
+            "estado": "OBSERVADO",
+            "fechaAprobacionAutorizacion":"",
+            "fidProyecto": 12345
+        },
+        {
+            "id":2,
+            "numeroHojaTramite":"1241545-14",
+            "numeroAutorizacionGasto":"002",
+            "fechaPresentacionPrograma":"01/01/2020",
+            "montoSolicitado":"1245.45",
+            "montoAutorizado":"",
+            "cidEstado": "002",
+            "estado": "EN ELABORACIÓN",
+            "fechaAprobacionAutorizacion":"",
+            "fidProyecto": 12345
+        },
+        {
+            "id":3,
+            "numeroHojaTramite":"1241545-14",
+            "numeroAutorizacionGasto":"001",
+            "fechaPresentacionPrograma":"01/01/2020",
+            "montoSolicitado":"1245.45",
+            "montoAutorizado":"",
+            "cidEstado": "003",
+            "estado": "EN REVISIÓN",
+            "fechaAprobacionAutorizacion":"",
+            "fidProyecto": 12345
+        },
+        {
+            "id":4,
+            "numeroHojaTramite":"1241545-14",
+            "numeroAutorizacionGasto":"004",
+            "fechaPresentacionPrograma":"01/01/2020",
+            "montoSolicitado":"1245.45",
+            "montoAutorizado":"2536.15",
+            "cidEstado": "001",
+            "estado": "OBSERVADO",
+            "fechaAprobacionAutorizacion":"",
+            "fidProyecto": 12345
+        },
+        {
+            "id":5,
+            "numeroHojaTramite":"1241545-14",
+            "numeroAutorizacionGasto":"005",
+            "fechaPresentacionPrograma":"01/01/2020",
+            "montoSolicitado":"1245.45",
+            "montoAutorizado":"2536.15",
+            "cidEstado": "005",
+            "estado": "APROBADO",
+            "fechaAprobacionAutorizacion":"28/07/2020",
+            "fidProyecto": 12345
+        }
+    ],
+	"idPerfil": 1
+}

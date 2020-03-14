@@ -1,0 +1,46 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Nuevo Plan</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>
+
+<div class="contenido-formulario" [formGroup]="planForm">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Objetivo</mat-label>
+    <textarea matInput formControlName="objetivo"></textarea>
+    <mat-error *ngIf="!planForm.get('objetivo').valid && planForm.get('objetivo').touched">
+      {{ planForm.get('objetivo').errors | errorMessage:"Ingrese Objetivo" }}
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Responsable</mat-label>
+    <input matInput  formControlName="responsable" [matAutocomplete]="empleado">
+    <mat-autocomplete #empleado="matAutocomplete">
+      <mat-option *ngFor="let empleado of empleados" [value]="empleado.nombre"
+        (onSelectionChange)="selectEmpledo(empleado.idCodigo)">
+        {{ empleado.nombre }}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-error *ngIf="!planForm.get('responsable').valid && planForm.get('responsable').touched">
+      {{ planForm.get('responsable').errors | errorMessage:"Ingrese Responsable" }}
+    </mat-error>
+  </mat-form-field>
+
+</div>
+
+<div align="center" class="example-button-row acciones-margen-derecho">
+  <button color="primary" mat-raised-button (click)="crearPlan()">
+    <mat-icon>save</mat-icon>CREAR PLAN
+  </button>
+</div>
+
+<br>

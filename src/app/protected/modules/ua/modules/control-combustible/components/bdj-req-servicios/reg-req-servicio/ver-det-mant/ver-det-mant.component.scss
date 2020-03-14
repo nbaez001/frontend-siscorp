@@ -1,0 +1,29 @@
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomTipoProducto: (
+      width: 5rem
+    ),
+    producto: (
+      width: 16rem
+    ),
+    cantidad: (
+      width: 4rem
+    ),
+    unidadMedida: (
+      width: 4rem
+    ),
+    monto: (
+      width: 4rem
+    )
+  )
+);

@@ -1,0 +1,248 @@
+{
+	"codResultado": null,
+	"msgResultado": null,
+	"total": null,
+	"data": 
+	[{
+		"data": {
+			"DEC_PRECIO_UNIT": 0.00,
+			"DEC_PRECIO_EXP":0.00,
+			"DEC_CANTIDAD": 89844.67,
+			"DEC_CUADRILLA": 0.00,
+			"DESCRIP_UND": "MANO DE OBRA",
+			"FID_CRN_MENSUAL": 96141,
+			"ID_CODIGO": 1,
+			"ID_PADRE": 0,
+			"ITEM": "01",
+			"TXT_UNIDAD": "-"
+		},
+		"expanded": {
+			"expanded": true
+		},
+		"children": [
+			{
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "OPERARIO",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 2,
+				"ID_PADRE": 0,
+				"ITEM": "01",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  },
+		  {
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "PEON",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 3,
+				"ID_PADRE": 0,
+				"ITEM": "01",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  }
+		]
+	},
+	{
+		"data": {
+			"DEC_PRECIO_UNIT": 0.00,
+			"DEC_PRECIO_EXP":0.00,
+			"DEC_CANTIDAD": 89844.67,
+			"DEC_CUADRILLA": 0.00,
+			"DESCRIP_UND": "MATERIALES",
+			"FID_CRN_MENSUAL": 96141,
+			"ID_CODIGO": 4,
+			"ID_PADRE": 0,
+			"ITEM": "02",
+			"TXT_UNIDAD": "-"
+		},
+		"expanded": {
+			"expanded": true
+		},
+		"children": [	
+			{
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "CLAVOS C/C P/CONSTRUCCION D.PROM.",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 5,
+				"ID_PADRE": 0,
+				"ITEM": "02",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  },
+		  {
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "ARENA GRUESA",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 6,
+				"ID_PADRE": 0,
+				"ITEM": "02",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  },
+		  {
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "AGUA",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 7,
+				"ID_PADRE": 0,
+				"ITEM": "02",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  },
+		  {
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "CEMENTO PORTLAND TIPO I (42.5 kg)",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 8,
+				"ID_PADRE": 0,
+				"ITEM": "02",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  },
+		  {
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "LADRILLO KK 18 HUECOS 9X13X24 cm",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 9,
+				"ID_PADRE": 0,
+				"ITEM": "02",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  },
+		  {
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "MADERA TORNILLO O SIMILAR (HABILITADA)",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 10,
+				"ID_PADRE": 0,
+				"ITEM": "02",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  }
+		 
+
+		]
+	},
+	{
+		"data": {
+			"DEC_PRECIO_UNIT": 0.00,
+			"DEC_PRECIO_EXP":0.00,
+			"DEC_CANTIDAD": 89844.67,
+			"DEC_CUADRILLA": 0.00,
+			"DESCRIP_UND": "EQUIPOS",
+			"FID_CRN_MENSUAL": 96141,
+			"ID_CODIGO": 1,
+			"ID_PADRE": 0,
+			"ITEM": "03",
+			"TXT_UNIDAD": "-"
+		},
+		"expanded": {
+			"expanded": true
+		},
+		"children": [
+			{
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "HERRAMIENTAS MANUALES",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 2,
+				"ID_PADRE": 0,
+				"ITEM": "03",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  },
+		  {
+			"data": {
+				"DEC_PRECIO_UNIT": 0.00,
+				"DEC_PRECIO_EXP":0.00,
+				"DEC_CANTIDAD": 89844.67,
+				"DEC_CUADRILLA": 0.00,
+				"DESCRIP_UND": "MEZCLADORA DE CONCRETO 9-11 P3 (23 HP)",
+				"FID_CRN_MENSUAL": 96141,
+				"ID_CODIGO": 3,
+				"ID_PADRE": 0,
+				"ITEM": "03",
+				"TXT_UNIDAD": "-"
+			},
+			"expanded": {
+				"expanded": false
+			},
+			"children": []
+		  }
+		]
+	}
+
+
+	]
+}

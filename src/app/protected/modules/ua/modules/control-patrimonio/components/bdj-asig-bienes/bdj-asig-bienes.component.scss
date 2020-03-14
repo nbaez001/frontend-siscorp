@@ -1,0 +1,53 @@
+// @import "assets/styles/scss/views/table";
+@import "../src/@shared/scss/style_ua/views/table";
+@import "../src/@shared/scss/style_ua";
+
+.page-vehiculo {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 500px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    cidCodigo: (
+      width: 6rem
+    ),
+    fecInicio: (
+      width: 6rem
+    ),
+    nomEmpleado: (
+      width: 12rem
+    ),
+    dniEmpleado: (
+      width: 6rem
+    ),
+    cargoEmpleado: (
+      width: 8rem
+    ),
+    local: (
+      width: 12rem
+    ),
+    oficina: (
+      width: 12rem
+    ),
+    dependencia: (
+      width: 10rem
+    ),
+    estado: (
+      width: 7rem
+    ),
+    cantBienes: (
+      width: 3rem
+    ),
+    opt: (
+      width: 5rem
+    )
+  )
+);

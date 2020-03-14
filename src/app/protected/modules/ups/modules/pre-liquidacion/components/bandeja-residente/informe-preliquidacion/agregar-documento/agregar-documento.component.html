@@ -1,0 +1,109 @@
+<div class="page">
+ 
+  <!-- CABECERA -->
+  <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+   <span>{{titulo_requerimiento}}</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+       <mat-icon>clear</mat-icon>
+   </button> 
+ </mat-toolbar>
+ <!-- CABECERA -->
+
+  
+    <div [formGroup]="formularioDocumentoGrp" id="formularioDocumentoGrp">  
+      <!-- <mat-card> -->
+          <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 5, md: 5, lg: 5, xl: 5}"> 
+              <mat-form-field appearance="outline">
+                  <mat-label>Tipo documento</mat-label>
+                  <mat-select formControlName="frmTipoDoc" >
+                    <mat-option *ngFor="let tc of dataItemTipoDoc?.tipodocs" [value]="tc.idCodigo">{{tc.cidNombre}}</mat-option>
+                  </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 6, sm: 3, md:3, lg: 3, xl: 3}" style="text-align:left !important;"> 
+              <!--  {{archivo}} -->
+              <p class="file-name" *ngIf="!archivo; else fileName">Elija un archivo...</p>
+              <ng-template #fileName>
+                <p class="file-name">{{ archivo }}</p>
+              </ng-template> 
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 6, sm: 3, md: 3, lg: 3, xl: 3}"> 
+              <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+                  <mat-icon matTooltip = "Seleccione un archivo" >attach_file</mat-icon>
+                  Examinar...
+              </button>
+              <input type="file" style="display: none; padding-left: 10px;" #fileInput accept="image/*" (change)="selectFile($event)" />
+            </mat-grid-tile>
+            
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 3, md: 3, lg: 1, xl: 1}">
+                <button color="primary" mat-raised-button (click)="agregarDocumento()">
+                  <mat-icon>add</mat-icon>
+                </button>
+            </mat-grid-tile>
+          </mat-grid-list>
+     <!-- </mat-card> -->
+     <mat-card>
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource"  > 
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef > N° </th>
+              <td mat-cell *matCellDef="let row; let i = index"> {{ i+1 }} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="colDescripcion">
+              <th mat-header-cell *matHeaderCellDef> Descripcion</th>
+              <td mat-cell *matCellDef="let tabla">{{tabla.descripcion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="colArchivo">
+              <th mat-header-cell *matHeaderCellDef> Archivo </th>
+              <td mat-cell *matCellDef="let tabla"> {{tabla.archivo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones"> 
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td mat-cell *matCellDef="let tabla">
+                <button mat-icon-button color="primary"
+                  (click)="eliminarDocumento(tabla.id)"
+                  matTooltip="Eliminar documento">
+                  <mat-icon>delete_forever</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnas; sticky: true" class="encabezadoTabla"></tr>
+            <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+          </table>
+
+          <div class="empty" *ngIf=" dataSource === null">
+            No existe datos para mostrar en la tabla
+          </div>
+
+
+          <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+          </mat-paginator>
+        </div>       
+
+
+     </mat-card>
+  
+     <mat-grid-list cols="12"  >
+      <mat-grid-tile [responsiveRows]="{xs: 0, sm: 4, md: 4, lg: 8, xl: 10}" ></mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 8, md: 8, lg: 4, xl: 2}" class="alinear-boton">
+        <div mat-dialog-actions   >
+          <button mat-raised-button color="primary" (click)="guardar()" style="margin-left: 5px;">Guardar</button>
+          <button mat-raised-button  color="warn" [mat-dialog-close]="null" cdkFocusInitial>Cancelar</button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+</div>
+  
+ 
+
+ </div>

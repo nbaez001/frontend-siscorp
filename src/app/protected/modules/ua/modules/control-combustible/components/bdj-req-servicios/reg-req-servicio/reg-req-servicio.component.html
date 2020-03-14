@@ -1,0 +1,341 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span>{{data.title}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <mat-horizontal-stepper [linear]="true" #stepper>
+      <mat-step [stepControl]="mantenimiento.idEstadoMantenimiento>1">
+        <ng-template matStepLabel>Requerimiento</ng-template>
+        <div>
+          <form [formGroup]="formularioGrp1">
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Unidad</mat-label>
+                  <mat-select formControlName="unidad">
+                    <mat-option *ngFor="let unid of unidades" [value]="unid">
+                      {{unid.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 8, lg: 8, xl: 9}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Asunto</mat-label>
+                  <input formControlName="asuntoRequerimiento" matInput type="text" placeholder="Asunto" [appUpperCase]>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tipo documento anexo</mat-label>
+                  <mat-select formControlName="tipoDocAnexo">
+                    <mat-option *ngFor="let tipoDocAnexo of tiposDocsAnexo" [value]="tipoDocAnexo">
+                      {{tipoDocAnexo.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}"
+                *ngIf="formularioGrp1.get('tipoDocAnexo').value.id==1 || formularioGrp1.get('tipoDocAnexo').value.id==2">
+                <mat-form-field appearance="outline">
+                  <mat-label>Documento TDR</mat-label>
+                  <input formControlName="nomTdrEett" matInput type="text" placeholder="Documento TDR">
+                  <!-- <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-icon-input" color="primary" (click)="buscarTdrEett($event)" [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1"> -->
+                  <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-icon-input"
+                    color="primary" (click)="buscarTdrEett($event)" [disabled]="mantenimiento.idEstadoMantenimiento!=1">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <input id="fileTdrEett" class="none" type="file" accept="application/pdf"
+                    (change)="cargarTdrEett($event)">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}"
+                *ngIf="formularioGrp1.get('tipoDocAnexo').value.id==3">
+                <mat-form-field appearance="outline">
+                  <mat-label>Documento fondo encargo</mat-label>
+                  <input formControlName="nroFondoEncargo" matInput type="text" placeholder="Documento fondo encargo">
+                  <!-- <button mat-icon-button matTooltip="Elaborar solicitud fondo encargo" type="button" class="btn-icon-input" color="primary" (click)="solFondoEncargo()" [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1"> -->
+                  <button mat-icon-button matTooltip="Elaborar solicitud fondo encargo" type="button"
+                    class="btn-icon-input" color="primary" (click)="solFondoEncargo()"
+                    [disabled]="mantenimiento.idEstadoMantenimiento!=1">
+                    <mat-icon>add_box</mat-icon>
+                  </button>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cotizacion requerimiento</mat-label>
+                  <input formControlName="cotizacion" matInput type="number" placeholder="Cotizacion requerimiento">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nro Hoja tramite</mat-label>
+                  <input formControlName="nroHt" matInput type="text" placeholder="Nro Hoja tramite">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nro Informe</mat-label>
+                  <input formControlName="nroInforme" matInput type="text" placeholder="Nro Informe">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Documentos de requerimiento</mat-label>
+                  <input formControlName="documentacion" matInput type="text" placeholder="Documentos de requerimiento">
+                  <!-- <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-icon-input" color="primary" (click)="buscarRequerimiento($event)" [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1"> -->
+                  <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-icon-input"
+                    color="primary" (click)="buscarRequerimiento($event)"
+                    [disabled]="mantenimiento.idEstadoMantenimiento!=1">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <input id="fileRequerimiento" class="none" type="file" accept="application/pdf"
+                    (change)="cargarRequerimiento($event)">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Fecha fin busqueda</mat-label>
+                  <input matInput [matDatepicker]="picker" placeholder="Fecha fin busqueda">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </form>
+          <h4 style="margin-bottom: 5px;">Lista de solicitudes de mantenimiento</h4>
+          <!-- <button mat-raised-button color="primary" type="button" (click)="buscarSolicitudesMant()" [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1"> -->
+          <button mat-raised-button color="primary" type="button" (click)="buscarSolicitudesMant()"
+            [disabled]="mantenimiento.idEstadoMantenimiento!=1">
+            <mat-icon>search</mat-icon>
+            Agregar solicitudes
+          </button>
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource1" matSort>
+              <ng-container *ngFor="let column of columnsGrilla1" [matColumnDef]="column.columnDef">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+                <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="opt" stickyEnd>
+                <th mat-header-cell *matHeaderCellDef>OPT.</th>
+                <td mat-cell *matCellDef="let element">
+                  <!-- <button mat-icon-button matTooltip="Quitar solicitud" (click)="quitarSolicitudMant(element)" [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1"> -->
+                  <button mat-icon-button matTooltip="Quitar solicitud" (click)="quitarSolicitudMant(element)"
+                    [disabled]="mantenimiento.idEstadoMantenimiento!=1">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+                  <button mat-icon-button matTooltip="Detalle servicio" (click)="regDetalleServicio(element)">
+                    <mat-icon>assignment</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+            </table>
+
+            <div class="empty" *ngIf="dataSource1 === null">
+              No existe datos para mostrar en la tabla
+            </div>
+
+            <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+            </mat-paginator>
+          </div>
+        </div>
+        <div align="center" class="button-separate">
+          <button mat-raised-button type="button" (click)="salir()">Salir</button>
+          <button mat-raised-button type="button" (click)="guardar()">Guardar</button>
+          <button mat-raised-button type="button" (click)="siguiente(stepper)">Siguiente</button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="mantenimiento.idEstadoMantenimiento>2">
+        <ng-template matStepLabel>Orden Servicio/Res. Administracion</ng-template>
+        <div>
+          <form [formGroup]="formularioGrp2">
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Orden servicio/Res. Administracion</mat-label>
+                  <input formControlName="ordenServicio" matInput type="text"
+                    placeholder="Orden servicio/Res. Administracion">
+                  <button mat-icon-button matTooltip="Buscar doc. asignacion presupuestal" type="button"
+                    class="btn-icon-input" color="primary" (click)="buscarOrdenServicio($event)">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Tipo presupuesto</mat-label>
+                  <mat-select formControlName="tipoPresupuesto">
+                    <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
+                      {{tipoPresupuesto.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Monto asignacion</mat-label>
+                  <input formControlName="monto" matInput type="number" placeholder="Monto asignacion">
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </form>
+          <h4 style="margin-bottom: 5px;">Detalle afectacion presupuestal</h4>
+          <div class="table-container">
+            <table mat-table [dataSource]="dataSource2" matSort>
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>N°</th>
+                <td mat-cell *matCellDef="let row; let i=index"> {{ i+1 }} </td>
+              </ng-container>
+
+              <ng-container *ngFor="let column of columnsGrilla2" [matColumnDef]="column.columnDef">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+                <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+            </table>
+
+            <div class="empty" *ngIf="dataSource2 === null">
+              No existe datos para mostrar en la tabla
+            </div>
+
+            <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+            </mat-paginator>
+          </div>
+        </div>
+        <div align="center" class="button-separate">
+          <button mat-raised-button type="button" (click)="salir()">Salir</button>
+          <button mat-raised-button type="button" (click)="guardar()">Guardar</button>
+          <button mat-raised-button type="button" (click)="anterior(stepper)">Anterior</button>
+          <button mat-raised-button type="button" (click)="siguiente(stepper)">Siguiente</button>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Conformidad servicio</ng-template>
+        <div>
+          <form [formGroup]="formularioGrp">
+            <mat-grid-list cols="12" rowHeight="50px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Unidad</mat-label>
+                  <mat-select formControlName="unidad">
+                    <mat-option *ngFor="let unid of unidades" [value]="unid">
+                      {{unid.nombre}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nro informe conformidad</mat-label>
+                  <input formControlName="nroInformeConf" matInput type="text" placeholder="Nro informe conformidad">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Nro HT conformidad</mat-label>
+                  <input formControlName="nroHojatramiteConf" matInput type="text" placeholder="Nro HT conformidad">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Documentos de conformidad</mat-label>
+                  <input formControlName="docsConformidad" matInput type="text" placeholder="Documentos de conformidad">
+                  <button mat-icon-button matTooltip="Buscar docs conformidad" type="button" class="btn-icon-input"
+                    color="primary" (click)="buscarDocsConformidad($event)">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  <input id="fileInput" class="none" type="file" accept="application/pdf"
+                    (change)="cargarDocsConformidad($event)">
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="12" rowHeight="70px">
+              <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+                <mat-form-field appearance="outline">
+                  <mat-label>Observaciones</mat-label>
+                  <textarea formControlName="obsRecepccionUURR" matInput placeholder="Observaciones"
+                    [appUpperCase]></textarea>
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </form>
+          <form [formGroup]="subformularioGrp">
+            <div class="table-container">
+              <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+                  <td mat-cell *matCellDef="let row; let i = index;">
+                    {{i+1}}
+                  </td>
+                </ng-container>
+
+                <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+                  <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaMant">
+                  <th mat-header-cell *matHeaderCellDef>FECHA </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-form-field appearance="outline">
+                      <input matInput [formControlName]="'f'+row.id" [matDatepicker]="picker1" placeholder="Fecha">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="kilometrajeInicio">
+                  <th mat-header-cell *matHeaderCellDef>KILOMETRAJE INICIO </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-form-field appearance="outline">
+                      <input matInput [formControlName]="'k'+row.id" type="number" placeholder="Kilometraje inicio">
+                    </mat-form-field>
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="opt" stickyEnd>
+                  <th mat-header-cell *matHeaderCellDef>OPT-</th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button matTooltip="Detalle servicio" (click)="regDetalleServicio(element)">
+                      <mat-icon>assignment</mat-icon>
+                    </button>
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <div class="empty" *ngIf="dataSource === null">
+                No existe detalle mantenimiento para mostrar en la tabla
+              </div>
+              <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+              </mat-paginator>
+
+            </div>
+          </form>
+        </div>
+        <div align="center" class="button-separate">
+          <button mat-raised-button type="button" (click)="salir()">Salir</button>
+          <button mat-raised-button type="button" (click)="guardar()">Guardar</button>
+          <button mat-raised-button type="button" (click)="anterior(stepper)">Anterior</button>
+          <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
+  <!-- <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+    <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+  </div> -->
+</div>

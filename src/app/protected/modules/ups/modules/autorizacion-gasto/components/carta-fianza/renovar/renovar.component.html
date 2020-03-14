@@ -1,0 +1,76 @@
+  <!-- CABECERA -->
+  <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+      <span>RENOVAR CARTA FIANZA</span>
+       <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+          <mat-icon>clear</mat-icon>
+      </button> 
+    </mat-toolbar>
+    <!-- CABECERA -->
+    <br>
+      <!-- FORMULARIO -->
+      <div mat-dialog-content class="contenido-formulario" [formGroup]="proyectoForm">
+  
+          <div class="">
+              <mat-form-field appearance="outline" style="width: 16%;">
+                <mat-label>Código Carta Fianza</mat-label>
+                <input matInput formControlName="codigoObra" readonly>
+              </mat-form-field>
+          
+              <mat-form-field appearance="outline" style="width: 22%; padding-left: 7px;">
+                  <mat-label>Nro Contrato</mat-label>
+                  <input matInput formControlName="nroContrato" readonly>
+                </mat-form-field>
+
+              <mat-form-field appearance="outline" style="margin-right: 6px;margin-left: 6px;width: 60%;">
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="descripcion"   readonly>
+              </mat-form-field>   
+                   
+        </div>
+
+
+        <div class="columna">
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha Emisión</mat-label>
+              <input matInput formControlName="fecInicioEmision" readonly>
+            </mat-form-field>
+        
+            <mat-form-field appearance="outline">
+                <mat-label>Fecha Fin Vigencia</mat-label>
+                <input matInput formControlName="fecFinEmision" readonly>
+              </mat-form-field>
+
+            <mat-form-field appearance="outline" style="padding-left: 7px;">
+              <mat-label>Estado</mat-label>
+              <input matInput formControlName="estado"   readonly>
+            </mat-form-field>   
+                 
+      </div>
+
+      
+      <div class="columna">
+          <mat-form-field appearance="outline" >
+            <mat-label>Contratista</mat-label>
+            <input matInput formControlName="contratista" readonly>
+          </mat-form-field>
+                 
+    </div>
+
+
+   
+        <div class="columna">       
+              <button mat-raised-button color="primary" style="margin-right: 10px;" (click) = "renovarCarta()">
+                <mat-icon>description</mat-icon> Renovar Carta Fianza
+              </button>
+        </div>
+   
+
+  
+      </div>
+        <!-- FORMULARIO -->
+    
+   
+     
+  
+  
+    

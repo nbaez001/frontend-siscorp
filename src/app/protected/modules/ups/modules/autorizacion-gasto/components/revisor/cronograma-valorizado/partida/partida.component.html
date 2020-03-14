@@ -1,0 +1,431 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Agregar Partida</span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<div class="mat-elevation-z2 mat-white-bg formulario-margin">
+  <mat-tab-group selectedIndex="{{selectedIndexTab}}" (selectedIndexChange)="tab_click($event)">
+
+    <mat-tab label="Partida">
+      <!-- MAT-TAB PARTIDA INICIO-->
+      <div class="bandeja">
+
+        <div class="container">
+          <div class="row">
+
+            <!-- FORMULARIO -->
+            <div mat-dialog-content class="contenido-formulario" [formGroup]="partidaForm">
+
+              <mat-form-field appearance="outline">
+                <mat-label>Total Sub Presupuesto</mat-label>
+                <input formControlName="totalSubPresupuestoFrmCtrl" matInput [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptionsArquitecto | async" [value]="option">
+                    {{option.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline">
+                <mat-label>Sub Total de Sub Presupuesto</mat-label>
+                <input formControlName="subTotalDeSubPresupuestoFrmCtrl" matInput [matAutocomplete]="auto2">
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptionsIngCivil | async" [value]="option">
+                    {{option.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+
+              <mat-form-field appearance="outline">
+                <mat-label>Sub Total de Partida</mat-label>
+                <input formControlName="subTotalDePartidaFrmCtrl" matInput [matAutocomplete]="auto3">
+                <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptionslElectrico | async" [value]="option">
+                    {{option.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Partida</mat-label>
+                <input formControlName="nombrePartidaFrmCtrl" matInput [matAutocomplete]="auto4">
+                <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayFn">
+                  <mat-option *ngFor="let option of filteredOptionslSanitario | async" [value]="option">
+                    {{option.cidNombre}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+           
+              <div class="columna">
+                <div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Unidad</mat-label>
+                    <input matInput formControlName="unidadFrmCtrl" >
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Metrado</mat-label>
+                    <input matInput formControlName="metradoFrmCtrl" (keyup.enter)="onMouseEnterMetradoPartida($event)">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Precio (S/.)</mat-label>
+                    <input matInput formControlName="precioFrmCtrl" (keyup.enter)="onMouseEnterPrecioPartida($event)">
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Parcial (S/.)</mat-label>
+                    <input matInput formControlName="parcialFrmCtrl" >
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+
+
+            </div> <!-- FORMULARIO -->
+          </div>
+        </div>
+
+
+      </div>
+      <div align="right" class="example-button-row acciones-margen-derecho">
+
+        <button color="primary" mat-raised-button (click)="tabPartidaGuardar()">
+          Siguiente&nbsp;&nbsp;&nbsp; <mat-icon>keyboard_tab</mat-icon>
+        </button>
+      </div>
+    </mat-tab><!-- MAT-TAB PARTIDA FIN-->
+
+
+    <mat-tab label="Insumos" [disabled]="tabInsumo">
+      <!-- MAT-TAB INSUMOS INICIO-->
+      <div class="bandeja">
+
+        <div class="container">
+          <div class="row">
+
+            <!-- TAB INSUMOS INICIO -->
+            <div mat-dialog-content class="contenido-formulario" [formGroup]="insumoForm">
+
+            <div> 
+                <mat-form-field appearance="outline" style="width: 20%;">
+                  <mat-label>Tipo Insumo</mat-label>
+                  <mat-select formControlName="tipoInsumoFrmCtrl"  [(ngModel)]="selectedOptionTipoInsumo"
+                  (selectionChange)="changeTipoInsumoPartida($event.value)" > 
+                     <mat-option value="-1">--SELECCIONAR--</mat-option>
+                    <mat-option *ngFor="let insumo of dataItemTipoInsumo?.tipoInsumo" [value]="insumo" > {{insumo.cidNombre}}</mat-option>
+                  </mat-select>
+
+                </mat-form-field>
+
+                <mat-form-field appearance="outline"  style="width: 20%; padding-left: 10px; padding-right: 10px;">
+                    <mat-label>Código</mat-label>
+                    <mat-select formControlName="codInsumoFrmCtrl"  [(ngModel)]="selectedOptionCodigoPartida"
+                      (selectionChange)="changeCodigoPartida($event.value)">
+                     <mat-option value="-1">--SELECCIONAR--</mat-option>
+                      <mat-option *ngFor="let codigo of dataItemCodigo?.codigoPart" [value]="codigo">{{codigo.cidNombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                
+                <mat-form-field appearance="outline"  style="width: 58%;">
+                  <mat-label>Descripción del Recurso</mat-label>
+                  <input matInput formControlName="descripcionInsumoFrmCtrl">
+                </mat-form-field>
+
+              </div>
+
+              <div class="columna">
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Unidad</mat-label>
+                  <input matInput formControlName="unidadInsumoFrmCtrl">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Cuadrilla</mat-label>
+                  <input matInput formControlName="cuadrillaFrmCtrl">
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline" style="padding-left: 10px;">
+                  <mat-label>Cantidad</mat-label>
+                  <input matInput formControlName="cantidadFrmCtrl" (keyup.enter)="onMouseEnterCantidad($event)">
+                </mat-form-field>
+
+
+             
+                <mat-form-field appearance="outline" style="padding-left: 10px;">
+                  <mat-label>Precio(S/.)</mat-label>
+                  <input matInput formControlName="precioInsumoFrmCtrl" (keyup.enter)="onMouseEnterPrecio($event)">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" style="padding-left: 10px; padding-right: 10px;">
+                  <mat-label>Parcial(S/.)</mat-label>
+                  <input matInput formControlName="parcialInsumoFrmCtrl" style="font-weight: 600;">
+                </mat-form-field>
+
+                <button mat-mini-fab (click)="agregarInsumo()" matTooltip="Agregar Insumo" style="margin-top: 10px;">
+                  <mat-icon>add</mat-icon>
+                </button>
+            
+              </div>
+
+
+
+
+
+              <div class="div-tabla-insumo">
+
+                <table mat-table [dataSource]="dataSource">
+
+                  <ng-container matColumnDef="nro">
+                    <th mat-header-cell *matHeaderCellDef> Nro.</th>
+                    <td mat-cell *matCellDef="let insumo; let i = index">{{i + 1}} </td>
+
+                  </ng-container>
+
+                  <ng-container matColumnDef="tipoInsumo">
+                    <th mat-header-cell *matHeaderCellDef> Tipo Insumo </th>
+                    <td mat-cell *matCellDef="let insumo">{{insumo.tipoInsumo}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="nombreInsumo">
+                    <th mat-header-cell *matHeaderCellDef> Descripción Recurso </th>
+                    <td mat-cell *matCellDef="let insumo">{{insumo.descripcion}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="unidad">
+                    <th mat-header-cell *matHeaderCellDef> unid. </th>
+                    <td mat-cell *matCellDef="let insumo">{{insumo.unidad}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="cuadrilla">
+                    <th mat-header-cell *matHeaderCellDef>Cuadrilla </th>
+                    <td mat-cell *matCellDef="let insumo">{{insumo.cuadrilla}}</td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="cantidad">
+                    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+                    <td mat-cell *matCellDef="let insumo">{{insumo.cantidad}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="precio">
+                    <th mat-header-cell *matHeaderCellDef> Precio(S/.) </th>
+                    <td mat-cell *matCellDef="let insumo">{{insumo.precio}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="parcial">
+                    <th mat-header-cell *matHeaderCellDef>Parcial(S/.) </th>
+                    <td mat-cell *matCellDef="let insumo">{{insumo.parcial}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let prefac">
+                      <button mat-icon-button color="primary" matTooltip="Editar Insumo" (click) = "editarInsumo(prefac, i)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+
+                      <button mat-icon-button color="primary" matTooltip="Eliminar Insumo" (click) = "eliminarInsumo(prefac)">
+                        <mat-icon>delete_forever</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+
+
+                  <tr mat-header-row *matHeaderRowDef="columnasInsumo"></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnasInsumo" ></tr>
+                </table>
+
+                <div class="empty" *ngIf="dataSource === null">
+                  No existe insumos a mostrar
+                </div>
+
+                <mat-toolbar>
+                  <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+                    <div>
+                      <mat-paginator [pageSizeOptions]="[5, 10, 15]">
+                      </mat-paginator>
+
+                    </div>
+                  </mat-toolbar-row>
+                </mat-toolbar>
+
+
+              </div>
+
+
+              <div align="right" class="example-button-row acciones-margen-derecho">
+
+                <button color="primary" mat-raised-button (click)="tabInsumoGuardar()">
+                  Siguiente&nbsp;&nbsp;&nbsp; <mat-icon>keyboard_tab</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <!-- TAB INSUMOS FIN    -->
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </mat-tab><!-- MAT-TAB INSUMOS FIN-->
+
+    <mat-tab label="Programación Mensual" [disabled]="tabProgramacion">
+      <!-- MAT-TAB PROGRAMACION INICIO-->
+      <div class="bandeja">
+
+        <div class="container">
+          <div class="row">
+            <!-- row INICIO -->
+
+
+            <div mat-dialog-content class="contenido-formulario" [formGroup]="programacionForm">
+
+              <div class="columna">
+                <mat-form-field appearance="outline">
+                  <mat-label>Mes</mat-label>
+                  <mat-select formControlName="mesFrmCtrl"   [(ngModel)]="selectedOption">
+                    <mat-option value ="-1" selected>--SELECCIONAR--</mat-option>
+                    <mat-option *ngFor="let mes of dataItemMeses?.meses" [value]="mes">
+                      {{mes.cidNombre}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Metrado</mat-label>
+                  <input matInput formControlName="metradoProgFrmCtrl" value="">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline"  style="padding-left: 10px;">
+                    <mat-label>Precio(S/.)</mat-label>
+                    <input matInput formControlName="precioProgFrmCtrl" value="">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline"  style="padding-left: 10px; padding-right: 10px;">
+                  <mat-label>Porcentaje(%)</mat-label>
+                  <input matInput formControlName="porcentajeFrmCtrl" value="">
+                </mat-form-field>
+
+                <button mat-mini-fab (click)="agregarProgramacion()" matTooltip="Agregar Programación" style="margin-top: 10px;">
+                  <mat-icon>add</mat-icon>
+                </button>
+  
+              </div>
+             
+
+              <div class="div-tabla-programacion">
+
+                <table mat-table [dataSource]="dataSourceProgramacion">
+
+                  <ng-container matColumnDef="nro" >
+                    <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Nro.</th>
+                    <!-- <td mat-cell *matCellDef="let prog">{{prog.item}} </td> -->
+                    <td mat-cell *matCellDef="let prog; let i = index">{{i + 1}} </td>
+
+
+                  </ng-container>
+
+                  <ng-container matColumnDef="mes" >
+                    <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Mes </th>
+                    <td mat-cell *matCellDef="let prog">{{prog.mes}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="metrado" >
+                    <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Metrado </th>
+                    <td mat-cell *matCellDef="let prog">{{prog.metrado}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="precio">
+                    <th mat-header-cell *matHeaderCellDef style=" text-align: center;"> Precio(S/.) </th>
+                    <td mat-cell *matCellDef="let prog">{{prog.precio}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="porcentaje">
+                    <th mat-header-cell *matHeaderCellDef style=" text-align: center;">Porcentaje(%) </th>
+                    <td mat-cell *matCellDef="let prog">{{prog.porcentaje}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="acciones" style="text-align: center;">
+                    <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                    <td mat-cell *matCellDef="let prog">
+                      <button mat-icon-button color="primary" matTooltip="Editar Programación" (click) = "editarProgramacion(prog, i)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+
+                      <button mat-icon-button color="primary" matTooltip="Eliminar Programación" (click) = "eliminarProgramacion(prog)">
+                        <mat-icon>delete_forever</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="columnasProgramacion" ></tr>
+                  <tr mat-row *matRowDef="let row; columns: columnasProgramacion" style="text-align: center;"></tr>
+                </table>
+
+                <div class="empty" *ngIf="dataSourceProgramacion === null">
+                  No existe programación a mostrar
+                </div>
+
+              <!--   <mat-toolbar>
+                  <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+
+                    <div>
+                      <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad"
+                        [showFirstLastButtons]="true" [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPaginaProgramacion($event)">
+                      </mat-paginator>
+
+                    </div>
+                  </mat-toolbar-row>
+                </mat-toolbar> -->
+
+
+              </div>
+
+              <br>
+              <mat-form-field appearance="outline">
+                  <mat-label>Ingresar Sutento</mat-label>
+                  <textarea  rows="2" matInput formControlName="sustentoFrmCtrl" maxlength="300" value=""></textarea>
+                </mat-form-field>
+
+
+              <div align="right" class="example-button-row acciones-margen-derecho">
+
+                <button color="primary" mat-raised-button (click)="Grabar()">
+                  <mat-icon>check</mat-icon>Guardar
+                </button>
+              </div>
+            </div>
+
+            <!-- TAB PROGRAMACION FIN    -->
+
+
+          </div> <!-- row FIN -->
+        </div>
+
+      </div>
+
+    </mat-tab><!-- MAT-TAB PROGRAMACION FIN-->
+  </mat-tab-group>
+
+</div>
+
+
+<!-- BANDEJA -->

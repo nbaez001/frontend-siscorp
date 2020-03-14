@@ -1,0 +1,23 @@
+.errorcarga-form-dialog {
+    
+  .mat-dialog-container {
+    padding: 0;
+    width: 400px;
+    overflow: hidden;
+
+    .mat-dialog-title {
+      justify-content: space-between;
+    }
+
+    .mat-dialog-content {
+      margin: 0;
+      padding-bottom: 24px;
+    }
+  }
+
+  .dialog-content-wrapper {
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+  }
+}

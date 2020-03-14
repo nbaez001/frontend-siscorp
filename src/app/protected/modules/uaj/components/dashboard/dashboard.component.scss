@@ -1,0 +1,42 @@
+.text-convenio-pais {
+  background-color: #91BBBF;
+  font-weight: bold;
+  color: white;
+}
+
+.text-convenio-activo {
+  background-color: #A7C1DE;
+  font-weight: bold;
+  color: white;
+}
+
+.text-convenio-finalizado {
+  background-color: #7C7C7C;
+  font-weight: bold;
+  color: white;
+}
+
+mat-card {
+  text-align: center;
+}
+
+mat-chip-list {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.example-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-image {
+  position: absolute;
+  top: 16%;
+  font-weight: bold;
+  font-size: 50px;
+  color: #5F5F5F;
+}

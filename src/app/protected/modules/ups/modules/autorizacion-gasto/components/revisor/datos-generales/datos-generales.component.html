@@ -1,0 +1,183 @@
+<div class="page">
+  <mat-toolbar class="mat-primary mat-dialog-header">
+    <span style="font-size: 20px !important; font-weight: bold;">DATOS DEL PROYECTO</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogDatosGenerales.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+  </ngx-spinner>
+
+  <div mat-dialog-content>
+    <div class="titulo-proyecto">{{datoProyecto.tituloProy}}</div> <!-- TAMBO "QUILLE" -->
+    <div class="subtitulo-proyecto">  {{datoProyecto.subtituloProy}}</div>  <!-- Creación del Centro de Servicios Tambo en el Centro Poblado Quille - Omacha -->
+    
+    <mat-grid-list cols = "3" class="contenedor-fieldset">
+
+      <mat-grid-tile  [colspan] = "1" [rowspan] = "1"   >        
+        <p-fieldset legend="ENCARGADOS DEL PROYECTO"  >
+          <mat-grid-list cols="12"  *ngFor="let encargado of encargados" rowHeight="50px">
+            <mat-grid-tile   [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 6, xl: 6}" >
+                <div class="label-datos" style="width: 110px !important;">{{encargado.puesto}}</div>
+             </mat-grid-tile>
+            <mat-grid-tile    [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 6, xl: 6}" >
+              <div class="background-color-blanco">
+                <span matTooltip="click para ver datos"   matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosPersonales(encargado)">
+                  {{encargado.nombres}} </span>  
+              </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        </p-fieldset>
+      </mat-grid-tile>
+
+      <mat-grid-tile    [colspan] = "1" [rowspan] = "1"   >
+        <div class="content-section implementation carousel-demo">
+          <p-carousel styleClass="carousel-demo" [value]="cars" [numVisible]="1"  [circular]="true" 
+          [responsiveOptions]="responsiveOptions" [autoplayInterval]="3000"
+          orientation="vertical" verticalViewPortHeight="275px"
+          >
+            <ng-template let-car pTemplate="item">
+              <div class="car-details">
+                <div class="p-grid p-nogutter">
+                      <img src={{car.url}}  height="190" width="300" />
+                </div>
+              </div>
+            </ng-template>
+            
+        </p-carousel>
+        </div>
+        
+
+  </mat-grid-tile>
+
+      <mat-grid-tile  [colspan] = "1" [rowspan] = "1"  >        
+        <p-fieldset legend="NÚCLEO EJECUTOR"  >
+          <mat-grid-list cols="12"  *ngFor="let ejecutor of ejecutores" rowHeight="50px">
+            <mat-grid-tile   [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 6, xl: 6}" >
+                <div class="label-datos" style="width: 110px !important;">{{ejecutor.puesto}}</div>
+             </mat-grid-tile>
+            <mat-grid-tile    [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 6, xl: 6}" >
+              <div class="background-color-blanco">
+                <span matTooltip="click para ver datos"   matTooltipClass="formato-tooltip"  class="detalle-trabajador" (click)="detalleDatosPersonales(ejecutor)">
+                  {{ejecutor.nombres}} </span>  
+              </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        </p-fieldset>
+      </mat-grid-tile>
+
+    
+    </mat-grid-list>
+
+
+    <mat-grid-list cols="10" rowHeight="60px">
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos"> PLAZO DE <br>EJECUCIÓN</span>
+        <br>
+        <span class="background-color-blanco">  {{datoProyecto.plazoEjecucion}} días</span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos"> AVANCE<br> FÍSICO</span>
+        <br>
+        <span class="background-color-blanco">  {{datoProyecto.avanceFisico}}% </span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos"> AVANCE<br> FINANCIERO</span>
+        <br>
+        <span class="background-color-blanco">  {{datoProyecto.avanceFinanciero}}%</span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos">MONTO<br> FINANCIERO</span>
+        <br>
+        <span class="background-color-blanco"> S/{{datoProyecto.montoFinanciero}}</span>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 5, sm: 5, md: 5, lg: 2, xl: 2}">
+        <span class="label-datos">MONTO<br> RENDIDO</span>
+        <br>
+        <span class="background-color-blanco"> S/ {{datoProyecto.montoRendido}}</span>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <br>
+    <mat-grid-list cols="12" rowHeight="115px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="verProyectoDesdeDatosGenerales(2020)" mat-raised-button color="primary" class="casilla">
+            <span>DESCARGAR DOCUMENTOS <br> DEL PROYECTO</span>
+            <br>
+            <mat-icon style="font-size: 30px;">cloud_download</mat-icon>
+            <br>
+            <br>
+          </button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="verCronogramaDesdeDatosGenerales(2020)" mat-raised-button color="primary" class="casilla">
+            <span>CRONOGRAMA <br> ACELERADO</span>
+            <br>
+            <mat-icon style="font-size: 30px;">calendar_today</mat-icon>
+            <br>
+            <br>
+          </button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="verCotizacionesDesdeDatosGenerales(200)" mat-raised-button
+            style="background-color: #EC971F; color: white;" class="casilla">
+            <span>AUTORIZACIÓN <br> DE GASTO</span>
+            <br>
+            <mat-icon style="font-size: 30px;">account_balance_wallet</mat-icon>
+            <br>
+            <br>
+          </button>
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button (click)="bandejaTrabajadorDesdeDatosGenerales(2020)" mat-raised-button
+            style="background-color: green; color: white;" class="casilla">
+            <br>
+            <span> TRABAJADOR</span>
+            <br>
+            <mat-icon style="font-size: 30px;">group_add</mat-icon>
+            <br>
+            <br>
+          </button>
+
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button mat-raised-button color="warn" class="casilla">
+            <br>
+            <span>PRE-LIQUIDACIÓN</span>
+            <br>
+            <mat-icon style="font-size: 30px;">library_add_check</mat-icon>
+            <br>
+            <br>
+          </button>
+
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+        <div style="text-align: center">
+          <button mat-raised-button color="warn" class="casilla">
+            <br>
+            <span> LIQUIDACIÓN</span>
+            <br>
+            <mat-icon style="font-size: 30px;">table_chart</mat-icon>
+            <br>
+            <br>
+          </button>
+
+        </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+  </div>
+
+</div>

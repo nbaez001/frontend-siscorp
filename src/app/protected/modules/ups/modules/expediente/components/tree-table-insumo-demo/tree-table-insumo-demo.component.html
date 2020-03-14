@@ -1,0 +1,79 @@
+<p-treeTable 
+    [value]="files"
+
+    [columns]="Scrollcolumna"
+    [frozenColumns]="Frozencolumna"
+    [scrollable]="true" 
+    scrollHeight="700px" 
+    frozenWidth="230px"
+
+    [loading]="loading"
+    [totalRecords]="3" 
+    [paginator]="false" 
+    [rows]="2"
+    [lazy]="true" 
+    (onLazyLoad)="cargaInsumoPadre($event)" 
+    (onNodeExpand)="cargaInsumoHijo($event)"
+    (onEditComplete)="editar($event)"
+    
+    frozenWidth="700px"
+   
+    >
+        <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                    <col *ngFor="let col of columns" 
+                    style="width:130px;border: 1px solid #c8c8c8;background-color: #f4f4f4; border-collapse: collapse">
+                </colgroup>
+        </ng-template>
+
+        <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <ng-container *ngFor="let col of columns; let i = index">
+                        <th *ngIf="i<4" [attr.colspan]="0" ><br><br><br> </th>
+                        <th *ngIf="i>=4" [attr.colspan]="2" > <span style="font-size: 16px;" > MES {{i-3}}</span> </th>
+                    </ng-container>    
+                </tr>
+                <tr>
+                    <th *ngFor="let col of columns" style="font-size: 13px;" >  {{col.header}} </th>
+                </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" >
+            <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover" >
+                <td class="celda" >{{rowData.unidad}}</td>
+                <td class="celda"  [ttEditableColumn]="rowData" [ttEditableColumnField] = "rowData.cantidad"  [ngClass]="{'ui-toggler-column': true}">
+                    <p-treeTableCellEditor >
+                        <ng-template  pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData.cantidad" [ngStyle]="{'width':'100%'}">
+                        </ng-template>
+                        <ng-template pTemplate="output">{{rowData.cantidad}} </ng-template>
+                    </p-treeTableCellEditor>
+                </td>
+                <td class="celda" >{{rowData.precio}}</td>
+                <td class="celda" >{{rowData.parcial}}</td>
+
+                <td class="celda-painted" >{{rowData.metrado1}}</td>
+                <td class="celda-painted" >{{rowData.costo1}}</td>
+
+                <td class="celda" >{{rowData.metrado2}}</td>
+                <td class="celda" >{{rowData.costo2}}</td>
+
+                <td class="celda-painted" >{{rowData.metrado3}}</td>
+                <td class="celda-painted" >{{rowData.costo3}}</td>
+
+                <td class="celda" >{{rowData.metrado4}}</td>
+                <td class="celda" >{{rowData.costo4}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="frozenbody" let-rowNode let-rowData="rowData">
+                <tr (mouseenter)="onMouseEnter(rowData)" (mouseleave)="onMouseLeave(rowData)" [class.row-hover]="rowData.hover">
+                    <td class="celda-frozen"  >
+                        <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+                        {{rowData.item}} -  {{rowData.recurso}}
+                    </td>
+                </tr>     
+        </ng-template>
+    </p-treeTable>
+
+
+

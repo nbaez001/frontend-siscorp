@@ -1,0 +1,53 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+        {          
+            "item": 1,
+            "cidCodigo" : "001",
+            "tipoInsumo": "Mano de Obra",
+            "descripcion": "OPERARIO",
+            "unidad": "hh",
+            "cuadrilla": "4.00",
+            "cantidad": "10",
+            "precio": "500",
+            "parcial": "5000",
+            "fidPartida": 101
+        }, {
+            "item": 2,
+            "cidCodigo" : "001",
+            "tipoInsumo": "Mano de Obra",
+            "descripcion": "PEON",
+            "unidad": "hh",
+            "cuadrilla": "4.00",
+            "cantidad": "10",
+            "precio": "200",
+            "parcial": "2000",
+            "fidPartida": 102
+        }, {
+            "item": 3,
+            "cidCodigo" : "002",
+            "tipoInsumo": "Materiales",
+            "descripcion": "VALVULA ENTRADA DESCARGA P/TANQUE BAJO ACERO PLASTICO",
+            "unidad": "pza.",
+            "cuadrilla": "",
+            "cantidad": "10",
+            "precio": "300",
+            "parcial": "3000",
+            "fidPartida": 103
+        }, {
+            "item": 4,
+            "cidCodigo" : "002",
+            "tipoInsumo": "Materiales",
+            "descripcion": "ANILLO DE CERA PARA INODORO",
+            "unidad": "pza",
+            "cuadrilla": "",
+            "cantidad": "10",
+            "precio": "800",
+            "parcial": "8000",
+            "fidPartida": 104
+        }
+    ],
+	"idPerfil": 1
+}

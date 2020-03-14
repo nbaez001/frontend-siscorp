@@ -1,0 +1,86 @@
+{
+    "data": [
+        {
+            "data": {
+                "item": "01",
+                "descripcion": "OBRAS PROVISIONALES, TRABAJOS PRELIMINARES, SEGURIDAD Y SALUD",
+                "und": "",
+                "cuadrilla": "",
+                "cantidad": "",
+                "preciounitario": "",
+                "parcialunitario": "",
+                "metrado": "",
+                "precio": "",
+                "parcial": "89844.67",
+                "metrado1": "",
+                "soles1": "",
+                "porcentaje1": "",
+                "metrado2": "",
+                "soles2": "",
+                "porcentaje2": "",
+                "metrado3": "",
+                "soles3": "",
+                "porcentaje3": "",
+                "metrado4": "",
+                "soles4": "",
+                "porcentaje4": ""
+            },
+            "leaf": false
+        },
+        {
+            "data": {
+                "item": "02",
+                "descripcion": "ESTRUCTURAS",
+                "und": "",
+                "cuadrilla": "",
+                "cantidad": "",
+                "preciounitario": "",
+                "parcialunitario": "",
+                "metrado": "",
+                "precio": "",
+                "parcial": 377679.63,
+                "metrado1": "",
+                "soles1": "",
+                "porcentaje1": "",
+                "metrado2": "",
+                "soles2": "",
+                "porcentaje2": "",
+                "metrado3": "",
+                "soles3": "",
+                "porcentaje3": "",
+                "metrado4": "",
+                "soles4": "",
+                "porcentaje4": ""
+            },
+            "leaf": false
+        },
+        {
+            "data": {
+                "item": "03",
+                "descripcion": "ARQUITECTURA",
+                "und": "",
+                "cuadrilla": "",
+                "cantidad": "",
+                "preciounitario": "",
+                "parcialunitario": "",
+                "metrado": "",
+                "precio": "",
+                "parcial": "178556.19",
+                "metrado1": "",
+                "soles1": "",
+                "porcentaje1": "",
+                "metrado2": "",
+                "soles2": "",
+                "porcentaje2": "",
+                "metrado3": "",
+                "soles3": "",
+                "porcentaje3": "",
+                "metrado4": "",
+                "soles4": "",
+                "porcentaje4": ""
+            },
+            "leaf": true
+        }
+        
+    ]
+}

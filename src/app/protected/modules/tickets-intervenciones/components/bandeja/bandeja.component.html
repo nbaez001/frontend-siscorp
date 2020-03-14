@@ -1,0 +1,194 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+
+  <div class="contenido">
+    <mat-icon>directions_boat</mat-icon>
+    <div class="detalle">
+      <span>ATENCIONES PIAS</span>
+      <span class="subtitulo">{{moduloPertenece?.entidad}}</span>
+    </div>
+  </div>
+  
+  <div>
+    <button mat-icon-button (click)="cargarIntervenciones()"><mat-icon class="white-fg">autorenew</mat-icon></button>
+  </div>
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FILTROS -->
+<mat-accordion class="filtros">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <strong>Filtros</strong>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <!-- INPUTS -->
+    <div class="inputs" [formGroup]="filtrosForm" fxLayout.xl="row" fxLayout.lg="row">
+      <mat-form-field appearance="outline">
+        <mat-label>COD.intrv</mat-label>
+        <input matInput formControlName="idAtencion">
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>ESTADO</mat-label>
+        <mat-select multiple formControlName="idEstado">
+          <mat-option *ngFor="let estado of datos?.estados" [value]="estado.idCodigo">{{estado.cidNombres}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>FECHA INICIO</mat-label>
+        <input matInput [matDatepicker]="picker1" readonly (click)="picker1.open()" formControlName="fecInicio" [max]="fechaActual">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>FECHA FIN</mat-label>
+        <input matInput [matDatepicker]="picker2" readonly (click)="picker2.open()" formControlName="fecFin" [max]="fechaActual">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+  
+      <div class="acciones">
+        <button mat-mini-fab (click)="cargarIntervenciones()"><mat-icon>filter_list</mat-icon></button>
+        <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()"><mat-icon>clear_all</mat-icon></button>
+      </div>
+    </div>
+    <!-- INPUTS -->
+
+  </mat-expansion-panel>
+</mat-accordion>
+<!-- FILTROS -->
+
+<!-- BANDEJA -->
+<div class="mat-elevation-z2 mat-white-bg bandeja">
+
+  <button *ngIf="moduloPertenece?.creaAtencion" mat-fab class="nuevo-intrv mat-green-bg" (click)="abrirFomulario()"><mat-icon class="white-fg">add</mat-icon></button>
+  
+  <table mat-table [dataSource]="intervenciones" [@animateStagger]="{value:'50'}">
+
+    <ng-container matColumnDef="desde">
+      <th mat-header-cell *matHeaderCellDef width="40"> </th>
+      <td mat-cell *matCellDef="let intrv" width="40">
+        <mat-icon matTooltip="Registrado desde un dispositivo móvil" *ngIf="intrv.origen === 'MOV'">smartphone</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="codigoAtencion">
+      <th mat-header-cell *matHeaderCellDef> COD. INTRV </th>
+      <td mat-cell *matCellDef="let intrv"> {{intrv.codigoAtencion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="modulos">
+      <th mat-header-cell *matHeaderCellDef> ORIGEN / DESTINO </th>
+      <td mat-cell *matCellDef="let intrv">
+        <div class="contenido">
+          <div class="dest-ori">
+            {{ intrv.creador ? 'A' : 'DE' }}:
+          </div>
+          <div class="contenido-modulos">
+            <div class="modulo">
+              <mat-icon>business</mat-icon> {{intrv.entidad}}
+            </div>
+            <div class="modulo">
+              <mat-icon>person</mat-icon> {{intrv.encargado}}
+            </div>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuarioAtendido">
+      <th mat-header-cell *matHeaderCellDef> PERSONA ATENDIDA </th>
+      <td mat-cell *matCellDef="let intrv">
+        {{intrv.personaAtendida}}
+        <!--<button mat-button (click)="abrirDetalle('usuario')"><mat-icon>person</mat-icon> {{intrv.personaAtendida}}</button>-->
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef> ESTADO </th>
+      <td mat-cell *matCellDef="let intrv">
+        <div
+          fxHide.md fxHide.xs fxHide.sm
+          class="estado"
+          [ngClass]="intrv.estadoCodigo | estadoIntervencion:'element'"
+          [class.disabled]="intrv.estadoCodigo === prefijoEstado.ADO || intrv.creador"
+          [matMenuTriggerFor]="appMenu"
+          (click)="intrvSelec = intrv"
+          >
+          {{intrv.estadoNombre}}
+        </div>
+        <div
+          fxHide.lg fxHide.xl
+          class="estado small"
+          [ngClass]="intrv.estadoCodigo | estadoIntervencion:'element'"
+          [class.disabled]="intrv.estadoCodigo === prefijoEstado.ADO || intrv.creador"
+          [matMenuTriggerFor]="appMenu"
+          (click)="intrvSelec = intrv"
+          >
+          {{intrv.estadoCodigo}}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidadArchivos">
+      <th mat-header-cell *matHeaderCellDef> </th>
+      <td mat-cell *matCellDef="let intrv">
+        <button
+          mat-icon-button
+          (click)="abrirDetalle('archivos')"
+          *ngIf="intrv.cantidadArchivos > 0">
+          <mat-icon>attachment</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaRegistro">
+      <th mat-header-cell *matHeaderCellDef> FECH. REG </th>
+      <td mat-cell *matCellDef="let intrv"> {{intrv.fechaRegistro | date:'d MMM y, h:mm a'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef align="right"> </th>
+      <td mat-cell *matCellDef="let intrv" align="right">
+        <button
+          *ngIf="!intrv.creador"
+          mat-raised-button
+          color="primary"
+          (click)="abrirFomulario(intrv.idPersona, intrv.idAtencion)">
+          <span fxHide.md fxHide.xs fxHide.sm>DERIVAR</span>
+          <mat-icon class="white-fg">forward</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+  </table>
+
+  <mat-paginator
+    [length]="total"
+    [pageIndex]="pagina - 1"
+    [pageSize]="cantidad"
+    [showFirstLastButtons]="true"
+    [pageSizeOptions]="[10, 50, 100]"
+    (page)="cambiarPagina($event)">
+  </mat-paginator>
+
+
+</div>
+<!-- BANDEJA -->
+
+<mat-menu #appMenu="matMenu">
+  <button
+    mat-menu-item
+    [fxHide]="estado.cidCodigo === intrvSelec?.estadoCodigo"
+    *ngFor="let estado of datos?.estados"
+    (click)="cambiarEstado(estado.cidCodigo)">
+    <mat-icon [ngClass]="estado.cidCodigo | estadoIntervencion:'icon'">fiber_manual_record</mat-icon> {{estado.cidNombres}}
+  </button>
+</mat-menu>

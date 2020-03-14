@@ -1,0 +1,90 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>Profesionales para la revisión de expediente técnico</span>
+  <!-- <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon class="white-fg">clear</mat-icon>
+  </button> -->
+</mat-toolbar>
+<!-- CABECERA -->
+
+<!-- FORMULARIO -->
+<div mat-dialog-content class="contenido-formulario" [formGroup]="proyectoForm">
+
+  <br>
+
+  <mat-radio-group appearance="outline"   #radioButonSeleccionado="matRadioGroup">
+     
+
+  <mat-form-field appearance="outline" class = "tamanio-padding">
+      
+      <mat-label>Arquitecto (Jefe de proyecto)</mat-label>
+    <input [appOnlyLetters]  formControlName="arquitecto" matInput [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptionsArquitecto | async" [value]="option">
+        {{option.cidNombre}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-radio-button value="1"  [checked]="true" matTooltip = 'Seleccionar Jefe del Proyecto' ></mat-radio-button>
+  <br>
+
+ 
+  <mat-form-field appearance="outline"  class = "tamanio-padding">
+      
+      <mat-label>Ingeniero Civil (Jefe de proyecto)</mat-label>
+    <input [appOnlyLetters] formControlName="ingcivil" matInput [matAutocomplete]="auto2">
+    <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptionsIngCivil | async" [value]="option">
+        {{option.cidNombre}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <mat-radio-button value="2" matTooltip = 'Seleccionar Jefe del Proyecto'></mat-radio-button>
+
+
+  <mat-form-field appearance="outline" class = "tamanio-padding">
+    <mat-label>Ingeniero Eléctrico</mat-label>
+    <input [appOnlyLetters] formControlName="ingelectrico" matInput [matAutocomplete]="auto3">
+    <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptionslElectrico | async" [value]="option">
+        {{option.cidNombre}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class = "tamanio-padding">
+    <mat-label>Ingeniero Sanitario</mat-label>
+    <input [appOnlyLetters] formControlName="ingsanitario" matInput [matAutocomplete]="auto4">
+    <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOptionslSanitario | async" [value]="option">
+        {{option.cidNombre}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class = "tamanio-padding">
+      <mat-label>Otros (Jefe de proyecto)</mat-label>
+      <input [appOnlyLetters] formControlName="otros" matInput [matAutocomplete]="auto5">
+      <mat-autocomplete #auto5="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptionslOtros | async" [value]="option">
+          {{option.cidNombre}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-radio-button value="3" matTooltip = 'Seleccionar Jefe del Proyecto'></mat-radio-button>
+  </mat-radio-group>
+  
+  <br>
+  <div align="right" class="example-button-row">
+    <button color="primary" mat-raised-button (click)="solicitar($event)">
+      <mat-icon>near_me</mat-icon> Solicitar evaluacion
+    </button>
+  
+    <button color="warn" mat-raised-button (click)="dialogRef.close()">
+      <mat-icon>highlight_off</mat-icon> Cerrar
+    </button>
+  </div>
+  <br>
+
+</div>
+<!-- FORMULARIO -->
