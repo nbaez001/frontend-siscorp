@@ -16,24 +16,24 @@ import { ChatService } from 'app/protected/modules/chat/services/chat.service';
 
 
 @Injectable()
-export class ProyectoService{
+export class ProyectoService {
 
-  constructor(private http: HttpClient,private  chatService :  ChatService) { }
+  constructor(private http: HttpClient, private chatService: ChatService) { }
 
-   
+
 
   /*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /*----------------------------------------------------------- JEFE DE UNIDAD DE PLATAFORMA DE SERVICIOS --------------------------------------------------- */
   /*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
 
-  proyectoFiltros(pagina : number, cantidad: number, filtrosProyectoRequest): Observable<WsResponseProyecto> {
-      return this.http.post<WsResponseProyecto>(`${environment.backendUrlProj}/prefactibilidadProyectos/listar/${pagina}/${cantidad}`, filtrosProyectoRequest);
+  proyectoFiltros(pagina: number, cantidad: number, filtrosProyectoRequest): Observable<WsResponseProyecto> {
+    return this.http.post<WsResponseProyecto>(`${environment.backendUrlProj}/prefactibilidadProyectos/listar/${pagina}/${cantidad}`, filtrosProyectoRequest);
   }
 
 
   asignarDerivarCorrdinador(ParametroRequest): Observable<WsApiOutResponse> {
-      return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/derivarDesdeBandejaJefe`, ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/derivarDesdeBandejaJefe`, ParametroRequest);
   }
 
 
@@ -41,18 +41,18 @@ export class ProyectoService{
     return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/devolverDesdeBandejaJefe`, ParametroRequest);
   }
 
-  generarExcelBandejaPrefactibilidad(pagina : number, cantidad: number,filtrosProyectoRequest): void {
+  generarExcelBandejaPrefactibilidad(pagina: number, cantidad: number, filtrosProyectoRequest): void {
     this.http
-      .post(`${environment.backendUrlProj}/prefactibilidadProyectos/exportExcel/${pagina}/${cantidad}`, filtrosProyectoRequest, {responseType: 'blob'})
+      .post(`${environment.backendUrlProj}/prefactibilidadProyectos/exportExcel/${pagina}/${cantidad}`, filtrosProyectoRequest, { responseType: 'blob' })
       .subscribe((b) => {
         fileSaver.saveAs(b, 'descarga_expediente.xls');
       });
   }
 
 
-  
+
   visualizarroyecto(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaJefe`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaJefe`, ParametroRequest);
   }
 
 
@@ -60,21 +60,21 @@ export class ProyectoService{
     return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/totalPendientes`, null);
   }
 
-  
-  listarObservacionesProyecto(pagina : number, cantidad: number,ParametroRequest): Observable<WsResponseObservacion> {
-    return this.http.post<WsResponseObservacion>(`${environment.backendUrlProj}/prefactibilidadProyectos/listarObservaciones/${pagina}/${cantidad}`,ParametroRequest);
+
+  listarObservacionesProyecto(pagina: number, cantidad: number, ParametroRequest): Observable<WsResponseObservacion> {
+    return this.http.post<WsResponseObservacion>(`${environment.backendUrlProj}/prefactibilidadProyectos/listarObservaciones/${pagina}/${cantidad}`, ParametroRequest);
   }
 
-  registrarObservacionProyecto(ParametroRequest): Observable<WsResponseObservacion> {   
-    return this.http.post<WsResponseObservacion>(`${environment.backendUrlProj}/prefactibilidadProyectos/registrarObservacion`,ParametroRequest);
+  registrarObservacionProyecto(ParametroRequest): Observable<WsResponseObservacion> {
+    return this.http.post<WsResponseObservacion>(`${environment.backendUrlProj}/prefactibilidadProyectos/registrarObservacion`, ParametroRequest);
   }
 
   registrarAusenciaJefe(AusenciaJefeRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/registrarAusenciaJefe`,AusenciaJefeRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/registrarAusenciaJefe`, AusenciaJefeRequest);
   }
 
   retornarAusenciaJefe(): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/registrarRetornoJefe`,null);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/registrarRetornoJefe`, null);
   }
 
   listarArchivoUpp(): Observable<WsApiOutResponse> {
@@ -82,12 +82,12 @@ export class ProyectoService{
   }
 
   aprobacionDelJefe(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/aprobacionDelJefe`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/aprobacionDelJefe`, ParametroRequest);
   }
 
 
   rechazoDelJefe(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/rechazoDelJefe`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/rechazoDelJefe`, ParametroRequest);
   }
 
 
@@ -96,7 +96,7 @@ export class ProyectoService{
   }
 
 
-  obtenerUsuarioPorTipoUsuario(tipoUsuario: string){
+  obtenerUsuarioPorTipoUsuario(tipoUsuario: string) {
     return this.http.get<number>(`${environment.backendUrlProj}/prefactibilidadProyectos/obtenerIdUsuario?tipoUsuario=${tipoUsuario}`);
   }
 
@@ -106,34 +106,34 @@ export class ProyectoService{
   /*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   asignarEncargadoDeBandejaCoordinador(ParametroCoordinadorAsignarRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/asignarDesdeBandejaCoordinador`,ParametroCoordinadorAsignarRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/asignarDesdeBandejaCoordinador`, ParametroCoordinadorAsignarRequest);
   }
-  
-    
+
+
   derivarEncargadoDeBandejaCoordinador(ParametroCoordinadorAsignarRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/derivarDesdeBandejaCoordinador`,ParametroCoordinadorAsignarRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/derivarDesdeBandejaCoordinador`, ParametroCoordinadorAsignarRequest);
   }
-  
-  
+
+
   visualizarProyectoCoordinador(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaCoordinador`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaCoordinador`, ParametroRequest);
   }
-    
+
   devolverDesdeBandejaCordinador(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/devolverDesdeBandejaCoordinador`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/devolverDesdeBandejaCoordinador`, ParametroRequest);
   }
 
   enviarParaAprobacionJefe(ParametroCoordinadorAsignarRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/aprobacionDelCoordinador`,ParametroCoordinadorAsignarRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/aprobacionDelCoordinador`, ParametroCoordinadorAsignarRequest);
   }
 
-  
+
   rechazoDelCoordinador(ParametroCoordinadorAsignarRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/rechazoDelCoordinador`,ParametroCoordinadorAsignarRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/rechazoDelCoordinador`, ParametroCoordinadorAsignarRequest);
   }
 
   enviarRechazoCoordinadorAEncargado(ParametroCoordinadorAsignarRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/enviarRechazoCoordinadorAEncargado`,ParametroCoordinadorAsignarRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/enviarRechazoCoordinadorAEncargado`, ParametroCoordinadorAsignarRequest);
   }
 
 
@@ -142,19 +142,19 @@ export class ProyectoService{
   /*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
   visualizarProyectoEncargado(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaEncargado`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaEncargado`, ParametroRequest);
   }
 
   darConformidadEncargado(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/darConformidad`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/darConformidad`, ParametroRequest);
   }
 
   asignarEquipoElaboradorEncargado(ProfesionalRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/asignarEquipoElaborador`,ProfesionalRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/asignarEquipoElaborador`, ProfesionalRequest);
   }
-  
+
   asignarEquipoRevisorEncargado(ProfesionalRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/asignarEquipoEvaluador`,ProfesionalRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/asignarEquipoEvaluador`, ProfesionalRequest);
   }
 
   listarArchivo(idMovimientoProyecto: number): Observable<WsApiOutResponse> {
@@ -166,36 +166,36 @@ export class ProyectoService{
   }
 
   observadoDesdeBandejaEncargado(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/obervadoDesdeBandejaEncargado`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/obervadoDesdeBandejaEncargado`, ParametroRequest);
   }
 
   devolverDesdeBandejaEncargado(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/devolverDesdeBandejaEncargado`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/devolverDesdeBandejaEncargado`, ParametroRequest);
   }
-      
+
   enviarParaAprobacionCoordinador(ParametroCoordinadorAsignarRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/enviaAlCoordinadorParaAprobacion`,ParametroCoordinadorAsignarRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/enviaAlCoordinadorParaAprobacion`, ParametroCoordinadorAsignarRequest);
   }
-  
+
 
 
   /*--------------------------------------------------------------------------------------------------------------------------------------------------------------- */
   /*------------------------------------------------------------- JEFE ELABORADOR DE EXPEDIENTE TECNICO ----------------------------------------------------------- */
   /*--------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
- 
+
   visualizarProyectoJefeElaborador(ParametroRequest): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaJefeElaborador`,ParametroRequest);
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/verDetalleBandejaJefeElaborador`, ParametroRequest);
   }
 
 
-  downloadFile(idCodigoArchivo, fileName) { 
+  downloadFile(idCodigoArchivo, fileName) {
     const REQUEST_URI = `${environment.backendUrlProj}/prefactibilidadProyectos/descargarArchivo/${idCodigoArchivo}/${fileName}`;
     return this.http.get(REQUEST_URI, {
       responseType: 'arraybuffer'
     })
   }
-  
+
   subirArchivo(request: ArchivoRequest): Observable<WsApiOutResponse> {
 
     const formData = new FormData();
@@ -203,111 +203,111 @@ export class ProyectoService{
     formData.append('nomArchivo', request.nomArchivo);
     formData.append('idMovimientoProyecto', request.idProyecto);
     formData.append('descripcion', request.descripcion);
-    formData.append('idTipoArchivo', request.tipoDoc+"");
+    formData.append('idTipoArchivo', request.tipoDoc + "");
 
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/subirArchivo`, formData,{
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadProyectos/subirArchivo`, formData, {
       reportProgress: true,
       observe: 'events'
     }).pipe(
-        map(event => this.getEventMessage(event, formData)),
-        catchError(this.handleError)
-      );
-    }
-
-    
+      map(event => this.getEventMessage(event, formData)),
+      catchError(this.handleError)
+    );
+  }
 
 
-    cargarExcelPresupuesto(request: ArchivoRequest): Observable<WsApiOutResponse> {
 
-      const formData = new FormData();
-      formData.append('file', request.archivo);
-      formData.append('idMovimientoProyecto', request.idProyecto);
-      formData.append('descripcion', request.descripcion);
+
+  cargarExcelPresupuesto(request: ArchivoRequest): Observable<WsApiOutResponse> {
+
+    const formData = new FormData();
+    formData.append('file', request.archivo);
+    formData.append('idMovimientoProyecto', request.idProyecto);
+    formData.append('descripcion', request.descripcion);
     /*formData.append('nomArchivo', request.nomArchivo);
       formData.append('idTipoArchivo', request.tipoDoc); */
-  
-      return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelPresupuesto`, formData,{
-        reportProgress: true,
-        observe: 'events'
-      }).pipe(
-          map(event => this.getEventMessage(event, formData)),
-          catchError(this.handleError)
-        );
-      }
 
-      cargarExcelPartida(request: ArchivoRequest): Observable<WsApiOutResponse> {
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelPresupuesto`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      map(event => this.getEventMessage(event, formData)),
+      catchError(this.handleError)
+    );
+  }
 
-        const formData = new FormData();
-        formData.append('file', request.archivo);
-        formData.append('idMovimientoProyecto', request.idProyecto);
-        formData.append('descripcion', request.descripcion);
-      /*formData.append('nomArchivo', request.nomArchivo);
-        formData.append('idTipoArchivo', request.tipoDoc); */
-    
-        return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelPartida`, formData,{
-          reportProgress: true,
-          observe: 'events'
-        }).pipe(
-            map(event => this.getEventMessage(event, formData)),
-            catchError(this.handleError)
-          );
-        }
+  cargarExcelPartida(request: ArchivoRequest): Observable<WsApiOutResponse> {
 
-      cargarExcelGastoGeneral(request: ArchivoRequest): Observable<WsApiOutResponse> {
+    const formData = new FormData();
+    formData.append('file', request.archivo);
+    formData.append('idMovimientoProyecto', request.idProyecto);
+    formData.append('descripcion', request.descripcion);
+    /*formData.append('nomArchivo', request.nomArchivo);
+      formData.append('idTipoArchivo', request.tipoDoc); */
 
-        const formData = new FormData();
-        formData.append('file', request.archivo);
-        formData.append('idMovimientoProyecto', request.idProyecto);
-        formData.append('descripcion', request.descripcion);
-      /*formData.append('nomArchivo', request.nomArchivo);
-        formData.append('idTipoArchivo', request.tipoDoc); */
-    
-        return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelGastoGeneral`, formData,{
-          reportProgress: true,
-          observe: 'events'
-        }).pipe(
-            map(event => this.getEventMessage(event, formData)),
-            catchError(this.handleError)
-          );
-        }
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelPartida`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      map(event => this.getEventMessage(event, formData)),
+      catchError(this.handleError)
+    );
+  }
 
+  cargarExcelGastoGeneral(request: ArchivoRequest): Observable<WsApiOutResponse> {
 
+    const formData = new FormData();
+    formData.append('file', request.archivo);
+    formData.append('idMovimientoProyecto', request.idProyecto);
+    formData.append('descripcion', request.descripcion);
+    /*formData.append('nomArchivo', request.nomArchivo);
+      formData.append('idTipoArchivo', request.tipoDoc); */
 
-       cargarExcelGastoSupervicion(request: ArchivoRequest): Observable<WsApiOutResponse> {
-
-            const formData = new FormData();
-            formData.append('file', request.archivo);
-            formData.append('idMovimientoProyecto', request.idProyecto);
-            formData.append('descripcion', request.descripcion);
-         /* formData.append('nomArchivo', request.nomArchivo);
-            formData.append('idTipoArchivo', request.tipoDoc); */
-        
-            return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelGastoSupervision`, formData,{
-              reportProgress: true,
-              observe: 'events'
-            }).pipe(
-                map(event => this.getEventMessage(event, formData)),
-                catchError(this.handleError)
-              );
-          }
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelGastoGeneral`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      map(event => this.getEventMessage(event, formData)),
+      catchError(this.handleError)
+    );
+  }
 
 
 
-        cargarExcelPartidaTxtError(nombreListado: string): void {
-          const formData = new FormData();
-          formData.append('nombreListado',nombreListado);
-          this.http
-            .post(`${environment.backendUrlProj}/ejecucionProyectos/verTxtErrores`, formData, {responseType: 'blob'})
-            .subscribe((b) => {
-              fileSaver.saveAs(b, 'error_excel.txt');
-            });
-        }
-          
+  cargarExcelGastoSupervicion(request: ArchivoRequest): Observable<WsApiOutResponse> {
 
-        
+    const formData = new FormData();
+    formData.append('file', request.archivo);
+    formData.append('idMovimientoProyecto', request.idProyecto);
+    formData.append('descripcion', request.descripcion);
+    /* formData.append('nomArchivo', request.nomArchivo);
+       formData.append('idTipoArchivo', request.tipoDoc); */
+
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/ejecucionProyectos/validarCargaExcelGastoSupervision`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      map(event => this.getEventMessage(event, formData)),
+      catchError(this.handleError)
+    );
+  }
 
 
-      
+
+  cargarExcelPartidaTxtError(nombreListado: string): void {
+    const formData = new FormData();
+    formData.append('nombreListado', nombreListado);
+    this.http
+      .post(`${environment.backendUrlProj}/ejecucionProyectos/verTxtErrores`, formData, { responseType: 'blob' })
+      .subscribe((b) => {
+        fileSaver.saveAs(b, 'error_excel.txt');
+      });
+  }
+
+
+
+
+
+
 
   private getEventMessage(event: HttpEvent<any>, formData) {
 
@@ -325,7 +325,7 @@ export class ProyectoService{
 
   private fileUploadProgress(event) {
     const percentDone = Math.round(100 * event.loaded / event.total);
-    return { status: 'progress', message: percentDone/2};
+    return { status: 'progress', message: percentDone / 2 };
   }
 
   private apiResponse(event) {
@@ -333,7 +333,7 @@ export class ProyectoService{
   }
 
   private handleError(error: HttpErrorResponse) {
-    
+
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -347,53 +347,53 @@ export class ProyectoService{
   }
 
 
-  obtenerTokenUsuarioEnviarSocket(idUsuario: number, expediente: string){
-    this.obternerToken(idUsuario).subscribe(response =>{
-      if(response){
-       
-        response.forEach(element =>{      
-          if(expediente == "expediente"){
+  obtenerTokenUsuarioEnviarSocket(idUsuario: number, expediente: string) {
+    this.obternerToken(idUsuario).subscribe(response => {
+      if (response) {
+
+        response.forEach(element => {
+          if (expediente == "expediente") {
             this.chatService.enviarCidSocketChannel(element.cidsocket, 'expediente');
             this.chatService.enviarCidSocketChannel(element.cidsocket, 'contadorMenu', 'expediente');
-          }else{          
-          this.chatService.enviarCidSocketChannel(element.cidsocket, 'contadorMenu', 'expediente');
+          } else {
+            this.chatService.enviarCidSocketChannel(element.cidsocket, 'contadorMenu', 'expediente');
           }
-        })            
+        })
       }
     });
   }
 
-  
-  ejecucionProyectos(pagina : number, cantidad: number,filtrosProyectoRequest): void {
+
+  ejecucionProyectos(pagina: number, cantidad: number, filtrosProyectoRequest): void {
     this.http
-      .post(`${environment.backendUrlProj}/prefactibilidadProyectos/ejecucionProyectos/${pagina}/${cantidad}`, filtrosProyectoRequest, {responseType: 'blob'})
+      .post(`${environment.backendUrlProj}/prefactibilidadProyectos/ejecucionProyectos/${pagina}/${cantidad}`, filtrosProyectoRequest, { responseType: 'blob' })
       .subscribe((b) => {
         fileSaver.saveAs(b, 'erro_formato.xls');
       });
   }
 
-  validarDocumentoExcel(idProyecto : number, tipoArchivo: number): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/validarFile/${idProyecto}/${tipoArchivo}`,  {responseType: 'blob'});
+  validarDocumentoExcel(idProyecto: number, tipoArchivo: number): Observable<WsApiOutResponse> {
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/validarFile/${idProyecto}/${tipoArchivo}`, { responseType: 'blob' });
   }
 
 
   /* INICIO VISUALIZAR ARCHIVOS TEMPORALES DEL PRESUPUESTO*/
   visualizarArchivoExcelPresupuesto(fidProyecto: number): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFilePresupuesto/${fidProyecto}`, {reportProgress: true});
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFilePresupuesto/${fidProyecto}`, { reportProgress: true });
   }
 
   visualizarArchivoExcelPartida(fidProyecto: number): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFilePrecioUnitario/${fidProyecto}`, {reportProgress: true});
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFilePrecioUnitario/${fidProyecto}`, { reportProgress: true });
   }
 
   visualizarArchivoExcelGeneral(fidProyecto: number): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFileGastoGeneral/${fidProyecto}`, {reportProgress: true});
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFileGastoGeneral/${fidProyecto}`, { reportProgress: true });
   }
- 
+
   visualizarArchivoExcelSupervision(fidProyecto: number): Observable<WsApiOutResponse> {
-    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFileGastoSupervision/${fidProyecto}`, {reportProgress: true});
+    return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/prefactibilidadFile/listarFileGastoSupervision/${fidProyecto}`, { reportProgress: true });
   }
- /* FIN VISUALIZAR ARCHIVOS TEMPORALES DEL PRESUPUESTO*/
+  /* FIN VISUALIZAR ARCHIVOS TEMPORALES DEL PRESUPUESTO*/
 
 
   aceptarConformidadArchivo(idCodigoArchivo: number): Observable<WsApiOutResponse> {

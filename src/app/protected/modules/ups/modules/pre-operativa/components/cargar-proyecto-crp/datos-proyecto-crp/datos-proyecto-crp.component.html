@@ -1,204 +1,118 @@
 <div class="page">
-  
-  <div style="text-align: center;">
-  
-  
-      <mat-toolbar class="mat-primary mat-dialog-header">
-        <span style="font-size: 18px !important; font-weight: bold;">DATOS GENERALES DEL PROYECTO</span>
-        <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
-          <mat-icon>clear</mat-icon>
-        </button>
-        
-      </mat-toolbar>
-      <div mat-dialog-content>
-      <mat-card-content>
-      
-        <mat-tab-group >
-  
-          <mat-tab label="PRE OPERATIVA">
-    
-            <div class="contenido-formulario" [formGroup]="proyectoForm1">
-    
-    
-              <mat-grid-list cols="12" rowHeight="50px">
-    
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
-                  <mat-form-field appearance="outline">
-                    <mat-label>N° Convenio Cooperación</mat-label>
-                    <input matInput formControlName="numeroConvenio" solonumero>
-                  </mat-form-field>
-    
-                </mat-grid-tile>
-    
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Plazo Ejecución (días)</mat-label>
-                    <input matInput formControlName="plazoEjecucion" solonumero>
-                  </mat-form-field>
-    
-                </mat-grid-tile>
-    
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12,  md: 3, lg: 3, xl: 3}">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Fecha Inicio Obra</mat-label>
-                    <input matInput [matDatepicker]="picker1" readonly formControlName="fechaInicioObra">
-                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-    
-                  </mat-form-field>
-    
-    
-                </mat-grid-tile>
-    
-               
-    
-              </mat-grid-list>
-    
-    
-              <mat-grid-list cols="12" rowHeight="50px">
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Entidad Bancaria</mat-label>
-                    <input matInput formControlName="entidadBancaria" solonumero>
-                  </mat-form-field>
-    
-                </mat-grid-tile>
-    
-               
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 6, lg: 6, xl: 6}">
-                  <mat-form-field appearance="outline">
-                    <mat-label>N° Cuenta Ahorros N.E.</mat-label>
-                    <input matInput formControlName="numeroCta" solonumero>
-                  </mat-form-field>
-    
-                </mat-grid-tile>
-    
-           
-    
-              </mat-grid-list>
-    
-    
-              <p-fieldset legend="Desembolso">
-                <mat-grid-list cols="12" rowHeight="50px">
-                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Monto S/.</mat-label>
-                      <input matInput formControlName="monto" solonumero>
-                    </mat-form-field>
-    
-                  </mat-grid-tile>
-    
-                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12,  md: 3, lg: 3, xl: 3}">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Fecha Trámite</mat-label>
-                      <input matInput [matDatepicker]="picker2" readonly formControlName="fechaTramite">
-                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                      <mat-datepicker #picker2></mat-datepicker>
-    
-                    </mat-form-field>
-    
-    
-                  </mat-grid-tile>
-    
-                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12,  md: 3, lg: 3, xl: 3}">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Fecha Recepción</mat-label>
-                      <input matInput [matDatepicker]="picker3" readonly formControlName="fechaRecepcion">
-                      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                      <mat-datepicker #picker3></mat-datepicker>
-    
-                    </mat-form-field>
-    
-    
-                  </mat-grid-tile>
-    
-                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
-                    <mat-form-field appearance="outline">
-                      <mat-label>Número Voucher</mat-label>
-                      <input matInput formControlName="nroVoucher" solonumero>
-                    </mat-form-field>
-    
-                  </mat-grid-tile>
-    
-                 
-    
-                  <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
-    
-                    <mat-form-field appearance="outline">
-                      <mat-label>Adjuntar Voucher</mat-label>
-                      <input matInput formControlName="adjuntarVoucher" type="text">
-                      <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input"
-                        color="primary">
-                        <mat-icon>attach_file</mat-icon>
-                      </button>
-                      <input class="none" type="file" id="fileFoto" >
-                    </mat-form-field>
-    
-                  </mat-grid-tile>
-    
-                </mat-grid-list>
-              </p-fieldset>
-    
-              <mat-grid-tile [responsiveRows]="{xs: 0, sm: 0, md: 9, lg: 9, xl: 9}">
-    
-    
-              </mat-grid-tile>
-    
-              <mat-grid-list cols="12" rowHeight="50px">
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
-    
-                  <mat-form-field appearance="outline">
-                    <mat-label>Acta Entrega del Terreno</mat-label>
-                    <input matInput formControlName="actaTerreno" type="text">
-                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input" color="primary">
-                      <mat-icon>attach_file</mat-icon>
-                    </button>
-                    <input class="none" type="file" id="fileFoto" >
-                  </mat-form-field>
-    
-                </mat-grid-tile>
-    
-                <mat-grid-tile [responsiveRows]="{xs: 0, sm: 0, md: 4, lg: 4, xl: 4}">
-    
-    
-                </mat-grid-tile>
-    
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
-    
-                  <mat-form-field appearance="outline">
-                    <mat-label>Informe de Compatibilidad</mat-label>
-                    <input matInput formControlName="informeCompat" type="text">
-                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input" color="primary">
-                      <mat-icon>attach_file</mat-icon>
-                    </button>
-                    <input class="none" type="file" id="fileFoto" >
-                  </mat-form-field>
-    
-                </mat-grid-tile>
-    
-    
-              </mat-grid-list>
-    
-    
-    
-            </div>
-    
-            <div align="center" class="example-button-row acciones-margen-derecho">
-              <button color="primary" mat-raised-button >
-                <mat-icon>save</mat-icon>Guardar
+
+  <div >
+
+
+    <mat-toolbar class="mat-primary mat-dialog-header">
+      <span style="font-size: 18px !important; font-weight: bold;">DATOS GENERALES DEL PROYECTO</span>
+      <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+        <mat-icon>clear</mat-icon>
+      </button>
+
+    </mat-toolbar>
+    <div mat-dialog-content>
+      <div class="contenido-formulario" [formGroup]="proyectoForm1">
+
+        <p-fieldset legend="Datos generales">
+        <mat-grid-list cols="12" rowHeight="50px">
+
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md:  3, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>N° Convenio Cooperación</mat-label>
+              <input matInput formControlName="numeroConvenio" solonumero>
+            </mat-form-field>
+
+          </mat-grid-tile>
+
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12,  md: 3, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Inicio de ejecución de Obra</mat-label>
+              <input matInput [matDatepicker]="picker1" readonly formControlName="fechaInicioObra">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+
+            </mat-form-field>
+
+
+          </mat-grid-tile>
+
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+            <mat-form-field appearance="outline">
+              <mat-label>Plazo de ejecución de obra</mat-label>
+              <input matInput formControlName="plazoEjecucion" solonumero>
+            </mat-form-field>
+
+          </mat-grid-tile>
+
+           <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+
+            <mat-form-field appearance="outline">
+              <mat-label>Acta Entrega del Terreno</mat-label>
+              <input matInput formControlName="actaTerreno" type="text">
+              <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input"
+                color="primary">
+                <mat-icon>attach_file</mat-icon>
               </button>
-            
-              
-            </div>
-          </mat-tab>
-    
+              <input class="none" type="file" id="fileFoto">
+            </mat-form-field>
+
+          </mat-grid-tile>
+
+   
+        </mat-grid-list>
+
+
+        <mat-grid-list cols="12" rowHeight="50px">
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
+
+           
+          </mat-grid-tile>
+
+          <mat-grid-tile [responsiveRows]="{xs: 0, sm: 0, md: 5, lg: 5, xl: 5}">
+
+
+          </mat-grid-tile>
+
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+
+            <mat-form-field appearance="outline">
+              <mat-label>Informe de Compatibilidad</mat-label>
+              <input matInput formControlName="informeCompat" type="text">
+              <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input"
+                color="primary">
+                <mat-icon>attach_file</mat-icon>
+              </button>
+              <input class="none" type="file" id="fileFoto">
+            </mat-form-field>
+
+          </mat-grid-tile>
+
+
+        </mat-grid-list>
+        </p-fieldset>
+
+
+      </div>
+
+      <div align="center" class="example-button-row acciones-margen-derecho">
+        <button color="primary" mat-raised-button>
+          <mat-icon>save</mat-icon>Guardar
+        </button>
+
+
+      </div>
+      <mat-card-content>
+
+        <mat-tab-group>
+        
+
           <mat-tab label="PROFESIONALES NE">
-    
+
             <div class="contenido-formulario" [formGroup]="proyectoForm2">
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Cargo</mat-label>
@@ -209,373 +123,369 @@
                     </mat-select>
                   </mat-form-field>
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Tipo Documento Identidad</mat-label>
-                    <mat-select formControlName="tipoDoc"  [(ngModel)]="trabajador.tipoDocumento">
+                    <mat-select formControlName="tipoDoc" [(ngModel)]="trabajador.tipoDocumento">
                       <mat-option *ngFor="let est of listTipoDocumento" [value]="est.codigo">
-                       {{est.nombre}}
+                        {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-grid-tile>
-    
-    
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>N° Documento Identidad</mat-label>
-                    <input matInput formControlName="nroDoc"  (blur)="buscarPersona()" 
-                    [(ngModel)]="trabajador.numeroDocumento">
+                    <input matInput formControlName="nroDoc" (blur)="buscarPersona()"
+                      [(ngModel)]="trabajador.numeroDocumento">
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
-    
+
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Apellido Paterno</mat-label>
                     <input matInput formControlName="apellidoPaterno" sololetra>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Apellido Materno</mat-label>
                     <input matInput formControlName="apellidoMaterno" sololetra>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Nombres</mat-label>
                     <input matInput formControlName="nombres" sololetra>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
-    
-    
+
+
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
-    
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Género</mat-label>
                     <mat-select formControlName="genero">
-                      <mat-option >
+                      <mat-option>
                         --SELECCIONAR--
                       </mat-option>
-                      
+
                       <mat-option *ngFor="let est of listTipoGenero" [value]="est.codigo">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12,  md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Fecha de Nacimiento</mat-label>
                     <input matInput [matDatepicker]="picker7" readonly formControlName="fechaNacimiento"
-                    (dateInput)="ageCalculator()" (dateChange)="ageCalculator()" [(ngModel)]="age">
+                      (dateInput)="ageCalculator()" (dateChange)="ageCalculator()" [(ngModel)]="age">
                     <mat-datepicker-toggle matSuffix [for]="picker7"></mat-datepicker-toggle>
                     <mat-datepicker #picker7></mat-datepicker>
-    
+
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Edad</mat-label>
                     <input matInput formControlName="edad" [(ngModel)]="trabajador.edad">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
-               
-    
+
+
+
               </mat-grid-list>
-    
-    
-    
+
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Departamento</mat-label>
                     <mat-select formControlName="departamento" class="tamanio-seleccionar">
                       <mat-option [value]="-1">--SELECCIONAR--</mat-option>
                       <mat-option *ngFor="let est of listDepartamento2" [value]="est.codigo"
-                      (click)="buscarProvincia2(est.codigo)">
+                        (click)="buscarProvincia2(est.codigo)">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
 
-               
-    
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Provincia</mat-label>
-                    <mat-select formControlName="provincia" class="tamanio-seleccionar" 
-                      [disabled]="enabledProvincia2">
+                    <mat-select formControlName="provincia" class="tamanio-seleccionar" [disabled]="enabledProvincia2">
                       <mat-option [value]="-1">--SELECCIONAR--</mat-option>
-                      <mat-option *ngFor="let est of listProvincia2" [value]="est.codigo" (click)="buscarDistrito2(est.codigo)"> 
+                      <mat-option *ngFor="let est of listProvincia2" [value]="est.codigo"
+                        (click)="buscarDistrito2(est.codigo)">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Distrito</mat-label>
-                    <mat-select formControlName="distrito" class="tamanio-seleccionar"
-                    [disabled]="enabledDistrito2">
+                    <mat-select formControlName="distrito" class="tamanio-seleccionar" [disabled]="enabledDistrito2">
                       <mat-option [value]="-1">--SELECCIONAR--</mat-option>
                       <mat-option *ngFor="let est of listDistrito2" [value]="est.codigo">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
-      
-    
-    
+
+
+
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
                   <mat-form-field appearance="outline">
                     <mat-label>Dirección</mat-label>
                     <input matInput formControlName="direccion">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-           
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Teléfono</mat-label>
                     <input matInput formControlName="telefono">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Correo Electrónico</mat-label>
                     <input matInput formControlName="correo">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
-    
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4 }">
-    
+
                   <mat-form-field appearance="outline">
                     <mat-label>Adjuntar foto</mat-label>
                     <input matInput formControlName="foto" type="text">
-                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input" color="primary" (click)="buscarFoto($event)">
+                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input"
+                      color="primary" (click)="buscarFoto($event)">
                       <mat-icon>attach_file</mat-icon>
                     </button>
-                    <input class="none" type="file" id="fileFoto" (change)="cargarFoto($event)" >
+                    <input class="none" type="file" id="fileFoto" (change)="cargarFoto($event)">
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
-             
-    
+
+
+
               </mat-grid-list>
-    
-    
-    
+
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Tipo Colegiatura</mat-label>
-                    <mat-select formControlName="tipoColegiatura" class="tamanio-seleccionar" >
-                      <mat-option [value]="-1"  >--SELECCIONAR--</mat-option>
-                      <mat-option *ngFor="let est of listTipoColegiatura" [value]="est.codigo" >
+                    <mat-select formControlName="tipoColegiatura" class="tamanio-seleccionar">
+                      <mat-option [value]="-1">--SELECCIONAR--</mat-option>
+                      <mat-option *ngFor="let est of listTipoColegiatura" [value]="est.codigo">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-  
-               
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>N° Colegiatura</mat-label>
-                    <input matInput formControlName="nroColegiatura" >
+                    <input matInput formControlName="nroColegiatura">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Profesión</mat-label>
                     <input matInput formControlName="profesion">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
               </mat-grid-list>
-    
+
               <mat-grid-list cols="12" rowHeight="50px">
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12,  md: 3, lg: 3, xl: 3}">
                   <mat-form-field appearance="outline">
                     <mat-label>Fecha Inicio de Contrato</mat-label>
-                    <input matInput [matDatepicker]="picker5" readonly formControlName="fechaInicioContrato"
-                   >
+                    <input matInput [matDatepicker]="picker5" readonly formControlName="fechaInicioContrato">
                     <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
                     <mat-datepicker #picker5></mat-datepicker>
-    
+
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 2, lg: 2, xl: 2}">
                   <mat-form-field appearance="outline">
                     <mat-label>Monto Contrato</mat-label>
-                    <input matInput formControlName="montoContrato" >
+                    <input matInput formControlName="montoContrato">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
-    
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+
+
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 2, lg: 2, xl: 2}">
                   <mat-form-field appearance="outline">
                     <mat-label>% Informe Compatibilidad S/.</mat-label>
-                    <input matInput formControlName="porcInformeComp" >
+                    <input matInput formControlName="porcInformeComp">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 2, lg: 2, xl: 2}">
                   <mat-form-field appearance="outline">
                     <mat-label>% Garantía S/.</mat-label>
                     <input matInput formControlName="porcGarantia">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-             
-    
-    
-    
-              </mat-grid-list>
-    
-              <mat-grid-list cols="12" rowHeight="50px">
-                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
-    
-                  <mat-form-field appearance="outline">     
+                <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
+
+                  <mat-form-field appearance="outline">
                     <mat-label>Adjuntar Contrato</mat-label>
                     <input matInput formControlName="contrato" type="text">
-                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input" color="primary" (click)="buscarContrato($event)">
+                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input"
+                      color="primary" (click)="buscarContrato($event)">
                       <mat-icon>attach_file</mat-icon>
                     </button>
                     <input class="none" type="file" id="fileContrato" (change)="cargarContrato($event)">
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
+
+
               </mat-grid-list>
-    
+
+            
             </div>
-  
+
             <div align="center" class="example-button-row acciones-margen-derecho">
               <button color="primary" mat-raised-button (click)="addRow()">
                 <mat-icon>save</mat-icon>Guardar
               </button>
-            
-              
+
+
             </div>
-  
+
             <mat-card class="example-card">
               <table mat-table [dataSource]="dataSource">
-          
+
                 <ng-container matColumnDef="nro">
                   <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
-                  <td mat-cell *matCellDef="let row"  >{{row.id}} </td>
+                  <td mat-cell *matCellDef="let row">{{row.id}} </td>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="nombre">
                   <th mat-header-cell *matHeaderCellDef class="formato_header_table"> NOMBRE </th>
-                  <td mat-cell *matCellDef="let row" > {{row.nombre}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row.nombre}} </td>
                 </ng-container>
-                
-                <ng-container matColumnDef="cargo"> 
+
+                <ng-container matColumnDef="cargo">
                   <th mat-header-cell *matHeaderCellDef class="formato_header_table">CARGO </th>
-                  <td mat-cell *matCellDef="let row" > {{row.cargo}} </td>
-                </ng-container>             
-                
-                <ng-container matColumnDef="dni"> 
-                  <th mat-header-cell *matHeaderCellDef class="formato_header_table">DNI </th>
-                  <td mat-cell *matCellDef="let row" > {{row.dni}} </td>
+                  <td mat-cell *matCellDef="let row"> {{row.cargo}} </td>
                 </ng-container>
-            
-            
-               
-            
-                <tr mat-header-row *matHeaderRowDef="columnas" class = "mat-header-row-formato"></tr>
+
+                <ng-container matColumnDef="dni">
+                  <th mat-header-cell *matHeaderCellDef class="formato_header_table">DNI </th>
+                  <td mat-cell *matCellDef="let row"> {{row.dni}} </td>
+                </ng-container>
+
+
+
+
+                <tr mat-header-row *matHeaderRowDef="columnas" class="mat-header-row-formato"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnas"></tr>
               </table>
             </mat-card>
-            
+
           </mat-tab>
-    
-    
+
+
           <mat-tab label="MIEMBROS NE">
-    
+
             <div class="contenido-formulario" [formGroup]="proyectoForm3">
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Cargo</mat-label>
@@ -586,264 +496,264 @@
                     </mat-select>
                   </mat-form-field>
                 </mat-grid-tile>
-  
-  
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Tipo Documento Identidad</mat-label>
-                    <mat-select formControlName="tipoDoc"  [(ngModel)]="trabajador2.tipoDocumento">
+                    <mat-select formControlName="tipoDoc" [(ngModel)]="trabajador2.tipoDocumento">
                       <mat-option *ngFor="let est of listTipoDocumento" [value]="est.codigo">
-                       {{est.nombre}}
+                        {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-grid-tile>
-    
-                
-    
-              
+
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>N° Documento Identidad</mat-label>
                     <input matInput formControlName="nroDoc" (blur)="buscarPersona2()" solonumero
-                    [(ngModel)]="trabajador2.numeroDocumento">
+                      [(ngModel)]="trabajador2.numeroDocumento">
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Apellido Paterno</mat-label>
                     <input matInput formControlName="apellidoPaterno" sololetra>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Apellido Materno</mat-label>
                     <input matInput formControlName="apellidoMaterno" sololetra>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Nombres</mat-label>
                     <input matInput formControlName="nombres" sololetra>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
-    
+
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
-    
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Género</mat-label>
                     <mat-select formControlName="genero">
-                      <mat-option >
+                      <mat-option>
                         --SELECCIONAR--
                       </mat-option>
-                      
+
                       <mat-option *ngFor="let est of listTipoGenero" [value]="est.codigo">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12,  md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Fecha de Nacimiento</mat-label>
                     <input matInput [matDatepicker]="picker6" readonly formControlName="fechaNacimiento"
-                    (dateInput)="ageCalculator2()" (dateChange)="ageCalculator2()" [(ngModel)]="age2" >
+                      (dateInput)="ageCalculator2()" (dateChange)="ageCalculator2()" [(ngModel)]="age2">
                     <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
                     <mat-datepicker #picker6></mat-datepicker>
-    
+
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
-            
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 3, lg: 3, xl: 3}">
                   <mat-form-field appearance="outline">
                     <mat-label>Edad</mat-label>
-                    <input matInput formControlName="edad" [(ngModel)]="trabajador2.edad" >
+                    <input matInput formControlName="edad" [(ngModel)]="trabajador2.edad">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
+
               </mat-grid-list>
-    
-    
-    
+
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Departamento</mat-label>
                     <mat-select formControlName="departamento" class="tamanio-seleccionar">
                       <mat-option [value]="-1">--SELECCIONAR--</mat-option>
                       <mat-option *ngFor="let est of listDepartamento3" [value]="est.codigo"
-                      (click)="buscarProvincia3(est.codigo)">
+                        (click)="buscarProvincia3(est.codigo)">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
 
-               
-    
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Provincia</mat-label>
-                    <mat-select formControlName="provincia" class="tamanio-seleccionar" 
-                      [disabled]="enabledProvincia3">
+                    <mat-select formControlName="provincia" class="tamanio-seleccionar" [disabled]="enabledProvincia3">
                       <mat-option [value]="-1">--SELECCIONAR--</mat-option>
-                      <mat-option *ngFor="let est of listProvincia3" [value]="est.codigo" (click)="buscarDistrito3(est.codigo)"> 
+                      <mat-option *ngFor="let est of listProvincia3" [value]="est.codigo"
+                        (click)="buscarDistrito3(est.codigo)">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Distrito</mat-label>
-                    <mat-select formControlName="distrito" class="tamanio-seleccionar"
-                    [disabled]="enabledDistrito3">
+                    <mat-select formControlName="distrito" class="tamanio-seleccionar" [disabled]="enabledDistrito3">
                       <mat-option [value]="-1">--SELECCIONAR--</mat-option>
                       <mat-option *ngFor="let est of listDistrito3" [value]="est.codigo">
                         {{est.nombre}}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
-    
+
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
                   <mat-form-field appearance="outline">
                     <mat-label>Dirección</mat-label>
                     <input matInput formControlName="direccion">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
+
               </mat-grid-list>
-    
-    
+
+
               <mat-grid-list cols="12" rowHeight="50px">
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Teléfono</mat-label>
                     <input matInput formControlName="telefono">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
                   <mat-form-field appearance="outline">
                     <mat-label>Correo Electrónico</mat-label>
                     <input matInput formControlName="correo">
                   </mat-form-field>
-    
-    
+
+
                 </mat-grid-tile>
-    
-    
-    
+
+
+
                 <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 4, lg: 4, xl: 4}">
-    
+
                   <mat-form-field appearance="outline">
                     <mat-label>Adjuntar foto</mat-label>
                     <input matInput formControlName="foto" type="text">
-                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input" color="primary" (click)="buscarFoto2($event)">
+                    <button mat-icon-button matTooltip="Adjuntar foto" type="button" class="btn-icon-input"
+                      color="primary" (click)="buscarFoto2($event)">
                       <mat-icon>attach_file</mat-icon>
                     </button>
                     <input class="none" type="file" id="fileFoto2" (change)="cargarFoto2($event)">
                   </mat-form-field>
-    
+
                 </mat-grid-tile>
-    
+
               </mat-grid-list>
-    
-    
-    
-    
+
+
+
+
             </div>
-  
+
             <div align="center" class="example-button-row acciones-margen-derecho">
-              <button color="primary" mat-raised-button >
+              <button color="primary" mat-raised-button>
                 <mat-icon>save</mat-icon>Guardar
               </button>
-            
-              
+
+
             </div>
-  
+
             <mat-card class="example-card">
-              <table mat-table >
-          
+              <table mat-table>
+
                 <ng-container matColumnDef="nro">
                   <th mat-header-cell *matHeaderCellDef class="formato_header_table"> N°</th>
-                  <td mat-cell *matCellDef="let row"  > </td>
+                  <td mat-cell *matCellDef="let row"> </td>
                 </ng-container>
-            
+
                 <ng-container matColumnDef="nombre">
                   <th mat-header-cell *matHeaderCellDef class="formato_header_table"> NOMBRE </th>
-                  <td mat-cell *matCellDef="let row" >  </td>
+                  <td mat-cell *matCellDef="let row"> </td>
                 </ng-container>
-                
-                <ng-container matColumnDef="cargo"> 
+
+                <ng-container matColumnDef="cargo">
                   <th mat-header-cell *matHeaderCellDef class="formato_header_table">CARGO </th>
-                  <td mat-cell *matCellDef="let row" >  </td>
-                </ng-container>             
-                
-                <ng-container matColumnDef="dni"> 
-                  <th mat-header-cell *matHeaderCellDef class="formato_header_table">DNI </th>
-                  <td mat-cell *matCellDef="let row" >  </td>
+                  <td mat-cell *matCellDef="let row"> </td>
                 </ng-container>
-            
-            
-               
-            
-                <tr mat-header-row *matHeaderRowDef="columnas" class = "mat-header-row-formato"></tr>
+
+                <ng-container matColumnDef="dni">
+                  <th mat-header-cell *matHeaderCellDef class="formato_header_table">DNI </th>
+                  <td mat-cell *matCellDef="let row"> </td>
+                </ng-container>
+
+
+
+
+                <tr mat-header-row *matHeaderRowDef="columnas" class="mat-header-row-formato"></tr>
                 <tr mat-row *matRowDef="let row; columns: columnas"></tr>
               </table>
             </mat-card>
-  
+
           </mat-tab>
-    
+
         </mat-tab-group>
-        </mat-card-content>
-    
-      </div>
-    
+      </mat-card-content>
+
+    </div>
+
   </div>
-  
-  </div>
+
+</div>

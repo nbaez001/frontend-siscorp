@@ -1,132 +1,141 @@
+<!-- CABECERA -->
+<mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
+  <span>ADJUNTAR ARCHIVOS AL EXPEDIENTE TÉCNICO </span>
+  <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- CABECERA -->
 
-    <!-- CABECERA -->
-    <mat-toolbar class="mat-primary mat-elevation-z2 cabecera">
-      <span>ADJUNTAR ARCHIVOS AL EXPEDIENTE TÉCNICO </span>
-       <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
-          <mat-icon>clear</mat-icon> 
-      </button> 
-    </mat-toolbar>
-    <!-- CABECERA -->
+<div mat-dialog-content class="contenido-formulario" [formGroup]="archivoForm">
+  <div class="columna">
+    <div>
+      <mat-form-field appearance="outline" style="width: 360px; margin-right: 10px;">
+        <mat-label>Tipo Documento:</mat-label>
+        <mat-select formControlName="tipoDocArchivoFrmCtrl" [value]="selectedDefault">
+          <mat-option *ngFor="let tipoDoc of tipoDocArchivo" [value]="tipoDoc">{{tipoDoc.cidNombre}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-label>
+        <span class="mat-raised-button btn-file">
+          Examinar...<input #myInput type="file" (change)="selectFile($event)" id="idFile" [disabled]="examinarFiles">
+          <!--     Examinar...<input type="file" (click)="onFileSelected()" id="idFile"  [disabled]="examinarFiles"> -->
+        </span>
+      </mat-label>
 
-        <div mat-dialog-content class="contenido-formulario" [formGroup]="archivoForm">
-            <div class="columna">
-                    <div>
-                        <mat-form-field appearance="outline" style="width: 360px; margin-right: 10px;">
-                             <mat-label>Tipo Documento:</mat-label>
-                             <mat-select   formControlName="tipoDocArchivoFrmCtrl" [value] = "selectedDefault">
-                                <mat-option  *ngFor="let tipoDoc of tipoDocArchivo" [value]="tipoDoc">{{tipoDoc.cidNombre}}
-                                </mat-option>
-                              </mat-select>                
-                        </mat-form-field>
-                    <mat-label  >
-                     <span class="mat-raised-button btn-file">
-                        Examinar...<input #myInput type="file" (change)="selectFile($event)" id="idFile"  [disabled]="examinarFiles">
-                <!--     Examinar...<input type="file" (click)="onFileSelected()" id="idFile"  [disabled]="examinarFiles"> -->
-                      </span>
-                    </mat-label>
-             
-                    <mat-label *ngIf="fileUploadRes.status !=='progress'" style="margin-left: 10px;">
-                         {{archivo}}
-                    </mat-label>
-            
-                    <div *ngIf="fileUploadRes.status==='progress'">
-                      <div class="progress">
-                        <div class="progress-bar" [style.width.%]= "fileUploadRes.message" [style.padding-left.%]= "fileUploadRes.message"
-                        role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{fileUploadRes.messageAux}}%</div>
-                    </div>
-                   </div>    
-                </div>                     
-            </div>
-     
-          <div class="columna">
-                  <mat-form-field appearance="outline" >                                  
-                      <mat-label>Descripción</mat-label>
-                      <input matInput formControlName="descArchivoFrmCtrl"  maxlength="100" >
-                  </mat-form-field>
-                         
-                 <button color="primary" mat-raised-button [disabled]="!selectedFiles" (click)="validarSubidaArchivo($event)" type="button"  style="height: 65px;margin-right:10px;">
-                   <mat-icon>file_upload</mat-icon>
-                   <mat-label  style="margin-right:35px;">CARGAR ARCHIVO</mat-label>
-                </button>      
-          </div>
+      <mat-label *ngIf="fileUploadRes.status !=='progress'" style="margin-left: 10px;">
+        {{archivo}}
+      </mat-label>
+
+      <div *ngIf="fileUploadRes.status==='progress'">
+        <div class="progress">
+          <div class="progress-bar" [style.width.%]="fileUploadRes.message"
+            [style.padding-left.%]="fileUploadRes.message" role="progressbar" aria-valuenow="25" aria-valuemin="0"
+            aria-valuemax="100">{{fileUploadRes.messageAux}}%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="columna">
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descArchivoFrmCtrl" maxlength="100">
+    </mat-form-field>
+
+    <button color="primary" mat-raised-button [disabled]="!selectedFiles" (click)="validarSubidaArchivo($event)"
+      type="button" style="height: 65px;margin-right:10px;">
+      <mat-icon>file_upload</mat-icon>
+      <mat-label style="margin-right:35px;">CARGAR ARCHIVO</mat-label>
+    </button>
+  </div>
 
 
 
-    <div class="bandeja scrollPersonal">
+  <div class="bandeja scrollPersonal">
 
-  <!-- BANDEJA -->
+    <!-- BANDEJA -->
     <table mat-table [dataSource]="dataSource">
-    
+
       <ng-container matColumnDef="nro">
-          <th mat-header-cell *matHeaderCellDef> NRO</th>
-          <td mat-cell *matCellDef="let archivo; let i = index">{{i + 1}}</td>    
+        <th mat-header-cell *matHeaderCellDef> NRO</th>
+        <td mat-cell *matCellDef="let archivo; let i = index">{{i + 1}}</td>
       </ng-container>
 
       <ng-container matColumnDef="archivo">
         <th mat-header-cell *matHeaderCellDef> ARCHIVO </th>
-        <td mat-cell *matCellDef="let archivo" class= "convertir-label-link" matTooltip="Descargar Archivo" (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">{{archivo.nombreArchivo}} </td>
+        <td mat-cell *matCellDef="let archivo" class="convertir-label-link" matTooltip="Descargar Archivo"
+          (click)="descargarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo)">{{archivo.nombreArchivo}} </td>
       </ng-container>
 
       <ng-container matColumnDef="tipoDoc">
-          <th mat-header-cell *matHeaderCellDef> TIPO DOC. </th>
-          <td mat-cell *matCellDef="let archivo">{{archivo.tipoArchivo}}</td>
+        <th mat-header-cell *matHeaderCellDef> TIPO DOC. </th>
+        <td mat-cell *matCellDef="let archivo">{{archivo.tipoArchivo}}</td>
       </ng-container>
 
       <ng-container matColumnDef="descripcion">
-          <th mat-header-cell *matHeaderCellDef> DESCRIPCION </th>
-          <td mat-cell *matCellDef="let archivo">{{archivo.descripcion}} </td>
+        <th mat-header-cell *matHeaderCellDef> DESCRIPCION </th>
+        <td mat-cell *matCellDef="let archivo">{{archivo.descripcion}} </td>
       </ng-container>
 
       <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef> ESTADO </th>
-          <td mat-cell *matCellDef="let archivo">{{archivo.nombreEstado}} </td>
+        <th mat-header-cell *matHeaderCellDef> ESTADO </th>
+        <td mat-cell *matCellDef="let archivo">{{archivo.nombreEstado}} </td>
       </ng-container>
 
-    <ng-container matColumnDef="accion" stickyEnd>
+      <ng-container matColumnDef="accion" stickyEnd>
         <th mat-header-cell *matHeaderCellDef>ACCIONES</th>
         <td mat-cell *matCellDef="let archivo">
-        <div *ngIf="archivo.estadoCarga  == '4' && archivo.cidTipoArchivo == '007' || archivo.estadoCarga  == '4' && archivo.cidTipoArchivo == '008' 
+          <div
+            *ngIf="archivo.estadoCarga  == '4' && archivo.cidTipoArchivo == '007' || archivo.estadoCarga  == '4' && archivo.cidTipoArchivo == '008' 
                  || archivo.estadoCarga  == '4' && archivo.cidTipoArchivo == '009' || archivo.estadoCarga  == '4' && archivo.cidTipoArchivo == '010'">
-          <button mat-icon-button  color="primary" (click)="visualizarArchivoExcel(archivo.fidProyecto, archivo.cidTipoArchivo, archivo.idCodigoArchivo, archivo.estadoCarga)">
-              <mat-icon  matTooltip = "Visualizar Archivos Temporales Desagregados Gastos Supervisión">search</mat-icon>
-          </button>
-        
-          <button class="tableIconButton mat-icon-btn-style"  [disabled]="btnEliminar" mat-icon-button matTooltip="Eliminar Archivo"
-            (click)="eliminarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo, archivo.cidNombreEstado)">
-              <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;"
-              >close</mat-icon>
-          </button>
-        </div>
-        <div *ngIf="archivo.estadoCarga  == '1' && archivo.cidTipoArchivo == '007' || archivo.estadoCarga  == '1'  && archivo.cidTipoArchivo == '008' 
-                 || archivo.estadoCarga  == '1' && archivo.cidTipoArchivo == '009' || archivo.estadoCarga  == '1' && archivo.cidTipoArchivo == '010'">
-            <button mat-icon-button  color="primary" (click)="visualizarArchivoExcel(archivo.fidProyecto, archivo.cidTipoArchivo, archivo.idCodigoArchivo, archivo.estadoCarga)">
-                <mat-icon  matTooltip = "La Conformidad ya ha sido Realizada">search</mat-icon>
-            </button>    
-        </div>
-
-        <div *ngIf="archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '007' || archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '008' 
-                 || archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '009' || archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '010'">
-              <button mat-icon-button  color="primary" (click)="visualizarArchivoExcelFinal(archivo.fidProyecto, archivo.cidTipoArchivo, archivo.idCodigoArchivo, archivo.estadoCarga)">
-                  <mat-icon  matTooltip = "Visualizar Archivo Final">pageview</mat-icon>
-              </button>   
-        </div>
-       
-        <div *ngIf="archivo.cidTipoArchivo != '007' &&  archivo.cidTipoArchivo != '008' && archivo.cidTipoArchivo != '009' && archivo.cidTipoArchivo != '010' ">
-            <button class="tableIconButton mat-icon-btn-style"  [disabled]="btnEliminar" mat-icon-button matTooltip="Eliminar Archivo"
-              (click)="eliminarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo, archivo.cidNombreEstado)">
-                <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;"
-                >close</mat-icon>
+            <button mat-icon-button color="primary"
+              (click)="visualizarArchivoExcel(archivo.fidProyecto, archivo.cidTipoArchivo, archivo.idCodigoArchivo, archivo.estadoCarga)">
+              <mat-icon matTooltip="Visualizar Archivos Temporales Desagregados Gastos Supervisión">search</mat-icon>
             </button>
-          </div> 
+
+            <button class="tableIconButton mat-icon-btn-style" [disabled]="btnEliminar" mat-icon-button
+              matTooltip="Eliminar Archivo"
+              (click)="eliminarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo, archivo.cidNombreEstado)">
+              <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close</mat-icon>
+            </button>
+          </div>
+          <div
+            *ngIf="archivo.estadoCarga  == '1' && archivo.cidTipoArchivo == '007' || archivo.estadoCarga  == '1'  && archivo.cidTipoArchivo == '008' 
+                 || archivo.estadoCarga  == '1' && archivo.cidTipoArchivo == '009' || archivo.estadoCarga  == '1' && archivo.cidTipoArchivo == '010'">
+            <button mat-icon-button color="primary"
+              (click)="visualizarArchivoExcel(archivo.fidProyecto, archivo.cidTipoArchivo, archivo.idCodigoArchivo, archivo.estadoCarga)">
+              <mat-icon matTooltip="La Conformidad ya ha sido Realizada">search</mat-icon>
+            </button>
+          </div>
+
+          <div
+            *ngIf="archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '007' || archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '008' 
+                 || archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '009' || archivo.estadoCarga  == '2' && archivo.cidTipoArchivo == '010'">
+            <button mat-icon-button color="primary"
+              (click)="visualizarArchivoExcelFinal(archivo.fidProyecto, archivo.cidTipoArchivo, archivo.idCodigoArchivo, archivo.estadoCarga)">
+              <mat-icon matTooltip="Visualizar Archivo Final">pageview</mat-icon>
+            </button>
+          </div>
+
+          <div
+            *ngIf="archivo.cidTipoArchivo != '007' &&  archivo.cidTipoArchivo != '008' && archivo.cidTipoArchivo != '009' && archivo.cidTipoArchivo != '010' ">
+            <button class="tableIconButton mat-icon-btn-style" [disabled]="btnEliminar" mat-icon-button
+              matTooltip="Eliminar Archivo"
+              (click)="eliminarArchivo(archivo.idCodigoArchivo , archivo.nombreArchivo, archivo.cidNombreEstado)">
+              <mat-icon style="font-size: 16px !important; margin-left: -1.5px; margin-top: -1px;">close</mat-icon>
+            </button>
+          </div>
         </td>
-    </ng-container>
+      </ng-container>
 
 
       <tr mat-header-row *matHeaderRowDef="columnas"></tr>
       <tr mat-row *matRowDef="let row; columns: columnas"></tr>
     </table>
 
-    
+
 
     <!--   <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
         <mat-progress-spinner 
@@ -135,29 +144,22 @@
         </mat-progress-spinner>
       </mat-card> -->
 
-  </div>  
+  </div>
 </div>
 
 
 <div align="right" class="botones-margen-derecho">
 
   <button color="warn" mat-raised-button (click)="dialogRef.close()">
-      <!-- <mat-icon>highlight_off</mat-icon> Cerrar -->
-      <mat-icon svgIcon="24-hours-pais"></mat-icon> Cerrar
+    <!-- <mat-icon>highlight_off</mat-icon> Cerrar -->
+    <mat-icon svgIcon="24-hours-pais"></mat-icon> Cerrar
 
   </button>
 
 </div>
 
 <br><br>
-  
-<ngx-spinner
-bdColor="rgba(0,0,0,0.70)"
-size="large"
-color="#fff"
-type="line-scale-party"
->
-<p style="font-size: 20px; color: white">Cargando...</p>
-</ngx-spinner>
 
-    
+<ngx-spinner bdColor="rgba(0,0,0,0.70)" size="large" color="#fff" type="line-scale-party">
+  <p style="font-size: 20px; color: white">Cargando...</p>
+</ngx-spinner>

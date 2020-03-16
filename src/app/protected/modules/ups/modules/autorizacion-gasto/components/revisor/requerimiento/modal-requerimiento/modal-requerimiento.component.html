@@ -7,7 +7,7 @@
       <mat-icon>clear</mat-icon>
     </button>
   </mat-toolbar>
-  <div >
+  <div>
 
     <!-- <button (click)="generarRequerimiento()" mat-icon-button color="primary"
       matTooltip="Editar Autorización Gasto" matTooltipClass="formato-tooltip">
@@ -25,6 +25,10 @@
     </button> -->
 
   </div>
+
+  <ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+  </ngx-spinner>
 
 
   <div mat-dialog-content>
@@ -103,7 +107,8 @@
 
           <ng-container matColumnDef="item">
             <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ITEM</th>
-            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla" style="height: 40px !important;"> {{coti.item}} </td>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla" style="height: 40px !important;">
+              {{coti.item}} </td>
           </ng-container>
 
           <ng-container matColumnDef="numeroHojaTramite">
@@ -142,7 +147,8 @@
 
           <ng-container matColumnDef="puestoActual">
             <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ENCARGADO </th>
-            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla" style="cursor:pointer;" (click)="verHistorial(coti.idCodigo,coti.numeroAutorizacionGasto)"> {{coti.puestoActual}} </td>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla" style="cursor:pointer;"
+              (click)="verHistorial(coti.idCodigo,coti.numeroAutorizacionGasto)"> {{coti.puestoActual}} </td>
           </ng-container>
 
           <ng-container matColumnDef="fechaAprobacionAutorizacion">
@@ -162,8 +168,8 @@
                   <mat-icon>edit</mat-icon>
                 </button>
 
-                <button (click)="eliminarAutorizacion(coti.numeroAutorizacionGasto)" mat-icon-button color="primary"
-                  matTooltip="Eliminar Autorización Gasto" matTooltipClass="formato-tooltip">
+                <button (click)="eliminarRequerimiento(coti.numeroAutorizacionGasto,coti.idCodigo)" mat-icon-button
+                  color="primary" matTooltip="Eliminar Autorización Gasto" matTooltipClass="formato-tooltip">
                   <mat-icon>delete</mat-icon>
                 </button>
 

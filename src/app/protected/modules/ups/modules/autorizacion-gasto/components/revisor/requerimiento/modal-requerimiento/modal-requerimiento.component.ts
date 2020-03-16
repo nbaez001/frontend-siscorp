@@ -22,6 +22,7 @@ import * as _moment from 'moment';
 import { HistorialAutorizacionComponent } from '../historial-autorizacion/historial-autorizacion.component';
 import { PdfViewerComponent } from '@shared/components/pdf-viewer/pdf-viewer.component';
 import { DataSharedService } from '../../../../service/data-shared.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-modal-requerimiento',
@@ -50,6 +51,7 @@ export class ModalRequerimientoComponent implements OnInit {
   disableBuscar: boolean;
 
   constructor(
+    private spinner: NgxSpinnerService,
     private dataShared: DataSharedService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -211,6 +213,19 @@ export class ModalRequerimientoComponent implements OnInit {
     });
   }
 
+  eliminarRequerimiento(viewCotizacion: string, idCodigo: number) {
+    this.openDialogMensajeConfirm('Está seguro de eliminar la Autorización de Gasto ' + viewCotizacion + '?', true);
+    this.dialogRefMessage.afterClosed().pipe(filter(verdadero => !!verdadero)).subscribe(() => {
+      // this.spinner.show();
+      this.cotizacionService.eliminarAutoGastoCostoDirecto(idCodigo).subscribe(response => {
+        this.cargarListaRequerimiento();
+        this.snackBar.open('La Autorización de Gasto ' + viewCotizacion + " eliminada");
+        // this.spinner.hide();
+      });
+    });
+
+  }
+
   //*************************** PDF ******************************************* */
   reporteDetalleAutoGasto() {
     this.cotizacionService.generaReporteDetalleAutoGasto().subscribe(response => {
@@ -295,21 +310,7 @@ export class ModalRequerimientoComponent implements OnInit {
     });
   }
 
-  eliminarAutorizacion(viewCotizacion: string) {
 
-    this.openDialogMensajeConfirm('Está seguro de eliminar la Autorización de Gasto ' + viewCotizacion + '?', true);
-
-    this.dialogRefMessage.afterClosed()
-      .pipe(filter(verdadero => !!verdadero))
-      .subscribe(() => {
-        this.snackBar.open('La Autorización de Gasto ' + viewCotizacion + " eliminada");
-        // viewInsumo.item = this.indexInsumo--;
-        /*  this.cotizacionResponse.splice(this.cotizacionResponse.indexOf(viewCotizacion), 1);
-         this.dataSource = new MatTableDataSource(this.cotizacionResponse);
-         this.dataSource.paginator = this.paginator; */
-      });
-
-  }
 
 
 

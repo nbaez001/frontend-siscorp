@@ -4,15 +4,12 @@ import { AuthService } from 'app/protected/services/auth.service';
 import { MENSAJES } from 'app/common';
 
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatTableDataSource } from '@angular/material';
-import { InfoMessageComponent } from '@shared/components/info-message/info-message.component';
-import { Reniec } from '../../../autorizacion-gasto/dto/response/Reniec';
+
 import { NgxSpinnerService } from 'ngx-spinner';
-import { TrabajadorRequest } from '../../../autorizacion-gasto/dto/request/TrabajadorRequest';
-import { WsResponseProyecto } from '../../../autorizacion-gasto/dto/response/Proyecto';
-import { id } from '@swimlane/ngx-charts/release/utils';
-import { TrabajadorService } from '../../services/trabajador.service';
+
+import { ProyectoService } from '../../services/proyecto.service';
 import { DatosProyectoCrpComponent } from './datos-proyecto-crp/datos-proyecto-crp.component';
-import { BandejaProyectoGestionResponse } from '../../dto/Response/BandejaProyectoGestionResponse';
+import { BandejaProyectoGestionResponse, WsBandejaProyectoGestionResponse } from '../../dto/Response/BandejaProyectoGestionResponse';
 
 @Component({
   selector: 'app-cargar-proyecto-crp',
@@ -23,15 +20,17 @@ export class CargarProyectoCRPComponent implements OnInit {
   
   proyectoForm1: FormGroup;
   
+  
   dataSource: MatTableDataSource<BandejaProyectoGestionResponse>;
+  
   
   
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    
+
     private spinner: NgxSpinnerService,
-   
+    private proyectoService: ProyectoService,
   
     
     private dialog: MatDialog,
@@ -47,19 +46,38 @@ export class CargarProyectoCRPComponent implements OnInit {
     
     this.tituloBandeja();
     this.crearFiltrosForm();
-    this.columnasAutorizacion();
-  
+    this.generarCabeceraColumnasEncargado();
+    this.cargarPerfilPrefactibilidad();
   }
 
   proyectoCRPFiltroForm: FormGroup;
 
   crearFiltrosForm() {
     this.proyectoCRPFiltroForm = new FormGroup({
-      fechaRegDesdeFrmCtrl: new FormControl(null),
-      fechaRegHastaFrmCtrl: new FormControl(null),
-      estadoFrmCtrl: new FormControl(null)
+      tamboFrmCtrl: new FormControl(null),
+      codigoFrmCtrl: new FormControl(null),
+      convenioFrmCtrl: new FormControl(null),
     });
   }
+
+  get tamboFrmCtrl() { return this.proyectoCRPFiltroForm.get('tamboFrmCtrl'); }
+  get codigoFrmCtrl() { return this.proyectoCRPFiltroForm.get('codigoFrmCtrl'); }
+  get convenioFrmCtrl() { return this.proyectoCRPFiltroForm.get('convenioFrmCtrl'); }
+
+  filtrosProyectoRequest: FiltroProyectoRequest = new FiltroProyectoRequest();
+  reiniciar() {
+    this.proyectoCRPFiltroForm.reset('');
+    this.filtrosProyectoRequest = null;
+    this.filtrosProyectoRequest = new FiltroProyectoRequest();
+    this.cargarPerfilPrefactibilidad();
+  }
+
+  public guardarFiltrosBusqueda(): void {
+    this.filtrosProyectoRequest.tambo = this.tamboFrmCtrl.value;
+    this.filtrosProyectoRequest.codigo = this.codigoFrmCtrl.value;
+    this.filtrosProyectoRequest.convenio = this.convenioFrmCtrl.value;
+  }
+
 
   tituloBandeja() {
     this.authService.cabecera.next({
@@ -69,28 +87,86 @@ export class CargarProyectoCRPComponent implements OnInit {
   }
 
   columnas: string[] = [];
-  columnasAutorizacion(): void {
+  generarCabeceraColumnasEncargado(): void {
     this.columnas = [
-      'nro',
-      'numeroHojaTramite',
-      'numeroAutorizacionGasto',
-      'fechaPresentacionPrograma',
-      'montoSolicitado',
-      'montoAutorizado',
+      'item',
+      'nroCodigo',
+      'nroConvenio',
+      'tambo',
+      'inicioObra',
+      'planEjecucion',
+      'ampliacionPlazo',
+      'diasRetraso',
+      'terminoObra',
+      'plazoEjecucionReal',
+      'avanceFisicoProgramado',
+      'avanceFisicoEjecutado',
+      'avanceFinanciero',
       'estado',
-      'fechaAprobacionAutorizacion',
-      'acciones'
-    ];
+      'prestandoServicio',
+      'acciones'];
+  }
+  
+  public buscarPerfilPrefactibilidad($event): void {
+    $event.preventDefault();
+    this.guardarFiltrosBusqueda();
+    this.cargarPerfilPrefactibilidad();
   }
 
   
-  modalDatosProyectoGestion(): void {
+
+  public cargarTablaPrefactibilidad(): void {
+    if (this.proyectoResponse != null && this.proyectoResponse.length > 0) {
+      this.dataSource = new MatTableDataSource(this.proyectoResponse);
+    }
+  }
+
+  proyectoResponse: BandejaProyectoGestionResponse[];
+  disableBuscar: boolean;
+  isLoading: boolean;
+  pagina = 1;
+  cantidad = 10;
+  total = 0;
+  mensaje: string;
+
+  cargarPerfilPrefactibilidad(): void {
+    this.dataSource = null;
+    this.disableBuscar = true;
+    this.proyectoResponse = [];
+    this.isLoading = true;
+    this.proyectoService.listaProyectoCRP(this.pagina, this.cantidad, this.filtrosProyectoRequest)
+      .subscribe(
+        (wsResponseProyecto: WsBandejaProyectoGestionResponse) => {
+         
+          if (wsResponseProyecto.codResultado == 1) {
+            this.proyectoResponse = (wsResponseProyecto.response != null) ? wsResponseProyecto.response : [];
+            this.total = (wsResponseProyecto.total != 0) ? wsResponseProyecto.total : 0;
+            this.cargarTablaPrefactibilidad();
+            
+          } else {
+            this.mensaje = MENSAJES.ERROR_NOFUNCION;
+             
+          }
+          this.isLoading = false;
+          this.disableBuscar = false;
+        },
+        error => {
+
+          console.error(error);
+
+        }
+      );
+  }
+
+  agregarDatosProyectoCRP(proyecto: BandejaProyectoGestionResponse): void {
+    console.log(proyecto)
     const dialogReg: MatDialogRef<DatosProyectoCrpComponent> = this.dialog.open(DatosProyectoCrpComponent, {
       disableClose: true,
       width: '1100px',
       autoFocus: false,
       data: {
-       
+        title:'ACTUALIZAR DATOS GENERALES DEL PROYECTO',objeto: proyecto
+
       },
     });
   }
@@ -115,4 +191,10 @@ interface Profesional {
   cargo?: string
   nombre?: string
   dni?: string
+}
+
+export class FiltroProyectoRequest {
+  convenio?: string;
+  codigo?: string;
+  tambo?: string;
 }

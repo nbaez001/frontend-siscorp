@@ -1,0 +1,25 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": null,
+	"response": [
+        {
+            "idCodigo": 1,
+            "cidCodigo": "001",
+            "cidNombre": "HUGO MC"
+        }
+		,{
+            "idCodigo": 2,
+            "cidCodigo": "002",
+            "cidNombre": "PACO MC"
+        }, {
+            "idCodigo": 3,
+            "cidCodigo": "003",
+            "cidNombre": "LUIS MC"
+        }
+    ],
+	"idPerfil": null
+}
+
+
+ 

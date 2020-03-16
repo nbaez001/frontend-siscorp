@@ -1,6 +1,7 @@
 @import "../src/@shared/scss/style_ua/views/table";
 @import "../src/@shared/scss/style_ua";
 
+
 :host {
   .page {
     .table-resultados {
@@ -138,6 +139,14 @@
       )
     )
   );
+}
+
+.paginacion-right{
+  display: inline !important;
+}
+
+.mat-toolbar-fondo{
+  background: #fff;
 }
 
 ::ng-deep .formato-tooltip {

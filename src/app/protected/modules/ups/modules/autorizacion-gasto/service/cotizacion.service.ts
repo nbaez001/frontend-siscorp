@@ -33,6 +33,10 @@ export class CotizacionService {
     return this.http.post<any>(`${environment.backendUrlProj}/autorizacionGasto/registroAutoGastoCostoDirecto/`, autorizacionGasto);
   }
 
+  eliminarAutoGastoCostoDirecto(idAutoGasto: number) {
+    return this.http.get<any>(`${environment.backendUrlProj}/autorizacionGasto/eliminarAutoGastoCostoDirecto/${idAutoGasto}`);
+  }
+
 
 
   listarCargarDataGastosGenerales(idProyecto: number): Observable<any> {
@@ -55,8 +59,8 @@ export class CotizacionService {
     return this.http.get<WsResponse>(`${environment.backendUrlProj}/autorizacionGasto/listarCategoriaAutocompleteInsumos/`);
   }
 
-  crearRecurso(idProyecto: number, recurso): Observable<any> {
-    return this.http.post<WsResponse>(`${environment.backendUrlProj}/autorizacionGasto/crearRecurso/${idProyecto}/`, recurso);
+  crearRecurso(idProyecto: number, idAutoGasto: number, recurso, sustento): Observable<any> {
+    return this.http.post<WsResponse>(`${environment.backendUrlProj}/autorizacionGasto/crearRecurso/${idProyecto}/${idAutoGasto}/`, recurso, sustento);
   }
 
 

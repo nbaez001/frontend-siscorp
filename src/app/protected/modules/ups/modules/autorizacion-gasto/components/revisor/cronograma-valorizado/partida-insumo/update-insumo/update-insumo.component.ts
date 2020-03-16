@@ -10,6 +10,7 @@ import { MENSAJES } from 'app/common';
 import { CotizacionService } from '../../../../../service/cotizacion.service';
 import { WsResponseCotizacion } from '../../../../../dto/response/Cotizacion';
 import { NodeService } from 'app/protected/modules/ups/modules/expediente/services/node.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-update-insumo',
@@ -38,7 +39,10 @@ export class UpdateInsumoComponent implements OnInit {
   optionsPartida: DataAutocompletePartida[] = [];
   filteredOptionsPartida: Observable<DataAutocompletePartida[]>;
 
+  dataNuevaDataRecurso: nuevaDataRecurso[] = [];
+
   constructor(
+    private spinner: NgxSpinnerService,
     private cotizacionService: CotizacionService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -96,6 +100,7 @@ export class UpdateInsumoComponent implements OnInit {
         if (wsResponseCotizacion.codResultado == 1) {
           this.dataRecursoPartida = (this.datos.dataInsumoSelected) ? wsResponseCotizacion.response : [];// wsResponseCotizacion.response;
           this.generarTablaFrozenScrollableRecursoPartida();
+          console.log(this.dataRecursoPartida);
         } else {
           this.mensaje = MENSAJES.ERROR_NOFUNCION;
         }
@@ -108,38 +113,6 @@ export class UpdateInsumoComponent implements OnInit {
 
   onEditInitRecursoPartida(event) { console.log("onEditInit", event); }
   onEditCompleteRecursoPartida(event) { console.log("onEditComplete", event); }
-
-  //************************************* TABLA TEMPORAL **************************************
-  insumoFormulario() {
-    this.insumoForm = this.formBuilder.group({
-      partidaFrmCtrl: ['', [Validators.required]],
-    });
-  }
-
-  get partidaFrmCtrl() { return this.insumoForm.get('partidaFrmCtrl'); }
-
-  crearRecursoPartidaTemporal() {
-    console.log(this.partidaFrmCtrl.value);
-    (this.dataRecursoPartida.length == 0) ? this.numeroItemMemoria = 1 : this.numeroItemMemoria = this.dataRecursoPartida.length + 1;
-    this.dataRecursoPartida.push(
-      {
-        "nro": this.numeroItemMemoria,
-        "idCategoria": 0,
-        "idRecurso": this.insumo.idRecurso,
-        "nombreRecurso": this.insumo.descripcionSelecion,
-        "unidad": this.insumo.unidad,
-        "cantidad": this.insumo.cantidad,
-        "precio": this.insumo.precio,
-        "parcial": this.insumo.parcial,
-        "partida": this.partidaFrmCtrl.value.cidNombre,
-        "idCodigo": this.partidaFrmCtrl.value.idCodigo,
-        "nroPartida": this.partidaFrmCtrl.value.cidCodigo,
-        "avanceFisico": "50%",
-        "flagAvance": 0,
-      }
-    );
-    console.log(this.dataRecursoPartida);
-  }
 
   //************************************* PARTIDA *************************************
   cargaAutocompletePartida(idProyecto: number) {
@@ -173,15 +146,63 @@ export class UpdateInsumoComponent implements OnInit {
     }
   }
 
-  //******************************************************************************
+  //************************************* TABLA TEMPORAL **************************************
+  insumoFormulario() {
+    this.insumoForm = this.formBuilder.group({
+      partidaFrmCtrl: ['', [Validators.required]],
+    });
+  }
 
-  agregarInsumo() {
-    console.log(this.insumo);
+  get partidaFrmCtrl() { return this.insumoForm.get('partidaFrmCtrl'); }
+
+  crearRecursoPartidaTemporal() {
+    console.log(this.partidaFrmCtrl.value);
+    (this.dataRecursoPartida.length == 0) ? this.numeroItemMemoria = 1 : this.numeroItemMemoria = this.dataRecursoPartida.length + 1;
+    this.dataRecursoPartida.push(
+      {
+        "nro": this.numeroItemMemoria,
+        "idCategoria": 0,//falta
+        "idRecurso": this.insumo.idRecurso,
+        "nombreRecurso": this.insumo.descripcionSelecion,
+        "unidad": this.insumo.unidad,
+        "cantidad": this.insumo.cantidad,
+        "precio": this.insumo.precio,
+        "parcial": this.insumo.parcial,
+        "partida": this.partidaFrmCtrl.value.cidNombre,
+        "nroPartida": this.partidaFrmCtrl.value.cidCodigo,
+        "idPartida": this.partidaFrmCtrl.value.idCodigo,
+        "avanceFisico": "50%",//falta
+        "flagAvance": 0,//falta
+
+      }
+    );
     console.log(this.dataRecursoPartida);
+  }
+
+  //******************************************************************************
+  agregarInsumo() {
     this.openDialogMensajeConfirm(MENSAJES.INSUMO.MODIFICAR_INSUMO, true);
     this.dialogRefMessage.afterClosed().pipe(filter(verdadero => !!verdadero)).subscribe(() => {
-      this.dialogRef.close(true);
-      this.snackBar.open("El insumo ha sido modificado correctamente");
+      // this.spinner.show();
+      this.dataRecursoPartida.forEach(element => {
+        this.dataNuevaDataRecurso.push(
+          {
+            "idCategoria": +element.idCategoria,
+            "idRecurso": +element.idRecurso,
+            "nombreRecurso": element.nombreRecurso,
+            "unidad": element.unidad,
+            "cantidad": +element.cantidad,
+            "precio": element.precio,
+            "parcial": element.parcial,
+            "idPartida": element.idPartida,
+            "avanceFisico": element.avanceFisico
+          }
+        );
+      });
+      console.log(this.dataNuevaDataRecurso);
+
+      // this.dialogRef.close(true);
+      // this.snackBar.open("El insumo ha sido modificado correctamente");
 
     });
 
@@ -259,3 +280,14 @@ export class DataAutocompletePartida {
   cidCodigo?: string;
 }
 
+export class nuevaDataRecurso {
+  idCategoria?: number;
+  idRecurso?: number;
+  nombreRecurso?: string;
+  unidad?: string;
+  cantidad?: number;
+  precio?: string;
+  parcial?: string;
+  idPartida?: number;
+  avanceFisico?: string;
+}

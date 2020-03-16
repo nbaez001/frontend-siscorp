@@ -137,18 +137,18 @@
             <td mat-cell *matCellDef="let coti" >
 
               <!-- <div *ngIf="coti.boolPuesto"> -->
-                <div *ngIf="coti.estado == 'ELABORACION'">
+                <div *ngIf="coti.estado == 'PENDIENTE ASIGNAR PROFESIONALES'">
                 <button (click)="editarProyecto(coti)" mat-icon-button color="primary"
                   matTooltip="Editar proyecto" matTooltipClass="formato-tooltip">
                   <mat-icon>edit</mat-icon>
                 </button>
-
+<!-- 
                 <button (click)="eliminarProyecto(coti.idProyecto)" mat-icon-button color="primary"
                   matTooltip="Eliminar proyecto" matTooltipClass="formato-tooltip">
                   <mat-icon>delete</mat-icon>
                 </button>
 
-               
+                -->
 
               </div>
 
@@ -177,9 +177,9 @@
               <span class="example-spacer"></span>
             </div> -->
             <div>
-              <!-- <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad"
+              <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad"
                 [showFirstLastButtons]="true" [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
-              </mat-paginator> -->
+              </mat-paginator>
             </div>
           </mat-toolbar-row>
         </mat-toolbar>

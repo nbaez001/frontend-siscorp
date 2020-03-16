@@ -1,0 +1,163 @@
+<div class="page">
+
+  <mat-accordion class="filtros">
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+        <mat-panel-title>
+          <img src="assets/images/busqueda.png" width="26px" height="26px"><strong style="color: white;">FILTROS DE
+            BÚSQUEDA</strong>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <button (click)="JASPER()">JASPER</button>
+
+      <div class="mat-expansion-panel-cuerpo">
+        <div [formGroup]="filtrosForm">
+          <mat-grid-list cols="10" rowHeight="50px">
+
+            <mat-grid-tile [responsiveRows]="{xs: 10, sm: 5, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>NOMBRE TAMBO</mat-label>
+                <input matInput formControlName="nombreTamboFrmCtrl">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 10, sm: 5, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>SNIP</mat-label>
+                <input matInput formControlName="snipFrmCtrl">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 10, sm: 5, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>CRP</mat-label>
+                <mat-select formControlName="crpFrmCtrl">
+                  <mat-option>--SELECCIONAR--</mat-option>
+                  <mat-option *ngFor="let est of dataItemCrp" [value]="est.idCodigo">{{est.cidNombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 10, sm: 5, md: 4, lg: 2, xl: 2}">
+              <mat-form-field appearance="outline">
+                <mat-label>ESTADO</mat-label>
+                <mat-select formControlName="estadoFrmCtrl">
+                  <mat-option>--SELECCIONAR--</mat-option>
+                  <mat-option *ngFor="let est of dataItemEstado" [value]="est.idCodigo">{{est.cidNombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile [responsiveRows]="{xs: 10, sm: 5, md: 4, lg: 2, xl: 2}" class="dialog-form-actions">
+              <button mat-mini-fab (click)="buscarFiltros($event)" [disabled]="disableBuscar">
+                <mat-icon matTooltip="Buscar documentos" matTooltipClass="formato-tooltip">search</mat-icon>
+              </button>
+              <button mat-mini-fab class="mat-grey-300-bg" (click)="reiniciar()">
+                <mat-icon matTooltip="Limpiar filtros de búsqueda" matTooltipClass="formato-tooltip">clear_all
+                </mat-icon>
+              </button>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- <div class="btn_agregar_position">
+    <button matTooltip="Registrar Autorización de Gasto" matTooltipClass="formato-tooltip" mat-mini-fab
+      class="btn_agregar" (click)="generarAutoGasto()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div> -->
+
+  <div class="bandeja mat-elevation-z6 ">
+    <div class="table-container clear-both">
+
+      <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="item">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ITEM</th>
+          <td mat-cell *matCellDef="let coti ; let i = index" class="estilo-center-cuerpo-tabla"
+            style="height: 40px !important;">{{coti.item}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreTambo">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">NOMBRE TAMBO </th>
+          <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.nombreTambo}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="snip">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">SNIP</th>
+          <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.snip}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nroConvenio">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">NÚMERO CONVENIO</th>
+          <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.nroConvenio}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="crp">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">CRP</th>
+          <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.crp}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="cantidadArchivos">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">ARCHIVOS EXP. TEC.</th>
+          <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.cantidadArchivos}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ESTADO </th>
+          <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla"> {{coti.estado}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">ACCIONES</th>
+          <td mat-cell *matCellDef="let coti">
+            <button (click)="adjuntarArchivos(21150)" mat-icon-button color="primary" matTooltip="Adjuntar archivos" matTooltipClass="formato-tooltip">
+              <mat-icon>cloud_upload</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+      </table>
+
+      <div class="empty" *ngIf="!isLoading && dataSource === null">
+        No existe datos para mostrar en la tabla
+      </div>
+
+      <div *ngIf="isLoading" class="spinerTable">
+        <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </div>
+
+      <mat-toolbar>
+        <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+          <!-- <div *ngIf="dataSource !== null" style="float: left !important;">
+            <mat-icon svgIcon="excel-pais" (click)="descargarExcel($event)" class="excel-icon-top"
+              matTooltip="Descargar Excel"></mat-icon>
+            <span class="example-spacer"></span>
+          </div> -->
+          <div>
+            <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad" [showFirstLastButtons]="true"
+              [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+            </mat-paginator>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+
+    </div>
+  </div>
+
+</div>

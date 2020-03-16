@@ -26,22 +26,29 @@ export class ProyectoService{
 
   listaProyectoGestion(pagina : number, cantidad: number, filtrosProyectoRequest): Observable<WsBandejaProyectoGestionResponse> {
     // return this.http.get<WsResponseProyecto>('assets/proyecto.json');
-    return this.http.post<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/listarProyectoGestion/${pagina}/${cantidad}`, filtrosProyectoRequest);
+    return this.http.post<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/listarProyectoGestion/${pagina}/${cantidad}`, filtrosProyectoRequest);
+  }
+
+ 
+  
+  listaProyectoCRP(pagina : number, cantidad: number, filtrosProyectoRequest): Observable<WsBandejaProyectoGestionResponse> {
+    // return this.http.get<WsResponseProyecto>('assets/proyecto.json');
+    return this.http.post<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/bandejaProyectoAurizacionGasto/listarProyectoEjecucion/${pagina}/${cantidad}`, filtrosProyectoRequest);
   }
 
   cargarDatosProyecto(proyecto): Observable<WsBandejaProyectoGestionResponse> {
     // return this.http.get<WsResponseProyecto>('assets/proyecto.json');
-    return this.http.post<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/cargarDatosProyectoAG/`, proyecto);
+    return this.http.post<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/cargarDatosProyecto/`, proyecto);
   }
 
   eliminarProyectoGestion(idProyecto): Observable<WsBandejaProyectoGestionResponse> {
     // return this.http.get<WsResponseProyecto>('assets/proyecto.json');
-    return this.http.get<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/eliminarProyectoGestion/${idProyecto}`);
+    return this.http.get<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/eliminarProyectoGestion/${idProyecto}`);
   }
 
   actualizarProyectoGestion(proyecto): Observable<WsBandejaProyectoGestionResponse> {
     // return this.http.get<WsResponseProyecto>('assets/proyecto.json');
-    return this.http.post<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/actualizarProyecto/`, proyecto);
+    return this.http.post<WsBandejaProyectoGestionResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/actualizarProyecto/`, proyecto);
   }
 
 

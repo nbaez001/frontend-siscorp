@@ -15,7 +15,21 @@ export class datosProyecto{
 	codCgp?:string;
 	idCP?:String;
 
-    
+    item?:string;
+    convenio?:string;
+   	numPlazo?:string;
+    fechaInicio?:string;
+  	ampliacionPlazo?:string;
+    fechaFinProgramado?:string;
+    diasTranscurridos?:string;
+    avanceFisProgramado?:string; 
+    avanceFisEjecutado?:string; 
+    numPorcAvanze?:string;
+    fecAutorizacion?:string;
+    montoConvenio?:string;
+    montoAcumulado?:string;
+	saldoDisponible?:string;
+			
     motivoPriorizacion?:string;
     nroCPBeneficiados?:string;
     adjuntarCP?:string;

@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'pre-operativa',
     loadChildren: './modules/pre-operativa/pre-operativa.module#PreOperativaModule'
+  },
+  {
+    path: 'archivo-expediente',
+    loadChildren: './modules/archivo-expediente/archivo-expediente.module#ArchivoExpedienteModule'
   }
   
   

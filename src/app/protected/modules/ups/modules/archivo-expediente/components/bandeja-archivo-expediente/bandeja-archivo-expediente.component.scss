@@ -1,6 +1,6 @@
 @import "../src/@shared/scss/style_ua/views/table";
 @import "../src/@shared/scss/style_ua";
- 
+
 :host {
   .page {
     .table-resultados {
@@ -71,9 +71,9 @@
     }
 
     .paginacion-right{
-      display: inline !important;
-    }
-
+        display: inline !important;
+      }
+      
     button:hover mat-icon {
       font-size: 36px !important;
     }
@@ -94,48 +94,60 @@
     }
 
     .btn_agregar {
-      float: right;
-    }
-
-    .btn_agregar_position {
-      position: relative;
-      margin-top: -10px;
-      padding: 5px;
-      padding-bottom: 18px;
-
-      button {
-        margin: 0 10px;
+        float: right;
       }
-    }
+  
+      .btn_agregar_position {
+        position: relative;
+        margin-top: -10px;
+        padding: 5px;
+        padding-bottom: 18px;
+  
+        button {
+          margin: 0 10px;
+        }
+      }
+
   }
+
+  @include mat-table-columns(
+    (
+      item: (
+        width: 2rem
+      ),
+      nombreTambo: (
+        width: 6rem
+      ),
+      snip: (
+        width: 6rem
+      ),
+      nroConvenio: (
+        width: 6rem
+      ),
+      crp: (
+        width: 6rem
+      ),
+      cantidadArchivos: (
+        width: 6rem
+      ),
+      estado: (
+        width: 6rem
+      ),
+      acciones: (
+        width: 4rem
+      )
+    )
+  );
 }
+
 ::ng-deep .formato-tooltip {
   background-color: black !important;
   color: white;
   font-size: 18px;
   width: auto !important;
 }
+
+// ::ng-deep .mat-dialog-container {
+//     overflow: hidden !important;
+//   }
   
-  
-.mat-input-element {
-  font: caption;
-
-}
-
-
-
-::ng-deep .mat-form-field-infix {
- 
-  width: 0 !important;
-}
-::ng-deep .formato-tooltip {
-  background-color: black !important;
-  color: white;
-  font-size: 18px;
-  width: auto !important;
-}
-
-.myFieldset .ui-fieldset, .ui-fieldset .ui-fieldset-legend {
-  background-color: transparent;
-  border-color: transparent;
-  }

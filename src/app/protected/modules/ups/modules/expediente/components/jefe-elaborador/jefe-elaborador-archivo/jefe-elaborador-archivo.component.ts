@@ -441,7 +441,8 @@ export class JefeElaboradorArchivoComponent implements OnInit {
 
     if (this.tipoDocArchivoAux.cidCodigo == '007' || this.tipoDocArchivoAux.cidCodigo == '008' ||
       this.tipoDocArchivoAux.cidCodigo == '009' || this.tipoDocArchivoAux.cidCodigo == '010') {
-      this.validarDocumentoExcel(Number(archivoRequest.fidProyecto), this.tipoDocArchivoAux.idCodigo, archivoRequest, this.tipoDocArchivoAux.cidCodigo);
+      this.validarDocumentoExcel(Number(archivoRequest.fidProyecto), 
+      this.tipoDocArchivoAux.idCodigo, archivoRequest, this.tipoDocArchivoAux.cidCodigo);
     } else {
       this.subirArchivo();
     }

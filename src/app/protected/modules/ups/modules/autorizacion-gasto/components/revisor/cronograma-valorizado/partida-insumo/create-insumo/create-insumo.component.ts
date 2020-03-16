@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, AfterViewInit, Renderer } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, AfterViewInit, Renderer, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar, MatTableDataSource } from '@angular/material';
 import { ItemComboService } from '../../../../../service/item-combo.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
@@ -12,6 +12,8 @@ import { WsResponseCotizacion } from '../../../../../dto/response/Cotizacion';
 import { NodeService } from 'app/protected/modules/ups/modules/expediente/services/node.service';
 import { UpdateInsumoComponent } from './../update-insumo/update-insumo.component';
 import { ValidationService } from 'app/protected/modules/ua/services/validation.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { DataSharedService } from '../../../../../service/data-shared.service';
 
 
 @Component({
@@ -19,7 +21,7 @@ import { ValidationService } from 'app/protected/modules/ua/services/validation.
   templateUrl: './create-insumo.component.html',
   styleUrls: ['./create-insumo.component.scss']
 })
-export class CreateInsumoComponent implements OnInit {
+export class CreateInsumoComponent implements OnInit, OnDestroy {
 
   mensaje: string;
   dataItemTipoInsumo: any;
@@ -47,8 +49,11 @@ export class CreateInsumoComponent implements OnInit {
   categoriaInsumo: any;
 
   dataNuevaDataRecurso: nuevaDataRecurso[] = [];
+  nuevaDataRecursoSustento: nuevaDataRecursoSustento = new nuevaDataRecursoSustento();
 
   constructor(
+    private dataShared: DataSharedService,
+    private spinner: NgxSpinnerService,
     @Inject(ValidationService) private validationService: ValidationService,
     private cotizacionService: CotizacionService,
     private formBuilder: FormBuilder,
@@ -182,7 +187,7 @@ export class CreateInsumoComponent implements OnInit {
             }
           });
           dialogReg.afterClosed().pipe(filter(r => !!r)).subscribe(() => {
-
+            
           });
           // });
         });
@@ -289,6 +294,7 @@ export class CreateInsumoComponent implements OnInit {
         "eliminar": this.numeroItemMemoria,
       }
     );
+    // this.dataRecursoPartida= this.dataRecursoPartida.reverse(); 
     console.log(this.dataRecursoPartida);
   }
 
@@ -299,45 +305,11 @@ export class CreateInsumoComponent implements OnInit {
   onEditInitRecursoPartida(event) { console.log("onEditInit", event); }
   onEditCompleteRecursoPartida(event) { console.log("onEditComplete", event); }
 
-  //***************************************************************************************************
-  // cargarComboPartida() {
-  // this.filtrosRequestPartida.nombrePartida='';
-  // this.cotizacionService.listarPartidaAutocompleteInsumos(21150,this.filtrosRequestPartida).subscribe(dataItem=>{
-  //   this.dataItemPartida = dataItem.response
-  // });
-  // this.itemComboService.ObtenerListadoPartida().subscribe(dataItem => {
-  //   this.dataItemPartida = dataItem.response
-  // });
-  // }
-  //*****************************
-  // evaluaInsumo($event) {
-  // console.log(this.insumo.descripcion);
-  // if (this.existeRecurso === false) {
-  //   console.log("nuevoooo");
-  // }
-  // if (this.insumo.descripcion == "") {
-  //   this.openDialogMensajeConfirm(`El recurso ${this.insumo.descripcion} no existe, ¿Desea crear un nuevo recurso?`, true);
-  //   this.dialogRefMessage.afterClosed().pipe(filter(verdadero => !!verdadero)).subscribe(() => {
-  //     this.dialogRef.close(true);
-  //     this.renderer.selectRootElement('#focus_unidad').focus();
-  //     this.deshabilitadoUnidad = false;
-  //     this.deshabilitadoCantidad = false;
-  //     this.deshabilitadoPrecio = false;
-  //   });
-  // }
-  // }
-
-  //**************************
   agregarInsumo(): void {
-    console.log(this.insumo);
-    console.log(this.dataRecursoPartida);
     if (this.insumoForm.valid) {
       this.openDialogMensajeConfirm(MENSAJES.INSUMO.GUARDAR_INSUMO, true);
       this.dialogRefMessage.afterClosed().pipe(filter(verdadero => !!verdadero)).subscribe(() => {
-        this.dialogRef.close(true);
-        /*
-          guardar en database
-        */
+        this.spinner.show();
         this.dataRecursoPartida.forEach(element => {
           this.dataNuevaDataRecurso.push(
             {
@@ -352,11 +324,24 @@ export class CreateInsumoComponent implements OnInit {
             }
           );
         });
+
+        this.nuevaDataRecursoSustento.sustento = this.insumo.sustento;
         console.log(this.dataNuevaDataRecurso);
-        this.cotizacionService.crearRecurso(21150, this.dataNuevaDataRecurso).subscribe();
+        this.cotizacionService.crearRecurso(this.datos.idProyecto, this.datos.idAutoGasto, this.dataNuevaDataRecurso, this.nuevaDataRecursoSustento)
+          .subscribe(response => {
+            console.log(response);
+            if (response.msgResultado == "OK") {
+              this.dataShared.enviarIdAutoGenerado(+this.datos.idAutoGasto);//actualiza grilla
+              this.dataShared.enviarIdAutoGeneradoDesdeCrearRecurso(+response.idAutoGasto);//enviar nuevo id-auto-gasto
+              this.dialogRef.close(true);
+              this.spinner.hide();
+              this.snackBar.open("El insumo ha sido registrado correctamente");
+            } else {
+              this.spinner.hide();
+              this.openDialogMensaje("ERROR DE TRANSACCIÓN EN BASE DE DATOS", true);
+            }
+          });
 
-
-        this.snackBar.open("El insumo ha sido registrado correctamente");
       });
     }
   }
@@ -369,12 +354,24 @@ export class CreateInsumoComponent implements OnInit {
     });
   }
 
+  public openDialogMensaje(message: string, alerta: boolean): void {
+    this.dialogRefMessage = this.dialog.open(InfoMessageComponent, {
+      width: '400px',
+      disableClose: true,
+      data: { message: message, alerta: alerta }
+    });
+  }
+
+  ngOnDestroy() {
+  }
+
 }
 
 interface DataInsumo {
   dataInsumoSelected?: any;
   flag?: any
   idProyecto?: number;
+  idAutoGasto?: number;
 }
 
 export class Insumo {
@@ -421,5 +418,7 @@ export class nuevaDataRecurso {
   idPartida?: number;
 }
 
-
+export class nuevaDataRecursoSustento {
+  sustento?: string;
+}
 

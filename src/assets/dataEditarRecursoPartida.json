@@ -4,40 +4,49 @@
     "total": 3,
     "response": [
         {
-            "idCodigo": 1,
             "nro": 1,
+            "idCategoria":1,
+            "idRecurso": 100,
+            "nombreRecurso": "clavos",
+            "unidad":"und",
+            "cantidad": 25,
+            "precio": "20.20",
+            "parcial": "200.20",
             "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
-            "cantidad": "5",
             "nroPartida":"01.01.01.01",
+            "idPartida": 1200,
             "avanceFisico":"50%",
             "flagAvance":0
         },
         {
-            "idCodigo": 2,
             "nro": 2,
-            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
-            "cantidad": "20",
-            "nroPartida":"01.02.01.02",
+            "idCategoria":1,
+            "idRecurso": 100,
+            "nombreRecurso": "clavos",
+            "unidad":"und",
+            "cantidad": 15,
+            "precio": "20.20",
+            "parcial": "200.20",
+            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
+            "nroPartida":"01.01.01.01",
+            "idPartida": 1200,
             "avanceFisico":"50%",
             "flagAvance":0
         },
         {
-            "idCodigo": 3,
             "nro": 3,
+            "idCategoria":1,
+            "idRecurso": 100,
+            "nombreRecurso": "clavos",
+            "unidad":"und",
+            "cantidad": 23,
+            "precio": "20.20",
+            "parcial": "200.20",
             "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
-            "cantidad": "10",
-            "nroPartida":"01.03.01.03",
+            "nroPartida":"01.01.01.01",
+            "idPartida": 1200,
             "avanceFisico":"100%",
             "flagAvance":1
-        },
-        {
-            "idCodigo": 3,
-            "nro": 4,
-            "partida": "MURO DE LADRILLO CABEZA KK 18 HUECOS C:A 1:5; JUNTA 1.5 CM",
-            "cantidad": "5",
-            "nroPartida":"01.04.01.04",
-            "avanceFisico":"20%",
-            "flagAvance":0
         }
     ]
 }

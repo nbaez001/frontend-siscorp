@@ -65,7 +65,7 @@ export class DatosProyectoGestionComponent implements OnInit {
     if (this.data.objeto) {
       // this.proyectoService.editarProyectoGestion(this.data.objeto).subscribe(
       //   (wsResponseProyecto: WsBandejaProyectoGestionResponse) => {
-      console.log("DDD");
+      console.log(this.data.objeto);
       // console.log(wsResponseProyecto)
       // if (wsResponseProyecto.codResultado == 1) {
       // this.proyectoResponse = (wsResponseProyecto.response != null) ? wsResponseProyecto.response : [];
@@ -73,13 +73,14 @@ export class DatosProyectoGestionComponent implements OnInit {
 
       this.proyectoForm.get('nombreProyecto').setValue(this.data.objeto.nombreProyecto);
       this.proyectoForm.get('nombreTambo').setValue(this.data.objeto.nombreTambo);
-      this.proyectoForm.get('snip').setValue(this.data.objeto.snip);
-      this.proyectoForm.get('montoViable').setValue(this.data.objeto.montoViable);
+      this.proyectoForm.get('codigo').setValue(this.data.objeto.snip);
+      this.proyectoForm.get('motivoPriorizacion').setValue(this.data.objeto.motivoPriorizacion);
+      // this.proyectoForm.get('montoViable').setValue(this.data.objeto.montoViable);
       this.proyectoForm.get('crp').setValue(+this.data.objeto.codCgp);
       this.proyectoForm.get('cgp').setValue(+this.data.objeto.codCrp);
-      this.proyectoForm.get('longitud').setValue(this.data.objeto.longitud);
-      this.proyectoForm.get('latitud').setValue(this.data.objeto.latitud);
-      this.proyectoForm.get('altitud').setValue(this.data.objeto.altitud);
+      // this.proyectoForm.get('longitud').setValue(this.data.objeto.longitud);
+      // this.proyectoForm.get('latitud').setValue(this.data.objeto.latitud);
+      // this.proyectoForm.get('altitud').setValue(this.data.objeto.altitud);
 
       // this.proyectoForm.get('cgp').value;
       // } else {
@@ -109,19 +110,19 @@ export class DatosProyectoGestionComponent implements OnInit {
     this.proyectoForm = this.formBuilder.group({
       nombreProyecto: [{ value: '', disabled: false }, [Validators.required]],
       nombreTambo: [{ value: '', disabled: false }, [Validators.required]],
-      snip: [{ value: '', disabled: false }, [Validators.required]],
-      motivoPriorizacion: [{ value: '', disabled: false }, [Validators.required]],
-      nroCPBeneficiados: [{ value: '', disabled: false }, [Validators.required]],
-      adjuntarCP: [{ value: '', disabled: false }, [Validators.required]],
-      nroPoblacionBeneficiada: [{ value: '', disabled: false }, [Validators.required]],
-      montoViable: [{ value: '', disabled: false }, [Validators.required]],
-      ubigeo: [{ value: '', disabled: false }, [Validators.required]],
-      lugar: [{ value: '', disabled: true }, [Validators.required]],
-      longitud: [{ value: '', disabled: false }, [Validators.required]],
-      latitud: [{ value: '', disabled: false }, [Validators.required]],
-      altitud: [{ value: '', disabled: false }, [Validators.required]],
-      crp: [{ value: '', disabled: false }, [Validators.required]],
-      cgp: [{ value: '', disabled: false }, [Validators.required]],
+      codigo: [{ value: '', disabled: false }, [Validators.required]],
+      motivoPriorizacion: [{ value: '', disabled: false }],
+      // nroCPBeneficiados: [{ value: '', disabled: false }, [Validators.required]],
+      adjuntarCP: [{ value: '', disabled: false }],
+      // nroPoblacionBeneficiada: [{ value: '', disabled: false }, [Validators.required]],
+      // montoViable: [{ value: '', disabled: false }, [Validators.required]],
+      // ubigeo: [{ value: '', disabled: false }, [Validators.required]],
+      // lugar: [{ value: '', disabled: true }, [Validators.required]],
+      // longitud: [{ value: '', disabled: false }, [Validators.required]],
+      // latitud: [{ value: '', disabled: false }, [Validators.required]],
+      // altitud: [{ value: '', disabled: false }, [Validators.required]],
+      crp: [{ value: '', disabled: false }],
+      cgp: [{ value: '', disabled: false }],
     });
   }
 
@@ -159,118 +160,212 @@ export class DatosProyectoGestionComponent implements OnInit {
   //////////////////////////
 
 
-  registrarProyecto() {
-    if (this.proyectoForm.valid) {
-      let proyecto = new datosProyecto();
-      console.log(this.proyectoForm)
-      proyecto.nombreProyecto = this.proyectoForm.get('nombreProyecto').value;
-      proyecto.tambo = this.proyectoForm.get('nombreTambo').value;
-      proyecto.ubigeo = this.proyectoForm.get('ubigeo').value;
-      proyecto.motivoPriorizacion = this.proyectoForm.get('motivoPriorizacion').value;
-      proyecto.nroCPBeneficiados = this.proyectoForm.get('nroCPBeneficiados').value;
-      proyecto.adjuntarCP = this.proyectoForm.get('adjuntarCP').value;
-      proyecto.nroPoblacionBeneficiada = this.proyectoForm.get('nroPoblacionBeneficiada').value;
-      proyecto.lugar = this.proyectoForm.get('lugar').value;
-      proyecto.longitud = this.proyectoForm.get('longitud').value;
-      proyecto.latitud = this.proyectoForm.get('latitud').value;
-      proyecto.altitud = this.proyectoForm.get('altitud').value;
-      proyecto.snip = this.proyectoForm.get('snip').value;
-      proyecto.montoViable = this.proyectoForm.get('montoViable').value;
-      proyecto.crp = this.proyectoForm.get('crp').value;
-      proyecto.cgp = this.proyectoForm.get('cgp').value;
+  // registrarProyecto() {
+  //   if (this.proyectoForm.valid) {
+  //     let proyecto = new datosProyecto();
+  //     console.log(this.proyectoForm)
+  //     proyecto.nombreProyecto = this.proyectoForm.get('nombreProyecto').value;
+  //     proyecto.tambo = this.proyectoForm.get('nombreTambo').value;
+  //     proyecto.ubigeo = this.proyectoForm.get('ubigeo').value;
+  //     proyecto.motivoPriorizacion = this.proyectoForm.get('motivoPriorizacion').value;
+  //     proyecto.nroCPBeneficiados = this.proyectoForm.get('nroCPBeneficiados').value;
+  //     proyecto.adjuntarCP = this.proyectoForm.get('adjuntarCP').value;
+  //     proyecto.nroPoblacionBeneficiada = this.proyectoForm.get('nroPoblacionBeneficiada').value;
+  //     proyecto.lugar = this.proyectoForm.get('lugar').value;
+  //     proyecto.longitud = this.proyectoForm.get('longitud').value;
+  //     proyecto.latitud = this.proyectoForm.get('latitud').value;
+  //     proyecto.altitud = this.proyectoForm.get('altitud').value;
+  //     proyecto.snip = this.proyectoForm.get('snip').value;
+  //     proyecto.montoViable = this.proyectoForm.get('montoViable').value;
+  //     proyecto.crp = this.proyectoForm.get('crp').value;
+  //     proyecto.cgp = this.proyectoForm.get('cgp').value;
       
       
 
-      if (this.data.objeto.idProyecto) {
-        console.log("AAAa")
-        proyecto.idCP = "31";
-        proyecto.etapaProceso= "2";
-        proyecto.idProyecto= this.data.objeto.idProyecto;
-        console.log(proyecto)
-        console.log(proyecto);
-        this.proyectoService.actualizarProyectoGestion(proyecto).subscribe(
-          () => {
-            this.dialogRef.close(true);
-            this.snackBar.open("Proyecto guardado");
-          }
+  //     if (this.data.objeto.idProyecto) {
+  //       console.log("AAAa")
+  //       proyecto.idCP = "31";
+  //       proyecto.etapaProceso= "2";
+  //       proyecto.idProyecto= this.data.objeto.idProyecto;
+  //       console.log(proyecto)
+  //       console.log(proyecto);
+  //       this.proyectoService.actualizarProyectoGestion(proyecto).subscribe(
+  //         () => {
+  //           this.dialogRef.close(true);
+  //           this.snackBar.open("Proyecto guardado");
+  //         }
 
-        );
-      } else {
-        console.log("bbb")
+  //       );
+  //     } else {
+  //       console.log("bbb")
 
 
 
-        console.log(proyecto);
-        proyecto.etapaProceso= "2";
-        this.proyectoService.cargarDatosProyecto(proyecto).subscribe(
-          () => {
-            this.dialogRef.close(true);
-            this.snackBar.open("Proyecto guardado");
-          }
+  //       console.log(proyecto);
+  //       proyecto.etapaProceso= "2";
+  //       this.proyectoService.cargarDatosProyecto(proyecto).subscribe(
+  //         () => {
+  //           this.dialogRef.close(true);
+  //           this.snackBar.open("Proyecto guardado");
+  //         }
 
-        );
-      }
+  //       );
+  //     }
 
-    } else {
-      const dialogRefMessage = this.dialog.open(InfoMessageComponent, {
-        width: '400px',
-        disableClose: true,
-        data: {
-          message: 'Ingrese los campos obligatorios',
-          alerta: true,
-          confirmacion: false
-        }
-      });
-    }
+  //   } else {
+  //     const dialogRefMessage = this.dialog.open(InfoMessageComponent, {
+  //       width: '400px',
+  //       disableClose: true,
+  //       data: {
+  //         message: 'Ingrese los campos obligatorios',
+  //         alerta: true,
+  //         confirmacion: false
+  //       }
+  //     });
+  //   }
 
-  }
+  // }
 
+
+  // enviarProyecto(){
+  //   if (this.proyectoForm.valid) {
+  //     let proyecto = new datosProyecto();
+  //     console.log(this.proyectoForm)
+  //     proyecto.nombreProyecto = this.proyectoForm.get('nombreProyecto').value;
+  //     proyecto.tambo = this.proyectoForm.get('nombreTambo').value;
+  //     proyecto.ubigeo = this.proyectoForm.get('ubigeo').value;
+  //     proyecto.motivoPriorizacion = this.proyectoForm.get('motivoPriorizacion').value;
+  //     proyecto.nroCPBeneficiados = this.proyectoForm.get('nroCPBeneficiados').value;
+  //     proyecto.adjuntarCP = this.proyectoForm.get('adjuntarCP').value;
+  //     proyecto.nroPoblacionBeneficiada = this.proyectoForm.get('nroPoblacionBeneficiada').value;
+  //     proyecto.lugar = this.proyectoForm.get('lugar').value;
+  //     proyecto.longitud = this.proyectoForm.get('longitud').value;
+  //     proyecto.latitud = this.proyectoForm.get('latitud').value;
+  //     proyecto.altitud = this.proyectoForm.get('altitud').value;
+  //     proyecto.snip = this.proyectoForm.get('snip').value;
+  //     proyecto.montoViable = this.proyectoForm.get('montoViable').value;
+  //     proyecto.crp = this.proyectoForm.get('crp').value;
+  //     proyecto.cgp = this.proyectoForm.get('cgp').value;
+      
+      
+
+  //     if (this.data.objeto.idProyecto) {
+  //       console.log("AAAa")
+  //       proyecto.idCP = "31";
+  //       proyecto.idProyecto= this.data.objeto.idProyecto;
+  //       proyecto.etapaProceso= "5";
+  //       this.proyectoService.actualizarProyectoGestion(proyecto).subscribe(
+  //         () => {
+  //           this.dialogRef.close(true);
+  //           this.snackBar.open("Proyecto enviado");
+  //         }
+
+  //       );
+  //     } else {
+  //       console.log("bbb")
+  //       proyecto.etapaProceso= "5";
+  //       this.proyectoService.cargarDatosProyecto(proyecto).subscribe(
+  //         () => {
+  //           this.dialogRef.close(true);
+  //           this.snackBar.open("Proyecto enviado");
+  //         }
+
+  //       );
+  //     }
+
+  //   } else {
+  //     const dialogRefMessage = this.dialog.open(InfoMessageComponent, {
+  //       width: '400px',
+  //       disableClose: true,
+  //       data: {
+  //         message: 'Ingrese los campos obligatorios',
+  //         alerta: true,
+  //         confirmacion: false
+  //       }
+  //     });
+  //   }
+
+  // }
 
   enviarProyecto(){
     if (this.proyectoForm.valid) {
       let proyecto = new datosProyecto();
       console.log(this.proyectoForm)
-      proyecto.nombreProyecto = this.proyectoForm.get('nombreProyecto').value;
-      proyecto.tambo = this.proyectoForm.get('nombreTambo').value;
-      proyecto.ubigeo = this.proyectoForm.get('ubigeo').value;
-      proyecto.motivoPriorizacion = this.proyectoForm.get('motivoPriorizacion').value;
-      proyecto.nroCPBeneficiados = this.proyectoForm.get('nroCPBeneficiados').value;
-      proyecto.adjuntarCP = this.proyectoForm.get('adjuntarCP').value;
-      proyecto.nroPoblacionBeneficiada = this.proyectoForm.get('nroPoblacionBeneficiada').value;
-      proyecto.lugar = this.proyectoForm.get('lugar').value;
-      proyecto.longitud = this.proyectoForm.get('longitud').value;
-      proyecto.latitud = this.proyectoForm.get('latitud').value;
-      proyecto.altitud = this.proyectoForm.get('altitud').value;
-      proyecto.snip = this.proyectoForm.get('snip').value;
-      proyecto.montoViable = this.proyectoForm.get('montoViable').value;
-      proyecto.crp = this.proyectoForm.get('crp').value;
-      proyecto.cgp = this.proyectoForm.get('cgp').value;
+      proyecto.nombreProyecto       = this.proyectoForm.get('nombreProyecto').value;
+      proyecto.tambo                = this.proyectoForm.get('nombreTambo').value;
+      // proyecto.ubigeo               = this.proyectoForm.get('ubigeo').value;
+      proyecto.motivoPriorizacion   = this.proyectoForm.get('motivoPriorizacion').value;
+      // proyecto.nroCPBeneficiados    = this.proyectoForm.get('nroCPBeneficiados').value;
+      proyecto.adjuntarCP           = this.proyectoForm.get('adjuntarCP').value;
+      // proyecto.nroPoblacionBeneficiada = this.proyectoForm.get('nroPoblacionBeneficiada').value;
+      // proyecto.lugar                = this.proyectoForm.get('lugar').value;
+      proyecto.idCP                 = '192';
+      proyecto.longitud             = '-72.149902';
+      proyecto.latitud              = '-14.637851';
+      proyecto.altitud              = '4084';
+      proyecto.snip                 = this.proyectoForm.get('codigo').value;
+      // proyecto.montoViable          = this.proyectoForm.get('montoViable').value;
+      proyecto.crp                  = this.proyectoForm.get('crp').value;
+      proyecto.cgp                  = this.proyectoForm.get('cgp').value;
       
-      
-
-      if (this.data.objeto.idProyecto) {
-        console.log("AAAa")
-        proyecto.idCP = "31";
+      if(this.data.objeto.idProyecto){
+      if((this.proyectoForm.get('crp').value>1) && (this.proyectoForm.get('cgp').value>1)){
+        console.log("AAA")
         proyecto.idProyecto= this.data.objeto.idProyecto;
-        proyecto.etapaProceso= "3";
+        console.log(this.data.objeto.idProyecto)
+        proyecto.etapaProceso="5";
+          this.proyectoService.actualizarProyectoGestion(proyecto).subscribe(
+          () => {
+            this.dialogRef.close(true);
+            this.snackBar.open("Proyecto enviado");
+            console.log(proyecto);
+          }
+
+          );
+      }else{
+        console.log("BBB")
+        if(this.proyectoForm.get('crp').value<1){proyecto.crp =""}
+        if(this.proyectoForm.get('cgp').value<1){proyecto.cgp =""}
+      
+        proyecto.idProyecto= this.data.objeto.idProyecto;
+        console.log(proyecto)
+        proyecto.etapaProceso="6";
         this.proyectoService.actualizarProyectoGestion(proyecto).subscribe(
           () => {
             this.dialogRef.close(true);
             this.snackBar.open("Proyecto enviado");
           }
 
-        );
-      } else {
-        console.log("bbb")
-        proyecto.etapaProceso= "3";
-        this.proyectoService.cargarDatosProyecto(proyecto).subscribe(
-          () => {
-            this.dialogRef.close(true);
-            this.snackBar.open("Proyecto enviado");
-          }
+          );
 
-        );
       }
+      }else{
+        if((this.proyectoForm.get('crp').value>1) && (this.proyectoForm.get('cgp').value>1)){
+          console.log("CCC")
+          
+          proyecto.etapaProceso="5";
+            this.proyectoService.cargarDatosProyecto(proyecto).subscribe(
+            () => {
+              this.dialogRef.close(true);
+              this.snackBar.open("Proyecto enviado");
+              console.log(proyecto);
+            }
+  
+            );
+        }else{
+          console.log("DDD")
+          proyecto.etapaProceso="6";
+          this.proyectoService.cargarDatosProyecto(proyecto).subscribe(
+            () => {
+              this.dialogRef.close(true);
+              this.snackBar.open("Proyecto enviado");
+            }
+  
+            );
+  
+        }
+      }
+
 
     } else {
       const dialogRefMessage = this.dialog.open(InfoMessageComponent, {
@@ -286,20 +381,17 @@ export class DatosProyectoGestionComponent implements OnInit {
 
   }
 
-
-  guardarFormulario() {
-    const proyecto = new datosProyecto();
-    proyecto.nombreProyecto = this.proyectoForm.get('nombreProyecto').value;
-    proyecto.tambo = this.proyectoForm.get('nombreTambo').value;
-    proyecto.ubigeo = this.proyectoForm.get('ubigeo').value;
-    proyecto.lugar = this.proyectoForm.get('lugar').value;
-    proyecto.snip = this.proyectoForm.get('snip').value;
-    proyecto.montoViable = this.proyectoForm.get('montoviable').value;
-    proyecto.crp = this.proyectoForm.get('crp').value;
-    proyecto.cgp = this.proyectoForm.get('cgp').value;
-
-
-  }
+  // guardarFormulario() {
+  //   const proyecto = new datosProyecto();
+  //   proyecto.nombreProyecto = this.proyectoForm.get('nombreProyecto').value;
+  //   proyecto.tambo = this.proyectoForm.get('nombreTambo').value;
+  //   proyecto.ubigeo = this.proyectoForm.get('ubigeo').value;
+  //   proyecto.lugar = this.proyectoForm.get('lugar').value;
+  //   proyecto.snip = this.proyectoForm.get('snip').value;
+  //   proyecto.montoViable = this.proyectoForm.get('montoviable').value;
+  //   proyecto.crp = this.proyectoForm.get('crp').value;
+  //   proyecto.cgp = this.proyectoForm.get('cgp').value;
+  // }
 
 
   /////////////GENERAR DEPART- PROV- DISTR ////////////

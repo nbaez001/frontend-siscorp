@@ -150,7 +150,7 @@ export class CargarProyectoGestionComponent implements OnInit {
     this.cargarProyectoGestion();
   }
   
-  public cargarProyectoGestion(): void {
+  public cargarProyectoGestion(): void {  
     this.dataSource = null;
     this.disableBuscar = true;
     this.proyectoResponse = [];
@@ -188,10 +188,15 @@ export class CargarProyectoGestionComponent implements OnInit {
       disableClose: true,
       width: '1200px',
       autoFocus: false,
-      data: { title:'ACTUALIZAR DATOS GENERALES DEL PROYECTO',objeto: proyecto},
+      data: { 
+        title:'ACTUALIZAR DATOS GENERALES DEL PROYECTO',objeto: proyecto
+      },
     });
     dialogReg.afterClosed().pipe(filter(r => !!r)).subscribe(() => {
         console.log("hola")
+        
+        this.cargarProyectoGestion();
+
     });
   }
 
@@ -274,12 +279,18 @@ export class CargarProyectoGestionComponent implements OnInit {
   modalDatosProyectoGestion(): void {
     const dialogReg: MatDialogRef<DatosProyectoGestionComponent> = this.dialog.open(DatosProyectoGestionComponent, {
       disableClose: true,
-      width: '1200px',
+      width: '800px',
       autoFocus: false,
       data: {
         title:'REGISTRAR DATOS GENERALES DEL PROYECTO',objeto: ''
       },
     });
+    dialogReg.afterClosed().pipe(filter(r => !!r)).subscribe(() => {
+      console.log("hola")
+      
+      this.cargarProyectoGestion();
+
+  });
   }
 
 }

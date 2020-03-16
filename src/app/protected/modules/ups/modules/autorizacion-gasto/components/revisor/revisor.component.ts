@@ -188,16 +188,15 @@ export class RevisorComponent implements OnInit {
     this.proyectoEjecucionService.listaProyectoEjecucionFiltros(this.pagina, this.cantidad, this.filtrosProyectoRequest)
       .subscribe(
         (wsResponseProyecto: WsResponseBandejaProyectoAutorizacionGasto) => {
-          console.log("DDD");
-          console.log(wsResponseProyecto.codResultado);
+         
           if (wsResponseProyecto.codResultado == 1) {
             this.proyectoResponse = (wsResponseProyecto.response != null) ? wsResponseProyecto.response : [];
             this.total = (wsResponseProyecto.total != 0) ? wsResponseProyecto.total : 0;
             this.cargarTablaPrefactibilidad();
-            console.log("EEE");
+            
           } else {
             this.mensaje = MENSAJES.ERROR_NOFUNCION;
-            console.log("fff");
+           
           }
           this.isLoading = false;
           this.disableBuscar = false;

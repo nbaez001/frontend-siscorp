@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TrabajadorRequest } from '../../../dto/Request/TrabajadorRequest';
-import { MatTableDataSource, MatDialog, MatDialogRef } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { WsResponseDatoProyecto } from '../../../dto/Response/DatoProyectoResponse';
 import { AuthService } from 'app/protected/services/auth.service';
 import { TrabajadorService } from '../../../services/trabajador.service';
@@ -12,6 +12,9 @@ import { Reniec } from '../../../dto/Response/Reniec';
 import { ItemComboServicio } from '../../../services/item-combo.service';
 import { ItemBean } from '../../../dto/Request/ItemBean';
 import { WsItemBeanResponse } from '../../../../autorizacion-gasto/dto/response/ItemBean';
+import { DataDialog } from 'app/protected/modules/ua/modules/control-combustible/entities/data-dialog.model';
+import { datosProyecto } from '../../../dto/Request/datosProyecto';
+import { ProyectoService } from '../../../services/proyecto.service';
 
 @Component({
   selector: 'app-datos-proyecto-crp',
@@ -50,19 +53,16 @@ export class DatosProyectoCrpComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-
+    private proyectoService: ProyectoService,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private trabajadorService: TrabajadorService,
     private spinner: NgxSpinnerService,
     public dialogRef: MatDialogRef<DatosProyectoCrpComponent>,
     private itemComboService: ItemComboServicio,
-
-
-
-
-
-    // private proyectoEjecucionService: ProyectoEjecucionService,
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog
+  // private proyectoEjecucionService: ProyectoEjecucionService,
 
   ) {
     const prof: Profesional[] = [];
@@ -79,7 +79,7 @@ export class DatosProyectoCrpComponent implements OnInit {
 
     this.tituloBandeja();
     this.cargarCombos();
-
+    this.agregarDatosProyecto();
 
   }
 
@@ -124,6 +124,58 @@ export class DatosProyectoCrpComponent implements OnInit {
 
 
   columnas: string[] = [];
+
+  agregarDatosProyecto() {
+    console.log(this.data)
+    if (this.data.objeto) {
+        console.log("DDD");
+    
+      this.proyectoForm1.get('numeroConvenio').setValue(this.data.objeto.idProyecto);
+      this.proyectoForm1.get('fechaInicioObra').setValue(this.data.objeto.fechaInicio);
+      this.proyectoForm1.get('plazoEjecucion').setValue(this.data.objeto.numPlazo);
+      
+      
+
+
+
+    }
+    else {
+      console.log("hola")
+    }
+
+  }
+
+  registrarDatosProyecto() {
+    if (this.proyectoForm1.valid) {
+      let proyecto = new datosProyecto();
+      console.log(this.proyectoForm1)
+      proyecto.convenio = this.proyectoForm1.get('numeroConvenio').value;
+      proyecto.fechaInicio = this.proyectoForm1.get('fechaInicioObra').value;
+      proyecto.numPlazo = this.proyectoForm1.get('plazoEjecucion').value;
+      proyecto.idProyecto= this.data.objeto.idProyecto;
+      
+      
+      this.proyectoService.actualizarProyectoGestion(proyecto).subscribe(
+          () => {
+            this.dialogRef.close(true);
+            this.snackBar.open("Proyecto guardado");
+          }
+
+        );
+    } else {
+      const dialogRefMessage = this.dialog.open(InfoMessageComponent, {
+        width: '400px',
+        disableClose: true,
+        data: {
+          message: 'Ingrese los campos obligatorios',
+          alerta: true,
+          confirmacion: false
+        }
+      });
+    }
+
+  }
+
 
 
   fileupload: any;

@@ -7,6 +7,10 @@
     </button>
   </mat-toolbar>
 
+  <ngx-spinner bdColor="rgba(0,0,0,0.35)" size="large" color="#fff" type="line-scale-party">
+    <p style="font-size: 20px; color: white">Cargando...</p>
+  </ngx-spinner>
+
   <div mat-dialog-content>
 
     <br>
@@ -202,7 +206,7 @@
       <br>
       <br>
       <div align="center">
-        <button mat-raised-button color="primary" (click)="agregarInsumo()">
+        <button mat-raised-button color="primary" [disabled]="insumoForm.invalid" (click)="agregarInsumo()">
           <mat-icon style="color: white;">save</mat-icon> Guardar
         </button>
       </div>

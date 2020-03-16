@@ -1,0 +1,148 @@
+<div class="page">
+  <mat-toolbar class="mat-primary  mat-dialog-header">
+    <span style="font-size: 18px !important; font-weight: bold;"> {{mensaje}}</span>
+    <button tabindex="-1" mat-icon-button (click)="dialogRef.close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <ngx-spinner bdColor="rgba(0,0,0,0.70)" size="large" color="#fff" type="line-scale-party">
+    <p style="font-size: 20px; color: white">Puede demorar unos minutos, cargando...</p>
+  </ngx-spinner>
+
+  <div mat-dialog-content>
+
+    <div [formGroup]="archivoForm">
+
+      <mat-grid-list cols="12" rowHeight="70px">
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 3, md: 3, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>MODALIDAD EJECUCIÓN</mat-label>
+            <mat-select formControlName="idTipoModalidadFrmCtrl" [value]="selectedDefault">
+              <mat-option *ngFor="let tipoModalidad of comboTipoModalidad" [value]="tipoModalidad">
+                {{tipoModalidad.cidNombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 3, md: 3, lg: 3, xl: 3}">
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 3, md: 3, lg: 3, xl: 3}">
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 3, sm: 3, md: 3, lg: 3, xl: 3}">
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="12" rowHeight="70px">
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>TIPO DOCUMENTO</mat-label>
+            <mat-select formControlName="idTipoDocumentoFrmCtrl"  (selectionChange)="seleccion($event.value)" >
+              <mat-option *ngFor="let tipoDocumento of comboTipoDocumento" [value]="tipoDocumento">
+                {{tipoDocumento.cidNombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>FECHA RD</mat-label>
+            <input [disabled]="bloquear" matInput [matDatepicker]="picker2" readonly (click)="picker2.open()"
+              formControlName="fechaRdFrmCtrl">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}">
+          <mat-form-field appearance="outline">
+            <mat-label>Presupuesto Aprobado</mat-label>
+            <input [readonly]="bloquear" formControlName="presupuestoAprobado" matInput type="text" >
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 3, xl: 3}">
+          <mat-form-field appearance="outline">
+            <mat-label>Archivo Expediente Técnico</mat-label>
+            <input readonly formControlName="nombreArchivo" matInput type="text"
+              placeholder="Archivo Expediente Técnico">
+            <button mat-icon-button matTooltip="Adjuntar archivo" matTooltipClass="formato-tooltip" type="button"
+              class="btn-icon-input" color="primary" (click)="buscarArchivo($event)">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <input id="archivo" class="none" #myInput type="file" (change)="cargarArchivo($event)">
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 2, xl: 2}" class="dialog-form-actions">
+          <button mat-mini-fab [disabled]="!selectedFiles" (click)="validarSubidaArchivo($event)">
+            <mat-icon matTooltip="Agregar archivo" matTooltipClass="formato-tooltip">add</mat-icon>
+          </button>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+    </div>
+
+    <div class="bandeja mat-elevation-z6 ">
+      <div class="table-container clear-both">
+
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="item">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> ITEM</th>
+            <td mat-cell *matCellDef="let coti ; let i = index" class="estilo-center-cuerpo-tabla"
+              style="height: 40px !important;">{{i + 1}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombreTipoArchivo">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla"> TIPO DOCUMENTO </th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla" (click)="download(coti.idCodigo,coti.nombreArchivo)" > {{coti.nombreTipoArchivo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nombreArchivo">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">ARCHIVO</th>
+            <td mat-cell *matCellDef="let coti" class="estilo-center-cuerpo-tabla">{{coti.nombreArchivo}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef class="estilo-cabecera-tabla">ACCIONES</th>
+            <td mat-cell *matCellDef="let coti">
+              <!-- <button mat-icon-button color="primary"
+                matTooltip="Editar Autorización Gasto" matTooltipClass="formato-tooltip">
+                <mat-icon>edit</mat-icon>
+              </button> -->
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+          <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+
+        </table>
+
+        <div class="empty" *ngIf="!isLoading && dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+
+        <div *ngIf="isLoading" class="spinerTable">
+          <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+          </mat-progress-spinner>
+        </div>
+
+        <!-- <mat-toolbar>
+          <mat-toolbar-row class="paginacion-right mat-toolbar-fondo">
+            <div>
+              <mat-paginator [length]="total" [pageIndex]="pagina - 1" [pageSize]="cantidad"
+                [showFirstLastButtons]="true" [pageSizeOptions]="[15, 30, 50]" (page)="cambiarPagina($event)">
+              </mat-paginator>
+            </div>
+          </mat-toolbar-row>
+        </mat-toolbar> -->
+
+      </div>
+    </div>
+
+<br>
+
+
+  </div>
+</div>

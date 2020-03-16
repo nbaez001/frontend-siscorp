@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject, ElementRef, OnDestroy } from '@angular/core';
 import { MENSAJES } from 'app/common';
 import { PageEvent, MatTableDataSource, MatPaginator, MatDialogRef, MatDialog, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -24,7 +24,7 @@ import { DataSharedService } from '../../../../service/data-shared.service';
   templateUrl: './generar-requerimiento.component.html',
   styleUrls: ['./generar-requerimiento.component.scss']
 })
-export class GenerarRequerimientoComponent implements OnInit {
+export class GenerarRequerimientoComponent implements OnInit, OnDestroy {
 
   pagina = 1;
   cantidad = 2;
@@ -119,6 +119,12 @@ export class GenerarRequerimientoComponent implements OnInit {
     this.generarTablaFrozenScrollableGastosFinanciero();
     this.generarTablaFrozenScrollableGastosNucleo();
     this.generarTablaFrozenScrollableGastosSupervision();
+    this.dataShared.obteneridAutoGastoGeneradoNuevoRecurso.subscribe(response => {
+      if (response.length != 0) {
+        this.idRegistroAutorizacionGasto = response;
+      }
+    });
+    this.idRegistroAutorizacionGasto = 0;
   }
 
   onMouseEnterTabla(rowData): void {
@@ -209,7 +215,7 @@ export class GenerarRequerimientoComponent implements OnInit {
 
   onEditCompleteCostoDirecto(event) {
     if (event.originalEvent.key) {
-      if (event.data.cantidadSolicitado.length != 0) {
+      if (event.data.cantidadSolicitado.length != 0 && +event.data.cantidadSolicitado != 0) {
         if (event.data.manoObra == 0) {
           if (+event.data.cantidadSolicitado > +event.data.saldoDisponible) {
             this.openDialogMensajeConfirm(`El recurso " ${event.data.recurso} " 
@@ -264,15 +270,21 @@ export class GenerarRequerimientoComponent implements OnInit {
             console.log(this.registroAutorizacionGasto);
             this.cotizacionService.registroAutorizacionGasto(this.registroAutorizacionGasto).subscribe(response => {
               console.log(response);
+              if (response.msgResultado == "OK") {
+                //envia variable al otro componente en caso de ser un nuevo registro (0)
+                this.dataShared.enviarIdAutoGenerado(+this.idRegistroAutorizacionGasto);
 
-              //envia variable al otro componente en caso de ser un nuevo registro (0)
-              this.dataShared.enviarIdAutoGenerado(+this.idRegistroAutorizacionGasto);
+                this.idRegistroAutorizacionGasto = response.idAutoGasto;
+                this.totalDataCostoDirecto.totalAcumulado = response.totalAcumulado;
+                this.totalDataCostoDirecto.totalSolicitado = response.totalSolicitado;
+                this.totalDataCostoDirecto.totalDisponible = response.totalDisponible;
 
-              this.idRegistroAutorizacionGasto = response.idAutoGasto;
-              this.totalDataCostoDirecto.totalAcumulado = response.totalAcumulado;
-              this.totalDataCostoDirecto.totalSolicitado = response.totalSolicitado;
-              this.totalDataCostoDirecto.totalDisponible = response.totalDisponible;
+                this.snackBar.open(`El recurso ${event.data.recurso} ha sido modificado correctamente`);
+                // this.snackBar.open(`El recurso ${event.data.recurso} ha sido modificado correctamente`, '', { panelClass: 'succes-snackbar' });
 
+              } else {
+                this.openDialogMensaje("ERROR DE TRANSACCIÓN EN BASE DE DATOS", true);
+              }
             });
           }
         }
@@ -286,11 +298,13 @@ export class GenerarRequerimientoComponent implements OnInit {
       width: '800px',
       autoFocus: false,
       data: {
-        idProyecto: this.datos.idProyecto
+        idProyecto: this.datos.idProyecto,
+        idAutoGasto: (this.datos.flag == 1) ? this.datos.idCodigoAutoGasto : this.idRegistroAutorizacionGasto
+        // idAutoGasto: this.datos.idCodigoAutoGasto
       }
     });
     dialogReg.afterClosed().pipe(filter(r => !!r)).subscribe(() => {
-
+      this.cargarDataCostoDirecto();
     });
   }
 
@@ -607,12 +621,24 @@ export class GenerarRequerimientoComponent implements OnInit {
       });
   }
 
+  public openDialogMensaje(message: string, alerta: boolean): void {
+    this.dialogRefMessage = this.dialog.open(InfoMessageComponent, {
+      width: '400px',
+      disableClose: true,
+      data: { message: message, alerta: alerta }
+    });
+  }
+
   openDialogMensajeConfirm(message: string, confirmacion: boolean): void {
     this.dialogRefMessage = this.dialog.open(InfoMessageComponent, {
       width: '400px',
       disableClose: true,
       data: { message: message, confirmacion: confirmacion }
     });
+  }
+
+  ngOnDestroy() {
+    this.idRegistroAutorizacionGasto = 0;
   }
 
   // generarSolicitudCotizacion() {

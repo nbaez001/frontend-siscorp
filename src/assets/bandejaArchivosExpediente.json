@@ -1,0 +1,48 @@
+{
+	"codResultado": 1,
+	"msgResultado": "OK",
+	"total": 4,
+	"response": [
+		{
+			"item": 1,
+			"idProyecto": 21150,
+			"nombreTambo": "Quille",
+			"snip": "10202",
+			"nroConvenio": "001-2020",
+			"crp": "CRP1",
+			"cantidadArchivos": 1,
+			"estado": "Pendiente carga"
+		},
+		{
+			"item": 2,
+			"idProyecto": 21150,
+			"nombreTambo": "Quille",
+			"snip": "10202",
+			"nroConvenio": "001-2020",
+			"crp": "CRP1",
+			"cantidadArchivos": 1,
+			"estado": "Pendiente carga"
+		},
+		{
+			"item": 3,
+			"idProyecto": 21150,
+			"nombreTambo": "Quille",
+			"snip": "10202",
+			"nroConvenio": "001-2020",
+			"crp": "CRP1",
+			"cantidadArchivos": 1,
+			"estado": "Pendiente carga"
+		},
+		{
+			"item": 4,
+			"idProyecto": 21150,
+			"nombreTambo": "Quille",
+			"snip": "10202",
+			"nroConvenio": "001-2020",
+			"crp": "CRP1",
+			"cantidadArchivos": 1,
+			"estado": "Pendiente carga"
+		}
+	],
+	"idPerfil": 1
+}

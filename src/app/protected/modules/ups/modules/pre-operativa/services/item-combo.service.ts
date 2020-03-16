@@ -24,34 +24,32 @@ export class ItemComboServicio {
   //**************************** SERVICIOS ********************** */
   
   obtenerCRP(): Observable<WsItemBeanResponse> {
-    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/cargarCRPProyectoAG/`);
+    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/cargarCRPProyectoAG/`);
   }
 
   obtenerCGP(): Observable<WsItemBeanResponse> {
-    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/cargarCGPProyectoAG/`);
+    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/cargarCGPProyectoAG/`);
   }
   
   obtenerTipoDocumento(): Observable<WsItemBeanResponse> {
-    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/comboTipoDocumento/`);
+    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/comboTipoDocumento/`);
   }
   
   obtenerTipoGenero(): Observable<WsItemBeanResponse> {
-    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/comboTipoGenero/`);
+    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/comboTipoGenero/`);
   }
 
   obtenerTipoColegiatura(): Observable<WsItemBeanResponse> {
-    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/cargarColegiatura/`);
+    return this.http.get<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/cargarColegiatura/`);
   }
 
   listarCombo(rpta): Observable<WsItemBeanResponse> {
-    return this.http.post<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/listarCombos/`,rpta);
+    return this.http.post<WsItemBeanResponse>(`${environment.backendUrlProj}/cargarDatosProyecto/listarCombos/`,rpta);
   }
   
   // listarCombos(parametros): Observable<WsItemBeanResponse> {
   //   return this.http.post<WsItemBeanResponse>(`${environment.backendUrlProj}/autorizacionGastoTrabajador/listarCombos`, parametros);
   // }
-
-
   mostrarUbigeo(resp: ConsultaNombresUbigeoRequest): Observable<WsApiOutResponse> {
     return this.http.post<WsApiOutResponse>(`${environment.backendUrlProj}/cargarDatosProyectoAG/mostrarUbigeo`, resp);
     // return this.http.post<WsResponseProyecto>(`${environment.backendUrlProj}/bandejaProyectoAurizacionGasto/listarProyectoEjecucion/${pagina}/${cantidad}`, filtrosProyectoRequest);
