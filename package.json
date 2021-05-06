@@ -37,7 +37,7 @@
     "core-js": "^2.6.9",
     "date-fns": "^2.8.0",
     "file-saver": "^2.0.1",
-    "highcharts": "^7.2.0",
+    "highcharts": "^9.0.0",
     "loadsh": "0.0.4",
     "moment": "^2.24.0",
     "net": "^1.0.2",
